@@ -3,17 +3,17 @@
 public class BallMovement : MonoBehaviour
 {
 
-    public float MoveValue = 0.5f;
-    public bool _BallIsMoving = false;
+    public float MoveValue = 1f; //default moving increment for the ball
+    public bool _BallIsMoving = false; //boolean that turns on if the ball is moving
 
-    public Vector3 BallStart;
-    public Vector3 BallDestination;
+    public Vector3 BallStart; //starting vector for the ball
+    public Vector3 BallDestination; //destination vector for the ball
 
-    private string ChosenDirection;
+    private string ChosenDirection; //direction that the ball is moving 
 
-    public float LerpFraction;
-    public float LerpSpeed = 0.5f;
-    public float RotSpeed = 100f;
+    public float LerpFraction; //current lerp fraction
+    public float LerpSpeed = 0.5f; //speed from transisiting from start to destination
+    public float RotSpeed = 100f; //speed at which the ball rotates
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class BallMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))  //debug arrow key movement
         {
-            BallForwards();
+            BallForwards(); //call the ball forwards/right/left/backwards script
 
         }
 
@@ -52,20 +52,20 @@ public class BallMovement : MonoBehaviour
 
 
 
-        if (_BallIsMoving == true)
+        if (_BallIsMoving == true) //if the ball is moving
         {
-            if (LerpFraction < 1)
+            if (LerpFraction < 1) //if the lerp isnt complete
             {
-                LerpFraction += Time.deltaTime * LerpSpeed;
-                gameObject.transform.position = Vector3.Lerp(BallStart, BallDestination, LerpFraction);
+                LerpFraction += Time.deltaTime * LerpSpeed; //increase the lerp fraction
+                gameObject.transform.position = Vector3.Lerp(BallStart, BallDestination, LerpFraction); //change the position of the ball based of the lerp fraction
 
-                //gameObject.transform.Rotate(0, 0, RotSpeed * Time.deltaTime);
 
-                switch (ChosenDirection)
+
+                switch (ChosenDirection) //switch case statement to determine which way the ball should spin
                 {
-                    case "F":
+                    case "F": // F/B/R/L for forwards, backwards, Right and Left
                         Debug.Log("Ball Moving Forwards");
-                        gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World);
+                        gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
                         break;
                     case "B":
                         Debug.Log("Ball Moving Backwards");
@@ -74,28 +74,25 @@ public class BallMovement : MonoBehaviour
 
                     case "R":
                         Debug.Log("Ball Moving Right");
-                        gameObject.transform.Rotate((RotSpeed * - 1) * Time.deltaTime, 0, 0, Space.World);
+                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
                         break;
                     case "L":
                         Debug.Log("Ball Moving Right");
                         gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
                         break;
 
-                    default:
+                    default: //in the unlikley case of the switch running without getting a value
                         Debug.Log("Unknown Value");
                         break;
 
 
-                }
-
-               
-               
+                }        
             }
 
             else
             {
-                _BallIsMoving = false;
-                LerpFraction = 0f;
+                _BallIsMoving = false; //ball is no longer moving
+                LerpFraction = 0f; //reset the fraction so it can be used again
                 
                 
             }
@@ -106,21 +103,21 @@ public class BallMovement : MonoBehaviour
         
     }
 
-    public void BallForwards()
+    public void BallForwards() //moving the ball forwards/right/left/backwards, pretty much the exact same code for forwards/right/left/back functions
     {
-        if (_BallIsMoving == false)
+        if (_BallIsMoving == false) //if the ball isnt already moving
         {
-            Debug.Log("Ball forwards button press active");
-            BallStart = gameObject.transform.position;
-            BallDestination = new Vector3(BallStart.x + MoveValue, gameObject.transform.position.y, gameObject.transform.position.z); //move ball right by the increment value
-            if (BallStart.x != 5)
+            Debug.Log("Ball forwards button press active"); //confirms button press
+            BallStart = gameObject.transform.position; //gets the current starting vector of the ball
+            BallDestination = new Vector3(BallStart.x + MoveValue, gameObject.transform.position.y, gameObject.transform.position.z); //calculate the destination vector of the ball
+            if (BallStart.x != 5) //if the starting location X value of the ball is not equal to 5, the walls have been adjusted so that the ball will be at the walls when the vector is at 5
             {
-                _BallIsMoving = true;
-                ChosenDirection = "F";
+                _BallIsMoving = true; //tell the ball to start moving
+                ChosenDirection = "F"; //set the chosen direction to F/B/R/L
             }
             else
             {
-                Debug.Log("Ball at the end of the grid");
+                Debug.Log("Ball at the end of the grid"); //returns that the ball has reached its limit
             }
             
             
@@ -134,7 +131,7 @@ public class BallMovement : MonoBehaviour
         {
             Debug.Log("Ball forwards button press active");
             BallStart = gameObject.transform.position;
-            BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z - MoveValue); //move ball right by the increment value
+            BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z - MoveValue);
 
             if (BallStart.z != -5)
             {
@@ -161,7 +158,7 @@ public class BallMovement : MonoBehaviour
         {
             Debug.Log("Ball forwards button press active");
             BallStart = gameObject.transform.position;
-            BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z + MoveValue); //move ball right by the increment value
+            BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z + MoveValue);
 
 
             if (BallStart.z != 5)
@@ -206,11 +203,11 @@ public class BallMovement : MonoBehaviour
     }
     
     
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other) //when the ball enters a trigger area
     {
-        if (other.gameObject.tag == "Boundary")
+        if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
         {
-            Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz");
+            Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
         }
     }
 
