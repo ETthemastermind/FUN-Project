@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
@@ -10,8 +8,8 @@ public class BallMovement : MonoBehaviour
 
     public Vector3 BallStart;
     public Vector3 BallDestination;
-    public bool ForwardDirection;
-    public bool SidewaysDirection;
+
+    private string ChosenDirection;
 
     public float LerpFraction;
     public float LerpSpeed = 0.5f;
@@ -62,14 +60,35 @@ public class BallMovement : MonoBehaviour
                 gameObject.transform.position = Vector3.Lerp(BallStart, BallDestination, LerpFraction);
 
                 //gameObject.transform.Rotate(0, 0, RotSpeed * Time.deltaTime);
-                if (ForwardDirection == true)
+
+                switch (ChosenDirection)
                 {
-                    gameObject.transform.Rotate(0, 0, RotSpeed * Time.deltaTime);
+                    case "F":
+                        Debug.Log("Ball Moving Forwards");
+                        gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World);
+                        break;
+                    case "B":
+                        Debug.Log("Ball Moving Backwards");
+                        gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
+                        break;
+
+                    case "R":
+                        Debug.Log("Ball Moving Right");
+                        gameObject.transform.Rotate((RotSpeed * - 1) * Time.deltaTime, 0, 0, Space.World);
+                        break;
+                    case "L":
+                        Debug.Log("Ball Moving Right");
+                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
+                        break;
+
+                    default:
+                        Debug.Log("Unknown Value");
+                        break;
+
+
                 }
-                else if (ForwardDirection == false)
-                {
-                    gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime);
-                }
+
+               
                
             }
 
@@ -77,6 +96,7 @@ public class BallMovement : MonoBehaviour
             {
                 _BallIsMoving = false;
                 LerpFraction = 0f;
+                
                 
             }
 
@@ -96,9 +116,7 @@ public class BallMovement : MonoBehaviour
             if (BallStart.x != 5)
             {
                 _BallIsMoving = true;
-
-                ForwardDirection = true;
-
+                ChosenDirection = "F";
             }
             else
             {
@@ -117,8 +135,20 @@ public class BallMovement : MonoBehaviour
             Debug.Log("Ball forwards button press active");
             BallStart = gameObject.transform.position;
             BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z - MoveValue); //move ball right by the increment value
-            _BallIsMoving = true;
-            SidewaysDirection = true;
+
+            if (BallStart.z != -5)
+            {
+                _BallIsMoving = true;
+                ChosenDirection = "R";
+            }
+
+            else
+            {
+                Debug.Log("Ball at the end of the grid");
+            }
+
+            
+            
 
         }
         
@@ -132,7 +162,17 @@ public class BallMovement : MonoBehaviour
             Debug.Log("Ball forwards button press active");
             BallStart = gameObject.transform.position;
             BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z + MoveValue); //move ball right by the increment value
-            _BallIsMoving = true;
+
+
+            if (BallStart.z != 5)
+            {
+                _BallIsMoving = true;
+                ChosenDirection = "L";
+            }
+            else
+            {
+                Debug.Log("Ball at the end of the grid");
+            }
             
 
         }
@@ -148,9 +188,18 @@ public class BallMovement : MonoBehaviour
             Debug.Log("Ball backwards button press active");
             BallStart = gameObject.transform.position;
             BallDestination = new Vector3(BallStart.x - MoveValue, gameObject.transform.position.y, gameObject.transform.position.z); //move ball right by the increment value
-            _BallIsMoving = true;
 
-            ForwardDirection = false;
+            if (BallStart.x != -5)
+            {
+                _BallIsMoving = true;
+                ChosenDirection = "B";
+            }
+            else
+            {
+                Debug.Log("Ball at the end of the grid");
+            }
+
+
 
         }
         
