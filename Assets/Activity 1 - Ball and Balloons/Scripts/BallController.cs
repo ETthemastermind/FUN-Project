@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BallMovement : MonoBehaviour
+public class BallController : MonoBehaviour
 {
 
     public float MoveValue = 1f; //default moving increment for the ball
@@ -14,6 +14,9 @@ public class BallMovement : MonoBehaviour
     public float LerpFraction; //current lerp fraction
     public float LerpSpeed = 0.5f; //speed from transisiting from start to destination
     public float RotSpeed = 100f; //speed at which the ball rotates
+
+    public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
+    public GameObject _HUDController;
     // Start is called before the first frame update
     void Start()
     {
@@ -203,13 +206,29 @@ public class BallMovement : MonoBehaviour
     }
     
     
-    public void OnTriggerStay(Collider other) //when the ball enters a trigger area
+    public void OnTriggerStay(Collider other) //when the ball stays in a trigger area
     {
         if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
         {
-            Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
+            HapticFeedback(); //run the haptic feedback function
         }
     }
 
-    
+    public void OnTriggerEnter(Collider other) //when the ball enters a trigger area
+    {
+        if (other.gameObject.tag == "Balloon") // if the other object is a balloon
+        {
+            PlayerScore++; //increment the player's score
+            _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
+            Destroy(other.gameObject); //destroy the balloon
+            HapticFeedback(); //run the haptic feedback function
+        }
+    }
+
+    public void HapticFeedback()
+    {
+        Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
+    }
+
+
 }

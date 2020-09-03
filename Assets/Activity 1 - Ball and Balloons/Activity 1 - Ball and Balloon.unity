@@ -1515,7 +1515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &982950592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,7 +1558,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 982950593}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1606569993}
+        m_MethodName: ResetGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &982950593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,11 +2373,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 96532138}
     m_Modifications:
-    - target: {fileID: 1896214868018485559, guid: c105390ff640dd542aeb8b90b891b10a,
-        type: 3}
-      propertyPath: BalloonLimit
-      value: 100000
-      objectReference: {fileID: 0}
     - target: {fileID: 2107915403366979611, guid: c105390ff640dd542aeb8b90b891b10a,
         type: 3}
       propertyPath: m_Name

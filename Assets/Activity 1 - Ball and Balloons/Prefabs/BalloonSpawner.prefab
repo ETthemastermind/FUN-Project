@@ -108,10 +108,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Balloon: {fileID: 1974230020705513382, guid: 6195589b82ac2e74da866ee1990808d0, type: 3}
   NumberOfBalloonsSpawned: 0
-  BalloonLimit: 5
+  BalloonLimit: 10
   SpawnCooldown: 0
   CurrentCooldown: 0
-  BalloonRecentlySpawned: 0
-  ReadyToSpawn: 1
+  ReadyToSpawn: 0
   BalloonLowerLimit: 3
   BalloonUpperLimit: 5
