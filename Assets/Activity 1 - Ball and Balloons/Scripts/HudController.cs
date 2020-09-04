@@ -9,37 +9,39 @@ public class HudController : MonoBehaviour
     public TextMeshProUGUI ScoreText; //reference to the score text
     public TextMeshProUGUI Timer; //reference to the timer text
 
+    private int MaxScore;
+    public int NumberOfRounds;
+
     public GameObject ResetButton; //reference for the reset button
+    public GameObject BalloonSpawner;
     
-    public float MaxGameTime; //float for the maxiumum playtime 
+    public float CurrentGameTime; //float for the maxiumum playtime 
+    public bool GameComplete;
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1; //makes sure that time scale for this scene is set to 1
+        MaxScore = BalloonSpawner.GetComponent<BalloonSpawnerV2>().NumberOfBalloonsToSpawn * NumberOfRounds;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (MaxGameTime >= 0f) //if the max play time is greater than 0 i.e. the game is still playing
-        {
-            MaxGameTime -= Time.deltaTime; //adjust the max game time based on the time played
-            Timer.GetComponent<TextMeshProUGUI>().text = "Remaining Time: " + (Mathf.RoundToInt(MaxGameTime)); //update the text for the time text to reflect the current amount of playtime left
+        CurrentGameTime += Time.deltaTime;
+        Timer.GetComponent<TextMeshProUGUI>().text = "Time: " + (Mathf.RoundToInt(CurrentGameTime));
 
-        }
-
-        else //when the allocated playtime has passed i.e.
-        {
-            Time.timeScale = 0; //set the time scale to 0 i.e. pause the game
-            ResetButton.SetActive(true); //show the reset button
-        }
-        
     }
 
     public void IncrementScore(int PlayerScore) //increment the player's score, gets called from the BallController script
     {
         ScoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + PlayerScore; //adjust the text on the score object to reflect the player's current score
 
+        if (PlayerScore == MaxScore)
+        {
+            Time.timeScale = 0; //set the time scale to 0 i.e. pause the game
+            ResetButton.SetActive(true); //show the reset button
+            GameComplete = true;
+        }
 
     }
 

@@ -5,25 +5,40 @@ using System.Linq;
 
 public class BalloonSpawnerV2 : MonoBehaviour
 {
+    public GameObject Ball_Player;
     public GameObject BalloonPrefab;
     public int NumberOfBalloonsToSpawn;
-    //public Vector3[] SpawnLocations = new Vector3[4];
     public new List<Vector3> SpawnLocations = new List<Vector3>();
+    public GameObject[] SpawnedBalloons;
+    public GameObject HUDController;
+    
     // Start is called before the first frame update
     void Start()
     {
-        SpawnBalloons();
+        Ball_Player = GameObject.FindGameObjectWithTag("Player");
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SpawnedBalloons = GameObject.FindGameObjectsWithTag("Balloon");
+        if (SpawnedBalloons.Length == 0)
+        {
+            if (HUDController.GetComponent<HudController>().GameComplete == false)
+            {
+                SpawnBalloons();
+            }
+            
+
+        }
     }
     public void SpawnBalloons()
     {
-        for (int i = 0; i <= NumberOfBalloonsToSpawn; i++)
+
+        SpawnLocations.Clear();
+        for (int i = 0; i <= NumberOfBalloonsToSpawn - 1; i++)
         {
 
             Vector3 SpawnLocation = new Vector3(Random.Range(-5, 5), transform.position.y, Random.Range(-5, 5));
@@ -32,11 +47,17 @@ public class BalloonSpawnerV2 : MonoBehaviour
         }
 
         CheckForDuplicates();
+
         for (int j = 0; j != SpawnLocations.Count; j++)
         {
             Instantiate(BalloonPrefab, SpawnLocations[j], Quaternion.identity);
+            
 
         }
+
+        
+
+        
 
     }
     public void CheckForDuplicates()
