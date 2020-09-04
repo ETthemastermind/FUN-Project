@@ -213,7 +213,7 @@ public class BallController : MonoBehaviour
             HapticFeedback(); //run the haptic feedback function
         }
     }
-
+    /*
     public void OnTriggerEnter(Collider other) //when the ball enters a trigger area
     {
         if (other.gameObject.tag == "Balloon") // if the other object is a balloon
@@ -224,11 +224,22 @@ public class BallController : MonoBehaviour
             HapticFeedback(); //run the haptic feedback function
         }
     }
+    */
 
     public void HapticFeedback()
     {
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
+        {
+            PlayerScore++; //increment the player's score
+            _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
+            Destroy(collision.gameObject); //destroy the balloon
+            HapticFeedback(); //run the haptic feedback function
+        }
+    }
 
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Balloons : MonoBehaviour
 {
-    public float BalloonSpeed = 10f;  //public float for the speed of the balloon
+    //public float BalloonSpeed = 10f;  //public float for the speed of the balloon
+    public float BalloonRotSpeed = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +15,12 @@ public class Balloons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position += Vector3.left * BalloonSpeed * Time.deltaTime; //move the balloon left at it's speed * time.delta time (left happens to be down towards the player here)
+        gameObject.transform.Rotate(0, BalloonRotSpeed, 0);
+        //gameObject.transform.position += Vector3.left * BalloonSpeed * Time.deltaTime; //move the balloon left at it's speed * time.delta time (left happens to be down towards the player here)
     }
 
 
+    /*
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "BalloonDestory") //if the balloon leaves the player's view and enters the trigger of the mesh behind them 
@@ -26,4 +29,5 @@ public class Balloons : MonoBehaviour
             Destroy(gameObject); //destroy the balloon
         }
     }
+    */
 }
