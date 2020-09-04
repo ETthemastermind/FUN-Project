@@ -1,0 +1,8 @@
+#The scene for the balloon game is in the Activity 1 folder#
+
+Use the arrow keys to move the ball around to hit the balloons
+change the value of "Number of Rounds" in the "Hud Controller" to make the game last longer. the chosen amount of balloons will spawn each round. The value is set to 3 by default
+change the value of "Number of Balloons to Spawn" in the "Number of Ballons To Spawn" in the "New Balloon Spawner" to change how many balloons will spawn in each round. The value is set to 4 by default
+
+the game will make adjust itself should you change these values (in theory, let me know if anything breaks)
+
