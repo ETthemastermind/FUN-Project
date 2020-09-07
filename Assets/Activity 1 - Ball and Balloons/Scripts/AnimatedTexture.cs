@@ -8,6 +8,11 @@ public class AnimatedTexture : MonoBehaviour
 
     public float TextureSpeed; //public float to control the speed
     public float Offset; //public float to see the current offset in the inspector
+
+    public bool Active;
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +22,14 @@ public class AnimatedTexture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Offset += Time.deltaTime * TextureSpeed / 10f; //calculate the current offset for the material
-        
+        if (Active == true)
+        {
+            Offset += Time.deltaTime * TextureSpeed / 10f; //calculate the current offset for the material
 
-        Material.mainTextureOffset = new Vector2(Offset, 0); //set the texture offset
+
+            Material.mainTextureOffset = new Vector2(Offset, 0); //set the texture offset
+
+        }
+        
     }
 }
