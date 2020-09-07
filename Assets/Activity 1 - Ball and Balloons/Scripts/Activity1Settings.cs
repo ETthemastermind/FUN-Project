@@ -22,6 +22,7 @@ public class Activity1Settings : MonoBehaviour
     public int MinBalloons;
     public int MaxBalloons;
     public TMP_Text NumOfBalloonText;
+    
 
     //Number of Rounds
     public HudController RoundNumber;
@@ -30,6 +31,12 @@ public class Activity1Settings : MonoBehaviour
     public TMP_Text RoundNumberText;
     //Ball Speed? also need to edit the ball rotation...
 
+
+
+
+
+    //TEMP SAVING CHANGES
+    public Profile NumberOfBalloons_Saved;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +61,8 @@ public class Activity1Settings : MonoBehaviour
         {
             SettingsMenu.SetActive(false);
             Time.timeScale = 1;
+            
+
         }
         else
         {
@@ -105,6 +114,7 @@ public class Activity1Settings : MonoBehaviour
 
         Debug.Log("Current Number of Balloons: " + BalloonSpawner.NumberOfBalloonsToSpawn);
         NumOfBalloonText.text = BalloonSpawner.NumberOfBalloonsToSpawn.ToString();
+        
 
 
     }
@@ -119,6 +129,7 @@ public class Activity1Settings : MonoBehaviour
 
         Debug.Log("Current Number of Balloons: " + BalloonSpawner.NumberOfBalloonsToSpawn);
         NumOfBalloonText.text = BalloonSpawner.NumberOfBalloonsToSpawn.ToString();
+        
     }
 
     public void IncrementRoundNumber()
@@ -147,4 +158,11 @@ public class Activity1Settings : MonoBehaviour
         RoundNumberText.text = RoundNumber.NumberOfRounds.ToString();
 
     }
+
+
+    
+
+    
+
+    
 }
