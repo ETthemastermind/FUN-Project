@@ -48,11 +48,17 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode enabled");
             for (int i = 0; i < CellsInScene.Length; i++)
             {
+                
                 CellsInScene[i].GetComponent<Button>().interactable = true;
                 for (int j = 0; j < CellsInScene[i].transform.childCount; j++)
                 {
-                    //Debug.Log(CellsInScene[i].transform.GetChild(j).name);
-                    CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false;
+                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject;
+                    if (CurrentChild.GetComponent<Button>() != null)
+                    {
+                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false;
+
+                    }
+                    
                 }
 
             }
@@ -68,8 +74,12 @@ public class UIManager : MonoBehaviour
                 CellsInScene[i].GetComponent<Button>().interactable = false;
                 for (int j = 0; j < CellsInScene[i].transform.childCount; j++)
                 {
-                    //Debug.Log(CellsInScene[i].transform.GetChild(j).name);
-                    CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = true;
+                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject;
+                    if (CurrentChild.GetComponent<Button>() != null)
+                    {
+                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = true;
+                    }
+                    
                 }
             }
 
