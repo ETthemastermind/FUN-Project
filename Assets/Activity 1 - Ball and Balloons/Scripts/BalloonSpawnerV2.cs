@@ -7,10 +7,12 @@ public class BalloonSpawnerV2 : MonoBehaviour
 {
     public GameObject Ball_Player; //reference to the player
     public GameObject BalloonPrefab; //reference to the balloon prefab 
-    public int NumberOfBalloonsToSpawn; // Reference to number of balloons to spawn per round
+    private int NumberOfBalloonsToSpawn; // Reference to number of balloons to spawn per round
     public new List<Vector3> SpawnLocations = new List<Vector3>(); //list of the spawn locations for the balloons, randomly generated
     public GameObject[] SpawnedBalloons; //array for all balloons in the scene
     public GameObject HUDController; //reference to the HUD controller
+
+    public Activity1Settings GameController;
 
     
     
@@ -18,8 +20,9 @@ public class BalloonSpawnerV2 : MonoBehaviour
     void Start()
     {
         Ball_Player = GameObject.FindGameObjectWithTag("Player"); //find the player
+        GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
+        NumberOfBalloonsToSpawn = GameController.NumberOfBalloonsToSpawn;
         
-
     }
 
     // Update is called once per frame

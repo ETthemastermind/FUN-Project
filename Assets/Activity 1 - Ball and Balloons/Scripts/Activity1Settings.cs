@@ -31,21 +31,32 @@ public class Activity1Settings : MonoBehaviour
     public TMP_Text RoundNumberText;
     //Ball Speed? also need to edit the ball rotation...
 
+    [Header("Game Attributes")]
+    public bool AnimatedTexturesActive;
+    public bool SoundActive;
+    public int NumberOfBalloonsToSpawn;
+    public int NumberOfRounds;
 
 
 
 
-    //TEMP SAVING CHANGES
-    public Profile NumberOfBalloons_Saved;
-
+    private void Awake()
+    {
+        LoadPrefs();
+    }
     // Start is called before the first frame update
     void Start()
     {
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
-        NumOfBalloonText.text = BalloonSpawner.NumberOfBalloonsToSpawn.ToString();
+        NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+        
         RoundNumber = gameObject.GetComponent<HudController>();
+        RoundNumberText.text = NumberOfRounds.ToString();
+
+
+
 
     }
 
@@ -78,12 +89,14 @@ public class Activity1Settings : MonoBehaviour
         {
             Debug.Log("Turn on animated ball texture");
             AnimatedTexture.Active = true;
+            AnimatedTexturesActive = true;
         }
 
         else
         {
             Debug.Log("Turn off animated ball texture");
             AnimatedTexture.Active = false ;
+            AnimatedTexturesActive = false;
         }
     }
 
@@ -92,13 +105,16 @@ public class Activity1Settings : MonoBehaviour
         if (SoundFXToggle.isOn == true)
         {
             AudioListener.volume = 1f;
-            Debug.Log("Sound FX turned off");
+            Debug.Log("Sound FX turned on");
+            SoundActive = true;
+
         }
 
         else
         {
             AudioListener.volume = 0f;
-            Debug.Log("Sound FX turned on");
+            Debug.Log("Sound FX turned off");
+            SoundActive = false;
         }
 
     }
@@ -106,14 +122,16 @@ public class Activity1Settings : MonoBehaviour
     public void IncrementBallonNumber()
     {
 
-        BalloonSpawner.NumberOfBalloonsToSpawn += 1;
-        if (BalloonSpawner.NumberOfBalloonsToSpawn > MaxBalloons)
+        NumberOfBalloonsToSpawn += 1;
+        if (NumberOfBalloonsToSpawn > MaxBalloons)
         {
-            BalloonSpawner.NumberOfBalloonsToSpawn = MaxBalloons;
+            NumberOfBalloonsToSpawn = MaxBalloons;
         }
 
-        Debug.Log("Current Number of Balloons: " + BalloonSpawner.NumberOfBalloonsToSpawn);
-        NumOfBalloonText.text = BalloonSpawner.NumberOfBalloonsToSpawn.ToString();
+        Debug.Log("Current Number of Balloons: " + NumberOfBalloonsToSpawn);
+        
+        NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+        //SavePrefs();
         
 
 
@@ -121,42 +139,58 @@ public class Activity1Settings : MonoBehaviour
 
     public void DecrementBallonNumber()
     {
-        BalloonSpawner.NumberOfBalloonsToSpawn -= 1;
-        if (BalloonSpawner.NumberOfBalloonsToSpawn < MinBalloons)
+        NumberOfBalloonsToSpawn -= 1;
+        if (NumberOfBalloonsToSpawn < MinBalloons)
         {
-            BalloonSpawner.NumberOfBalloonsToSpawn = MinBalloons;
+            NumberOfBalloonsToSpawn = MinBalloons;
         }
 
-        Debug.Log("Current Number of Balloons: " + BalloonSpawner.NumberOfBalloonsToSpawn);
-        NumOfBalloonText.text = BalloonSpawner.NumberOfBalloonsToSpawn.ToString();
-        
+        Debug.Log("Current Number of Balloons: " + NumberOfBalloonsToSpawn);
+        NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+        //SavePrefs();
+
     }
 
     public void IncrementRoundNumber()
     {
-        RoundNumber.NumberOfRounds += 1;
-        if (RoundNumber.NumberOfRounds > MaxRounds)
+        NumberOfRounds += 1;
+        if (NumberOfRounds > MaxRounds)
         {
-            RoundNumber.NumberOfRounds = MaxRounds;
+            NumberOfRounds = MaxRounds;
         }
 
-        Debug.Log("Current Number of Rounds: " + RoundNumber.NumberOfRounds);
-        RoundNumberText.text = RoundNumber.NumberOfRounds.ToString();
+        Debug.Log("Current Number of Rounds: " + NumberOfRounds);
+        RoundNumberText.text = NumberOfRounds.ToString();
+        //SavePrefs();
         
 
     }
 
     public void DecrementRoundNumber()
     {
-        RoundNumber.NumberOfRounds -= 1;
-        if (RoundNumber.NumberOfRounds < MinRounds)
+        NumberOfRounds -= 1;
+        if (NumberOfRounds < MinRounds)
         {
-            RoundNumber.NumberOfRounds = MinRounds;
+            NumberOfRounds = MinRounds;
         }
 
-        Debug.Log("Current Number of Rounds: " + RoundNumber.NumberOfRounds);
-        RoundNumberText.text = RoundNumber.NumberOfRounds.ToString();
+        Debug.Log("Current Number of Rounds: " + NumberOfRounds);
+       
+        RoundNumberText.text = NumberOfRounds.ToString();
+        //SavePrefs();
 
+    }
+
+
+    public void SavePrefs()
+    {
+        SaveSystem.SavePrefs(this);
+    }
+
+    public void LoadPrefs()
+    {
+        Profile data = SaveSystem.LoadPrefs();
+        //NumberOfBalloonsToSpawn = data.NumberOfBalloons_Save;
     }
 
 

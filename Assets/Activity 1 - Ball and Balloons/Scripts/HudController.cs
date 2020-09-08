@@ -9,19 +9,24 @@ public class HudController : MonoBehaviour
     public TextMeshProUGUI ScoreText; //reference to the score text
     public TextMeshProUGUI Timer; //reference to the timer text
 
-    private int MaxScore;
-    public int NumberOfRounds;
+    public int MaxScore;
+    
 
     public GameObject ResetButton; //reference for the reset button
     public GameObject BalloonSpawner;
     
     public float CurrentGameTime; //float for the maxiumum playtime 
     public bool GameComplete;
+
+    public Activity1Settings GameController;
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1; //makes sure that time scale for this scene is set to 1
-        MaxScore = BalloonSpawner.GetComponent<BalloonSpawnerV2>().NumberOfBalloonsToSpawn * NumberOfRounds;
+        GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
+        MaxScore = GameController.NumberOfBalloonsToSpawn * GameController.NumberOfRounds;
+        
+        
     }
 
     // Update is called once per frame
@@ -34,7 +39,7 @@ public class HudController : MonoBehaviour
 
     public void IncrementScore(int PlayerScore) //increment the player's score, gets called from the BallController script
     {
-        ScoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + PlayerScore; //adjust the text on the score object to reflect the player's current score
+        ScoreText.GetComponent<TextMeshProUGUI>().text = PlayerScore.ToString() ; //adjust the text on the score object to reflect the player's current score
 
         if (PlayerScore == MaxScore)
         {

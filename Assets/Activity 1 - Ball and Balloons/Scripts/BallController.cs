@@ -210,6 +210,7 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
         {
+            Debug.Log("Boundary Hit");
             HapticFeedback(); //run the haptic feedback function
         }
     }
