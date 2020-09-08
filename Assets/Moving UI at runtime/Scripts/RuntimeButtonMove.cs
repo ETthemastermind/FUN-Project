@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class RuntimeButtonMove : MonoBehaviour
 {
     public bool ElementPickedUp;
-    
+    public bool ActiveElement;
+
     public Vector2 CurrentMouseLocation;
 
 
@@ -54,17 +55,12 @@ public class RuntimeButtonMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            Debug.Log("Scale Up");
-            float NewY = gameObject.transform.localScale.y + 0.1f;
-            float NewX = gameObject.transform.localScale.x + 0.1f;
-            gameObject.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+            
+            ScaleCellUp();
         }
         else if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            Debug.Log("Scale Down");
-            float NewY = gameObject.transform.localScale.y - 0.1f;
-            float NewX = gameObject.transform.localScale.x - 0.1f;
-            gameObject.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+            ScaleCellDown();
         }
 
        
@@ -77,7 +73,10 @@ public class RuntimeButtonMove : MonoBehaviour
         if (ElementPickedUp == false)
         {
             ElementPickedUp = true;
+            
             Debug.Log("Element Picked Up");
+
+            
 
         }
 
@@ -92,5 +91,26 @@ public class RuntimeButtonMove : MonoBehaviour
 
     }
 
+    
+    public void ScaleCellUp()
+    {
+        Debug.Log("Scale Up");
+        float NewY = gameObject.transform.localScale.y + 0.1f;
+        float NewX = gameObject.transform.localScale.x + 0.1f;
+        gameObject.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+      
+        
+    }
+
+    public void ScaleCellDown()
+    {
+        Debug.Log("Scale Down");
+        float NewY = gameObject.transform.localScale.y - 0.1f;
+        float NewX = gameObject.transform.localScale.x - 0.1f;
+        gameObject.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+        
+        
+    }
+    
     
 }

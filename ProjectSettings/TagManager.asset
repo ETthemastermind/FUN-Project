@@ -9,6 +9,7 @@ TagManager:
   - Balloon
   - BalloonDestory
   - BalloonSpawner
+  - Cell
   layers:
   - Default
   - TransparentFX
