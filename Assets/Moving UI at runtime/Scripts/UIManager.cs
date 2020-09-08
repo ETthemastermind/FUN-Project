@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < CellsInScene.Length; i++)
         {
             
-            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.localPosition + "|" + CellsInScene[i].transform.localScale);
+            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.position + "|" + CellsInScene[i].transform.localScale);
         }
             
         
