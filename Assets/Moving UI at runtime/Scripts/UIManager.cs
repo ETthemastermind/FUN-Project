@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class UIManager : MonoBehaviour
 {
@@ -37,6 +39,11 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             ScaleCellDown();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveCellPosition();
         }
     }
 
@@ -126,5 +133,28 @@ public class UIManager : MonoBehaviour
         float NewX = ChosenCell.transform.localScale.x - 0.1f;
         ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
 
+    }
+
+    public void SaveCellPosition()
+    {
+        Debug.Log("Saved Cell Position");
+        string FileName = "/TestSave";
+        string FilePath = Application.streamingAssetsPath + FileName + ".txt";
+
+        StreamWriter SW = new StreamWriter(FilePath, false);
+
+        for (int i = 0; i < CellsInScene.Length; i++)
+        {
+            
+            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.localPosition + "|" + CellsInScene[i].transform.localScale);
+        }
+            
+        
+        SW.Close();
+    }
+
+    public void LoadCellPosition()
+    {
+       
     }
 }
