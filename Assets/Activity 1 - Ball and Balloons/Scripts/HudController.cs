@@ -15,11 +15,13 @@ public class HudController : MonoBehaviour
     public GameObject ResetButton; //reference for the reset button
     public GameObject BalloonSpawner;
     public GameObject PrepareForBang_GO;
+    private bool PrepareForBang_SFX;
     
     public float CurrentGameTime; //float for the maxiumum playtime 
     public bool GameComplete;
 
     public Activity1Settings GameController;
+    public AudioClip inBallonProx_Clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,17 @@ public class HudController : MonoBehaviour
     {
         CurrentGameTime += Time.deltaTime;
         Timer.GetComponent<TextMeshProUGUI>().text = "Time: " + (Mathf.RoundToInt(CurrentGameTime));
+        
+        if (PrepareForBang_SFX == true)
+        {
+            AudioSource AS = Camera.main.GetComponent<AudioSource>();
+            if (AS.isPlaying == false)
+            {
+                AS.PlayOneShot(inBallonProx_Clip);
+
+            }
+        }
+        
 
     }
 
@@ -64,12 +77,16 @@ public class HudController : MonoBehaviour
         {
             Debug.Log("Prepare for Bang");
             PrepareForBang_GO.SetActive(true);
+            PrepareForBang_SFX = true;
+            
+            
 
         }
 
         else
         {
             PrepareForBang_GO.SetActive(false);
+            PrepareForBang_SFX = false;
         }
     }
 }
