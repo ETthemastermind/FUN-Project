@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
 
     public GameObject[] CellsInScene;
     public GameObject ChosenCell;
+
+    public Vector2 CurrentMouseLocation;
+    public float[] NewAnchor = new float[2];
+
+    public float ScreenRes_W;
+    public float ScreenRes_H;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +26,8 @@ public class UIManager : MonoBehaviour
             CellsInScene[i].GetComponent<Button>().interactable = false;
             
         }
+        ScreenRes_W = (Screen.width);
+        ScreenRes_H = (Screen.height);
     }
 
     // Update is called once per frame
@@ -27,7 +35,8 @@ public class UIManager : MonoBehaviour
     {
         if (ChosenCell != null)
         {
-            ChosenCell.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            CurrentMouseLocation = Input.mousePosition;
+            ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0);
         }
 
 
@@ -107,7 +116,11 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.Log("Put down cell");
+            Vector3 CellLocation = ChosenCell.transform.position;
+            CalculateAnchor();
+            ChosenCell.transform.position = CellLocation;
             ChosenCell = null;
+            
         }
         /*
         Debug.Log(Cell.name + "Cell Activated");
@@ -157,4 +170,63 @@ public class UIManager : MonoBehaviour
     {
        
     }
+
+    public void CalculateAnchor()
+    {
+        Debug.Log("Calculating Anchor Point");
+        float ScreenRes_W_OneThird = ScreenRes_W / 3;
+        float ScreenRes_W_TwoThird = ScreenRes_W_OneThird * 2;
+
+        //Debug.Log(ScreenRes_W_OneThird);
+        //Debug.Log(ScreenRes_W_TwoThird);
+        //Debug.Log(ScreenRes_W);
+
+
+        // work out which third of the screen the mouse is on (width)
+        if (CurrentMouseLocation.x >= 0 && CurrentMouseLocation.x <= ScreenRes_W_OneThird) //left third
+        {
+            Debug.Log("Left");
+            NewAnchor[0] = 0f;
+        }
+
+        else if (CurrentMouseLocation.x >= ScreenRes_W_OneThird && CurrentMouseLocation.x <= ScreenRes_W_TwoThird) // middle third
+        {
+            Debug.Log("Middle");
+            NewAnchor[0] = 0.5f;
+        }
+
+        else if (CurrentMouseLocation.x >= ScreenRes_W_TwoThird && CurrentMouseLocation.x <= ScreenRes_W) // top third
+        {
+            Debug.Log("Top");
+            NewAnchor[0] = 1f;
+        }
+
+        //work out which third of the screen the mouse is on (height)
+        float ScreenRes_H_OneThird = ScreenRes_H / 3;
+        float ScreenRes_H_TwoThird = ScreenRes_H_OneThird * 2;
+
+        if (CurrentMouseLocation.y >= 0 && CurrentMouseLocation.y <= ScreenRes_H_OneThird) //left third
+        {
+            Debug.Log("Bottom");
+            NewAnchor[1] = 0f;
+        }
+
+        else if (CurrentMouseLocation.y >= ScreenRes_H_OneThird && CurrentMouseLocation.y <= ScreenRes_H_TwoThird) // middle third
+        {
+            Debug.Log("Middle");
+            NewAnchor[1] = 0.5f;
+        }
+
+        else if (CurrentMouseLocation.y >= ScreenRes_H_TwoThird && CurrentMouseLocation.y <= ScreenRes_H) // top third
+        {
+            Debug.Log("Top");
+            NewAnchor[1] = 1f;
+        }
+
+        ChosenCell.GetComponent<RectTransform>().anchorMax = new Vector2(NewAnchor[0], NewAnchor[1]);
+        ChosenCell.GetComponent<RectTransform>().anchorMin = new Vector2(NewAnchor[0], NewAnchor[1]);
+        //this.gameObject.GetComponent<RectTransform>().anchorMax = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
+        //this.gameObject.GetComponent<RectTransform>().anchorMin = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
+    }
+
 }
