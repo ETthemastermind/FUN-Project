@@ -7,45 +7,46 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class UIManager : MonoBehaviour
 {
-    public bool CellsActive = false;
+    public bool CellsActive = false; //reference to check if the cells functionality is active 
 
-    public GameObject[] CellsInScene;
-    public GameObject ChosenCell;
+    public GameObject[] CellsInScene; //array of all the objects with the "Cell" tag
+    public GameObject ChosenCell; //current chosen cell
 
-    public Vector2 CurrentMouseLocation;
-    public float[] NewAnchor = new float[2];
+    public Vector2 CurrentMouseLocation; //current mouse location
+    public float[] NewAnchor = new float[2]; //float to put the new anchor values in 
 
-    public float ScreenRes_W;
+    public float ScreenRes_W; //these were mainly to just check to see if the values for the screen resolution were correct
     public float ScreenRes_H;
 
-    public string[] LoadedData;
+    public string[] LoadedData; //string array for the data load from the .txt
     
     // Start is called before the first frame update
     void Start()
     {
-        CellsInScene = GameObject.FindGameObjectsWithTag("Cell");
-        for (int i = 0; i < CellsInScene.Length; i++)
+        CellsInScene = GameObject.FindGameObjectsWithTag("Cell"); //finds all the objects with the "Cell" tag
+        for (int i = 0; i < CellsInScene.Length; i++) //for each gameobject in the cell array
         {
-            CellsInScene[i].GetComponent<Button>().interactable = false;
+            CellsInScene[i].GetComponent<Button>().interactable = false; //turn the button functionality off
             
         }
-        ScreenRes_W = (Screen.width);
+        ScreenRes_W = (Screen.width); //find the width and height of the screen, mainly here for debug
         ScreenRes_H = (Screen.height);
 
-        LoadCellPosition();
+
+        LoadCellPosition(); //load saved UI data
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ChosenCell != null)
+        if (ChosenCell != null) //if the user has chosen a cell to move
         {
-            CurrentMouseLocation = Input.mousePosition;
-            ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0);
+            CurrentMouseLocation = Input.mousePosition; //get the current mouse position
+            ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0); //have the cell follow the mouse
         }
 
 
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.KeypadPlus)) //debug controls
         {
             ScaleCellUp();
         }
@@ -55,28 +56,25 @@ public class UIManager : MonoBehaviour
             ScaleCellDown();
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveCellPosition();
-        }
+       
     }
 
-    public void ActivateCells()
+    public void ActivateCells() //show the cells to the user
     {
-        if (CellsActive == false)
+        if (CellsActive == false) //if the user is currently not the edit cell mode
         {
-            CellsActive = true;
-            Debug.Log("Cell moving mode enabled");
-            for (int i = 0; i < CellsInScene.Length; i++)
+            CellsActive = true; //activate the cells active variable
+            Debug.Log("Cell moving mode enabled"); //print to console the the cell moving mode is active
+            for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
                 
-                CellsInScene[i].GetComponent<Button>().interactable = true;
-                for (int j = 0; j < CellsInScene[i].transform.childCount; j++)
+                CellsInScene[i].GetComponent<Button>().interactable = true; //reactivate the interactble option
+                for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for each child of the cell
                 {
-                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject;
-                    if (CurrentChild.GetComponent<Button>() != null)
+                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the current child to a reference for ease of use
+                    if (CurrentChild.GetComponent<Button>() != null) //if the child has a button component
                     {
-                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false;
+                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false; //turn the button component off
 
                     }
                     
@@ -86,19 +84,19 @@ public class UIManager : MonoBehaviour
 
         }
 
-        else
+        else //if the cellsactive is true, it basically does the opposite
         {
-            CellsActive = false;
-            Debug.Log("Cell moving mode disabled");
-            for (int i = 0; i < CellsInScene.Length; i++)
+            CellsActive = false; //set the cells active variable to false
+            Debug.Log("Cell moving mode disabled"); //print to console that the cell moving mode is disabled
+            for (int i = 0; i < CellsInScene.Length; i++)// for the number of cells in the scene
             {
-                CellsInScene[i].GetComponent<Button>().interactable = false;
-                for (int j = 0; j < CellsInScene[i].transform.childCount; j++)
+                CellsInScene[i].GetComponent<Button>().interactable = false; //turn the interactble option off for the button
+                for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for the childen of the current cell
                 {
-                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject;
-                    if (CurrentChild.GetComponent<Button>() != null)
+                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the child to a variable for ease of use
+                    if (CurrentChild.GetComponent<Button>() != null) //if the child has a buttton component
                     {
-                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = true;
+                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = true; //renable to button component for the child
                     }
                     
                 }
@@ -110,22 +108,22 @@ public class UIManager : MonoBehaviour
 
     
 
-    public void ActivateCell(GameObject Cell)
+    public void ActivateCell(GameObject Cell) //function that gets called when a specific cell is clicked on
     {
-        if (ChosenCell == null)
+        if (ChosenCell == null) //if no cell is currently being held
         {
-            Debug.Log("Pick up cell");
-            ChosenCell = Cell;
+            Debug.Log("Pick up cell"); //print to console that a cell has been picked up
+            ChosenCell = Cell; //sets the chosen cell to this cell
         }
 
-        else
+        else //if a cell is currently being held
         {
-            Debug.Log("Put down cell");
-            Vector3 CellLocation = ChosenCell.transform.position;
-            CalculateAnchor();
-            ChosenCell.transform.position = CellLocation;
-            ChosenCell = null;
-            SaveCellPosition();
+            Debug.Log("Put down cell"); //print to console that a cell has been put down
+            Vector3 CellLocation = ChosenCell.transform.position; //gets the current location of the cell
+            CalculateAnchor(); //run the script to calculate where the anchor should be
+            ChosenCell.transform.position = CellLocation; //reset the location of the cell, if the anchor changes then its position moves
+            ChosenCell = null; //set the chosen cell to null
+            SaveCellPosition(); //run the save cell position script
             
         }
         /*
@@ -135,80 +133,94 @@ public class UIManager : MonoBehaviour
         */
     }
 
-    public void ScaleCellUp()
+    public void ScaleCellUp() //a function to scale the size of a cell up, this will likely be reworked later
     {
-        if (ChosenCell != null)
+        if (ChosenCell != null) //if a cell has been chosen
         {
-            float NewY = ChosenCell.transform.localScale.y + 0.1f;
+            float NewY = ChosenCell.transform.localScale.y + 0.1f; //increase the size of the x and y variables
             float NewX = ChosenCell.transform.localScale.x + 0.1f;
-            ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+            ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
         }
         
     }
 
-    public void ScaleCellDown()
+    public void ScaleCellDown() //a function to scale the size of a cell up, likely to be reworked later
     {
-        float NewY = ChosenCell.transform.localScale.y - 0.1f;
+        float NewY = ChosenCell.transform.localScale.y - 0.1f; //decrease the size of the x and y variables
         float NewX = ChosenCell.transform.localScale.x - 0.1f;
-        ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z);
+        ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
 
     }
 
-    public void SaveCellPosition()
+    public void SaveCellPosition() //horrible function
     {
-        Debug.Log("Saved Cell Position");
-        string FileName = "/TestSave";
-        string FilePath = Application.streamingAssetsPath + FileName + ".txt";
+        Debug.Log("Saved Cell Position"); //print to console that the UI layout is being saved
+        string FileName = "/TestSave"; //TEMP filename, this will need to be swapped out when the profile system is working as intended
+        string FilePath = Application.streamingAssetsPath + FileName + ".txt"; //TEMP filepath, this will need to be swapped out when the profile system is working as intended
 
-        StreamWriter SW = new StreamWriter(FilePath, false);
+        StreamWriter SW = new StreamWriter(FilePath, false); //creates a new file at the filepath
 
-        for (int i = 0; i < CellsInScene.Length; i++)
+        for (int i = 0; i < CellsInScene.Length; i++) //for the amount of Cells in the scene
         {
             
-            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.position + "|" + CellsInScene[i].transform.localScale + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMax + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMin);
+            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.position + "|" + CellsInScene[i].transform.localScale + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMax + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMin); //create a string holding the data, why im doing it like this i have absolutely no idea
         }
             
         
-        SW.Close();
+        SW.Close(); //close the Streamwriter
     }
 //==================================================================working on this==============================================
-    public void LoadCellPosition()  
+    public void LoadCellPosition()  //a more so horrible function
     {
-        string FileName = "/TestSave";
-        string FilePath = Application.streamingAssetsPath + FileName + ".txt";
+        string FileName = "/TestSave"; //TEMP filename, will be swapped out later
+        string FilePath = Application.streamingAssetsPath + FileName + ".txt"; //TEMP filepath, will be swapped out later
 
-        StreamReader SR = new StreamReader(FilePath);
-        //Debug.Log (SR.ReadToEnd());
-        string contents = SR.ReadToEnd();
-        LoadedData = contents.Split('\n');
-        for (int i = 0; i < CellsInScene.Length; i++)
+        if (File.Exists(FilePath)) //if the file exists
         {
-            string[] DataLine = LoadedData[i].Split('|');
+            Debug.Log("File Found"); //debug that the file was found
 
-            if (CellsInScene[i].name == DataLine[0])
+            StreamReader SR = new StreamReader(FilePath); //opens a new streamreader at the filepath
+
+            //Debug.Log (SR.ReadToEnd());
+            string contents = SR.ReadToEnd(); //full contents of the filepath
+            LoadedData = contents.Split('\n'); //split the contents by line
+            for (int i = 0; i < CellsInScene.Length; i++) //for the number of Cells in the scene
             {
-                Debug.Log("Data found for " + CellsInScene[i].name);
+                string[] DataLine = LoadedData[i].Split('|');//spit the i'th entry by |, (|) used to seperate values
 
-                Vector3 Position = StringToVector2(DataLine[1]);
-                Debug.Log("The position for this cell is: " + Position);
-                CellsInScene[i].transform.position = Position;
+                if (CellsInScene[i].name == DataLine[0]) //check to see if the Cell name matches the Cell name in column 0 of the dataline
+                {
+                    Debug.Log("Data found for " + CellsInScene[i].name); //prints to console that the data for a cell in the scene has been found
 
-                Vector3 Scale = StringToVector2(DataLine[2]);
-                Debug.Log("The scale for this cell is:" + Scale);
-                CellsInScene[i].transform.localScale = Scale;
-                
+                    Vector2 Position = StringToVector2(DataLine[1]); //run the StringToVector2 function with Dataline[1](the saved position from the file) as input and return the value
+                    Debug.Log("The position for this cell is: " + Position); //print the returned postion to the console
+                    CellsInScene[i].transform.position = Position; //set the position of the cell
 
+                    Vector2 Scale = StringToVector2(DataLine[2]); //run the StringToVector2 function with Dataline[2](the saved scale from the file) as input and return the value
+                    Debug.Log("The scale for this cell is:" + Scale); //print the returned scale to the console
+                    CellsInScene[i].transform.localScale = Scale; //set the scale of the cell
 
+                    Vector2 CurrentPosition = CellsInScene[i].transform.position;
+                    Vector2 AnchorMax = StringToVector2(DataLine[3]);
+                    Debug.Log("The AnchorMax for this cell is: " + AnchorMax);
+                    CellsInScene[i].GetComponent<RectTransform>().anchorMax = AnchorMax;
+                    CellsInScene[i].GetComponent<RectTransform>().anchorMin = AnchorMax;
+                    CellsInScene[i].transform.position = CurrentPosition;
+
+                }
             }
         }
+
+        
+        
     }
 //==========================================================================================================================================
-/// </summary>
-    public void CalculateAnchor()
+
+    public void CalculateAnchor() //function to calculate where the anchor should be set once the UI element has been moved. the screen is split into thirds up and down and the anchor is chosen depending which segment of the screen the cell falls in
     {
-        Debug.Log("Calculating Anchor Point");
-        float ScreenRes_W_OneThird = ScreenRes_W / 3;
-        float ScreenRes_W_TwoThird = ScreenRes_W_OneThird * 2;
+        Debug.Log("Calculating Anchor Point"); //prints to console that the anchor point is being calculated
+        float ScreenRes_W_OneThird = ScreenRes_W / 3; //finds 1/3 of the screen resolution
+        float ScreenRes_W_TwoThird = ScreenRes_W_OneThird * 2; //find 2/3 of the screen resolution
 
         //Debug.Log(ScreenRes_W_OneThird);
         //Debug.Log(ScreenRes_W_TwoThird);
@@ -256,18 +268,19 @@ public class UIManager : MonoBehaviour
             NewAnchor[1] = 1f;
         }
 
-        ChosenCell.GetComponent<RectTransform>().anchorMax = new Vector2(NewAnchor[0], NewAnchor[1]);
+        ChosenCell.GetComponent<RectTransform>().anchorMax = new Vector2(NewAnchor[0], NewAnchor[1]); //sets the AnchorMax and AnchorMin
         ChosenCell.GetComponent<RectTransform>().anchorMin = new Vector2(NewAnchor[0], NewAnchor[1]);
-        //this.gameObject.GetComponent<RectTransform>().anchorMax = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
-        //this.gameObject.GetComponent<RectTransform>().anchorMin = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
+        
     }
 
-    public Vector3 StringToVector2(string Target)
+    public Vector2 StringToVector2(string Target) //function to transform the string input 
     {
-        string NewTarget = Target.Trim('(',')');
-        string[] String_Pos = NewTarget.Split(',');
-        Vector3 Postion = new Vector3(float.Parse(String_Pos[0]), float.Parse(String_Pos[1]), float.Parse(String_Pos[2]));
-        return Postion;
+        string NewTarget = Target.Trim('(',')'); //removes the brackets from the target
+        string[] String_Pos = NewTarget.Split(','); //splits the newTarget up by , into an array of numbers as strings
+        //Debug.Log(String_Pos[0]); 
+        //Debug.Log(String_Pos[1]);
+        Vector2 Output = new Vector2(float.Parse(String_Pos[0]), float.Parse(String_Pos[1])); //turns the numbers as strings into numbers as floats and saves them to this output variable
+        return Output; //returns the output
 
     }
 
