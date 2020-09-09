@@ -99,7 +99,7 @@ public class Activity1Settings : MonoBehaviour
             AnimatedTexturesActive = false;
         }
     }
-
+    /*
     public void ToggleSoundFX()
     {
         if (SoundFXToggle.isOn == true)
@@ -117,6 +117,19 @@ public class Activity1Settings : MonoBehaviour
             SoundActive = false;
         }
 
+    }
+    */
+    public void ToggleSoundFX(GameObject SoundObject)
+    {
+        AudioSource AS = SoundObject.GetComponent<AudioSource>();
+        if (AS.mute == false)
+        {
+            AS.mute = true;
+        }
+        else
+        {
+            AS.mute = false;
+        }
     }
 
     public void IncrementBallonNumber()

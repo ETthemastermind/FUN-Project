@@ -14,6 +14,7 @@ public class HudController : MonoBehaviour
 
     public GameObject ResetButton; //reference for the reset button
     public GameObject BalloonSpawner;
+    public GameObject PrepareForBang_GO;
     
     public float CurrentGameTime; //float for the maxiumum playtime 
     public bool GameComplete;
@@ -55,5 +56,20 @@ public class HudController : MonoBehaviour
         int CurrentScene = SceneManager.GetActiveScene().buildIndex; //gets the current scene index of the level (in case i end up reusing the hud controller script in multiple scene)
         SceneManager.LoadScene(CurrentScene); //loads the current scene as defined in the line above i.e reset the scene
         
+    }
+
+    public void PrepareForBang(bool inBallonProx)
+    {
+        if (inBallonProx == true)
+        {
+            Debug.Log("Prepare for Bang");
+            PrepareForBang_GO.SetActive(true);
+
+        }
+
+        else
+        {
+            PrepareForBang_GO.SetActive(false);
+        }
     }
 }

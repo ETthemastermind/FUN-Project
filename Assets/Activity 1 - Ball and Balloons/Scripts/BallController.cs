@@ -17,6 +17,8 @@ public class BallController : MonoBehaviour
 
     public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
     public GameObject _HUDController;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +63,7 @@ public class BallController : MonoBehaviour
             {
                 LerpFraction += Time.deltaTime * LerpSpeed; //increase the lerp fraction
                 gameObject.transform.position = Vector3.Lerp(BallStart, BallDestination, LerpFraction); //change the position of the ball based of the lerp fraction
-
+                
 
 
                 switch (ChosenDirection) //switch case statement to determine which way the ball should spin
@@ -89,15 +91,18 @@ public class BallController : MonoBehaviour
                         break;
 
 
-                }        
+                }
+                
             }
 
             else
             {
+                PrepareForBang();
                 _BallIsMoving = false; //ball is no longer moving
                 LerpFraction = 0f; //reset the fraction so it can be used again
                 
-                
+
+
             }
 
 
@@ -241,6 +246,42 @@ public class BallController : MonoBehaviour
             Destroy(collision.gameObject); //destroy the balloon
             HapticFeedback(); //run the haptic feedback function
         }
+    }
+
+
+    public void PrepareForBang()
+    {
+      
+        Vector3 Origin = transform.position;
+        Vector3 Direction = transform.forward;
+        float SphereRadius = 1f;
+        RaycastHit[] Hit = Physics.SphereCastAll(Origin, SphereRadius, Direction);
+        for (int i = 0; i < Hit.Length; i++)
+        {
+            bool BalloonFound = false;
+            if (Hit[i].transform.tag == "Balloon")
+            {
+                Debug.Log("Player in Proximity of Balloon");
+                BalloonFound = true;
+                
+                
+            }
+            _HUDController.GetComponent<HudController>().PrepareForBang(BalloonFound);
+            
+           
+
+        }
+
+        
+        
+
+
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);
     }
 
 }
