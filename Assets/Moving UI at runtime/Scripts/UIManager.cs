@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
 
     public float ScreenRes_W;
     public float ScreenRes_H;
+
+    public string[] LoadedData;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,8 @@ public class UIManager : MonoBehaviour
         }
         ScreenRes_W = (Screen.width);
         ScreenRes_H = (Screen.height);
+
+        LoadCellPosition();
     }
 
     // Update is called once per frame
@@ -120,6 +125,7 @@ public class UIManager : MonoBehaviour
             CalculateAnchor();
             ChosenCell.transform.position = CellLocation;
             ChosenCell = null;
+            SaveCellPosition();
             
         }
         /*
@@ -159,18 +165,45 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < CellsInScene.Length; i++)
         {
             
-            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.position + "|" + CellsInScene[i].transform.localScale);
+            SW.WriteLine(CellsInScene[i].name + "|" + CellsInScene[i].transform.position + "|" + CellsInScene[i].transform.localScale + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMax + "|" + CellsInScene[i].GetComponent<RectTransform>().anchorMin);
         }
             
         
         SW.Close();
     }
-
-    public void LoadCellPosition()
+//==================================================================working on this==============================================
+    public void LoadCellPosition()  
     {
-       
-    }
+        string FileName = "/TestSave";
+        string FilePath = Application.streamingAssetsPath + FileName + ".txt";
 
+        StreamReader SR = new StreamReader(FilePath);
+        //Debug.Log (SR.ReadToEnd());
+        string contents = SR.ReadToEnd();
+        LoadedData = contents.Split('\n');
+        for (int i = 0; i < CellsInScene.Length; i++)
+        {
+            string[] DataLine = LoadedData[i].Split('|');
+
+            if (CellsInScene[i].name == DataLine[0])
+            {
+                Debug.Log("Data found for " + CellsInScene[i].name);
+
+                Vector3 Position = StringToVector2(DataLine[1]);
+                Debug.Log("The position for this cell is: " + Position);
+                CellsInScene[i].transform.position = Position;
+
+                Vector3 Scale = StringToVector2(DataLine[2]);
+                Debug.Log("The scale for this cell is:" + Scale);
+                CellsInScene[i].transform.localScale = Scale;
+                
+
+
+            }
+        }
+    }
+//==========================================================================================================================================
+/// </summary>
     public void CalculateAnchor()
     {
         Debug.Log("Calculating Anchor Point");
@@ -227,6 +260,15 @@ public class UIManager : MonoBehaviour
         ChosenCell.GetComponent<RectTransform>().anchorMin = new Vector2(NewAnchor[0], NewAnchor[1]);
         //this.gameObject.GetComponent<RectTransform>().anchorMax = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
         //this.gameObject.GetComponent<RectTransform>().anchorMin = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
+    }
+
+    public Vector3 StringToVector2(string Target)
+    {
+        string NewTarget = Target.Trim('(',')');
+        string[] String_Pos = NewTarget.Split(',');
+        Vector3 Postion = new Vector3(float.Parse(String_Pos[0]), float.Parse(String_Pos[1]), float.Parse(String_Pos[2]));
+        return Postion;
+
     }
 
 }
