@@ -9,28 +9,32 @@ public class CameraMovement : MonoBehaviour
     public int CurrentCamera = 0;
 
     public Vector3 StartRotation;
+    public Vector3 RotationTarget;
+
+
     public float MaxRot;
     public float CurrentRot;
 
     public string ChosenRot;
     public bool _CameraMoving;
-    public Vector3 RotationTarget;
-
-    float LerpFraction;
-    float LerpSpeed;
     
+
+    public float LerpFraction;
+    public float LerpSpeed;
+    public float TimeBeforeReturn = 5f;
+    public float CurrentTimeBeforeReturn;
 
     // Start is called before the first frame update
     void Start()
     {
         StartRotation = transform.rotation.eulerAngles;
-        RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //RotateCameraUp();
         if (Input.GetKeyDown(KeyCode.C))
         {
             NextCamera();
@@ -38,8 +42,9 @@ public class CameraMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            
-            RotateCameraUp();
+
+            //RotateCameraUp();
+            StartCoroutine(RotCamUp());
             
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -57,7 +62,7 @@ public class CameraMovement : MonoBehaviour
 
 
 
-        /*
+        
         if (_CameraMoving == true)
         {
             if (LerpFraction < 1)
@@ -67,12 +72,22 @@ public class CameraMovement : MonoBehaviour
             }
             else
             {
-                _CameraMoving = false;
+                if (CurrentTimeBeforeReturn < TimeBeforeReturn)
+                {
+                    CurrentTimeBeforeReturn += Time.deltaTime;
+                }
+
+                else
+                {
+                    Debug.Log("Return Function");
+
+
+                }
             }
 
             
         }
-        */
+        
     }
 
 
@@ -95,11 +110,61 @@ public class CameraMovement : MonoBehaviour
 
 
     //functions to write: rotate camera up, down, left, right and back to start
+
+    public IEnumerator RotCamUp()
+    {
+        RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+        while (LerpFraction < 1)
+        {
+            Debug.Log("Rotating Camera Up");
+            yield return new WaitForEndOfFrame();
+            LerpFraction += LerpSpeed * Time.deltaTime * LerpSpeed;
+            gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
+        }
+        LerpFraction = 0f;
+    }
+
     public void RotateCameraUp()
     {
-        transform.Rotate(MaxRot, 0f, 0f);
+        Debug.Log("Rotate Camera Up");
+        while (LerpFraction < 1)
+        {
+            Debug.Log("Rotating Camera Up");
+            LerpFraction += LerpSpeed * Time.deltaTime * LerpSpeed;
+            gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
+        }
+        /*
+        _CameraMoving = true;
+        RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+        //transform.Rotate(MaxRot, 0f, 0f);
+
+        /*
+        LerpFraction += Time.deltaTime * LerpSpeed;
+        if (LerpFraction < 1)
+        {
+            transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
+            RotateCameraUp();
+        }
+        else
+        {
+            
+        }
+        */
+        
+        
+    }
+
+    public void RotateCameraToStart()
+    {
+        _CameraMoving = true;
+        RotationTarget = new Vector3(StartRotation.x, StartRotation.y, StartRotation.z);
+        //transform.Rotate(MaxRot, 0f, 0f);
+
+       
+
+
     }
 
 
-    
+
 }
