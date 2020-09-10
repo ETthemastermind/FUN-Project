@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     public int CurrentCamera = 0;
 
     public Vector3 StartRotation;
-    public Vector3 RotationTarget;
+    //public Vector3 RotationTarget;
 
 
     public float MaxRot;
@@ -42,50 +42,19 @@ public class CameraMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-
-            //RotateCameraUp();
-            StartCoroutine(RotCamUp());
-            
+            RotateCameraUp();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            //RotateCameraDown();
+            RotateCameraDown();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            
+            RotateCameraRight();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            
-        }
-
-
-
-        
-        if (_CameraMoving == true)
-        {
-            if (LerpFraction < 1)
-            {
-                LerpFraction += LerpSpeed * Time.deltaTime;
-                gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
-            }
-            else
-            {
-                if (CurrentTimeBeforeReturn < TimeBeforeReturn)
-                {
-                    CurrentTimeBeforeReturn += Time.deltaTime;
-                }
-
-                else
-                {
-                    Debug.Log("Return Function");
-
-
-                }
-            }
-
-            
+            RotateCameraLeft();
         }
         
     }
@@ -103,67 +72,107 @@ public class CameraMovement : MonoBehaviour
         transform.parent = CameraPositionsArray[CurrentCamera].transform;
         transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
-
-    }
-
-
-
-
-    //functions to write: rotate camera up, down, left, right and back to start
-
-    public IEnumerator RotCamUp()
-    {
-        RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
-        while (LerpFraction < 1)
-        {
-            Debug.Log("Rotating Camera Up");
-            yield return new WaitForEndOfFrame();
-            LerpFraction += LerpSpeed * Time.deltaTime * LerpSpeed;
-            gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
-        }
-        LerpFraction = 0f;
+        StartRotation = transform.rotation.eulerAngles;
     }
 
     public void RotateCameraUp()
     {
-        Debug.Log("Rotate Camera Up");
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+            Vector3 RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+            StartCoroutine(RotCam(RotationTarget));
+        }
+        
+    }
+
+    public void RotateCameraDown()
+    {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+            Vector3 RotationTarget = new Vector3(StartRotation.x + MaxRot, StartRotation.y, StartRotation.z);
+            StartCoroutine(RotCam(RotationTarget));
+
+        }
+        
+    }
+
+    public void RotateCameraRight()
+    {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y + MaxRot, StartRotation.z);
+            StartCoroutine(RotCam(RotationTarget));
+        }
+    }
+
+    public void RotateCameraLeft()
+    {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y - MaxRot, StartRotation.z);
+            StartCoroutine(RotCam(RotationTarget));
+        }
+    }
+
+    #region Rotate the Camera
+    //functions to write: rotate camera up, down, left, right and back to start
+
+    public IEnumerator RotCam(Vector3 RotTarget)
+    {
+        
         while (LerpFraction < 1)
         {
             Debug.Log("Rotating Camera Up");
-            LerpFraction += LerpSpeed * Time.deltaTime * LerpSpeed;
-            gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
+            yield return new WaitForEndOfFrame();
+            LerpFraction += LerpSpeed * Time.deltaTime;
+            gameObject.transform.eulerAngles = Vector3.Lerp(StartRotation, RotTarget, LerpFraction);
         }
-        /*
-        _CameraMoving = true;
-        RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
-        //transform.Rotate(MaxRot, 0f, 0f);
-
-        /*
-        LerpFraction += Time.deltaTime * LerpSpeed;
-        if (LerpFraction < 1)
-        {
-            transform.eulerAngles = Vector3.Lerp(StartRotation, RotationTarget, LerpFraction);
-            RotateCameraUp();
-        }
-        else
-        {
-            
-        }
-        */
-        
-        
+        LerpFraction = 0f;
+        StartCoroutine(ReturnCamera(RotTarget));
     }
 
-    public void RotateCameraToStart()
+
+
+
+    public IEnumerator ReturnCamera(Vector3 RotTarget)
     {
-        _CameraMoving = true;
-        RotationTarget = new Vector3(StartRotation.x, StartRotation.y, StartRotation.z);
-        //transform.Rotate(MaxRot, 0f, 0f);
+        yield return StartCoroutine(RotPause());
+        yield return StartCoroutine(RotCamStart(RotTarget));
+    }
 
-       
+    public IEnumerator RotPause()
+    {
+        while (CurrentTimeBeforeReturn < TimeBeforeReturn)
+        {
+            CurrentTimeBeforeReturn++;
+            yield return new WaitForSecondsRealtime(TimeBeforeReturn);
+        }
+        CurrentTimeBeforeReturn = 0f;
 
 
     }
+
+    public IEnumerator RotCamStart(Vector3 RotTarget)
+    {
+        //RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+        while (LerpFraction < 1)
+        {
+            Debug.Log("Rotating Camera to Start");
+            yield return new WaitForEndOfFrame();
+            LerpFraction += LerpSpeed * Time.deltaTime;
+            gameObject.transform.eulerAngles = Vector3.Lerp(RotTarget, StartRotation, LerpFraction);
+        }
+        LerpFraction = 0f;
+        _CameraMoving = false;
+    }
+
+    
+    #endregion
+
 
 
 
