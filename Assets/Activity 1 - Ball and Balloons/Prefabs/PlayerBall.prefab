@@ -242,6 +242,7 @@ MonoBehaviour:
   Material: {fileID: 0}
   TextureSpeed: 4
   Offset: 0
+  Active: 0
 --- !u!82 &7502587753116477451
 AudioSource:
   m_ObjectHideFlags: 0

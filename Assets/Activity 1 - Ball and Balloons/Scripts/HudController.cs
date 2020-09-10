@@ -43,7 +43,7 @@ public class HudController : MonoBehaviour
             AudioSource AS = Camera.main.GetComponent<AudioSource>();
             if (AS.isPlaying == false)
             {
-                AS.PlayOneShot(inBallonProx_Clip);
+                //AS.PlayOneShot(inBallonProx_Clip);
 
             }
         }
