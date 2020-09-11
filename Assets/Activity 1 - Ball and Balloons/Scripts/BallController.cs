@@ -102,6 +102,8 @@ public class BallController : MonoBehaviour
                 //PrepareForBang();
                 _BallIsMoving = false; //ball is no longer moving
                 LerpFraction = 0f; //reset the fraction so it can be used again
+
+                gameObject.GetComponent<ProxmityToBalloon>().BalloonProxCheck();
                 
 
 
