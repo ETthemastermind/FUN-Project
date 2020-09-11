@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform[] CameraPositionsArray;
+    public GameObject[] CameraInterface_Canvas;
 
     public int CurrentCamera = 0;
 
@@ -64,12 +65,14 @@ public class CameraMovement : MonoBehaviour
 
     public void NextCamera()
     {
+        CameraInterface_Canvas[CurrentCamera].SetActive(false);
         CurrentCamera++;
         Debug.Log("Array length = " + CameraPositionsArray.Length);
         if (CurrentCamera > CameraPositionsArray.Length - 1)
         {
             CurrentCamera = 0;
         }
+        CameraInterface_Canvas[CurrentCamera].SetActive(true);
         transform.parent = CameraPositionsArray[CurrentCamera].transform;
         transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
