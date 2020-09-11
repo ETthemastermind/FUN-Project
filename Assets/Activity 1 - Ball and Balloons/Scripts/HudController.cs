@@ -22,6 +22,7 @@ public class HudController : MonoBehaviour
 
     public Activity1Settings GameController;
     public AudioClip inBallonProx_Clip;
+    public AudioClip ButtonClick_SFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,5 +89,10 @@ public class HudController : MonoBehaviour
             PrepareForBang_GO.SetActive(false);
             PrepareForBang_SFX = false;
         }
+    }
+
+    public void ButtonClick()
+    {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
     }
 }

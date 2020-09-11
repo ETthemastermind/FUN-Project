@@ -5,6 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform[] CameraPositionsArray;
+    public char[] V_Axis;
+    public char[] H_Axis;
+
 
     public int CurrentCamera = 0;
 
@@ -12,7 +15,8 @@ public class CameraMovement : MonoBehaviour
     //public Vector3 RotationTarget;
 
 
-    public float MaxRot;
+    public float MaxRot_UD;
+    public float MaxRot_LR;
     public float CurrentRot;
 
     public string ChosenRot;
@@ -72,6 +76,7 @@ public class CameraMovement : MonoBehaviour
         transform.parent = CameraPositionsArray[CurrentCamera].transform;
         transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
+        transform.parent = null;
         StartRotation = transform.rotation.eulerAngles;
     }
 
@@ -80,7 +85,7 @@ public class CameraMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
-            Vector3 RotationTarget = new Vector3(StartRotation.x - MaxRot, StartRotation.y, StartRotation.z);
+            Vector3 RotationTarget = new Vector3(StartRotation.x - MaxRot_UD, StartRotation.y, StartRotation.z);
             StartCoroutine(RotCam(RotationTarget));
         }
         
@@ -91,7 +96,7 @@ public class CameraMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
-            Vector3 RotationTarget = new Vector3(StartRotation.x + MaxRot, StartRotation.y, StartRotation.z);
+            Vector3 RotationTarget = new Vector3(StartRotation.x + MaxRot_UD, StartRotation.y, StartRotation.z);
             StartCoroutine(RotCam(RotationTarget));
 
         }
@@ -103,7 +108,7 @@ public class CameraMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
-            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y + MaxRot, StartRotation.z);
+            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y + MaxRot_LR, StartRotation.z);
             StartCoroutine(RotCam(RotationTarget));
         }
     }
@@ -113,7 +118,7 @@ public class CameraMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
-            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y - MaxRot, StartRotation.z);
+            Vector3 RotationTarget = new Vector3(StartRotation.x, StartRotation.y - MaxRot_LR, StartRotation.z);
             StartCoroutine(RotCam(RotationTarget));
         }
     }

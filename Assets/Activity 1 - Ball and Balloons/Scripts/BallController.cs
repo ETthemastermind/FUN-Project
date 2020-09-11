@@ -15,8 +15,8 @@ public class BallController : MonoBehaviour
     public float LerpSpeed = 0.5f; //speed from transisiting from start to destination
     public float RotSpeed = 100f; //speed at which the ball rotates
 
-    public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
-    public GameObject _HUDController;
+    
+    
 
     
     // Start is called before the first frame update
@@ -97,7 +97,7 @@ public class BallController : MonoBehaviour
 
             else
             {
-                PrepareForBang();
+                //PrepareForBang();
                 _BallIsMoving = false; //ball is no longer moving
                 LerpFraction = 0f; //reset the fraction so it can be used again
                 
@@ -211,14 +211,7 @@ public class BallController : MonoBehaviour
     }
     
     
-    public void OnTriggerStay(Collider other) //when the ball stays in a trigger area
-    {
-        if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
-        {
-            Debug.Log("Boundary Hit");
-            HapticFeedback(); //run the haptic feedback function
-        }
-    }
+    
     /*
     public void OnTriggerEnter(Collider other) //when the ball enters a trigger area
     {
@@ -235,53 +228,6 @@ public class BallController : MonoBehaviour
     public void HapticFeedback()
     {
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
-        {
-            PlayerScore++; //increment the player's score
-            _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
-            Destroy(collision.gameObject); //destroy the balloon
-            HapticFeedback(); //run the haptic feedback function
-        }
-    }
-
-
-    public void PrepareForBang()
-    {
-      
-        Vector3 Origin = transform.position;
-        Vector3 Direction = transform.forward;
-        float SphereRadius = 1f;
-        RaycastHit[] Hit = Physics.SphereCastAll(Origin, SphereRadius, Direction);
-        for (int i = 0; i < Hit.Length; i++)
-        {
-            bool BalloonFound = false;
-            if (Hit[i].transform.tag == "Balloon")
-            {
-                Debug.Log("Player in Proximity of Balloon");
-                BalloonFound = true;
-                
-                
-            }
-            _HUDController.GetComponent<HudController>().PrepareForBang(BalloonFound);
-            
-           
-
-        }
-
-        
-        
-
-
-    }
-
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f);
     }
 
 }
