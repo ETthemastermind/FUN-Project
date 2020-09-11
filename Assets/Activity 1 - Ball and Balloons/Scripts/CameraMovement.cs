@@ -5,9 +5,6 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform[] CameraPositionsArray;
-    public char[] V_Axis;
-    public char[] H_Axis;
-
 
     public int CurrentCamera = 0;
 
