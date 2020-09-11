@@ -15,6 +15,8 @@ public class BallController : MonoBehaviour
     public float LerpSpeed = 0.5f; //speed from transisiting from start to destination
     public float RotSpeed = 100f; //speed at which the ball rotates
 
+    public int MaxGrid_UD;
+    public int MaxGrid_LR;
     
     
 
@@ -118,7 +120,7 @@ public class BallController : MonoBehaviour
             Debug.Log("Ball forwards button press active"); //confirms button press
             BallStart = gameObject.transform.position; //gets the current starting vector of the ball
             BallDestination = new Vector3(BallStart.x + MoveValue, gameObject.transform.position.y, gameObject.transform.position.z); //calculate the destination vector of the ball
-            if (BallStart.x != 5) //if the starting location X value of the ball is not equal to 5, the walls have been adjusted so that the ball will be at the walls when the vector is at 5
+            if (BallStart.x != MaxGrid_UD) //if the starting location X value of the ball is not equal to 5, the walls have been adjusted so that the ball will be at the walls when the vector is at 5
             {
                 _BallIsMoving = true; //tell the ball to start moving
                 ChosenDirection = "F"; //set the chosen direction to F/B/R/L
@@ -141,7 +143,7 @@ public class BallController : MonoBehaviour
             BallStart = gameObject.transform.position;
             BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z - MoveValue);
 
-            if (BallStart.z != -5)
+            if (BallStart.z != (MaxGrid_LR * -1))
             {
                 _BallIsMoving = true;
                 ChosenDirection = "R";
@@ -169,7 +171,7 @@ public class BallController : MonoBehaviour
             BallDestination = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, BallStart.z + MoveValue);
 
 
-            if (BallStart.z != 5)
+            if (BallStart.z != MaxGrid_LR)
             {
                 _BallIsMoving = true;
                 ChosenDirection = "L";
@@ -194,7 +196,7 @@ public class BallController : MonoBehaviour
             BallStart = gameObject.transform.position;
             BallDestination = new Vector3(BallStart.x - MoveValue, gameObject.transform.position.y, gameObject.transform.position.z); //move ball right by the increment value
 
-            if (BallStart.x != -5)
+            if (BallStart.x != (MaxGrid_UD * -1))
             {
                 _BallIsMoving = true;
                 ChosenDirection = "B";

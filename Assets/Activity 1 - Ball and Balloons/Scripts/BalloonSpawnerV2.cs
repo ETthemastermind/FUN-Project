@@ -14,6 +14,9 @@ public class BalloonSpawnerV2 : MonoBehaviour
 
     public Activity1Settings GameController;
 
+    public int MaxGrid_UD;
+    public int MaxGrid_LR;
+
     
     
     // Start is called before the first frame update
@@ -22,7 +25,10 @@ public class BalloonSpawnerV2 : MonoBehaviour
         Ball_Player = GameObject.FindGameObjectWithTag("Player"); //find the player
         GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
         NumberOfBalloonsToSpawn = GameController.NumberOfBalloonsToSpawn;
-        
+
+        MaxGrid_UD = Ball_Player.GetComponent<BallController>().MaxGrid_UD;
+        MaxGrid_LR = Ball_Player.GetComponent<BallController>().MaxGrid_LR;
+
     }
 
     // Update is called once per frame
@@ -46,7 +52,7 @@ public class BalloonSpawnerV2 : MonoBehaviour
         for (int i = 0; i <= NumberOfBalloonsToSpawn - 1; i++) //for the number of balloons to spawn (-1 is there so that the chosen number of balloons set in the inspector works with the list)
         {
 
-            Vector3 SpawnLocation = new Vector3(Random.Range(-5f, 5f), transform.position.y, Random.Range(-5f, 5f)); //generate a random location for a balloon to spawn
+            Vector3 SpawnLocation = new Vector3(Random.Range(MaxGrid_UD * -1, MaxGrid_UD), transform.position.y, Random.Range(MaxGrid_LR * -1, MaxGrid_LR)); //generate a random location for a balloon to spawn
             SpawnLocations.Add(SpawnLocation); //adds the random location to the list of locations
 
         }
@@ -71,7 +77,7 @@ public class BalloonSpawnerV2 : MonoBehaviour
         if (SpawnLocations.Count <= 3) //if the length of the list is less than 3
         {
             Debug.Log("Duplicate Spawn Location Found"); //print that a duplicate spawn location was generated to the console
-            Vector3 SpawnLocation = new Vector3(Random.Range(-5f, 5f), transform.position.y, Random.Range(-5f, 5f)); //create a new location to replace the duplicated
+            Vector3 SpawnLocation = new Vector3(Random.Range(MaxGrid_UD * -1, MaxGrid_UD), transform.position.y, Random.Range(MaxGrid_LR * -1, MaxGrid_LR)); //create a new location to replace the duplicated
             SpawnLocations.Add(SpawnLocation); //adds the replacement location to the list
             CheckForDuplicates(); //run the check duplicates function again, essentially creating a loop until 4 unique locations are generated
         }
