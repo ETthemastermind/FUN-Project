@@ -23,7 +23,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
     {
         if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
         {
-            PlayerScore++; //increment the player's score
+            PlayerScore += collision.gameObject.GetComponent<Balloons>().BalloonValue; //increment the player's score
             _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
             Destroy(collision.gameObject); //destroy the balloon
             Ball.HapticFeedback(); //run the haptic feedback function

@@ -6,7 +6,8 @@ using System.Linq;
 public class BalloonSpawnerV2 : MonoBehaviour
 {
     public GameObject Ball_Player; //reference to the player
-    public GameObject BalloonPrefab; //reference to the balloon prefab 
+    public GameObject[] Balloon_Prefab; //reference to the balloon prefab
+  
     private int NumberOfBalloonsToSpawn; // Reference to number of balloons to spawn per round
     public new List<Vector3> SpawnLocations = new List<Vector3>(); //list of the spawn locations for the balloons, randomly generated
     public GameObject[] SpawnedBalloons; //array for all balloons in the scene
@@ -16,7 +17,7 @@ public class BalloonSpawnerV2 : MonoBehaviour
 
     public int MaxGrid_UD;
     public int MaxGrid_LR;
-
+    
     
     
     // Start is called before the first frame update
@@ -56,13 +57,33 @@ public class BalloonSpawnerV2 : MonoBehaviour
             SpawnLocations.Add(SpawnLocation); //adds the random location to the list of locations
 
         }
-
+        
         CheckForDuplicates(); //run the check for duplicates function
 
         for (int j = 0; j != SpawnLocations.Count; j++) //for the length of the spawn locations list (basically how many balloons are wanted to spawn)
         {
-            Instantiate(BalloonPrefab, SpawnLocations[j], Quaternion.identity); //spawn a balloon at the location held in element J of the list
+            int BalloonToSpawn = Random.Range(1, 11); // 50% for 1 pointer, 40% for a 2 pointer, 10% for a 3 pointer
+            Debug.Log("Balloon to spawn" + BalloonToSpawn);
+            //Instantiate(Balloon_Prefab[2], SpawnLocations[j], Quaternion.identity); //spawn a balloon at the location held in element J of the list
+
+            if (BalloonToSpawn >= 1 && BalloonToSpawn <= 5)
+            {
+                Instantiate(Balloon_Prefab[0], SpawnLocations[j], Quaternion.identity); //spawn a balloon at the location held in element J of the list
+            }
             
+            else if (BalloonToSpawn >= 6 && BalloonToSpawn <= 9)
+            {
+                Instantiate(Balloon_Prefab[1], SpawnLocations[j], Quaternion.identity); //spawn a balloon at the location held in element J of the list
+            }
+
+            else if (BalloonToSpawn == 10)
+            {
+                Instantiate(Balloon_Prefab[2], SpawnLocations[j], Quaternion.identity); //spawn a balloon at the location held in element J of the list
+            }
+            
+
+
+
 
         }
 

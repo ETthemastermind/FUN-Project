@@ -225,8 +225,8 @@ MonoBehaviour:
   LerpFraction: 0
   LerpSpeed: 3
   RotSpeed: 500
-  PlayerScore: 0
-  _HUDController: {fileID: 0}
+  MaxGrid_UD: 0
+  MaxGrid_LR: 0
 --- !u!114 &8753386378283065122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9e42fb933a136454ead8d061aec900ab, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9c17701064b72b543a3bc4e58ea74e62, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1

@@ -73,7 +73,6 @@ public class CameraMovement : MonoBehaviour
         transform.parent = CameraPositionsArray[CurrentCamera].transform;
         transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
-        transform.parent = null;
         StartRotation = transform.rotation.eulerAngles;
     }
 

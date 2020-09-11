@@ -23,12 +23,16 @@ public class HudController : MonoBehaviour
     public Activity1Settings GameController;
     public AudioClip inBallonProx_Clip;
     public AudioClip ButtonClick_SFX;
+
+    //Activate Menu
+    public GameObject SettingsMenu;
+    public GameObject Controls;
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1; //makes sure that time scale for this scene is set to 1
         GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
-        MaxScore = GameController.NumberOfBalloonsToSpawn * GameController.NumberOfRounds;
+        MaxScore = GameController.Score_Goal;
         
         
     }
@@ -56,7 +60,7 @@ public class HudController : MonoBehaviour
     {
         ScoreText.GetComponent<TextMeshProUGUI>().text = PlayerScore.ToString() ; //adjust the text on the score object to reflect the player's current score
 
-        if (PlayerScore == MaxScore)
+        if (PlayerScore >= MaxScore)
         {
             Time.timeScale = 0; //set the time scale to 0 i.e. pause the game
             ResetButton.SetActive(true); //show the reset button
@@ -94,5 +98,24 @@ public class HudController : MonoBehaviour
     public void ButtonClick()
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
+    }
+
+    public void OpenCloseSettings()
+    {
+        if (SettingsMenu.active == true)
+        {
+            SettingsMenu.SetActive(false);
+            Controls.SetActive(true);
+            Time.timeScale = 1;
+
+
+        }
+        else
+        {
+            SettingsMenu.SetActive(true);
+            Controls.SetActive(false);
+            Time.timeScale = 0;
+        }
+
     }
 }

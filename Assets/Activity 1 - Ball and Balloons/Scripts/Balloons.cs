@@ -6,7 +6,7 @@ public class Balloons : MonoBehaviour
 {
     
     public float BalloonRotSpeed = 10f; //value for the rotation speed of the balloon
-
+    public int BalloonValue;
     public Texture[] BalloonColors; //array of albedo maps for the balloons
     public GameObject Camera; //reference to the camera because it has an audio source
     public AudioSource AS; //reference to the audio source on the camera

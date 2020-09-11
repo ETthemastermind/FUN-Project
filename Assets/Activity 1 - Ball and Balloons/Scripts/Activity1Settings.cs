@@ -6,8 +6,7 @@ using TMPro;
 public class Activity1Settings : MonoBehaviour
 {
     public GameObject PlayerBall;
-    //Activate Menu
-    public GameObject SettingsMenu;
+    
 
     // Rotating Ball Texture
     public AnimatedTexture AnimatedTexture;
@@ -23,19 +22,22 @@ public class Activity1Settings : MonoBehaviour
     public int MaxBalloons;
     public TMP_Text NumOfBalloonText;
     
-
+    /*
     //Number of Rounds
     public HudController RoundNumber;
     public int MinRounds;
     public int MaxRounds;
     public TMP_Text RoundNumberText;
+    */
     //Ball Speed? also need to edit the ball rotation...
 
     [Header("Game Attributes")]
     public bool AnimatedTexturesActive;
     public bool SoundActive;
     public int NumberOfBalloonsToSpawn;
-    public int NumberOfRounds;
+    //public int NumberOfRounds;
+    public int Score_Goal;
+
 
 
 
@@ -52,8 +54,8 @@ public class Activity1Settings : MonoBehaviour
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
         NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
         
-        RoundNumber = gameObject.GetComponent<HudController>();
-        RoundNumberText.text = NumberOfRounds.ToString();
+        //RoundNumber = gameObject.GetComponent<HudController>();
+        //RoundNumberText.text = NumberOfRounds.ToString();
 
 
 
@@ -66,22 +68,6 @@ public class Activity1Settings : MonoBehaviour
         
     }
 
-    public void OpenCloseSettings()
-    {
-        if (SettingsMenu.active == true)
-        {
-            SettingsMenu.SetActive(false);
-            Time.timeScale = 1;
-            
-
-        }
-        else
-        {
-            SettingsMenu.SetActive(true);
-            Time.timeScale = 0;
-        }
-
-    }
 
     public void ToggleAnimatedTexture()
     {
@@ -125,10 +111,12 @@ public class Activity1Settings : MonoBehaviour
         if (AS.mute == false)
         {
             AS.mute = true;
+            Debug.Log("Turning Sound on component off");
         }
         else
         {
             AS.mute = false;
+            Debug.Log("Turning Sound on component on");
         }
     }
 
@@ -163,7 +151,7 @@ public class Activity1Settings : MonoBehaviour
         //SavePrefs();
 
     }
-
+    /*
     public void IncrementRoundNumber()
     {
         NumberOfRounds += 1;
@@ -193,7 +181,7 @@ public class Activity1Settings : MonoBehaviour
         //SavePrefs();
 
     }
-
+    */
 
     public void SavePrefs()
     {
