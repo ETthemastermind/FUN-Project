@@ -31,7 +31,7 @@ public class BallController : MonoBehaviour
     void Update()
     {
         
-
+        /*
         if (Input.GetKeyDown(KeyCode.UpArrow))  //debug arrow key movement
         {
             BallForwards(); //call the ball forwards/right/left/backwards script
@@ -55,7 +55,7 @@ public class BallController : MonoBehaviour
             BallBackwards();
 
         }
-
+        */
 
 
 
