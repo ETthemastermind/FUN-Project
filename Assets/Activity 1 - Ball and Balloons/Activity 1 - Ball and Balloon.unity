@@ -7400,7 +7400,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 58be41f6a64761c4e900591be720873c,
+      objectReference: {fileID: 21300000, guid: ed39dd54b66dcc54ca5ae410ec5bc2f0,
         type: 3}
     - target: {fileID: 1978652214704718856, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -7432,10 +7432,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -6.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3347818521018213375, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_Name
+      value: ButtonImage
+      objectReference: {fileID: 0}
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -7487,10 +7492,40 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1606569993}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Camera_Movement_Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.UI.Image, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1765919998}
     - target: {fileID: 8195689205225100690, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_Name
-      value: Change Camera
+      value: Toggle Camera
       objectReference: {fileID: 0}
     - target: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -8641,6 +8676,9 @@ MonoBehaviour:
   ButtonClick_SFX: {fileID: 8300000, guid: 96fc51d8ff65ca34e89a9ce20c612be3, type: 3}
   SettingsMenu: {fileID: 1277201578}
   Controls: {fileID: 858232524}
+  ControlToggle: 1
+  CameraSprite: {fileID: 21300000, guid: 58be41f6a64761c4e900591be720873c, type: 3}
+  MovementSprite: {fileID: 21300000, guid: ed39dd54b66dcc54ca5ae410ec5bc2f0, type: 3}
 --- !u!114 &1606569994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8661,7 +8699,7 @@ MonoBehaviour:
   MinBalloons: 4
   MaxBalloons: 10
   NumOfBalloonText: {fileID: 1667953314}
-  AnimatedTexturesActive: 0
+  AnimatedTexturesActive: 1
   SoundActive: 0
   NumberOfBalloonsToSpawn: 4
   Score_Goal: 20
@@ -9262,6 +9300,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BalloonFound: 0
   PrepareToBang: {fileID: 952218879}
+--- !u!114 &1765919998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 645152250045279263, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1367877175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1786830669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6414702839575199825, guid: c105390ff640dd542aeb8b90b891b10a,

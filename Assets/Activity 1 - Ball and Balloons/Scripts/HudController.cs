@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HudController : MonoBehaviour
 {
@@ -27,6 +28,14 @@ public class HudController : MonoBehaviour
     //Activate Menu
     public GameObject SettingsMenu;
     public GameObject Controls;
+
+
+    public bool ControlToggle = true; //true = movement, false = camera
+    public Sprite CameraSprite;
+    public GameObject CameraControlsCanvas;
+    public Sprite MovementSprite;
+    public GameObject MovementControlsCanvas;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -117,5 +126,25 @@ public class HudController : MonoBehaviour
             Time.timeScale = 0;
         }
 
+    }
+
+    public void Camera_Movement_Toggle(Image ButtonImage)
+    {
+        if (ControlToggle == true) //if the movement controls are active
+        {
+            ControlToggle = false;
+            ButtonImage.sprite = CameraSprite;
+            MovementControlsCanvas.SetActive(false);
+            CameraControlsCanvas.SetActive(true);
+
+            
+        }
+        else //if the camera controls are active
+        {
+            ControlToggle = true;
+            ButtonImage.sprite = MovementSprite;
+            MovementControlsCanvas.SetActive(true);
+            CameraControlsCanvas.SetActive(false);
+        }
     }
 }
