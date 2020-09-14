@@ -8850,7 +8850,7 @@ PrefabInstance:
     - target: {fileID: 6065881097038340100, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6408410518435697565, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
@@ -10374,6 +10374,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7347501093321462476, guid: a46250497e66bef4e8f46a8b9a727152,
+        type: 3}
+      propertyPath: LerpSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347501093321462476, guid: a46250497e66bef4e8f46a8b9a727152,
+        type: 3}
+      propertyPath: RotSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347501093321462476, guid: a46250497e66bef4e8f46a8b9a727152,
+        type: 3}
+      propertyPath: TravelSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7347501093321462477, guid: a46250497e66bef4e8f46a8b9a727152,
         type: 3}
       propertyPath: m_Name
