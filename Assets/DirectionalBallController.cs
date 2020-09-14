@@ -7,6 +7,8 @@ public class DirectionalBallController : MonoBehaviour
     public float LerpFraction;
     public float LerpSpeed;
     public float TravelDistance = 1f;
+
+    public bool _BallMoving = false;
     //public Vector3 Target;
     //public Vector3 StartRot;
 
@@ -44,49 +46,76 @@ public class DirectionalBallController : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            StartCoroutine(MoveTowards());
+            Vector3 StartPos = transform.localPosition;
+            Vector3 Target = transform.localPosition += (transform.right * TravelDistance);
+            StartCoroutine(MoveTowards(StartPos, Target));
         }
     }
 
     public void RotateForward()
     {
-        Debug.Log("Rotate to forward");
-        Vector3 StartRot = transform.eulerAngles;
-        Vector3 Target = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
-        StartCoroutine(RotateTowardsDirection(Target, StartRot));
-        Debug.Log("Rotation Complete");
+        if (_BallMoving == false)
+        {
+            _BallMoving = true;
+            Debug.Log("Rotate to forward");
+            Vector3 StartRot = transform.eulerAngles;
+            Vector3 Target = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
+            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            Debug.Log("Rotation Complete");
+        }
+        
     }
 
     public void RotateBackwards()
     {
-        Debug.Log("Rotate to backwards");
-        Vector3 StartRot = transform.eulerAngles;
-        Vector3 Target = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
-        StartCoroutine(RotateTowardsDirection(Target, StartRot));
-        Debug.Log("Rotation Complete");
+        if (_BallMoving == false)
+        {
+            _BallMoving = true;
+            Debug.Log("Rotate to backwards");
+            Vector3 StartRot = transform.eulerAngles;
+            Vector3 Target = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
+            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            Debug.Log("Rotation Complete");
+        }
+        
     }
     
     public void RotateRight()
     {
-        Debug.Log("Rotate to right");
-        Vector3 StartRot = transform.eulerAngles;
-        Vector3 Target = new Vector3(transform.eulerAngles.x, 90f, transform.eulerAngles.z);
-        StartCoroutine(RotateTowardsDirection(Target, StartRot));
-        Debug.Log("Rotation Complete");
+        if (_BallMoving == false)
+        {
+            _BallMoving = true;
+            Debug.Log("Rotate to right");
+            Vector3 StartRot = transform.eulerAngles;
+            Vector3 Target = new Vector3(transform.eulerAngles.x, 90f, transform.eulerAngles.z);
+            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            Debug.Log("Rotation Complete");
+        }
+        
     }
 
     public void RotateLeft()
     {
-        Debug.Log("Rotate to left");
-        Vector3 StartRot = transform.eulerAngles;
-        Vector3 Target = new Vector3(transform.eulerAngles.x, 270f, transform.eulerAngles.z);
-        StartCoroutine(RotateTowardsDirection(Target, StartRot));
-        Debug.Log("Rotation Complete");
+        if (_BallMoving == false)
+        {
+            _BallMoving = true;
+            Debug.Log("Rotate to left");
+            Vector3 StartRot = transform.eulerAngles;
+            Vector3 Target = new Vector3(transform.eulerAngles.x, 270f, transform.eulerAngles.z);
+            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            Debug.Log("Rotation Complete");
+
+        }
+        
 
     }
     
+    
+    
+    
     public IEnumerator RotateTowardsDirection(Vector3 Target, Vector3 StartRot)
     {
+
         while (LerpFraction < 1)
         {
             yield return new WaitForEndOfFrame();
@@ -95,23 +124,29 @@ public class DirectionalBallController : MonoBehaviour
             
         }
         LerpFraction = 0f;
-        //StartCoroutine(MoveTowards());
+        _BallMoving = false;
+        
         
     }
 
-    public IEnumerator MoveTowards()
+    public IEnumerator MoveTowards(Vector3 StartPos, Vector3 Target)
     {
-        Debug.Log("Move Towards");
-        Vector3 StartPos = transform.localPosition;
-        Vector3 Target = transform.localPosition += (transform.right * TravelDistance);
-        transform.localPosition += transform.right;
-        while (LerpFraction < 1)
+        if (_BallMoving == false)
         {
-            yield return new WaitForEndOfFrame();
-            LerpFraction += Time.deltaTime * LerpSpeed;
-            transform.localPosition = Vector3.Lerp(StartPos, Target, LerpFraction);
+            _BallMoving = true;
+            Debug.Log("Move Towards");
+
+
+            while (LerpFraction < 1)
+            {
+                yield return new WaitForEndOfFrame();
+                LerpFraction += Time.deltaTime * LerpSpeed;
+                transform.localPosition = Vector3.Lerp(StartPos, Target, LerpFraction);
+            }
+            LerpFraction = 0f;
+            _BallMoving = false;
         }
-        LerpFraction = 0f;
+        
 
     }
 }
