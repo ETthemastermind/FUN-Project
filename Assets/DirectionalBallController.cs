@@ -5,7 +5,8 @@ using UnityEngine;
 public class DirectionalBallController : MonoBehaviour
 {
     public float LerpFraction;
-    public float LerpSpeed;
+    public float RotSpeed;
+    public float TravelSpeed;
     public float TravelDistance = 1f;
 
     public bool _BallMoving = false;
@@ -22,7 +23,7 @@ public class DirectionalBallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(transform.localPosition);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             RotateForward();
@@ -47,7 +48,7 @@ public class DirectionalBallController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             Vector3 StartPos = transform.localPosition;
-            Vector3 Target = transform.localPosition += (transform.right * TravelDistance);
+            Vector3 Target = transform.localPosition + (transform.right * TravelDistance);
             StartCoroutine(MoveTowards(StartPos, Target));
         }
     }
@@ -119,7 +120,7 @@ public class DirectionalBallController : MonoBehaviour
         while (LerpFraction < 1)
         {
             yield return new WaitForEndOfFrame();
-            LerpFraction += Time.deltaTime * LerpSpeed;
+            LerpFraction += Time.deltaTime * RotSpeed;
             transform.eulerAngles = Vector3.Lerp(StartRot, Target, LerpFraction);
             
         }
@@ -140,7 +141,7 @@ public class DirectionalBallController : MonoBehaviour
             while (LerpFraction < 1)
             {
                 yield return new WaitForEndOfFrame();
-                LerpFraction += Time.deltaTime * LerpSpeed;
+                LerpFraction += Time.deltaTime * TravelSpeed;
                 transform.localPosition = Vector3.Lerp(StartPos, Target, LerpFraction);
             }
             LerpFraction = 0f;
