@@ -24,14 +24,11 @@ public class DirectionalBallController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             RotateForward();
-            
-            
         }
 
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             RotateBackwards();
-            
 
         }
 
@@ -44,6 +41,11 @@ public class DirectionalBallController : MonoBehaviour
         {
             RotateLeft();
         }
+
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            StartCoroutine(MoveTowards());
+        }
     }
 
     public void RotateForward()
@@ -53,10 +55,6 @@ public class DirectionalBallController : MonoBehaviour
         Vector3 Target = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
         StartCoroutine(RotateTowardsDirection(Target, StartRot));
         Debug.Log("Rotation Complete");
-        
-        
-        
-
     }
 
     public void RotateBackwards()
@@ -66,10 +64,6 @@ public class DirectionalBallController : MonoBehaviour
         Vector3 Target = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
         StartCoroutine(RotateTowardsDirection(Target, StartRot));
         Debug.Log("Rotation Complete");
-        
-
-
-
     }
     
     public void RotateRight()
@@ -79,9 +73,6 @@ public class DirectionalBallController : MonoBehaviour
         Vector3 Target = new Vector3(transform.eulerAngles.x, 90f, transform.eulerAngles.z);
         StartCoroutine(RotateTowardsDirection(Target, StartRot));
         Debug.Log("Rotation Complete");
-        
-
-
     }
 
     public void RotateLeft()
@@ -91,9 +82,6 @@ public class DirectionalBallController : MonoBehaviour
         Vector3 Target = new Vector3(transform.eulerAngles.x, 270f, transform.eulerAngles.z);
         StartCoroutine(RotateTowardsDirection(Target, StartRot));
         Debug.Log("Rotation Complete");
-        
-
-
 
     }
     
