@@ -91,22 +91,22 @@ public class HudController : MonoBehaviour
     }
    
 
-    public void ButtonClick()
+    public void ButtonClick() //play a button click sound effect
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
     }
 
-    public void OpenCloseSettings()
+    public void OpenCloseSettings() //function to open and close the settings menu
     {
-        if (SettingsMenu.active == true)
+        if (SettingsMenu.active == true) //if the settings menu is open
         {
-            SettingsMenu.SetActive(false);
-            Controls.SetActive(true);
-            Time.timeScale = 1;
+            SettingsMenu.SetActive(false); //close the menu
+            Controls.SetActive(true); //show the controls canvas
+            Time.timeScale = 1; //set the time scale back to 1
 
 
         }
-        else
+        else //do the opposite
         {
             SettingsMenu.SetActive(true);
             Controls.SetActive(false);
@@ -115,7 +115,7 @@ public class HudController : MonoBehaviour
 
     }
 
-    public void Camera_Movement_Toggle(Image ButtonImage)
+    public void Camera_Movement_Toggle(Image ButtonImage) //switch between player movement and camera movement
     {
         if (ControlToggle == true) //if the movement controls are active
         {
