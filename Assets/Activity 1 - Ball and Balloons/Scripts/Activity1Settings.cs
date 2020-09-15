@@ -40,8 +40,8 @@ public class Activity1Settings : MonoBehaviour
     //public int NumberOfRounds;
     public int Score_Goal;
 
-    
 
+    public TMP_Text BallSpeedText;
 
 
     private void Awake()
@@ -124,6 +124,8 @@ public class Activity1Settings : MonoBehaviour
         }
     }
 
+   
+
     public void ToggleSlider(GameObject Slider)
     {
         if (Slider.active == false)
@@ -180,6 +182,33 @@ public class Activity1Settings : MonoBehaviour
         float CurrentVolume = AS.volume;
         float NextVolume = CurrentVolume - 0.1f;
         AS.volume = NextVolume;
+
+    }
+
+    public void IncreaseBallSpeed()
+    {
+        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 5)
+        {
+            //do nothing
+        }
+        else
+        {
+            PlayerBall.GetComponent<BallController>().LerpSpeed++;
+            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString();
+        }
+    }
+
+    public void DecreaseBallSpeed()
+    {
+        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 1)
+        {
+            //do nothing
+        }
+        else
+        {
+            PlayerBall.GetComponent<BallController>().LerpSpeed--;
+            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString();
+        }
 
     }
     /*
