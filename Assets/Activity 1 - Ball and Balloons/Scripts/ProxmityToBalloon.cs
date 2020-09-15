@@ -7,11 +7,13 @@ public class ProxmityToBalloon : MonoBehaviour
     public bool BalloonFound = false;
     Vector3[] Directions = new Vector3[4] {(Vector3.forward * 1), (Vector3.back * 1), (Vector3.left * 1), (Vector3.right * 1) };
     public GameObject PrepareToBang;
+    public AudioClip PrepareToBang_Audio;
+    private AudioSource AS;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        AS = Camera.main.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,11 @@ public class ProxmityToBalloon : MonoBehaviour
                     Debug.Log("Balloon in Proximity");
                     BalloonFound = true;
                     PrepareToBang.SetActive(true);
+                    if (AS.isPlaying == false)
+                    {
+                        AS.PlayOneShot(PrepareToBang_Audio);
+                    }
+                    
                     
                     //Destroy(hit.transform.gameObject);
                 }

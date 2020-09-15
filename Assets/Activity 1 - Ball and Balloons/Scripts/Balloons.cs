@@ -11,6 +11,8 @@ public class Balloons : MonoBehaviour
     public GameObject Camera; //reference to the camera because it has an audio source
     public AudioSource AS; //reference to the audio source on the camera
     public AudioClip Pop_SFX; //pop sound effect for the balloon
+
+    public ParticleSystem ps;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,9 @@ public class Balloons : MonoBehaviour
 
     public void OnDestroy()
     {
+        Instantiate(ps, transform.position, Quaternion.identity);
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
+
     }
 
 
