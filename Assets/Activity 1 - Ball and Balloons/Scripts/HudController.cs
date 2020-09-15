@@ -89,25 +89,7 @@ public class HudController : MonoBehaviour
         SceneManager.LoadScene(CurrentScene); //loads the current scene as defined in the line above i.e reset the scene
         
     }
-
-    public void PrepareForBang(bool inBallonProx)
-    {
-        if (inBallonProx == true)
-        {
-            Debug.Log("Prepare for Bang");
-            PrepareForBang_GO.SetActive(true);
-            PrepareForBang_SFX = true;
-            
-            
-
-        }
-
-        else
-        {
-            PrepareForBang_GO.SetActive(false);
-            PrepareForBang_SFX = false;
-        }
-    }
+   
 
     public void ButtonClick()
     {

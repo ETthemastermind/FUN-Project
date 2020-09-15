@@ -109,32 +109,32 @@ public class Activity1Settings : MonoBehaviour
     */
 
     
-    public void ToggleSoundFX(GameObject SoundObject)
+    public void ToggleSoundFX(GameObject SoundObject) //function to mute the audiosource passed in on the gameobject
     {
-        AudioSource AS = SoundObject.GetComponent<AudioSource>();
-        if (AS.mute == false)
+        AudioSource AS = SoundObject.GetComponent<AudioSource>(); //get the audiosource
+        if (AS.mute == false) //if the audiosource is unmuted
         {
-            AS.mute = true;
+            AS.mute = true; //mute
             Debug.Log("Turning Sound on component off");
         }
-        else
+        else //therefore if its unmuted
         {
-            AS.mute = false;
+            AS.mute = false; //unmute
             Debug.Log("Turning Sound on component on");
         }
     }
 
    
 
-    public void ToggleSlider(GameObject Slider)
+    public void ToggleSlider(GameObject Slider) //toggle the sliders for the audio components in the settings
     {
-        if (Slider.active == false)
+        if (Slider.active == false) //if the slider isnt active
         {
-            Slider.SetActive(true);
+            Slider.SetActive(true); //activate slider
         }
-        else
+        else //if the slider is active
         {
-            Slider.SetActive(false);
+            Slider.SetActive(false); //deactivate the slider
         }
     }
 
@@ -170,14 +170,14 @@ public class Activity1Settings : MonoBehaviour
 
     }
 
-    public void IncreaseVolume(AudioSource AS)
+    public void IncreaseVolume(AudioSource AS) //pass in an audiosource as a parameter
     {
-        float CurrentVolume = AS.volume;
-        float NextVolume = CurrentVolume + 0.1f;
-        AS.volume = NextVolume;
+        float CurrentVolume = AS.volume; //get the current volume. Why have i done it this way... it can be done in one line
+        float NextVolume = CurrentVolume + 0.1f; //get the next volume
+        AS.volume = NextVolume; //set the next volume
       
     }
-    public void DecreaseVolume(AudioSource AS)
+    public void DecreaseVolume(AudioSource AS) //same as above but - instead of +
     {
         float CurrentVolume = AS.volume;
         float NextVolume = CurrentVolume - 0.1f;
@@ -185,20 +185,20 @@ public class Activity1Settings : MonoBehaviour
 
     }
 
-    public void IncreaseBallSpeed()
+    public void IncreaseBallSpeed() //function to increase the ball speed
     {
-        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 5)
+        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 5) //if the current speed of the ball is 5
         {
             //do nothing
         }
-        else
+        else //if its not
         {
-            PlayerBall.GetComponent<BallController>().LerpSpeed++;
-            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString();
+            PlayerBall.GetComponent<BallController>().LerpSpeed++; //increment the ball speed
+            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString(); //update the text component
         }
     }
 
-    public void DecreaseBallSpeed()
+    public void DecreaseBallSpeed() //same as above but to decrease the speed
     {
         if (PlayerBall.GetComponent<BallController>().LerpSpeed == 1)
         {

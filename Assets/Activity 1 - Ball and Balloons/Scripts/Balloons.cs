@@ -39,7 +39,7 @@ public class Balloons : MonoBehaviour
 
     public void OnDestroy()
     {
-        Instantiate(ps, transform.position, Quaternion.identity);
+        Instantiate(ps, transform.position, Quaternion.identity); //spawn the particle effects of the destroyed balloon
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
 
     }

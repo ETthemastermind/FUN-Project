@@ -46,10 +46,10 @@ public class ProxmityToBalloon : MonoBehaviour
                 {
                     Debug.Log("Balloon in Proximity");
                     BalloonFound = true;
-                    PrepareToBang.SetActive(true);
-                    if (AS.isPlaying == false)
+                    PrepareToBang.SetActive(true); //activate the prepare to bang graphic
+                    if (AS.isPlaying == false) //if the audiosource is not playing
                     {
-                        AS.PlayOneShot(PrepareToBang_Audio);
+                        AS.PlayOneShot(PrepareToBang_Audio); //play the prepare to bang audio
                     }
                     
                     
