@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class Activity1Settings : MonoBehaviour
 {
     public GameObject PlayerBall;
@@ -38,7 +40,7 @@ public class Activity1Settings : MonoBehaviour
     //public int NumberOfRounds;
     public int Score_Goal;
 
-
+    
 
 
 
@@ -149,6 +151,21 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Current Number of Balloons: " + NumberOfBalloonsToSpawn);
         NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
         //SavePrefs();
+
+    }
+
+    public void IncreaseVolume(AudioSource AS)
+    {
+        float CurrentVolume = AS.volume;
+        float NextVolume = CurrentVolume + 0.1f;
+        AS.volume = NextVolume;
+      
+    }
+    public void DecreaseVolume(AudioSource AS)
+    {
+        float CurrentVolume = AS.volume;
+        float NextVolume = CurrentVolume - 0.1f;
+        AS.volume = NextVolume;
 
     }
     /*

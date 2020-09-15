@@ -35,7 +35,12 @@ public class HudController : MonoBehaviour
     public GameObject CameraControlsCanvas;
     public Sprite MovementSprite;
     public GameObject MovementControlsCanvas;
-    
+
+    [Header("Settings Menus")]
+    public GameObject MusicMenu_Canvas;
+    public GameObject GameMenu_Canvas;
+    public GameObject ProfileMenu_Canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -133,7 +138,7 @@ public class HudController : MonoBehaviour
         if (ControlToggle == true) //if the movement controls are active
         {
             ControlToggle = false;
-            ButtonImage.sprite = CameraSprite;
+            ButtonImage.sprite = MovementSprite;
             MovementControlsCanvas.SetActive(false);
             CameraControlsCanvas.SetActive(true);
 
@@ -142,9 +147,31 @@ public class HudController : MonoBehaviour
         else //if the camera controls are active
         {
             ControlToggle = true;
-            ButtonImage.sprite = MovementSprite;
+            ButtonImage.sprite = CameraSprite;
             MovementControlsCanvas.SetActive(true);
             CameraControlsCanvas.SetActive(false);
         }
     }
+
+    #region Settings Menu Functions
+    public void MusicMenuOn()
+    {
+        MusicMenu_Canvas.SetActive(true);
+        GameMenu_Canvas.SetActive(false);
+        ProfileMenu_Canvas.SetActive(false);
+    }
+    public void GameMenuOn()
+    {
+        MusicMenu_Canvas.SetActive(false);
+        GameMenu_Canvas.SetActive(true);
+        ProfileMenu_Canvas.SetActive(false);
+    }
+    public void ProfileMenuOn()
+    {
+        MusicMenu_Canvas.SetActive(false);
+        GameMenu_Canvas.SetActive(false);
+        ProfileMenu_Canvas.SetActive(true);
+    }
+    #endregion
+
 }

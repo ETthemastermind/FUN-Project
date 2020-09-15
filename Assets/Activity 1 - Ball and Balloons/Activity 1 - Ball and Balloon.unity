@@ -10379,16 +10379,6 @@ PrefabInstance:
       propertyPath: LerpSpeed
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7347501093321462476, guid: a46250497e66bef4e8f46a8b9a727152,
-        type: 3}
-      propertyPath: RotSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7347501093321462476, guid: a46250497e66bef4e8f46a8b9a727152,
-        type: 3}
-      propertyPath: TravelSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7347501093321462477, guid: a46250497e66bef4e8f46a8b9a727152,
         type: 3}
       propertyPath: m_Name

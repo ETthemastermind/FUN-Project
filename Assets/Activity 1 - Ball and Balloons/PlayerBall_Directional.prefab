@@ -218,7 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LerpFraction: 0
-  LerpSpeed: 0.5
+  RotSpeed: 1
+  TravelSpeed: 3
   TravelDistance: 1
   _BallMoving: 0
 --- !u!1 &9198738210341314523

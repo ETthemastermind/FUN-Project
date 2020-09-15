@@ -47,26 +47,40 @@ public class DirectionalBallController : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            MoveBall();
+            //MoveBall();
         }
     }
 
+    /*
     public void MoveBall() //fucntion to move the ball
-    { 
+    {
+        Debug.Log("Moving Ball");
         Vector3 StartPos = transform.localPosition; //gets the current local position of the ball
         Vector3 Target = transform.localPosition + (transform.right * TravelDistance); //calculates the destination of the ball
         StartCoroutine(MoveTowards(StartPos, Target)); //run the coroutine to move the ball
     }
+    */
     public void RotateForward() //functions to set the ball to rotate to face the chosen direction, 
     {
-        if (_BallMoving == false) //if the ball is not moving
+        if (_BallMoving == false ) //if the ball is not moving
         {
             _BallMoving = true; //turn the bool to true, therefore the ball is moving
             Debug.Log("Rotate to forward"); //debug which way the ball is rotating to the console
             Vector3 StartRot = transform.eulerAngles; //gets the current rotation
             Vector3 Target = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z); //calculates the target rotation
-            StartCoroutine(RotateTowardsDirection(Target, StartRot)); //runs the coroutine to rotate the ball
+            if (StartRot != Target)
+            {
+                StartCoroutine(RotateTowardsDirection(Target, StartRot)); //runs the coroutine to rotate the ball
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+            }
+           
+            
             Debug.Log("Rotation Complete"); //debug to console that the rotation is complete
+            
+            
         }
         
     }
@@ -79,8 +93,17 @@ public class DirectionalBallController : MonoBehaviour
             Debug.Log("Rotate to backwards");
             Vector3 StartRot = transform.eulerAngles;
             Vector3 Target = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
-            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            if (StartRot != Target)
+            {
+                StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+            }
+            
             Debug.Log("Rotation Complete");
+            
         }
         
     }
@@ -93,8 +116,17 @@ public class DirectionalBallController : MonoBehaviour
             Debug.Log("Rotate to right");
             Vector3 StartRot = transform.eulerAngles;
             Vector3 Target = new Vector3(transform.eulerAngles.x, 90f, transform.eulerAngles.z);
-            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            if (StartRot != Target)
+            {
+                StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+            }
+            
             Debug.Log("Rotation Complete");
+            
         }
         
     }
@@ -107,8 +139,17 @@ public class DirectionalBallController : MonoBehaviour
             Debug.Log("Rotate to left");
             Vector3 StartRot = transform.eulerAngles;
             Vector3 Target = new Vector3(transform.eulerAngles.x, 270f, transform.eulerAngles.z);
-            StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            if (StartRot != Target)
+            {
+                StartCoroutine(RotateTowardsDirection(Target, StartRot));
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+            }
+            
             Debug.Log("Rotation Complete");
+            
 
         }
         
@@ -129,29 +170,29 @@ public class DirectionalBallController : MonoBehaviour
             
         }
         LerpFraction = 0f; //reset the lerp fraction
-        _BallMoving = false; //change the bool as the ball is no longer moving
+        StartCoroutine(MoveTowards());
+        
         
         
     }
 
-    public IEnumerator MoveTowards(Vector3 StartPos, Vector3 Target) //Ienum to move the ball forwards
+    public IEnumerator MoveTowards() //Ienum to move the ball forwards
     {
-        if (_BallMoving == false) //if the ball is not moving
-        {
-            _BallMoving = true; //set the bool to true as the ball is moving
-            Debug.Log("Move Towards"); //print to console
-
-
-            while (LerpFraction < 1) //while the lerp fraction is less than 1
-            {
-                yield return new WaitForEndOfFrame(); //wait unti the end of the frame
-                LerpFraction += Time.deltaTime * TravelSpeed; //adjust the lerp fraction
-                transform.localPosition = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball between start and target based on the lerp fraction
-            }
-            LerpFraction = 0f; //reset the lerp fraction
-            _BallMoving = false; //change the bool as the ball is not moving
-        }
         
+        _BallMoving = true; //set the bool to true as the ball is moving
+        Debug.Log("Move Towards"); //print to console
+        Vector3 StartPos = transform.localPosition; //gets the current local position of the ball
+        Vector3 Target = transform.localPosition + (transform.right * TravelDistance); //calculates the destination of the ball
+
+        while (LerpFraction < 1) //while the lerp fraction is less than 1
+        {
+            yield return new WaitForEndOfFrame(); //wait unti the end of the frame
+            LerpFraction += Time.deltaTime * TravelSpeed; //adjust the lerp fraction
+            transform.localPosition = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball between start and target based on the lerp fraction
+        }
+        LerpFraction = 0f; //reset the lerp fraction
+        _BallMoving = false; //change the bool as the ball is not moving
+
 
     }
 }
