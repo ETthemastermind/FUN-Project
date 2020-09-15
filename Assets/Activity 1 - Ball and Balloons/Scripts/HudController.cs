@@ -174,4 +174,16 @@ public class HudController : MonoBehaviour
     }
     #endregion
 
+    public void ButtonActivateToggle(Toggle Toggle)
+    {
+        if (Toggle.isOn == true)
+        {
+            Toggle.isOn = false;
+        }
+        else
+        {
+            Toggle.isOn = true;
+        }
+    }
+
 }

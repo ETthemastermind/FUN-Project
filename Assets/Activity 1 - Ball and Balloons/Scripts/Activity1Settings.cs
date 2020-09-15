@@ -107,6 +107,8 @@ public class Activity1Settings : MonoBehaviour
 
     }
     */
+
+    
     public void ToggleSoundFX(GameObject SoundObject)
     {
         AudioSource AS = SoundObject.GetComponent<AudioSource>();
@@ -119,6 +121,18 @@ public class Activity1Settings : MonoBehaviour
         {
             AS.mute = false;
             Debug.Log("Turning Sound on component on");
+        }
+    }
+
+    public void ToggleSlider(GameObject Slider)
+    {
+        if (Slider.active == false)
+        {
+            Slider.SetActive(true);
+        }
+        else
+        {
+            Slider.SetActive(false);
         }
     }
 
