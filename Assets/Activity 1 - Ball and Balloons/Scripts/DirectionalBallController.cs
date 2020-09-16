@@ -10,6 +10,7 @@ public class DirectionalBallController : MonoBehaviour
     public float TravelDistance = 1f; //distance the ball travels
 
     public bool _BallMoving = false; //bool to keep track if the ball is moving
+    public Quaternion from;
     //public Vector3 Target;
     //public Vector3 StartRot;
 
@@ -17,38 +18,49 @@ public class DirectionalBallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        from = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(transform.localPosition);
-        if (Input.GetKeyDown(KeyCode.UpArrow)) //debug controls
+        if (Input.GetKey(KeyCode.UpArrow)) //debug controls
         {
             RotateForward();
+            
+            
+            
         }
 
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             RotateBackwards();
+            
+            
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             RotateRight();
+           
+            
         }
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             RotateLeft();
+            
+            
         }
 
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             //MoveBall();
         }
+
+        
     }
 
     /*
@@ -64,6 +76,21 @@ public class DirectionalBallController : MonoBehaviour
     {
         if (_BallMoving == false ) //if the ball is not moving
         {
+            _BallMoving = true;
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.AngleAxis(0f, Vector3.up);
+            if (from != to)
+            {
+                //rotate
+                StartCoroutine(RotateTowardsDirection(to, from));
+            }
+            else
+            {
+                //just move
+                StartCoroutine(MoveTowards());
+            }
+            #region old code
+            /*
             _BallMoving = true; //turn the bool to true, therefore the ball is moving
             Debug.Log("Rotate to forward"); //debug which way the ball is rotating to the console
             Vector3 StartRot = transform.eulerAngles; //gets the current rotation
@@ -79,16 +106,33 @@ public class DirectionalBallController : MonoBehaviour
            
             
             Debug.Log("Rotation Complete"); //debug to console that the rotation is complete
-            
-            
+            */
+            #endregion
+
         }
-        
+
     }
 
     public void RotateBackwards() //same as above but backwards
     {
         if (_BallMoving == false)
         {
+
+            _BallMoving = true;
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.AngleAxis(180f, Vector3.up);
+            if (from != to)
+            {
+                //rotate
+                StartCoroutine(RotateTowardsDirection(to, from));
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+                //just move
+            }
+            #region old code
+            /*
             _BallMoving = true;
             Debug.Log("Rotate to backwards");
             Vector3 StartRot = transform.eulerAngles;
@@ -103,15 +147,33 @@ public class DirectionalBallController : MonoBehaviour
             }
             
             Debug.Log("Rotation Complete");
-            
+            */
+            #endregion
+
         }
-        
+
     }
     
     public void RotateRight() //same as above but right
     {
         if (_BallMoving == false)
         {
+
+            _BallMoving = true;
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.AngleAxis(90f, Vector3.up);
+            if (from != to)
+            {
+                //rotate
+                StartCoroutine(RotateTowardsDirection(to, from));
+            }
+            else
+            {
+                //just move
+                StartCoroutine(MoveTowards());
+            }
+            #region old code
+            /*
             _BallMoving = true;
             Debug.Log("Rotate to right");
             Vector3 StartRot = transform.eulerAngles;
@@ -126,15 +188,33 @@ public class DirectionalBallController : MonoBehaviour
             }
             
             Debug.Log("Rotation Complete");
-            
+            */
+            #endregion
+
+
         }
-        
+
     }
 
     public void RotateLeft() //same as above but left
     {
         if (_BallMoving == false)
         {
+
+            _BallMoving = true;
+            Quaternion from = transform.rotation;
+            Quaternion to = Quaternion.AngleAxis(270f, Vector3.up);
+            if (from != to)
+            {
+                //rotate
+                StartCoroutine(RotateTowardsDirection(to, from));
+            }
+            else
+            {
+                StartCoroutine(MoveTowards());
+            }
+            #region old code
+            /*
             _BallMoving = true;
             Debug.Log("Rotate to left");
             Vector3 StartRot = transform.eulerAngles;
@@ -149,24 +229,26 @@ public class DirectionalBallController : MonoBehaviour
             }
             
             Debug.Log("Rotation Complete");
-            
+            */
+            #endregion
+
 
         }
-        
+
 
     }
     
     
     
     
-    public IEnumerator RotateTowardsDirection(Vector3 Target, Vector3 StartRot) //Ienum to rotate the ball to the desired direction
+    public IEnumerator RotateTowardsDirection(Quaternion Target, Quaternion StartRot) //Ienum to rotate the ball to the desired direction
     {
 
         while (LerpFraction < 1) //while the lerp fraction is less than 1
         {
             yield return new WaitForEndOfFrame(); //wait until the end of the frame
             LerpFraction += Time.deltaTime * RotSpeed; //adjust the lerp fraction
-            transform.eulerAngles = Vector3.Lerp(StartRot, Target, LerpFraction); //rotate the ball between start and target based on the lerp fraction
+            transform.rotation = Quaternion.Lerp(StartRot, Target, LerpFraction); //rotate the ball between start and target based on the lerp fraction
             
         }
         LerpFraction = 0f; //reset the lerp fraction
