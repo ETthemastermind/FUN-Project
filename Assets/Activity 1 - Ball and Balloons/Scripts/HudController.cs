@@ -73,12 +73,16 @@ public class HudController : MonoBehaviour
     public void IncrementScore(int PlayerScore) //increment the player's score, gets called from the BallController script
     {
         ScoreText.GetComponent<TextMeshProUGUI>().text = PlayerScore.ToString() ; //adjust the text on the score object to reflect the player's current score
-
+        GameController.GetComponent<Activity1Settings>().NumberOfBalloonsPopped++;
         if (PlayerScore >= MaxScore)
         {
-            Time.timeScale = 0; //set the time scale to 0 i.e. pause the game
-            ResetButton.SetActive(true); //show the reset button
+            
+            //ResetButton.SetActive(true); //show the reset button
+            GameController.CompletedTime = Mathf.RoundToInt(CurrentGameTime);
+            
             GameComplete = true;
+            GameController.Win_PopUp();
+            Time.timeScale = 0; //set the time scale to 0 i.e. pause the game
         }
 
     }
@@ -101,7 +105,7 @@ public class HudController : MonoBehaviour
         if (SettingsMenu.active == true) //if the settings menu is open
         {
             SettingsMenu.SetActive(false); //close the menu
-            Controls.SetActive(true); //show the controls canvas
+            Controls.SetActive(true);
             Time.timeScale = 1; //set the time scale back to 1
 
 
@@ -114,7 +118,7 @@ public class HudController : MonoBehaviour
         }
 
     }
-
+    
     public void Camera_Movement_Toggle(Image ButtonImage) //switch between player movement and camera movement
     {
         if (ControlToggle == true) //if the movement controls are active
@@ -134,6 +138,7 @@ public class HudController : MonoBehaviour
             CameraControlsCanvas.SetActive(false);
         }
     }
+    
 
     #region Settings Menu Functions
     public void MusicMenuOn()

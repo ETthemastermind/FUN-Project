@@ -37,11 +37,15 @@ public class Activity1Settings : MonoBehaviour
     public bool AnimatedTexturesActive;
     public bool SoundActive;
     public int NumberOfBalloonsToSpawn;
-    //public int NumberOfRounds;
     public int Score_Goal;
+    public int CompletedTime;
+    public int NumberOfBalloonsPopped;
 
 
     public TMP_Text BallSpeedText;
+    public TMP_Text WinText;
+    public GameObject Win_PopUpCanvas;
+    public GameObject[] OtherCanvases;
 
 
     private void Awake()
@@ -54,7 +58,7 @@ public class Activity1Settings : MonoBehaviour
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
-        NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+        //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
         
         //RoundNumber = gameObject.GetComponent<HudController>();
         //RoundNumberText.text = NumberOfRounds.ToString();
@@ -254,10 +258,26 @@ public class Activity1Settings : MonoBehaviour
         //NumberOfBalloonsToSpawn = data.NumberOfBalloons_Save;
     }
 
+    public void Win_PopUp()
+    {
+        //< Username >, you completed<Name of the game> and popped < number of balloons> to get the max score of < max score > in just < Completed time > !
+             string Username = "<Username>";
+        string NameOfGame = "<Name of the game>";
 
-    
+        string StatsText = Username + " ,you completed " + NameOfGame + " and popped " + NumberOfBalloonsPopped + " to get the max score of " + Score_Goal + " in just " + CompletedTime + " seconds!";
+        Debug.Log(StatsText);
+        for (int i = 0; i < OtherCanvases.Length; i++)
+        {
+            OtherCanvases[i].SetActive(false);
+        }
+        Win_PopUpCanvas.SetActive(true);
+        WinText.text = StatsText;
+    }
 
-    
 
-    
+
+
+
+
+
 }
