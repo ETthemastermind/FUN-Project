@@ -41,6 +41,10 @@ public class HudController : MonoBehaviour
     public GameObject GameMenu_Canvas;
     public GameObject ProfileMenu_Canvas;
 
+    [Header("Minimap and Wing Mirror Refs")]
+    public GameObject Minimap;
+    public GameObject Mirrors;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -170,6 +174,20 @@ public class HudController : MonoBehaviour
         else
         {
             Toggle.isOn = true;
+        }
+    }
+
+    public void ToggleBetweenMMandWM()
+    {
+        if (Minimap.active == true) //if the minimap is active
+        {
+            Minimap.SetActive(false); //deactive the minimap gameobject
+            Mirrors.SetActive(true); //activate the mirrors gameobject
+        }
+        else
+        {
+            Minimap.SetActive(true); //active the minimap gameobject
+            Mirrors.SetActive(false); //deactivate the mirrors gameobject
         }
     }
 
