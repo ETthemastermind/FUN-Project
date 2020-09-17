@@ -5700,13 +5700,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908337181}
-  m_LocalRotation: {x: 0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 34.5, z: -45.5}
+  m_LocalRotation: {x: 0, y: 0.64278764, z: -0.76604444, w: 0}
+  m_LocalPosition: {x: 0, y: 60, z: -20}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 695500376}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 160, y: 180, z: 180}
+  m_LocalEulerAnglesHint: {x: 100, y: 180, z: 0}
 --- !u!20 &908337183
 Camera:
   m_ObjectHideFlags: 0
@@ -7184,7 +7184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 8923fd831d047324fa48e96fd8a7c8ca, type: 2}
+  m_Texture: {fileID: 8400000, guid: e06e1564b93067049bd66b0d570aaf9a, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7756,7 +7756,7 @@ RectTransform:
   m_GameObject: {fileID: 1146907725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.00059929816}
-  m_LocalScale: {x: 0.49389094, y: 0.49389094, z: 0.49389094}
+  m_LocalScale: {x: -0.4938909, y: 0.49389094, z: 0.49389094}
   m_Children: []
   m_Father: {fileID: 1100831943}
   m_RootOrder: 0
