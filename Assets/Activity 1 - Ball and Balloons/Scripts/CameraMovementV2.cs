@@ -35,7 +35,7 @@ public class CameraMovementV2 : MonoBehaviour
         {
             CurrentCamera = 0; //resets the camera back to 0 if true
         }
-        CameraPositionsArray[CurrentCamera].gameObject.GetComponent<CameraPosMovement>().DeclarePosition();
+        //CameraPositionsArray[CurrentCamera].gameObject.GetComponent<CameraPosMovement>().DeclarePosition();
         //CameraInterface_Canvas[CurrentCamera].SetActive(true); //activate the corresponding canvas
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().ActivateCanvas();
 
@@ -54,7 +54,7 @@ public class CameraMovementV2 : MonoBehaviour
         {
             CurrentCamera = CameraPositionsArray.Length - 1; //resets the camera back to 0 if true
         }
-        CameraPositionsArray[CurrentCamera].gameObject.GetComponent<CameraPosMovement>().DeclarePosition();
+        //CameraPositionsArray[CurrentCamera].gameObject.GetComponent<CameraPosMovement>().DeclarePosition();
         //CameraInterface_Canvas[CurrentCamera].SetActive(true); //activate the corresponding canvas
 
         transform.parent = CameraPositionsArray[CurrentCamera].transform; //set the camera to a be a child of the position game object and sets its transforms too

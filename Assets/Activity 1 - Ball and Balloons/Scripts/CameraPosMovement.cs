@@ -16,15 +16,15 @@ public class CameraPosMovement : MonoBehaviour
     public float UpDownRotAngle;
     public float LeftRightRotAngle;
 
-    [Header("MovementPlus")]
+    [Header("MovementPlus")] //all variables relating to the movement plus feature
     public bool MovementPlus;
-    public Quaternion QuatStore;
-    public Quaternion[] TargetRot_MP;
-    public Vector3[] TargetPos_MP;
+    public Quaternion QuatStore; //debug because idk how to access quaterions in the inspector
+    public Quaternion[] TargetRot_MP; //array of rotations -> 0 = up, 1 = down, 2 = left, 3 = right
+    public Vector3[] TargetPos_MP; //array of positions -> 0 = up, 1 = down, 2 = left, 3 = right
 
     void Start()
     {
-        TargetRot = transform.rotation;
+        TargetRot = transform.rotation; //initialise some variables
         StartRotation = transform.rotation;
         StartPos = transform.position;
         
@@ -33,46 +33,47 @@ public class CameraPosMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q)) //debug so i can get quaterion values
         {
             GetQuaterion();
         }
     }
 
-    public void DeclarePosition()
+    public void RotateUp() //function for rotating/moving the camera up/down/left/right
     {
-        
-        
-    }
-
-    public void RotateUp()
-    {
-        if (MovementPlus == false)
+        if (MovementPlus == false) //if the movement plus is not enabled
         {
-            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left);
-            StartCoroutine(RotCam(TargetRot, transform.position));
-            TargetRot = StartRotation;
+            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left); //get the target rotation, depending on the function
+            StartCoroutine(RotCam(TargetRot, transform.position)); //run the rot cam coroutine, passing in the target rot calculated and the current position
+            TargetRot = StartRotation; //ngl i dont remember why this is here but i dont want to get rid of it just in case
         }
-        else if (MovementPlus == true)
+        else if (MovementPlus == true) // if movement plus is enabled
         {
             
             Debug.Log("Rotate Up Movement Plus");
-            StartCoroutine(RotCam(TargetRot_MP[0], TargetPos_MP[0]));
+            StartCoroutine(RotCam(TargetRot_MP[0], TargetPos_MP[0])); //run the rot cam coroutine, passing the target rot and target pos assigned by the user in the corressponding array
             
         }
         
     }
-    public void RotateRight()
+    public void RotateRight() //same as above but right
     {
         if (MovementPlus == false)
         {
             TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
             StartCoroutine(RotCam(TargetRot, transform.position));
             TargetRot = StartRotation;
+            
         }
-        
+        else if (MovementPlus == true)
+        {
+            Debug.Log("Rotate Right Movement Plus");
+            StartCoroutine(RotCam(TargetRot_MP[3], TargetPos_MP[3]));
+        }
+
+
     }
-    public void RotateDown()
+    public void RotateDown() //same as above but down
     {
         if (MovementPlus == false)
         {
@@ -80,9 +81,14 @@ public class CameraPosMovement : MonoBehaviour
             StartCoroutine(RotCam(TargetRot, transform.position));
             TargetRot = StartRotation;
         }
-        
+        else if (MovementPlus == true)
+        {
+            Debug.Log("Rotate Down Movement Plus");
+            StartCoroutine(RotCam(TargetRot_MP[1], TargetPos_MP[1]));
+        }
+
     }
-    public void RotateLeft()
+    public void RotateLeft() //same as above but left
     {
         if (MovementPlus == false)
         {
@@ -90,10 +96,16 @@ public class CameraPosMovement : MonoBehaviour
             StartCoroutine(RotCam(TargetRot, transform.position));
             TargetRot = StartRotation;
         }
-        
+
+        else if (MovementPlus == true)
+        {
+            Debug.Log("Rotate Left Movement Plus");
+            StartCoroutine(RotCam(TargetRot_MP[2], TargetPos_MP[2]));
+        }
+
     }
 
-    public void GetQuaterion()
+    public void GetQuaterion() //debug to get the current quaternion
     {
         if (MovementPlus == true)
         {
@@ -105,23 +117,23 @@ public class CameraPosMovement : MonoBehaviour
 
 
 
-    public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget)
+    public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget) //coroutine to rotate the camera
     {
-        Debug.Log(StartRotation);
-        Debug.Log(RotTarget);
-        while (LerpFraction < 1)
+        //Debug.Log(StartRotation);
+        //Debug.Log(RotTarget);
+        while (LerpFraction < 1) //while the lerp fraction is less than 1
         {
             Debug.Log("Rotating Camera Up");
             yield return new WaitForEndOfFrame();
-            LerpFraction += LerpSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction);
-            if (MovementPlus == true)
+            LerpFraction += LerpSpeed * Time.deltaTime; //increment the lerp fraction
+            transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction); //set the rotation based on the lerp fraction
+            if (MovementPlus == true) //if the movement plus is active
             {
-                transform.position = Vector3.Slerp(StartPos, PosTarget, LerpFraction);
+                transform.position = Vector3.Slerp(StartPos, PosTarget, LerpFraction); //set the position based on the lerp fraction
             }
         }
-        LerpFraction = 0f;
-        StartCoroutine(ReturnCamera(RotTarget, PosTarget));
+        LerpFraction = 0f; //reset the lerp fraction
+        StartCoroutine(ReturnCamera(RotTarget, PosTarget)); // start the coroutine for returning the camera
 
     }
 
@@ -147,7 +159,7 @@ public class CameraPosMovement : MonoBehaviour
 
     }
 
-    public IEnumerator RotCamStart(Quaternion RotTarget, Vector3 PosTarget)
+    public IEnumerator RotCamStart(Quaternion RotTarget, Vector3 PosTarget) //same as the first rot cam
     {
         while (LerpFraction < 1)
         {
