@@ -22,6 +22,8 @@ public class CameraPosMovement : MonoBehaviour
     public Quaternion[] TargetRot_MP; //array of rotations -> 0 = up, 1 = down, 2 = left, 3 = right
     public Vector3[] TargetPos_MP; //array of positions -> 0 = up, 1 = down, 2 = left, 3 = right
 
+    
+
     void Start()
     {
         TargetRot = transform.rotation; //initialise some variables
