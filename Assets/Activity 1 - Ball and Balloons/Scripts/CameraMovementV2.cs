@@ -6,7 +6,7 @@ public class CameraMovementV2 : MonoBehaviour
 {
     public Transform[] CameraPositionsArray; //array of camera positions
     //public GameObject[] CameraInterface_Canvas; //array of canvases, canvas 0 is for camera 0 etc
-    public int CurrentCamera = 0; //ref to the current active camera
+    public int CurrentCamera = 100000; //ref to the current active camera
 
     public Quaternion TargetRot;    
     public Quaternion StartRotation;
@@ -40,14 +40,24 @@ public class CameraMovementV2 : MonoBehaviour
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().ActivateCanvas();
 
         transform.parent = CameraPositionsArray[CurrentCamera].transform; //set the camera to a be a child of the position game object and sets its transforms too
-        transform.position = CameraPositionsArray[CurrentCamera].transform.position;
-        transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
+
+        
+        Vector3 StartPos = transform.position;
+        Quaternion StartRot = transform.rotation;
+
+        Vector3 TargetPos = CameraPositionsArray[CurrentCamera].transform.position;
+        Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
+
+        StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
+
+        //transform.position = CameraPositionsArray[CurrentCamera].transform.position;
+        //transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
     }
 
     public void LastCamera() //function to go to the next camera
     {
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
-
+        CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera--; //increment the current camera
         Debug.Log("Current Camera" + CurrentCamera); //just a debug
         if (CurrentCamera == -1) //if the current camera value is greater than the amount of cameras avaliable
@@ -56,10 +66,18 @@ public class CameraMovementV2 : MonoBehaviour
         }
         //CameraPositionsArray[CurrentCamera].gameObject.GetComponent<CameraPosMovement>().DeclarePosition();
         //CameraInterface_Canvas[CurrentCamera].SetActive(true); //activate the corresponding canvas
-
+        CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().ActivateCanvas();
         transform.parent = CameraPositionsArray[CurrentCamera].transform; //set the camera to a be a child of the position game object and sets its transforms too
-        transform.position = CameraPositionsArray[CurrentCamera].transform.position;
-        transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
+        //transform.position = CameraPositionsArray[CurrentCamera].transform.position;
+        //transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
+
+        Vector3 StartPos = transform.position;
+        Quaternion StartRot = transform.rotation;
+
+        Vector3 TargetPos = CameraPositionsArray[CurrentCamera].transform.position;
+        Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
+
+        StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
     }
 
 
@@ -82,6 +100,22 @@ public class CameraMovementV2 : MonoBehaviour
         CameraPositionsArray[CurrentCamera].GetComponent<CameraPosMovement>().RotateLeft();
     }
 
+    public IEnumerator CameraLerp(Vector3 StartPos, Quaternion StartRot, Vector3 TargetPos,Quaternion TargetRot)
+    {
+        float LerpFraction = 0f;
+        float LerpSpeed = 1f;
+        while (LerpFraction < 1)
+        {
+            LerpFraction += LerpSpeed * Time.deltaTime;
+            transform.position = Vector3.Slerp(StartPos, TargetPos, LerpFraction);
+            transform.rotation = Quaternion.Slerp(StartRot, TargetRot, LerpFraction);
+            yield return new WaitForEndOfFrame();
+
+
+        }
+        
+    }
+    /*
     public IEnumerator RotCam(Quaternion RotTarget)
     {
         while (LerpFraction < 1)
@@ -95,4 +129,5 @@ public class CameraMovementV2 : MonoBehaviour
         //StartCoroutine(ReturnCamera(RotTarget));
 
     }
+    */
 }
