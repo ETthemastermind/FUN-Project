@@ -7,6 +7,7 @@ public class CameraPosMovement : MonoBehaviour
     
     public Quaternion TargetRot;    // Start is called before the first frame update
     public Quaternion StartRotation;
+    public Vector3 StartPos;
     public float LerpSpeed = 1f;
     public float LerpFraction;
     public float TimeBeforeReturn; //how long the camera gets hold in rotation for
@@ -17,69 +18,121 @@ public class CameraPosMovement : MonoBehaviour
 
     [Header("MovementPlus")]
     public bool MovementPlus;
+    public Quaternion QuatStore;
+    public Quaternion[] TargetRot_MP;
+    public Vector3[] TargetPos_MP;
+
     void Start()
     {
         TargetRot = transform.rotation;
         StartRotation = transform.rotation;
+        StartPos = transform.position;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Q))
+        {
+            GetQuaterion();
+        }
     }
 
     public void DeclarePosition()
     {
-        Debug.Log(this.name + " is the current active camera view");
+        
+        
     }
 
     public void RotateUp()
     {
-        TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left);
-        StartCoroutine(RotCam(TargetRot));
-        TargetRot = StartRotation;
+        if (MovementPlus == false)
+        {
+            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left);
+            StartCoroutine(RotCam(TargetRot, transform.position));
+            TargetRot = StartRotation;
+        }
+        else if (MovementPlus == true)
+        {
+            
+            Debug.Log("Rotate Up Movement Plus");
+            StartCoroutine(RotCam(TargetRot_MP[0], TargetPos_MP[0]));
+            
+        }
+        
     }
     public void RotateRight()
     {
-        TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
-        StartCoroutine(RotCam(TargetRot));
-        TargetRot = StartRotation;
+        if (MovementPlus == false)
+        {
+            TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
+            StartCoroutine(RotCam(TargetRot, transform.position));
+            TargetRot = StartRotation;
+        }
+        
     }
     public void RotateDown()
     {
-        TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.right);
-        StartCoroutine(RotCam(TargetRot));
-        TargetRot = StartRotation;
+        if (MovementPlus == false)
+        {
+            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.right);
+            StartCoroutine(RotCam(TargetRot, transform.position));
+            TargetRot = StartRotation;
+        }
+        
     }
     public void RotateLeft()
     {
-        TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.down);
-        StartCoroutine(RotCam(TargetRot));
-        TargetRot = StartRotation;
+        if (MovementPlus == false)
+        {
+            TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.down);
+            StartCoroutine(RotCam(TargetRot, transform.position));
+            TargetRot = StartRotation;
+        }
+        
+    }
+
+    public void GetQuaterion()
+    {
+        if (MovementPlus == true)
+        {
+            QuatStore = transform.rotation;
+            Debug.Log("Current Quaterion is: " + transform.rotation);
+        }
+        
     }
 
 
 
-    public IEnumerator RotCam(Quaternion RotTarget)
+    public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget)
     {
+        Debug.Log(StartRotation);
+        Debug.Log(RotTarget);
         while (LerpFraction < 1)
         {
             Debug.Log("Rotating Camera Up");
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction);
+            if (MovementPlus == true)
+            {
+                transform.position = Vector3.Slerp(StartPos, PosTarget, LerpFraction);
+            }
         }
         LerpFraction = 0f;
-        StartCoroutine(ReturnCamera(RotTarget));
+        StartCoroutine(ReturnCamera(RotTarget, PosTarget));
 
     }
+
+
+
+    
     #region Rotate the Camera // "It's over, Anakin. I have the high ground"
-    public IEnumerator ReturnCamera(Quaternion RotTarget) //return the camera 
+    public IEnumerator ReturnCamera(Quaternion RotTarget, Vector3 StartPos) //return the camera 
     {
         yield return StartCoroutine(RotPause()); //start the coroutine to hold the camera in place
-        yield return StartCoroutine(RotCamStart(RotTarget)); //start the corountine to return the camera to its start rotation
+        yield return StartCoroutine(RotCamStart(RotTarget, StartPos)); //start the corountine to return the camera to its start rotation
     }
 
     public IEnumerator RotPause() //pause the camera
@@ -94,7 +147,7 @@ public class CameraPosMovement : MonoBehaviour
 
     }
 
-    public IEnumerator RotCamStart(Quaternion RotTarget)
+    public IEnumerator RotCamStart(Quaternion RotTarget, Vector3 PosTarget)
     {
         while (LerpFraction < 1)
         {
@@ -102,6 +155,10 @@ public class CameraPosMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(RotTarget, StartRotation, LerpFraction);
+            if (MovementPlus == true)
+            {
+                transform.position = Vector3.Slerp(PosTarget, StartPos, LerpFraction);
+            }
         }
         LerpFraction = 0f;
     }
