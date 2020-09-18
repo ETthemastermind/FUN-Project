@@ -15,6 +15,8 @@ public class CameraPosMovement : MonoBehaviour
     public float UpDownRotAngle;
     public float LeftRightRotAngle;
 
+    [Header("MovementPlus")]
+    public bool MovementPlus;
     void Start()
     {
         TargetRot = transform.rotation;
