@@ -51,7 +51,8 @@ public class CameraPosMovement : MonoBehaviour
         {
             
             Debug.Log("Rotate Up Movement Plus");
-            StartCoroutine(RotCam(TargetRot_MP[0], TargetPos_MP[0])); //run the rot cam coroutine, passing the target rot and target pos assigned by the user in the corressponding array
+            StartCoroutine(MoveCam(TargetRot_MP[0], TargetPos_MP[0])); //run the rot cam coroutine, passing the target rot and target pos assigned by the user in the corressponding array
+            //StartCoroutine(MoveCam(TargetPos_MP[0]));
             
         }
         
@@ -68,7 +69,8 @@ public class CameraPosMovement : MonoBehaviour
         else if (MovementPlus == true)
         {
             Debug.Log("Rotate Right Movement Plus");
-            StartCoroutine(RotCam(TargetRot_MP[3], TargetPos_MP[3]));
+            StartCoroutine(MoveCam(TargetRot_MP[3], TargetPos_MP[3]));
+            //StartCoroutine(MoveCam(TargetPos_MP[3]));
         }
 
 
@@ -84,7 +86,8 @@ public class CameraPosMovement : MonoBehaviour
         else if (MovementPlus == true)
         {
             Debug.Log("Rotate Down Movement Plus");
-            StartCoroutine(RotCam(TargetRot_MP[1], TargetPos_MP[1]));
+            StartCoroutine(MoveCam(TargetRot_MP[1], TargetPos_MP[1]));
+            //StartCoroutine(MoveCam(TargetPos_MP[1]));
         }
 
     }
@@ -100,7 +103,8 @@ public class CameraPosMovement : MonoBehaviour
         else if (MovementPlus == true)
         {
             Debug.Log("Rotate Left Movement Plus");
-            StartCoroutine(RotCam(TargetRot_MP[2], TargetPos_MP[2]));
+            //StartCoroutine(RotCam(TargetRot_MP[2], TargetPos_MP[2]));
+            StartCoroutine(MoveCam(TargetRot_MP[2], TargetPos_MP[2]));
         }
 
     }
@@ -127,15 +131,30 @@ public class CameraPosMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime; //increment the lerp fraction
             transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction); //set the rotation based on the lerp fraction
-            if (MovementPlus == true) //if the movement plus is active
-            {
-                transform.position = Vector3.Slerp(StartPos, PosTarget, LerpFraction); //set the position based on the lerp fraction
-            }
         }
         LerpFraction = 0f; //reset the lerp fraction
         StartCoroutine(ReturnCamera(RotTarget, PosTarget)); // start the coroutine for returning the camera
 
     }
+
+    public IEnumerator MoveCam(Quaternion RotTarget, Vector3 PosTarget)
+    {
+        float LerpFraction = 0f;
+        float LerpSpeed = 1f;
+        
+        while (LerpFraction < 1)
+        {
+            LerpFraction += LerpSpeed * Time.deltaTime;
+            transform.position = Vector3.Lerp(StartPos, PosTarget, LerpFraction);
+            yield return new WaitForEndOfFrame();
+
+        }
+        StartCoroutine(RotCam(RotTarget, PosTarget));
+        
+        
+    }
+
+    
 
 
 
