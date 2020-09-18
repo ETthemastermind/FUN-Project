@@ -156,6 +156,8 @@ public class CameraPosMovement : MonoBehaviour
 
     
 
+    
+
 
 
     
@@ -186,12 +188,28 @@ public class CameraPosMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(RotTarget, StartRotation, LerpFraction);
-            if (MovementPlus == true)
-            {
-                transform.position = Vector3.Slerp(PosTarget, StartPos, LerpFraction);
-            }
+            
         }
         LerpFraction = 0f;
+        if (MovementPlus == true)
+        {
+            StartCoroutine(MoveCamStart(RotTarget, PosTarget));
+        }
+    }
+
+    public IEnumerator MoveCamStart(Quaternion RotTarget, Vector3 PosTarget)
+    {
+        float LerpFraction = 0f;
+        float LerpSpeed = 1f;
+
+        while (LerpFraction < 1)
+        {
+            LerpFraction += LerpSpeed * Time.deltaTime;
+            transform.position = Vector3.Lerp(PosTarget, StartPos, LerpFraction);
+            yield return new WaitForEndOfFrame();
+
+        }
+
     }
 
     #endregion
