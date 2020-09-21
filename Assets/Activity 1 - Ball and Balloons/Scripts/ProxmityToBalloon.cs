@@ -9,7 +9,7 @@ public class ProxmityToBalloon : MonoBehaviour
     public GameObject PrepareToBang;
     public AudioClip PrepareToBang_Audio;
     private AudioSource AS;
-    
+    public float Distance;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +26,10 @@ public class ProxmityToBalloon : MonoBehaviour
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.forward * 1), 0.1f);
-        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.back * 1), 0.1f);
-        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.left * 1), 0.1f);
-        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.right * 1), 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.forward * Distance), 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.back * Distance), 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.left * Distance), 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + (Vector3.right * Distance), 0.1f);
     }
 
     public void BalloonProxCheck()
@@ -40,7 +40,7 @@ public class ProxmityToBalloon : MonoBehaviour
         for (int i = 0; i < Directions.Length; i++)
         {
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 0.1f, Directions[i], out hit, 1f))
+            if (Physics.SphereCast(transform.position, 0.1f, Directions[i], out hit, Distance))
             {
                 if (hit.transform.tag == "Balloon")
                 {

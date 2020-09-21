@@ -1327,8 +1327,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149354484215}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 11, y: 10.999999, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
@@ -11454,6 +11454,27 @@ MonoBehaviour:
   BalloonFound: 0
   PrepareToBang: {fileID: 49134804}
   PrepareToBang_Audio: {fileID: 8300000, guid: 49469f95b9c5fb34fb24fe3d9a1c50ed, type: 3}
+--- !u!114 &1708170161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708170150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2543512eb4e0f79468659ade9ec040b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridStep: 1
+  MoveableDistance: 0
+  MaxGrid_UD: 0
+  MaxGrid_LR: 0
+  LerpFraction: 0
+  LerpSpeed: 3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1714287777
 GameObject:
   m_ObjectHideFlags: 0
@@ -11991,7 +12012,7 @@ PrefabInstance:
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
@@ -12001,7 +12022,7 @@ PrefabInstance:
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
@@ -12820,7 +12841,7 @@ GameObject:
   - component: {fileID: 199716009}
   - component: {fileID: 919132149354484216}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Grid
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12838,12 +12859,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf4c492e56e3cd47bdadb6edbbf41b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X_Start: -4.4
-  Y_Start: 6.64
+  GridGameObjects: []
+  X_Start: -4.5
+  Y_Start: 6.8
   Length: 7
   Width: 10
-  X_Space: 2
-  Y_Space: 2
+  X_Space: 1.5
+  Y_Space: 1.5
   prefab: {fileID: 6690282497464556422, guid: ae4b18c4922002041808094697708062, type: 3}
 --- !u!114 &1141477647138750070
 MonoBehaviour:
@@ -12881,7 +12903,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149354484215}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
