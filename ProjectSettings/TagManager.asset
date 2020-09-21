@@ -11,6 +11,7 @@ TagManager:
   - BalloonSpawner
   - Cell
   - GridCube
+  - GridObject
   layers:
   - Default
   - TransparentFX
