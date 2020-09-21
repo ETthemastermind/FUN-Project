@@ -12,6 +12,8 @@ public class BallControllerV2 : MonoBehaviour
 
     public float LerpFraction;
     public float LerpSpeed;
+
+    public LayerMask layerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +23,19 @@ public class BallControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveForward();
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             MoveRight();
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveBackward();
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveLeft();
         }
@@ -48,51 +50,99 @@ public class BallControllerV2 : MonoBehaviour
 
     public void MoveForward()
     {
-        if (transform.position.x != MaxGrid_UD)
+        Debug.Log("Move Forward");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.right * 100f, out hit, layerMask))
         {
-            if (transform.position.x != MaxGrid_UD * 1)
+            if (hit.transform.tag == "GridCube")
             {
-                Debug.Log("Move Backward");
-                transform.position += Vector3.right * gridStep;
+                Transform HT = hit.transform;
+                Vector3 Target;
+                Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                StartCoroutine(Move(Target));
             }
+            
+            Debug.Log(hit.transform.name);
+            //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
         }
         
     }
 
     public void MoveBackward()
     {
-        if (transform.position.x != MaxGrid_UD * -1)
+        Debug.Log("Move Backwards");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.left * 100f, out hit, layerMask))
         {
-            Debug.Log("Move Backward");
-            transform.position += Vector3.left * gridStep;
+            if (hit.transform.tag == "GridCube")
+            {
+                Transform HT = hit.transform;
+                Vector3 Target;
+                Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                StartCoroutine(Move(Target));
+            }
+            
+            Debug.Log(hit.transform.name);
+            //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
         }
-        
+
     }
 
     public void MoveRight()
     {
-        if (transform.position.z != (MaxGrid_LR * -1))
+        Debug.Log("Move Right");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.back * 100f, out hit,layerMask))
         {
-            Debug.Log("Move Right");
-            transform.position += Vector3.back * gridStep;
+            if (hit.transform.tag == "GridCube")
+            {
+                Transform HT = hit.transform;
+                Vector3 Target;
+                Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                StartCoroutine(Move(Target));
+            }
+            
+            Debug.Log(hit.transform.name);
+            //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+            
         }
-        
+
     }
 
     public void MoveLeft()
     {
-        if (transform.position.z != MaxGrid_LR)
+        Debug.Log("Move Left");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.forward * 100f, out hit,layerMask))
         {
-            Debug.Log("Move Left");
-            transform.position += Vector3.forward * gridStep;
+            if (hit.transform.tag == "GridCube")
+            {
+                Transform HT = hit.transform;
+                Vector3 Target;
+                Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                StartCoroutine(Move(Target));
+            }
+            
+            Debug.Log(hit.transform.name);
+            //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
         }
-        
+
     }
 
-    public IEnumerator Move(Vector3 direction)
+    public IEnumerator Move(Vector3 Target)
     {
-
-        yield return new WaitForEndOfFrame();
+        LerpFraction = 0f;
+        Vector3 StartPos = transform.position;
+        while (LerpFraction < 1)
+        {
+            LerpFraction += (LerpSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(StartPos, Target, LerpFraction);
+            yield return new WaitForEndOfFrame();
+        }
+        
     }
 
 }
