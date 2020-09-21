@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridV3 : MonoBehaviour //https://www.youtube.com/watch?v=WJimYq2Tczc
+public class GridV3 : MonoBehaviour
 {
-    public float X_Start;
-    public float Y_Start;
 
-    public int Length;
-    public int Width;
 
-    public float X_Space;
-    public float Y_Space;
+
+
+    [Header ("FromVid")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
+    public float X_Start; //default = -4.5
+    public float Y_Start; // default = 6.8
+
+    public int Length; // default = 7
+    public int Width; //default = 10
+
+    public float X_Space; //default = 1.5
+    public float Y_Space; //default = 1.5
     public GameObject prefab;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < Length * Width; i++)
+        for (int i = 0; i < Length * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
             Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Length)),transform.position.y, -Y_Start + (Y_Space * (i / Length))), Quaternion.identity);
         }
