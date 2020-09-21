@@ -10,10 +10,12 @@ public class BallControllerV2 : MonoBehaviour
     public LayerMask layerMask; //reference for the layermask for the movement raycast
     public bool _BallMoving; //bool to check if the ball is moving
     public float RotSpeed = 500f; //speed at which the ball rotates
+
+    public MasterTelemetrySystem TelSystem;
     // Start is called before the first frame update
     void Start()
     {
-        
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
     }
 
     // Update is called once per frame
@@ -59,12 +61,14 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target; //reference for a vector3 called target
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z); //calculate the target location, based on the cube hit
                     StartCoroutine(Move(Target, "F")); //start the move coroutine passing in the target and a string of F/B/L/R depending on which way the ball needs to rotate
+                    TelSystem.AddLine("Ball moved forward");
                 }
 
                 //Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
             }
+            
         }
 
         
@@ -87,6 +91,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"B"));
+                    TelSystem.AddLine("Ball moved backward");
                 }
 
                 //Debug.Log(hit.transform.name);
@@ -94,6 +99,7 @@ public class BallControllerV2 : MonoBehaviour
                 
 
             }
+            
         }
 
         
@@ -116,6 +122,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"R"));
+                    TelSystem.AddLine("Ball moved right");
                 }
 
                 //Debug.Log(hit.transform.name);
@@ -145,6 +152,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"L"));
+                    TelSystem.AddLine("Ball moved left");
                 }
 
                 //Debug.Log(hit.transform.name);

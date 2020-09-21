@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class MasterTelemetrySystem : MonoBehaviour
 {
     public bool TelemetryActive;
 
     public string ID;
+    private string[] Headings = new string[4] { "Activity", "Interaction Style", "Action Completed", "Time Completed" };
+    public string FilePath;
+    public string LineToWrite;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +47,30 @@ public class MasterTelemetrySystem : MonoBehaviour
         CurrentTime = CurrentTime.Replace(":", "-");
 
         string FileName = "/" + ID + CurrentDate + "_" + CurrentTime + "_" + ".csv";
-        string FilePath = Application.streamingAssetsPath + "/Logs" + FileName;
+        FilePath = Application.streamingAssetsPath + "/Logs" + FileName;
 
         StreamWriter SW = new StreamWriter(FilePath, false);
-        SW.WriteLine(ID + ID + ID);
+        for (int i = 0; i < Headings.Length; i++)
+        {
+            LineToWrite += ((Headings[i]) + ",");
+        }
+        SW.WriteLine(LineToWrite);
         SW.Close();
     }
+
+    public void AddLine(string ActionCompleted)
+    {
+        string Activity = SceneManager.GetActiveScene().name;
+        string InteractionStyle = "Mouse (TEMPORARY HARD CODED OUTPUT)";
+        string Action = ActionCompleted;
+        string TimeCode = System.DateTime.Now.ToLongTimeString();
+
+        LineToWrite = Activity + "," + InteractionStyle + "," + Action + "," + TimeCode;
+        StreamWriter SW = new StreamWriter(FilePath, true);
+        SW.WriteLine(LineToWrite);
+        SW.Close();
+
+    }
+
+    
 }

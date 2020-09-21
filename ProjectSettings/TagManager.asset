@@ -12,6 +12,7 @@ TagManager:
   - Cell
   - GridCube
   - GridObject
+  - TelSystem
   layers:
   - Default
   - TransparentFX
