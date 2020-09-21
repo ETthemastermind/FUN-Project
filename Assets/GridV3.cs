@@ -44,7 +44,7 @@ public class GridV3 : MonoBehaviour
     {
         for (int i = 0; i < Length * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
-            GridGameObjects.Add(Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Length)), transform.position.y, -Y_Start + (Y_Space * (i / Length))), Quaternion.identity));
+            GridGameObjects.Add(Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Length)), transform.position.y - 0.53f, -Y_Start + (Y_Space * (i / Length))), Quaternion.identity));
         }
     }
 

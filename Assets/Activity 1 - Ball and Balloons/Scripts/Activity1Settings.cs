@@ -46,7 +46,7 @@ public class Activity1Settings : MonoBehaviour
     public TMP_Text WinText;
     public GameObject Win_PopUpCanvas;
     public GameObject[] OtherCanvases;
-
+    public TMP_Text BallSizeText;
 
     private void Awake()
     {
@@ -191,61 +191,59 @@ public class Activity1Settings : MonoBehaviour
 
     public void IncreaseBallSpeed() //function to increase the ball speed
     {
-        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 5) //if the current speed of the ball is 5
+        if (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed == 5) //if the current speed of the ball is 5
         {
             //do nothing
         }
         else //if its not
         {
-            PlayerBall.GetComponent<BallController>().LerpSpeed++; //increment the ball speed
-            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString(); //update the text component
+            PlayerBall.GetComponent<BallControllerV2>().LerpSpeed++; //increment the ball speed
+            BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString(); //update the text component
         }
     }
 
     public void DecreaseBallSpeed() //same as above but to decrease the speed
     {
-        if (PlayerBall.GetComponent<BallController>().LerpSpeed == 1)
+        if (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed == 1)
         {
             //do nothing
         }
         else
         {
-            PlayerBall.GetComponent<BallController>().LerpSpeed--;
-            BallSpeedText.text = (PlayerBall.GetComponent<BallController>().LerpSpeed).ToString();
+            PlayerBall.GetComponent<BallControllerV2>().LerpSpeed--;
+            BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString();
         }
 
     }
-    /*
-    public void IncrementRoundNumber()
+
+    public void IncreaseBallSize()
     {
-        NumberOfRounds += 1;
-        if (NumberOfRounds > MaxRounds)
+
+        //Debug.Log(PlayerBall.transform.localScale);
+        Vector3 MaxSize = new Vector3(0.6f, 0.6f, 0.6f);
+        int BallSizeNumber = int.Parse(BallSizeText.text);
+        if (PlayerBall.transform.localScale != MaxSize)
         {
-            NumberOfRounds = MaxRounds;
+            PlayerBall.transform.localScale += new Vector3(0.15f, 0.15f, 0.15f);
+            PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
+            BallSizeNumber++;
+            BallSizeText.text = BallSizeNumber.ToString();
         }
-
-        Debug.Log("Current Number of Rounds: " + NumberOfRounds);
-        RoundNumberText.text = NumberOfRounds.ToString();
-        //SavePrefs();
-        
-
     }
 
-    public void DecrementRoundNumber()
+    public void DecreaseBallSize()
     {
-        NumberOfRounds -= 1;
-        if (NumberOfRounds < MinRounds)
+        //Debug.Log(PlayerBall.transform.localScale);
+        int BallSizeNumber = int.Parse(BallSizeText.text);
+        Vector3 MinSize = new Vector3(0.3f, 0.3f, 0.3f);
+        if (PlayerBall.transform.localScale != MinSize)
         {
-            NumberOfRounds = MinRounds;
+            PlayerBall.transform.localScale -= new Vector3(0.15f, 0.15f, 0.15f);
+            PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
+            BallSizeNumber--;
+            BallSizeText.text = BallSizeNumber.ToString();
         }
-
-        Debug.Log("Current Number of Rounds: " + NumberOfRounds);
-       
-        RoundNumberText.text = NumberOfRounds.ToString();
-        //SavePrefs();
-
     }
-    */
 
     public void SavePrefs()
     {
