@@ -12,6 +12,7 @@ public class CameraPosMovement : MonoBehaviour
     public float LerpFraction;
     public float TimeBeforeReturn; //how long the camera gets hold in rotation for
     public float CurrentTimeBeforeReturn; //how long the user has already waited for
+    public bool _CameraMoving;
 
     public float UpDownRotAngle;
     public float LeftRightRotAngle;
@@ -22,6 +23,7 @@ public class CameraPosMovement : MonoBehaviour
     public Quaternion[] TargetRot_MP; //array of rotations -> 0 = up, 1 = down, 2 = left, 3 = right
     public Vector3[] TargetPos_MP; //array of positions -> 0 = up, 1 = down, 2 = left, 3 = right
 
+    public MasterTelemetrySystem TelSystem;
     
 
     void Start()
@@ -29,6 +31,8 @@ public class CameraPosMovement : MonoBehaviour
         TargetRot = transform.rotation; //initialise some variables
         StartRotation = transform.rotation;
         StartPos = transform.position;
+
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         
     }
 
@@ -43,6 +47,11 @@ public class CameraPosMovement : MonoBehaviour
 
     public void RotateUp() //function for rotating/moving the camera up/down/left/right
     {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+        }
+        TelSystem.AddLine("Rotating Camera Up");
         if (MovementPlus == false) //if the movement plus is not enabled
         {
             TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left); //get the target rotation, depending on the function
@@ -61,6 +70,11 @@ public class CameraPosMovement : MonoBehaviour
     }
     public void RotateRight() //same as above but right
     {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+        }
+        TelSystem.AddLine("Rotating Camera Right");
         if (MovementPlus == false)
         {
             TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
@@ -79,6 +93,11 @@ public class CameraPosMovement : MonoBehaviour
     }
     public void RotateDown() //same as above but down
     {
+        if (_CameraMoving == false)
+        {
+            _CameraMoving = true;
+        }
+        TelSystem.AddLine("Rotating Camera Down");
         if (MovementPlus == false)
         {
             TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.right);
@@ -95,19 +114,25 @@ public class CameraPosMovement : MonoBehaviour
     }
     public void RotateLeft() //same as above but left
     {
-        if (MovementPlus == false)
+        if (_CameraMoving == false)
         {
-            TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.down);
-            StartCoroutine(RotCam(TargetRot, transform.position));
-            TargetRot = StartRotation;
-        }
+            _CameraMoving = true;
+            TelSystem.AddLine("Rotating Camera Left");
+            if (MovementPlus == false)
+            {
+                TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.down);
+                StartCoroutine(RotCam(TargetRot, transform.position));
+                TargetRot = StartRotation;
+            }
 
-        else if (MovementPlus == true)
-        {
-            Debug.Log("Rotate Left Movement Plus");
-            //StartCoroutine(RotCam(TargetRot_MP[2], TargetPos_MP[2]));
-            StartCoroutine(MoveCam(TargetRot_MP[2], TargetPos_MP[2]));
+            else if (MovementPlus == true)
+            {
+                Debug.Log("Rotate Left Movement Plus");
+                //StartCoroutine(RotCam(TargetRot_MP[2], TargetPos_MP[2]));
+                StartCoroutine(MoveCam(TargetRot_MP[2], TargetPos_MP[2]));
+            }
         }
+        
 
     }
 

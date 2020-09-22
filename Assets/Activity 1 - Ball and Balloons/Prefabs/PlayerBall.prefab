@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 5705685554165023185}
   - component: {fileID: 6408410518435697552}
   - component: {fileID: 6408410518435697553}
-  - component: {fileID: 6408410518435697565}
   - component: {fileID: 8753386378283065122}
   - component: {fileID: 7502587753116477451}
   m_Layer: 0
@@ -206,27 +205,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6408410518435697565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6065881097038340100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1422f93a3f86a5b499dac2425b2511d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveValue: 1
-  _BallIsMoving: 0
-  BallStart: {x: 0, y: 0, z: 0}
-  BallDestination: {x: 0, y: 0, z: 0}
-  LerpFraction: 0
-  LerpSpeed: 3
-  RotSpeed: 500
-  MaxGrid_UD: 0
-  MaxGrid_LR: 0
 --- !u!114 &8753386378283065122
 MonoBehaviour:
   m_ObjectHideFlags: 0
