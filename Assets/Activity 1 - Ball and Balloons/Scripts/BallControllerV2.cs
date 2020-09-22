@@ -50,18 +50,23 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false) //if the ball isnt moving
         {
-            _BallMoving = true; // the ball is now moving
+            
             Debug.Log("Move Forward"); //print to console that the ball is moving
             RaycastHit hit; //reference for the hit
             if (Physics.Raycast(transform.position, Vector3.right, out hit, 100f, layerMask)) //shoot the ray in the direction the ball is going to move
             {
                 if (hit.transform.tag == "GridCube") //if the hit object has the grid cube tag
                 {
+                    _BallMoving = true; // the ball is now moving
                     Transform HT = hit.transform; //reference for the transform of the hit object
                     Vector3 Target; //reference for a vector3 called target
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z); //calculate the target location, based on the cube hit
                     StartCoroutine(Move(Target, "F")); //start the move coroutine passing in the target and a string of F/B/L/R depending on which way the ball needs to rotate
                     TelSystem.AddLine("Ball moved forward");
+                }
+                else
+                {
+                    
                 }
 
                 Debug.Log(hit.transform.name);
@@ -80,18 +85,23 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            _BallMoving = true;
+            
             Debug.Log("Move Backwards");
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.left, out hit, 100f, layerMask))
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"B"));
                     TelSystem.AddLine("Ball moved backward");
+                }
+                else
+                {
+                    _BallMoving = false;
                 }
 
                 Debug.Log(hit.transform.name);
@@ -111,18 +121,23 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            _BallMoving = true;
+            
             Debug.Log("Move Right");
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.back, out hit, 100f, layerMask))
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"R"));
                     TelSystem.AddLine("Ball moved right");
+                }
+                else
+                {
+                    _BallMoving = false;
                 }
 
                 Debug.Log(hit.transform.name);
@@ -141,18 +156,24 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            _BallMoving = true;
+            
             Debug.Log("Move Left");
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100f, layerMask))
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target,"L"));
+                    StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
+                }
+
+                else
+                {
+                    _BallMoving = false;
                 }
 
                 Debug.Log(hit.transform.name);
