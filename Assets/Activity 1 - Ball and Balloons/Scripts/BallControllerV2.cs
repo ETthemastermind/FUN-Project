@@ -64,7 +64,7 @@ public class BallControllerV2 : MonoBehaviour
                     TelSystem.AddLine("Ball moved forward");
                 }
 
-                //Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
             }
@@ -94,7 +94,7 @@ public class BallControllerV2 : MonoBehaviour
                     TelSystem.AddLine("Ball moved backward");
                 }
 
-                //Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -125,7 +125,7 @@ public class BallControllerV2 : MonoBehaviour
                     TelSystem.AddLine("Ball moved right");
                 }
 
-                //Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -155,7 +155,7 @@ public class BallControllerV2 : MonoBehaviour
                     TelSystem.AddLine("Ball moved left");
                 }
 
-                //Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -204,7 +204,13 @@ public class BallControllerV2 : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
+        
 
+    }
+
+    public void HapticFeedback()
+    {
+        Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
 }

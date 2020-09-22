@@ -7,11 +7,11 @@ public class ActivityOneBallFunctions : MonoBehaviour
     public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
     public GameObject _HUDController;
 
-    public BallController Ball;
+    public BallControllerV2 Ball;
     // Start is called before the first frame update
     void Start()
     {
-        Ball = this.GetComponent<BallController>();
+        Ball = this.GetComponent<BallControllerV2>();
     }
 
     // Update is called once per frame

@@ -1150,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &127483540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,7 +2598,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 279
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 8923fd831d047324fa48e96fd8a7c8ca, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: e06e1564b93067049bd66b0d570aaf9a, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -3700,7 +3700,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 279
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: e06e1564b93067049bd66b0d570aaf9a, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 8923fd831d047324fa48e96fd8a7c8ca, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -5302,7 +5302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &859125848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7704,7 +7704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1100831943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13634,7 +13634,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6408410518435697565, guid: 026508a40cc7d7746acfe9ff438c6c79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 026508a40cc7d7746acfe9ff438c6c79, type: 3}
 --- !u!1 &1877131257
 GameObject:
