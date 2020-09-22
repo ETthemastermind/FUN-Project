@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class HudController : MonoBehaviour
 {
+    public MasterTelemetrySystem TelSystem;
+
     public TextMeshProUGUI ScoreText; //reference to the score text
     public TextMeshProUGUI Timer; //reference to the timer text
 
@@ -51,8 +53,10 @@ public class HudController : MonoBehaviour
         Time.timeScale = 1; //makes sure that time scale for this scene is set to 1
         GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
         MaxScore = GameController.Score_Goal;
-        
-        
+
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+
+
     }
 
     // Update is called once per frame
@@ -61,6 +65,7 @@ public class HudController : MonoBehaviour
         CurrentGameTime += Time.deltaTime;
         Timer.GetComponent<TextMeshProUGUI>().text = "Time: " + (Mathf.RoundToInt(CurrentGameTime));
         
+        /*
         if (PrepareForBang_SFX == true)
         {
             AudioSource AS = Camera.main.GetComponent<AudioSource>();
@@ -70,6 +75,7 @@ public class HudController : MonoBehaviour
 
             }
         }
+        */
         
 
     }
@@ -111,6 +117,8 @@ public class HudController : MonoBehaviour
             SettingsMenu.SetActive(false); //close the menu
             Controls.SetActive(true);
             Time.timeScale = 1; //set the time scale back to 1
+            TelSystem.AddLine("Settings menu closed");
+
 
 
         }
@@ -119,6 +127,7 @@ public class HudController : MonoBehaviour
             SettingsMenu.SetActive(true);
             Controls.SetActive(false);
             Time.timeScale = 0;
+            TelSystem.AddLine("Settings menu opened");
         }
 
     }
@@ -131,8 +140,9 @@ public class HudController : MonoBehaviour
             ButtonImage.sprite = MovementSprite;
             MovementControlsCanvas.SetActive(false);
             CameraControlsCanvas.SetActive(true);
+            TelSystem.AddLine("Camera Controls activated and Movement Controls deactivated");
 
-            
+
         }
         else //if the camera controls are active
         {
@@ -140,6 +150,7 @@ public class HudController : MonoBehaviour
             ButtonImage.sprite = CameraSprite;
             MovementControlsCanvas.SetActive(true);
             CameraControlsCanvas.SetActive(false);
+            TelSystem.AddLine("Movement Controls activated and Camera Controls deactivated");
         }
     }
     
@@ -150,18 +161,21 @@ public class HudController : MonoBehaviour
         MusicMenu_Canvas.SetActive(true);
         GameMenu_Canvas.SetActive(false);
         ProfileMenu_Canvas.SetActive(false);
+        TelSystem.AddLine("Music tab opened");
     }
     public void GameMenuOn()
     {
         MusicMenu_Canvas.SetActive(false);
         GameMenu_Canvas.SetActive(true);
         ProfileMenu_Canvas.SetActive(false);
+        TelSystem.AddLine("Game tab opened");
     }
     public void ProfileMenuOn()
     {
         MusicMenu_Canvas.SetActive(false);
         GameMenu_Canvas.SetActive(false);
         ProfileMenu_Canvas.SetActive(true);
+        TelSystem.AddLine("Profile tab opened");
     }
     #endregion
 
@@ -183,11 +197,13 @@ public class HudController : MonoBehaviour
         {
             Minimap.SetActive(false); //deactive the minimap gameobject
             Mirrors.SetActive(true); //activate the mirrors gameobject
+            TelSystem.AddLine("Mirror UI activated");
         }
         else
         {
             Minimap.SetActive(true); //active the minimap gameobject
             Mirrors.SetActive(false); //deactivate the mirrors gameobject
+            TelSystem.AddLine("Minimap UI activated");
         }
     }
 
