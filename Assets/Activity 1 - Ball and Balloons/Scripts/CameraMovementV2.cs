@@ -13,10 +13,13 @@ public class CameraMovementV2 : MonoBehaviour
 
     public float LerpSpeed = 1f;
     public float LerpFraction;
+
+    public MasterTelemetrySystem TelSystem;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
-
+        TelSystem.AddLine("Next Camera button pressed active camera is - " + CameraPositionsArray[CurrentCamera].name);
         //transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         //transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
     }
@@ -78,6 +81,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
+        TelSystem.AddLine("Last Camera button pressed active camera is - " + CameraPositionsArray[CurrentCamera].name);
     }
 
 

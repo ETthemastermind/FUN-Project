@@ -10,7 +10,7 @@ public class MasterTelemetrySystem : MonoBehaviour
     public bool TelemetryActive;
 
     public string ID;
-    private string[] Headings = new string[4] { "Activity", "Interaction Style", "Action Completed", "Time Completed" };
+    private string[] Headings = new string[6] { "Activity", "Interaction Style", "Action Completed", "Time Completed","X coord", "Y coord"};
     public string FilePath;
     public string LineToWrite;
     // Start is called before the first frame update
@@ -64,13 +64,13 @@ public class MasterTelemetrySystem : MonoBehaviour
         string InteractionStyle = "Mouse (TEMPORARY HARD CODED OUTPUT)";
         string Action = ActionCompleted;
         string TimeCode = System.DateTime.Now.ToLongTimeString();
-
-        LineToWrite = Activity + "," + InteractionStyle + "," + Action + "," + TimeCode;
+        string Xcoord = Input.mousePosition.x.ToString();
+        string Ycoord = Input.mousePosition.y.ToString();
+        LineToWrite = Activity + "," + InteractionStyle + "," + Action + "," + TimeCode + "," + Xcoord + "," + Ycoord + "," + gameObject;
         StreamWriter SW = new StreamWriter(FilePath, true);
         SW.WriteLine(LineToWrite);
         SW.Close();
-
     }
-
+    
     
 }
