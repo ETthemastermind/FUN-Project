@@ -10,10 +10,13 @@ public class ProxmityToBalloon : MonoBehaviour
     public AudioClip PrepareToBang_Audio;
     private AudioSource AS;
     public float Distance;
+    public LayerMask layerMask;
+    public BallControllerV2 BC;
     // Start is called before the first frame update
     void Start()
     {
         AS = Camera.main.GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -21,11 +24,13 @@ public class ProxmityToBalloon : MonoBehaviour
     {
 
         //BalloonProxCheck();
+        
+        
     }
 
     public void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.localPosition + (Vector3.forward * Distance), 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + (Vector3.back * Distance), 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + (Vector3.left * Distance), 0.1f);
@@ -34,14 +39,16 @@ public class ProxmityToBalloon : MonoBehaviour
 
     public void BalloonProxCheck()
     {
+        
         Debug.Log("running the balloon prox check");
         BalloonFound = false;
         PrepareToBang.SetActive(false);
         for (int i = 0; i < Directions.Length; i++)
         {
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 0.1f, Directions[i], out hit, Distance))
+            if (Physics.Raycast(transform.position, Directions[i], out hit, Distance, layerMask))
             {
+                Debug.Log(hit.transform.name);
                 if (hit.transform.tag == "Balloon")
                 {
                     Debug.Log("Balloon in Proximity");
@@ -65,10 +72,11 @@ public class ProxmityToBalloon : MonoBehaviour
         }
         
 
-        
-            
 
-        
+
+
+
+
     }
 
 

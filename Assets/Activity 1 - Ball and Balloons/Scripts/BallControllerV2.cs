@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BallControllerV2 : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class BallControllerV2 : MonoBehaviour
     public float RotSpeed = 500f; //speed at which the ball rotates
 
     public MasterTelemetrySystem TelSystem;
+
+    public UnityEvent myEvent = new UnityEvent();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +73,7 @@ public class BallControllerV2 : MonoBehaviour
                     
                 }
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
             }
@@ -104,7 +108,7 @@ public class BallControllerV2 : MonoBehaviour
                     _BallMoving = false;
                 }
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -140,7 +144,7 @@ public class BallControllerV2 : MonoBehaviour
                     _BallMoving = false;
                 }
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -176,7 +180,7 @@ public class BallControllerV2 : MonoBehaviour
                     _BallMoving = false;
                 }
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
                 
 
@@ -225,6 +229,8 @@ public class BallControllerV2 : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
+        myEvent.Invoke();
+        
         
 
     }

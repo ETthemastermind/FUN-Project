@@ -13815,6 +13815,10 @@ MonoBehaviour:
   PrepareToBang: {fileID: 49134804}
   PrepareToBang_Audio: {fileID: 8300000, guid: 49469f95b9c5fb34fb24fe3d9a1c50ed, type: 3}
   Distance: 1.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  BC: {fileID: 0}
 --- !u!114 &1708170161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13835,6 +13839,20 @@ MonoBehaviour:
   _BallMoving: 0
   RotSpeed: 500
   TelSystem: {fileID: 0}
+  myEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1708170160}
+        m_MethodName: BalloonProxCheck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1714287777
 GameObject:
   m_ObjectHideFlags: 0
