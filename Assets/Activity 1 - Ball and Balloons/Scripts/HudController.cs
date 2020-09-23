@@ -13,13 +13,13 @@ public class HudController : MonoBehaviour
     public TextMeshProUGUI Timer; //reference to the timer text
 
     public int MaxScore;
-    
+
 
     public GameObject ResetButton; //reference for the reset button
     public GameObject BalloonSpawner;
     public GameObject PrepareForBang_GO;
     private bool PrepareForBang_SFX;
-    
+
     public float CurrentGameTime; //float for the maxiumum playtime 
     public bool GameComplete;
 
@@ -47,6 +47,8 @@ public class HudController : MonoBehaviour
     public GameObject Minimap;
     public GameObject Mirrors;
 
+    [Header("Grid Refs")]
+    public GridV3 Grid;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class HudController : MonoBehaviour
         MaxScore = GameController.Score_Goal;
 
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
 
 
     }
@@ -205,6 +208,16 @@ public class HudController : MonoBehaviour
             Mirrors.SetActive(false); //deactivate the mirrors gameobject
             TelSystem.AddLine("Minimap UI activated");
         }
+    }
+
+    public void GridUp()
+    {
+        Debug.Log("Making grid bigger");
+    }
+
+    public void GridDown()
+    {
+        Debug.Log("Making grid smaller");
     }
 
     

@@ -48,7 +48,11 @@ public class Activity1Settings : MonoBehaviour
     public GameObject[] OtherCanvases;
     public TMP_Text BallSizeText;
 
+    [Header("Grid Refs")]
+    public GridV3 Grid;
+    public TextMeshProUGUI GridText;
     private void Awake()
+
     {
         LoadPrefs();
     }
@@ -59,8 +63,10 @@ public class Activity1Settings : MonoBehaviour
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
         Application.targetFrameRate = 30;
-        //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         
+        //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
+
         //RoundNumber = gameObject.GetComponent<HudController>();
         //RoundNumberText.text = NumberOfRounds.ToString();
 
@@ -272,6 +278,27 @@ public class Activity1Settings : MonoBehaviour
         Win_PopUpCanvas.SetActive(true);
         WinText.text = StatsText;
     }
+
+    public void GridUp()
+    {
+        Debug.Log("Making grid bigger");
+        Grid.NextGrid();
+        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+    }
+
+    public void GridDown()
+    {
+        Debug.Log("Making grid smaller");
+        Grid.LastGrid();
+        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+    }
+
+    public void ShowHideGrid()
+    {
+        Grid.ShowHideGrid();
+    }
+
+    
 
 
 

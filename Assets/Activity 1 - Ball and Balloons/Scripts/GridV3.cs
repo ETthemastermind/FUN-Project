@@ -54,12 +54,7 @@ public class GridV3 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            NextGrid();
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            LastGrid();
+            ShowHideGrid();
         }
     }
 
@@ -116,6 +111,24 @@ public class GridV3 : MonoBehaviour
 
         }
 
+    }
+
+    public void ShowHideGrid()
+    {
+        if (GridGameObjects[0].GetComponent<MeshRenderer>().enabled == true)
+        {
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
     }
 
 
