@@ -192,6 +192,7 @@ public class BallControllerV2 : MonoBehaviour
         
 
     }
+   
 
     public IEnumerator Move(Vector3 Target, string FauxRot) //ienum to move the ball, taking in a target vector
     {
@@ -240,5 +241,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
+
+    
 
 }
