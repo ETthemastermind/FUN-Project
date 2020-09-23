@@ -58,6 +58,7 @@ public class Activity1Settings : MonoBehaviour
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
+        Application.targetFrameRate = 30;
         //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
         
         //RoundNumber = gameObject.GetComponent<HudController>();

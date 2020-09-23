@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class testSc : MonoBehaviour
 {
-    public GameObject[] Buttons;
+    public GameObject[] Buttons; //https://answers.unity.com/questions/828666/46-how-to-get-name-of-button-that-was-clicked.html
     // Start is called before the first frame update
     void Start()
     {

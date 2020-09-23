@@ -41,6 +41,7 @@ public class BalloonSpawnerV3 : MonoBehaviour
 
     public void SpawnBalloons()
     {
+        grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         SpawnLocations.Clear();
         for (int i = 0; i < NumberOfBalloonsToSpawn; i++)
         {

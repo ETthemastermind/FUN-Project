@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GridV3 : MonoBehaviour
 {
     public List<GameObject> GridGameObjects = new List<GameObject>();
@@ -19,60 +20,56 @@ public class GridV3 : MonoBehaviour
     public float Y_Space; //default = 1.5
     public GameObject prefab;
 
+    [Header("Grid Values")]
+    public float[][] GridValueArray = new float[5][];
+
+    public float[] GridPos1 = new float [4] { 5, 9, 2.25f, 1.85f };
+    public float[] GridPos2 = new float[4] {6,10,1.78f,1.65f };
+    public float[] GridPos3 = new float[4] {7,11,1.54f,1.5f };
+    public float[] GridPos4 = new float[4] {8,12,1.3f,1.35f };
+    public float[] GridPos5 = new float[4] {9,13,1.13f,1.24f };
+
+    
+    public int CurrentGrid = 1;
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        GridValueArray[0] = GridPos1;
+        GridValueArray[1] = GridPos2;
+        GridValueArray[2] = GridPos3;
+        GridValueArray[3] = GridPos4;
+        GridValueArray[4] = GridPos5;
+        
+
+        //Debug.Log(GridValueArray[0][2]);
         CreateGrid();
-        Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.x) / Height);
-        Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.z) / Width);
+        //Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.x) / Height);
+        //Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.z) / Width);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            CreateGrid();
+            NextGrid();
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            DeleteGrid();
+            LastGrid();
         }
-
-
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-
-            RowUp();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            RowDown();
-
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ColumnUp();
-
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-
-            ColumnDown();
-        }
-
-
-
-
-
-
     }
 
     public void CreateGrid()
     {
+        float[] Temp = GridValueArray[CurrentGrid];
+        Height = (int)Temp[0];
+        Width = (int)Temp[1];
+        X_Space = Temp[2];
+        Y_Space = Temp[3];
         for (int i = 0; i < Height * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
             GridGameObjects.Add(Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.53f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity));
@@ -87,29 +84,39 @@ public class GridV3 : MonoBehaviour
         }
     }
 
-    public void RowUp()
+    public void NextGrid()
     {
-        Height++;
-        X_Space -= 0.375f;
-        DeleteGrid();
-        CreateGrid();
+        CurrentGrid++;
+        {
+            if (CurrentGrid > GridValueArray.Length - 1)
+            {
+                CurrentGrid = GridValueArray.Length - 1;
+                
+                //DeleteGrid();
+                //CreateGrid();
+            }
+            DeleteGrid();
+            CreateGrid();
+        }
     }
 
-    public void RowDown()
+    public void LastGrid()
     {
-        Height--;
-        X_Space += 0.375f;
-        DeleteGrid();
-        CreateGrid();
+        CurrentGrid--;
+        {
+            if (CurrentGrid < 0)
+            {
+                CurrentGrid = 0;
+                //DeleteGrid();
+                //CreateGrid();
+            }
+
+            DeleteGrid();
+            CreateGrid();
+
+        }
+
     }
 
-    public void ColumnUp()
-    {
-        Width++;
-    }
 
-    public void ColumnDown()
-    {
-        Width--;
-    }
 }
