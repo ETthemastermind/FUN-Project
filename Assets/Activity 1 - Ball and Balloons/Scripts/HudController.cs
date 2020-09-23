@@ -47,8 +47,10 @@ public class HudController : MonoBehaviour
     public GameObject Minimap;
     public GameObject Mirrors;
 
-    [Header("Grid Refs")]
-    public GridV3 Grid;
+    [Header("Comms Menu")]
+    public GameObject CommsMenu;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,7 @@ public class HudController : MonoBehaviour
         MaxScore = GameController.Score_Goal;
 
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
+        
 
 
     }
@@ -118,7 +120,8 @@ public class HudController : MonoBehaviour
         if (SettingsMenu.active == true) //if the settings menu is open
         {
             SettingsMenu.SetActive(false); //close the menu
-            Controls.SetActive(true);
+            //Controls.SetActive(true);
+            CommsMenu.SetActive(false);
             Time.timeScale = 1; //set the time scale back to 1
             TelSystem.AddLine("Settings menu closed");
 
@@ -128,11 +131,26 @@ public class HudController : MonoBehaviour
         else //do the opposite
         {
             SettingsMenu.SetActive(true);
-            Controls.SetActive(false);
+            //Controls.SetActive(false);
+            CommsMenu.SetActive(false);
             Time.timeScale = 0;
             TelSystem.AddLine("Settings menu opened");
         }
 
+    }
+
+    public void OpenCloseComms()
+    {
+        if (CommsMenu.active == true)
+        {
+            Time.timeScale = 1;
+            CommsMenu.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            CommsMenu.SetActive(true);
+        }
     }
     
     public void Camera_Movement_Toggle(Image ButtonImage) //switch between player movement and camera movement
@@ -210,15 +228,9 @@ public class HudController : MonoBehaviour
         }
     }
 
-    public void GridUp()
-    {
-        Debug.Log("Making grid bigger");
-    }
 
-    public void GridDown()
-    {
-        Debug.Log("Making grid smaller");
-    }
+
+    
 
     
 

@@ -15,7 +15,7 @@ public class Activity1Settings : MonoBehaviour
     public Toggle AnimTextureToggle;
 
     // Sound Effects
-    public Toggle SoundFXToggle;
+    //public Toggle SoundFXToggle;
     // reset button
 
     //Number of Balloons per round
