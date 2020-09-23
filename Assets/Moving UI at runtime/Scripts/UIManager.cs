@@ -48,14 +48,29 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.KeypadPlus)) //debug controls
         {
-            ScaleCellUp();
+            if (ChosenCell != null)
+            {
+                ScaleCellUp();
+            }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            ScaleCellDown();
+            if (ChosenCell != null)
+            {
+                ScaleCellDown();
+            }
+            
         }
-
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (ChosenCell != null)
+            {
+                HideCell();
+            }
+            
+        }
        
     }
 
@@ -69,6 +84,7 @@ public class UIManager : MonoBehaviour
             {
                 
                 CellsInScene[i].GetComponent<Button>().interactable = true; //reactivate the interactble option
+                CellsInScene[i].SetActive(true);
                 for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for each child of the cell
                 {
                     GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the current child to a reference for ease of use
@@ -91,6 +107,10 @@ public class UIManager : MonoBehaviour
             for (int i = 0; i < CellsInScene.Length; i++)// for the number of cells in the scene
             {
                 CellsInScene[i].GetComponent<Button>().interactable = false; //turn the interactble option off for the button
+                if (CellsInScene[i].GetComponent<Cell>().HiddenCell == true)
+                {
+                    CellsInScene[i].SetActive(false);
+                }
                 for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for the childen of the current cell
                 {
                     GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the child to a variable for ease of use
@@ -150,6 +170,28 @@ public class UIManager : MonoBehaviour
         float NewX = ChosenCell.transform.localScale.x - 0.1f;
         ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
 
+    }
+
+    public void HideCell() //https://answers.unity.com/questions/1401626/how-to-change-button-color-highlited-color-etc.html
+    {
+        if (ChosenCell.GetComponent<Cell>().HiddenCell == true) //if the cell is hidden
+        {
+            Debug.Log("Cell Hidden");
+            ChosenCell.GetComponent<Cell>().HiddenCell = false; //turn the hidden cell bool off
+            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(255f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            ChosenCell.GetComponent<Button>().colors = Colours;
+
+
+        }
+        else //therefore, if the cell is not hidden
+        {
+            ChosenCell.GetComponent<Cell>().HiddenCell = true; //turn the hidden cell bool on
+            Debug.Log("Cell Unhidden");
+            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(0f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            ChosenCell.GetComponent<Button>().colors = Colours;
+        }
     }
 
     public void SaveCellPosition() //horrible function
@@ -214,7 +256,7 @@ public class UIManager : MonoBehaviour
         
         
     }
-//==========================================================================================================================================
+    //==========================================================================================================================================
 
     public void CalculateAnchor() //function to calculate where the anchor should be set once the UI element has been moved. the screen is split into thirds up and down and the anchor is chosen depending which segment of the screen the cell falls in
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RuntimeButtonMove : MonoBehaviour
+public class RuntimeButtonMove : MonoBehaviour //im pretty sure this script is not longer in use!
 {
     public bool ElementPickedUp;
     public bool ActiveElement;
@@ -40,11 +40,12 @@ public class RuntimeButtonMove : MonoBehaviour
     {
         
         CurrentMouseLocation = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        /*
         if (Input.GetKeyDown(KeyCode.I))
         {
             CalculateAnchor();
         }
-        /*
+        
         if (ElementPickedUp == true)
         {
             //Debug.Log(Input.mousePosition);
@@ -58,7 +59,7 @@ public class RuntimeButtonMove : MonoBehaviour
             this.gameObject.GetComponent<RectTransform>().anchorMax = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
             this.gameObject.GetComponent<RectTransform>().anchorMin = new Vector2(Anchor_TopRight[0], Anchor_TopRight[1]);
         }
-
+        */
         //scaling testing ========================================================================================
 
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
@@ -73,7 +74,7 @@ public class RuntimeButtonMove : MonoBehaviour
 
        
         //========================================================================================================
-        */
+        
     }
 
     public void PickUp()
