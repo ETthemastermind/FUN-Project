@@ -58,7 +58,7 @@ public class BallControllerV2 : MonoBehaviour
             
             Debug.Log("Move Forward"); //print to console that the ball is moving
             RaycastHit hit; //reference for the hit
-            if (Physics.Raycast(transform.position, Vector3.right, out hit, 100f, layerMask)) //shoot the ray in the direction the ball is going to move
+            if (Physics.SphereCast(transform.position, 0.5f, Vector3.right, out hit, 100f, layerMask.value)) //shoot the ray in the direction the ball is going to move
             {
                 if (hit.transform.tag == "GridCube") //if the hit object has the grid cube tag
                 {
@@ -93,7 +93,7 @@ public class BallControllerV2 : MonoBehaviour
             
             Debug.Log("Move Backwards");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.left, out hit, 100f, layerMask))
+            if (Physics.SphereCast(transform.position, 0.5f, Vector3.left, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
                 {
@@ -129,7 +129,7 @@ public class BallControllerV2 : MonoBehaviour
             
             Debug.Log("Move Right");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.back, out hit, 100f, layerMask))
+            if (Physics.SphereCast(transform.position,0.5f, Vector3.back, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
                 {
@@ -164,7 +164,7 @@ public class BallControllerV2 : MonoBehaviour
             
             Debug.Log("Move Left");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, 100f, layerMask))
+            if (Physics.SphereCast(transform.position,0.5f, Vector3.forward, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
                 {
