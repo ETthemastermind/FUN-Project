@@ -1573,7 +1573,7 @@ PrefabInstance:
     - target: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -2571,7 +2571,7 @@ PrefabInstance:
     - target: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -3112,7 +3112,7 @@ RectTransform:
   - {fileID: 1401794329}
   - {fileID: 1811579085}
   m_Father: {fileID: 1614871383}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3153,7 +3153,7 @@ RectTransform:
   - {fileID: 547877703}
   - {fileID: 1763637195}
   m_Father: {fileID: 1614871383}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4357,7 +4357,7 @@ RectTransform:
   - {fileID: 925349158}
   - {fileID: 1024973858}
   m_Father: {fileID: 1614871383}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10362,7 +10362,7 @@ RectTransform:
   - {fileID: 949466010}
   - {fileID: 186439382}
   m_Father: {fileID: 1614871383}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13184,6 +13184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerBall: {fileID: 0}
+  TelSystem: {fileID: 0}
   AnimatedTexture: {fileID: 0}
   AnimTextureToggle: {fileID: 1488902108}
   BalloonSpawner: {fileID: 0}
@@ -13338,12 +13339,12 @@ RectTransform:
   - {fileID: 49134805}
   - {fileID: 1435514175}
   - {fileID: 808467377}
+  - {fileID: 264424780}
   - {fileID: 1266508936}
   - {fileID: 234116869}
   - {fileID: 33556476}
   - {fileID: 1294367444}
   - {fileID: 492808687}
-  - {fileID: 264424780}
   m_Father: {fileID: 1714287778}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15152,7 +15153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36f7a95ae523cd4cad8a8bf8cc3a84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TelemetryActive: 0
+  TelemetryActive: 1
   ID: 
   FilePath: 
   LineToWrite: 

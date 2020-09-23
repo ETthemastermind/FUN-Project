@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.EventSystems;
 
 public class Activity1Settings : MonoBehaviour
 {
     public GameObject PlayerBall;
-    
+    public MasterTelemetrySystem TelSystem;
 
     // Rotating Ball Texture
     public AnimatedTexture AnimatedTexture;
@@ -64,7 +65,7 @@ public class Activity1Settings : MonoBehaviour
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
         Application.targetFrameRate = 30;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
 
         //RoundNumber = gameObject.GetComponent<HudController>();
@@ -88,14 +89,16 @@ public class Activity1Settings : MonoBehaviour
         {
             Debug.Log("Turn on animated ball texture");
             AnimatedTexture.Active = true;
-            AnimatedTexturesActive = true;
+            TelSystem.AddLine("Animated ball texture turned on");
+            
         }
 
         else
         {
             Debug.Log("Turn off animated ball texture");
             AnimatedTexture.Active = false ;
-            AnimatedTexturesActive = false;
+            TelSystem.AddLine("Animated ball texture turned off");
+
         }
     }
     /*
@@ -127,11 +130,14 @@ public class Activity1Settings : MonoBehaviour
         {
             AS.mute = true; //mute
             Debug.Log("Turning Sound on component off");
+            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned off");
+
         }
         else //therefore if its unmuted
         {
             AS.mute = false; //unmute
             Debug.Log("Turning Sound on component on");
+            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned on");
         }
     }
 
@@ -161,8 +167,9 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Current Number of Balloons: " + NumberOfBalloonsToSpawn);
         
         NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
-        //SavePrefs();
         
+        //SavePrefs();
+
 
 
     }
@@ -206,6 +213,7 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed++; //increment the ball speed
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString(); //update the text component
+            TelSystem.AddLine("Ball speed increased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
         }
     }
 
@@ -219,6 +227,7 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed--;
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString();
+            TelSystem.AddLine("Ball speed decreased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
         }
 
     }
@@ -235,6 +244,7 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber++;
             BallSizeText.text = BallSizeNumber.ToString();
+            //TelSystem.AddLine("Ball size increased to" + PlayerBall.transform.localScale);
         }
     }
 
@@ -249,6 +259,7 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber--;
             BallSizeText.text = BallSizeNumber.ToString();
+            //TelSystem.AddLine("Ball size decreased to" + PlayerBall.transform.localScale);
         }
     }
 
@@ -284,6 +295,7 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid bigger");
         Grid.NextGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
     public void GridDown()
@@ -291,6 +303,7 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid smaller");
         Grid.LastGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
     public void ShowHideGrid()
