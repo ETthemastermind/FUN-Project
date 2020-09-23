@@ -50,22 +50,23 @@ public class CameraPosMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
+            TelSystem.AddLine("Rotating Camera Up");
+            if (MovementPlus == false) //if the movement plus is not enabled
+            {
+                TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left); //get the target rotation, depending on the function
+                StartCoroutine(RotCam(TargetRot, transform.position)); //run the rot cam coroutine, passing in the target rot calculated and the current position
+                TargetRot = StartRotation; //ngl i dont remember why this is here but i dont want to get rid of it just in case
+            }
+            else if (MovementPlus == true) // if movement plus is enabled
+            {
+
+                Debug.Log("Rotate Up Movement Plus");
+                StartCoroutine(MoveCam(TargetRot_MP[0], TargetPos_MP[0])); //run the rot cam coroutine, passing the target rot and target pos assigned by the user in the corressponding array
+                                                                           //StartCoroutine(MoveCam(TargetPos_MP[0]));
+
+            }
         }
-        TelSystem.AddLine("Rotating Camera Up");
-        if (MovementPlus == false) //if the movement plus is not enabled
-        {
-            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.left); //get the target rotation, depending on the function
-            StartCoroutine(RotCam(TargetRot, transform.position)); //run the rot cam coroutine, passing in the target rot calculated and the current position
-            TargetRot = StartRotation; //ngl i dont remember why this is here but i dont want to get rid of it just in case
-        }
-        else if (MovementPlus == true) // if movement plus is enabled
-        {
-            
-            Debug.Log("Rotate Up Movement Plus");
-            StartCoroutine(MoveCam(TargetRot_MP[0], TargetPos_MP[0])); //run the rot cam coroutine, passing the target rot and target pos assigned by the user in the corressponding array
-            //StartCoroutine(MoveCam(TargetPos_MP[0]));
-            
-        }
+        
         
     }
     public void RotateRight() //same as above but right
@@ -73,21 +74,22 @@ public class CameraPosMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
+            TelSystem.AddLine("Rotating Camera Right");
+            if (MovementPlus == false)
+            {
+                TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
+                StartCoroutine(RotCam(TargetRot, transform.position));
+                TargetRot = StartRotation;
+
+            }
+            else if (MovementPlus == true)
+            {
+                Debug.Log("Rotate Right Movement Plus");
+                StartCoroutine(MoveCam(TargetRot_MP[3], TargetPos_MP[3]));
+                //StartCoroutine(MoveCam(TargetPos_MP[3]));
+            }
         }
-        TelSystem.AddLine("Rotating Camera Right");
-        if (MovementPlus == false)
-        {
-            TargetRot *= Quaternion.AngleAxis(LeftRightRotAngle, Vector3.up);
-            StartCoroutine(RotCam(TargetRot, transform.position));
-            TargetRot = StartRotation;
-            
-        }
-        else if (MovementPlus == true)
-        {
-            Debug.Log("Rotate Right Movement Plus");
-            StartCoroutine(MoveCam(TargetRot_MP[3], TargetPos_MP[3]));
-            //StartCoroutine(MoveCam(TargetPos_MP[3]));
-        }
+        
 
 
     }
@@ -96,20 +98,21 @@ public class CameraPosMovement : MonoBehaviour
         if (_CameraMoving == false)
         {
             _CameraMoving = true;
+            TelSystem.AddLine("Rotating Camera Down");
+            if (MovementPlus == false)
+            {
+                TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.right);
+                StartCoroutine(RotCam(TargetRot, transform.position));
+                TargetRot = StartRotation;
+            }
+            else if (MovementPlus == true)
+            {
+                Debug.Log("Rotate Down Movement Plus");
+                StartCoroutine(MoveCam(TargetRot_MP[1], TargetPos_MP[1]));
+                //StartCoroutine(MoveCam(TargetPos_MP[1]));
+            }
         }
-        TelSystem.AddLine("Rotating Camera Down");
-        if (MovementPlus == false)
-        {
-            TargetRot *= Quaternion.AngleAxis(UpDownRotAngle, Vector3.right);
-            StartCoroutine(RotCam(TargetRot, transform.position));
-            TargetRot = StartRotation;
-        }
-        else if (MovementPlus == true)
-        {
-            Debug.Log("Rotate Down Movement Plus");
-            StartCoroutine(MoveCam(TargetRot_MP[1], TargetPos_MP[1]));
-            //StartCoroutine(MoveCam(TargetPos_MP[1]));
-        }
+        
 
     }
     public void RotateLeft() //same as above but left
@@ -222,6 +225,10 @@ public class CameraPosMovement : MonoBehaviour
         {
             StartCoroutine(MoveCamStart(RotTarget, PosTarget));
         }
+        else
+        {
+            _CameraMoving = false;
+        }
     }
 
     public IEnumerator MoveCamStart(Quaternion RotTarget, Vector3 PosTarget)
@@ -236,8 +243,12 @@ public class CameraPosMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
         }
+        _CameraMoving = false;
+
+
 
     }
+    
 
     #endregion
 
