@@ -14,8 +14,9 @@ public class BallControllerV2 : MonoBehaviour
 
     public MasterTelemetrySystem TelSystem;
 
-    public UnityEvent myEvent = new UnityEvent();
 
+    public UnityEvent RunAfterMove = new UnityEvent();
+    public UnityEvent RunBeforeMove = new UnityEvent();
     // Start is called before the first frame update
     void Start()
     {
@@ -196,6 +197,7 @@ public class BallControllerV2 : MonoBehaviour
 
     public IEnumerator Move(Vector3 Target, string FauxRot) //ienum to move the ball, taking in a target vector
     {
+        RunBeforeMove.Invoke();
         LerpFraction = 0f; //set the lerp fraction to 0
         Vector3 StartPos = transform.position; //get the current start position of the ball
         while (LerpFraction < 1) // while the lerp fraction is less than 0
@@ -231,7 +233,7 @@ public class BallControllerV2 : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        myEvent.Invoke();
+        RunAfterMove.Invoke();
         
         
 
