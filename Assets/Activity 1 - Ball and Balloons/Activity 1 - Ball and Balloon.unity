@@ -11854,7 +11854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1517539528
 Transform:
   m_ObjectHideFlags: 0
@@ -13198,7 +13198,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 859125847}
   BallSizeText: {fileID: 349154119}
-  Grid: {fileID: 0}
+  Grid: {fileID: 919132149354484216}
   GridText: {fileID: 393979998}
 --- !u!82 &1606569995
 AudioSource:
@@ -16824,7 +16824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149354484215}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.009, y: 0.2, z: 0.096}
+  m_LocalPosition: {x: -0.009, y: 0.03, z: 0.096}
   m_LocalScale: {x: 0.93782824, y: 1.4456761, z: 0.95}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16863,38 +16863,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridGameObjects: []
-  X_Start: -4.5
-  Y_Start: 7.5
-  Height: 0
-  Width: 0
-  X_Space: 1.54
-  Y_Space: 1.5
+  X_Start: -4.603
+  Y_Start: 7.24
+  Height: 9
+  Width: 13
+  X_Space: 1.145
+  Y_Space: 1.222
   prefab: {fileID: 6690282497464556422, guid: ae4b18c4922002041808094697708062, type: 3}
   GridPos1:
+  - -4.138
+  - 6.957
   - 5
   - 9
-  - 2.25
-  - 1.85
+  - 2.06
+  - 1.765
   GridPos2:
+  - -4.3
+  - 7.05
   - 6
   - 10
-  - 1.78
-  - 1.65
+  - 1.72
+  - 1.59
   GridPos3:
+  - -4.45
+  - 7.1
   - 7
   - 11
-  - 1.54
-  - 1.5
+  - 1.48
+  - 1.44
   GridPos4:
+  - -4.538
+  - 7.194
   - 8
   - 12
-  - 1.3
-  - 1.35
+  - 1.29
+  - 1.325
   GridPos5:
+  - -4.603
+  - 7.24
   - 9
   - 13
-  - 1.13
-  - 1.24
+  - 1.145
+  - 1.222
   CurrentGrid: 2
 --- !u!23 &1711813855745011746
 MeshRenderer:

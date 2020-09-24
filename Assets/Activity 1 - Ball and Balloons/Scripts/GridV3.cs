@@ -23,11 +23,11 @@ public class GridV3 : MonoBehaviour
     [Header("Grid Values")]
     public float[][] GridValueArray = new float[5][];
 
-    public float[] GridPos1 = new float [4] { 5, 9, 2.25f, 1.85f };
-    public float[] GridPos2 = new float[4] {6,10,1.78f,1.65f };
-    public float[] GridPos3 = new float[4] {7,11,1.54f,1.5f };
-    public float[] GridPos4 = new float[4] {8,12,1.3f,1.35f };
-    public float[] GridPos5 = new float[4] {9,13,1.13f,1.24f };
+    public float[] GridPos1 = new float[6];
+    public float[] GridPos2 = new float[6];
+    public float[] GridPos3 = new float[6];
+    public float[] GridPos4 = new float[6];
+    public float[] GridPos5 = new float[6];
 
     
     public int CurrentGrid = 1;
@@ -56,19 +56,34 @@ public class GridV3 : MonoBehaviour
         {
             ShowHideGrid();
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            DeleteGrid();
+            CreateGrid();
+        }
     }
 
     public void CreateGrid()
     {
+        
         float[] Temp = GridValueArray[CurrentGrid];
-        Height = (int)Temp[0];
-        Width = (int)Temp[1];
-        X_Space = Temp[2];
-        Y_Space = Temp[3];
+        X_Start = Temp[0];
+        Y_Start = Temp[1];
+        Height = (int)Temp[2];
+        Width = (int)Temp[3];
+        X_Space = Temp[4];
+        Y_Space = Temp[5];
+        
         for (int i = 0; i < Height * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
-            GridGameObjects.Add(Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.53f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity));
+            GameObject G =  Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
+            GridGameObjects.Add(G);
+            G.transform.parent = this.gameObject.transform;
         }
+        Material gridLines = gameObject.GetComponent<Renderer>().material;
+        gridLines.mainTextureScale = new Vector2(Height, Width);
+
     }
 
     public void DeleteGrid()

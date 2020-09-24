@@ -295,7 +295,7 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid bigger");
         Grid.NextGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-        TelSystem.AddLine("Grid increased to" + GridText.text);
+        //TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
     public void GridDown()
@@ -303,7 +303,7 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid smaller");
         Grid.LastGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-        TelSystem.AddLine("Grid decreased to" + GridText.text);
+        //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
     public void ShowHideGrid()
