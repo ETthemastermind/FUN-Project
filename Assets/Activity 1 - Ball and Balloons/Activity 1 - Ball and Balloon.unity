@@ -3107,7 +3107,6 @@ RectTransform:
   - {fileID: 267109038}
   - {fileID: 2089649188}
   - {fileID: 510721858}
-  - {fileID: 957184875}
   - {fileID: 1198082722}
   - {fileID: 1401794329}
   - {fileID: 1811579085}
@@ -8282,7 +8281,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 234116869}
+    m_TransformParent: {fileID: 2089649188}
     m_Modifications:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -8322,7 +8321,7 @@ PrefabInstance:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -8342,12 +8341,12 @@ PrefabInstance:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -53.99991
+      value: 308.5185
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 88.39998
+      value: -30.388763
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -8451,12 +8450,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a49a6d3b742e254a8c2fa34b2415238, type: 3}
---- !u!224 &957184875 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
-    type: 3}
-  m_PrefabInstance: {fileID: 957184874}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -10084,7 +10077,7 @@ PrefabInstance:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -11259,7 +11252,7 @@ PrefabInstance:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -13458,7 +13451,7 @@ PrefabInstance:
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_text
-      value: Camera Down
+      value: Camera Left
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -14529,27 +14522,27 @@ PrefabInstance:
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_text
-      value: Camera Down
+      value: Camera Left
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -14559,7 +14552,7 @@ PrefabInstance:
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -14984,7 +14977,7 @@ PrefabInstance:
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5925655124733132617, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
@@ -16740,6 +16733,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240488722673279353, guid: 7a49a6d3b742e254a8c2fa34b2415238,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4,
+        type: 2}
+    - target: {fileID: 7240488722673279353, guid: 7a49a6d3b742e254a8c2fa34b2415238,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9137772788813619179, guid: 7a49a6d3b742e254a8c2fa34b2415238,
         type: 3}
