@@ -8,16 +8,17 @@ public class Balloons : MonoBehaviour
     public float BalloonRotSpeed = 10f; //value for the rotation speed of the balloon
     public int BalloonValue;
     public Texture[] BalloonColors; //array of albedo maps for the balloons
+    public Texture[] PoppedBalloonColors;
     public GameObject Camera; //reference to the camera because it has an audio source
     public AudioSource AS; //reference to the audio source on the camera
     public AudioClip Pop_SFX; //pop sound effect for the balloon
-
+    public int RandomColor;
     public ParticleSystem ps;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Balloon Spawned"); //debug to confirm that the balloon has spawned
-        int RandomColor = Random.Range(0, 5); //pick a number at random
+        RandomColor = Random.Range(0, 5); //pick a number at random
         //Debug.Log(RandomColor);
         Material BalloonMat = gameObject.GetComponent<Renderer>().material; //gets the material on the balloon
         BalloonMat.SetTexture("_MainTex", BalloonColors[RandomColor]); //change the albedo map of the balloon to the randomly chosen one
@@ -39,7 +40,9 @@ public class Balloons : MonoBehaviour
 
     public void OnDestroy()
     {
-        Instantiate(ps, transform.position, Quaternion.identity); //spawn the particle effects of the destroyed balloon
+        ParticleSystem BalloonLeftovers = Instantiate(ps, transform.position, Quaternion.identity); //spawn the particle effects of the destroyed balloon
+        Material mat = BalloonLeftovers.GetComponent<ParticleSystemRenderer>().material;
+        mat.SetTexture("_MainTex", PoppedBalloonColors[RandomColor]);
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
 
     }

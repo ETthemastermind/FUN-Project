@@ -550,7 +550,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -601,13 +601,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 1
-    maxNumParticles: 5
+    maxNumParticles: 7
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0.9
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2623,7 +2623,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -4710,8 +4710,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d22f8e040adbf54cbe17773f9d8eb48, type: 2}
-  - {fileID: 2100000, guid: 1d22f8e040adbf54cbe17773f9d8eb48, type: 2}
+  - {fileID: 2100000, guid: 6e147e2f08ed53f499e13db1058f83da, type: 2}
+  - {fileID: 2100000, guid: 6e147e2f08ed53f499e13db1058f83da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

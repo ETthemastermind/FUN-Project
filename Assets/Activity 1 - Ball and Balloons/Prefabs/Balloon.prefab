@@ -132,6 +132,12 @@ MonoBehaviour:
   - {fileID: 2800000, guid: fbdc4ecfe04da72429e48264a3c154c0, type: 3}
   - {fileID: 2800000, guid: 7758cfea5df99d94491a4fc3625c5ffa, type: 3}
   - {fileID: 2800000, guid: 76d3cae4391cd034486b778ac7177e8f, type: 3}
+  PoppedBalloonColors:
+  - {fileID: 2800000, guid: 9114d78d03ac13549930a0d7a1165dd8, type: 3}
+  - {fileID: 2800000, guid: da12479dfac5eb444beea4d3dca36e13, type: 3}
+  - {fileID: 2800000, guid: cd6a46dfdba0b83448d201ce887acebf, type: 3}
+  - {fileID: 2800000, guid: f293f9cb82e07e44dbec0285bbdb917f, type: 3}
+  - {fileID: 2800000, guid: ca22241cf7d483247b5522b7466aa3d7, type: 3}
   Camera: {fileID: 0}
   AS: {fileID: 0}
   Pop_SFX: {fileID: 8300000, guid: 17422c81b990aaf4ab36738b547b6e18, type: 3}
