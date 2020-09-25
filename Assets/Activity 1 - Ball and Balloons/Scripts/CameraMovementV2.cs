@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraMovementV2 : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class CameraMovementV2 : MonoBehaviour
 
     public MasterTelemetrySystem TelSystem;
 
+    public UnityEvent Command = new UnityEvent();
+    public UnityEvent View = new UnityEvent();
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +35,7 @@ public class CameraMovementV2 : MonoBehaviour
 
     public void NextCamera() //function to go to the next camera
     {
+        View.Invoke();
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera++; //increment the current camera
@@ -59,6 +65,7 @@ public class CameraMovementV2 : MonoBehaviour
 
     public void LastCamera() //function to go to the next camera
     {
+        View.Invoke();
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera--; //increment the current camera
@@ -117,21 +124,8 @@ public class CameraMovementV2 : MonoBehaviour
 
 
         }
+        Command.Invoke();
         
     }
-    /*
-    public IEnumerator RotCam(Quaternion RotTarget)
-    {
-        while (LerpFraction < 1)
-        {
-            Debug.Log("Rotating Camera Up");
-            yield return new WaitForEndOfFrame();
-            LerpFraction += LerpSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction);
-        }
-        LerpFraction = 0f;
-        //StartCoroutine(ReturnCamera(RotTarget));
-
-    }
-    */
+   
 }

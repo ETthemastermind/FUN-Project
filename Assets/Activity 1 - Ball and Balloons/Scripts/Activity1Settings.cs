@@ -63,7 +63,7 @@ public class Activity1Settings : MonoBehaviour
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();

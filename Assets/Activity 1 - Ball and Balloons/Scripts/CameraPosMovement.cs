@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraPosMovement : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class CameraPosMovement : MonoBehaviour
     public Quaternion[] TargetRot_MP; //array of rotations -> 0 = up, 1 = down, 2 = left, 3 = right
     public Vector3[] TargetPos_MP; //array of positions -> 0 = up, 1 = down, 2 = left, 3 = right
 
+    public UnityEvent Command = new UnityEvent();
+    public UnityEvent View = new UnityEvent();
     public MasterTelemetrySystem TelSystem;
     
 
@@ -153,6 +156,7 @@ public class CameraPosMovement : MonoBehaviour
 
     public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget) //coroutine to rotate the camera
     {
+        View.Invoke();
         //Debug.Log(StartRotation);
         //Debug.Log(RotTarget);
         while (LerpFraction < 1) //while the lerp fraction is less than 1
@@ -169,6 +173,7 @@ public class CameraPosMovement : MonoBehaviour
 
     public IEnumerator MoveCam(Quaternion RotTarget, Vector3 PosTarget)
     {
+        View.Invoke();
         float LerpFraction = 0f;
         float LerpSpeed = 1f;
         
@@ -229,6 +234,7 @@ public class CameraPosMovement : MonoBehaviour
         {
             _CameraMoving = false;
         }
+        Command.Invoke();
     }
 
     public IEnumerator MoveCamStart(Quaternion RotTarget, Vector3 PosTarget)
@@ -244,6 +250,7 @@ public class CameraPosMovement : MonoBehaviour
 
         }
         _CameraMoving = false;
+        Command.Invoke();
 
 
 
