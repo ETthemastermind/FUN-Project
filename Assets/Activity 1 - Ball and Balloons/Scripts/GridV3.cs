@@ -9,7 +9,7 @@ public class GridV3 : MonoBehaviour
 
     
 
-    [Header ("FromVid")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
+    [Header ("FromVid - changing these value does nothing, its just for debug")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
     public float X_Start; //default = -4.5
     public float Y_Start; // default = 6.8
 
@@ -31,6 +31,9 @@ public class GridV3 : MonoBehaviour
 
     
     public int CurrentGrid = 1;
+
+    int CurrentY = 1;
+    int CurrentX = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +69,8 @@ public class GridV3 : MonoBehaviour
 
     public void CreateGrid()
     {
-        
+        CurrentX = 1;
+        CurrentY = 1;
         float[] Temp = GridValueArray[CurrentGrid];
         X_Start = Temp[0];
         Y_Start = Temp[1];
@@ -80,6 +84,25 @@ public class GridV3 : MonoBehaviour
             GameObject G =  Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
             GridGameObjects.Add(G);
             G.transform.parent = this.gameObject.transform;
+            GridAttributes GA = G.GetComponent<GridAttributes>();
+            if (CurrentY != Height + 1)
+            {
+                GA.X = CurrentX;
+                GA.Y = CurrentY;
+                CurrentY++;
+
+            }
+            else
+            {
+                CurrentY = 1;
+                CurrentX++;
+                GA.X = CurrentX;
+                GA.Y = CurrentY;
+                CurrentY++;
+
+            }
+            
+
         }
         Material gridLines = gameObject.GetComponent<Renderer>().material;
         gridLines.mainTextureScale = new Vector2(Height, Width);

@@ -28,7 +28,7 @@ public class FPScounter : MonoBehaviour // https://answers.unity.com/questions/4
         else
         {
             m_lastFrameRate = (float)m_frameCounter / m_TimeCounter;
-            FPStext.text = m_lastFrameRate.ToString();
+            FPStext.text = ((int)m_lastFrameRate).ToString();
             m_frameCounter = 0;
             m_TimeCounter = 0.0f;
         }
