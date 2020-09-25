@@ -14,6 +14,7 @@ public class Balloons : MonoBehaviour
     public AudioClip Pop_SFX; //pop sound effect for the balloon
     public int RandomColor;
     public ParticleSystem ps;
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,8 @@ public class Balloons : MonoBehaviour
 
         Camera = GameObject.FindGameObjectWithTag("MainCamera"); //finds the main camera
         AS = Camera.GetComponent<AudioSource>(); //gets the audiosource on the camera object
+        rb = gameObject.GetComponent<Rigidbody>();
+        StartCoroutine(FallOver());
 
         
     }
@@ -44,6 +47,14 @@ public class Balloons : MonoBehaviour
         Material mat = BalloonLeftovers.GetComponent<ParticleSystemRenderer>().material;
         mat.SetTexture("_MainTex", PoppedBalloonColors[RandomColor]);
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
+
+    }
+
+    public IEnumerator FallOver()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        rb.constraints = RigidbodyConstraints.None;
+        
 
     }
 
