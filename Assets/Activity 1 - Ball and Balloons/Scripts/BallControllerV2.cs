@@ -29,24 +29,26 @@ public class BallControllerV2 : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) //debug controls
         {
-            MoveForward();
+            //MoveForward();
+            
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MoveRight();
+            //MoveRight();
+            
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            MoveBackward();
+            //MoveBackward();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveLeft();
+            //MoveLeft();
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LerpFraction = 0f;
+            //LerpFraction = 0f;
         }
 
 
@@ -70,9 +72,13 @@ public class BallControllerV2 : MonoBehaviour
                     StartCoroutine(Move(Target, "F")); //start the move coroutine passing in the target and a string of F/B/L/R depending on which way the ball needs to rotate
                     TelSystem.AddLine("Ball moved forward");
                 }
+                else if (hit.transform.tag == "Boundary")
+                {
+
+                }
                 else
                 {
-                    
+
                 }
 
                 //Debug.Log(hit.transform.name);
@@ -153,9 +159,6 @@ public class BallControllerV2 : MonoBehaviour
             }
         }
 
-        
-        
-
     }
 
     public void MoveLeft() //same as above
@@ -188,12 +191,134 @@ public class BallControllerV2 : MonoBehaviour
 
             }
         }
-
-        
-        
-
     }
-   
+
+    
+
+    public void MoveForwardRight()
+    {
+        if (_BallMoving == false)
+        {
+            Debug.Log("Move Forward Right");
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.back), out hit, 100f, layerMask.value))
+            {
+                if (hit.transform.tag == "GridCube")
+                {
+                    _BallMoving = true;
+                    Transform HT = hit.transform;
+                    Vector3 Target;
+                    Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                    StartCoroutine(Move(Target, "L"));
+                    TelSystem.AddLine("Ball moved left");
+                }
+
+                else
+                {
+                    _BallMoving = false;
+                }
+
+                //Debug.Log(hit.transform.name);
+                //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
+
+            }
+        }
+    }
+
+    public void MoveForwardLeft()
+    {
+        if (_BallMoving == false)
+        {
+            Debug.Log("Move Forward Left");
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.forward), out hit, 100f, layerMask.value))
+            {
+                if (hit.transform.tag == "GridCube")
+                {
+                    _BallMoving = true;
+                    Transform HT = hit.transform;
+                    Vector3 Target;
+                    Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                    StartCoroutine(Move(Target, "L"));
+                    TelSystem.AddLine("Ball moved left");
+                }
+
+                else
+                {
+                    _BallMoving = false;
+                }
+
+                //Debug.Log(hit.transform.name);
+                //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
+
+            }
+        }
+    }
+
+    public void MoveBackwardRight()
+    {
+        if (_BallMoving == false)
+        {
+            Debug.Log("Move Forward Right");
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.back), out hit, 100f, layerMask.value))
+            {
+                if (hit.transform.tag == "GridCube")
+                {
+                    _BallMoving = true;
+                    Transform HT = hit.transform;
+                    Vector3 Target;
+                    Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                    StartCoroutine(Move(Target, "L"));
+                    TelSystem.AddLine("Ball moved left");
+                }
+
+                else
+                {
+                    _BallMoving = false;
+                }
+
+                //Debug.Log(hit.transform.name);
+                //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
+
+            }
+        }
+    }
+
+    public void MoveBackwardLeft()
+    {
+        if (_BallMoving == false)
+        {
+            Debug.Log("Move Forward Left");
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.forward), out hit, 100f, layerMask.value))
+            {
+                if (hit.transform.tag == "GridCube")
+                {
+                    _BallMoving = true;
+                    Transform HT = hit.transform;
+                    Vector3 Target;
+                    Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
+                    StartCoroutine(Move(Target, "L"));
+                    TelSystem.AddLine("Ball moved left");
+                }
+
+                else
+                {
+                    _BallMoving = false;
+                }
+
+                //Debug.Log(hit.transform.name);
+                //hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 10, hit.transform.position.z);
+
+
+            }
+        }
+    }
+    
 
     public IEnumerator Move(Vector3 Target, string FauxRot) //ienum to move the ball, taking in a target vector
     {
@@ -207,20 +332,20 @@ public class BallControllerV2 : MonoBehaviour
             switch (FauxRot) //switch case statement to determine which way the ball should spin
             {
                 case "F": // F/B/R/L for forwards, backwards, Right and Left
-                    Debug.Log("Ball Moving Forwards");
+                    //Debug.Log("Ball Moving Forwards");
                     gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
                     break;
                 case "B":
-                    Debug.Log("Ball Moving Backwards");
+                    //Debug.Log("Ball Moving Backwards");
                     gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
                     break;
 
                 case "R":
-                    Debug.Log("Ball Moving Right");
+                    //Debug.Log("Ball Moving Right");
                     gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
                     break;
                 case "L":
-                    Debug.Log("Ball Moving Right");
+                    //Debug.Log("Ball Moving Right");
                     gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
                     break;
 
@@ -230,7 +355,7 @@ public class BallControllerV2 : MonoBehaviour
 
 
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.01f);
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
@@ -244,6 +369,19 @@ public class BallControllerV2 : MonoBehaviour
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
-    
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawWireSphere(transform.position + (Vector3.right), 0.1f); //forward
+        Gizmos.DrawWireSphere(transform.position + (Vector3.left), 0.1f); //backward
+        Gizmos.DrawWireSphere(transform.position + (Vector3.back), 0.1f); //right
+        Gizmos.DrawWireSphere(transform.position + (Vector3.forward), 0.1f); //left
+
+        Gizmos.DrawWireSphere(transform.position + (Vector3.right + Vector3.forward), 0.1f); //forward left
+        Gizmos.DrawWireSphere(transform.position + (Vector3.right + Vector3.back), 0.1f); //forward right
+        Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.forward), 0.1f); //backwards left
+        Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.back), 0.1f); //backwards right
+    }
 
 }
