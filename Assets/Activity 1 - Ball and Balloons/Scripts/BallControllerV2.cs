@@ -11,8 +11,10 @@ public class BallControllerV2 : MonoBehaviour
     public LayerMask layerMask; //reference for the layermask for the movement raycast
     public bool _BallMoving; //bool to check if the ball is moving
     public float RotSpeed = 500f; //speed at which the ball rotates
+    public bool _InBoundary = false;
 
     public MasterTelemetrySystem TelSystem;
+
 
 
     public UnityEvent RunAfterMove = new UnityEvent();
@@ -74,7 +76,9 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
+                    
                 }
                 else
                 {
@@ -113,7 +117,8 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
                 else
                 {
@@ -153,7 +158,8 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
                 else
                 {
@@ -191,7 +197,9 @@ public class BallControllerV2 : MonoBehaviour
                
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
+
                 }
                 else
                 {
@@ -222,12 +230,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "L"));
-                    TelSystem.AddLine("Ball moved left");
+                    StartCoroutine(Move(Target, "F"));
+                    //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
                 else
                 {
@@ -256,12 +265,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "L"));
-                    TelSystem.AddLine("Ball moved left");
+                    StartCoroutine(Move(Target, "F"));
+                    //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
                 else
                 {
@@ -290,12 +300,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "L"));
-                    TelSystem.AddLine("Ball moved left");
+                    StartCoroutine(Move(Target, "F"));
+                    //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
 
                 else
@@ -326,11 +337,12 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "L"));
-                    TelSystem.AddLine("Ball moved left");
+                    //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-                    Debug.Log(hit.transform.name);
+                    Vector3 Target = hit.point;
+                    StartCoroutine(BoundaryHitMove(Target));
                 }
 
                 else
@@ -386,9 +398,47 @@ public class BallControllerV2 : MonoBehaviour
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
-        
-        
+    }
 
+    public IEnumerator BoundaryHitMove(Vector3 Target)
+    {
+        RunBeforeMove.Invoke();
+        LerpFraction = 0f; //set the lerp fraction to 0
+        Vector3 StartPos = transform.position; //get the current start position of the ball
+
+        while (LerpFraction < 1) // while the lerp fraction is less than 0
+        {
+            if (_InBoundary == false)
+            {
+                LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
+                transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+                yield return new WaitForEndOfFrame();
+            }
+            else
+            {
+                break;
+            }
+            
+        }
+        _BallMoving = false; //ball has stopped moving, so change the bool to false
+        RunAfterMove.Invoke();
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Boundary")
+        {
+            //Debug.Log("Boundary Hit");
+            _InBoundary = true;
+        }
+    }
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Boundary")
+        {
+            //Debug.Log("Boundary Hit");
+            _InBoundary = false;
+        }
     }
 
     public void HapticFeedback()
@@ -396,20 +446,6 @@ public class BallControllerV2 : MonoBehaviour
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
-    /*
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
+    
 
-        Gizmos.DrawWireSphere(transform.position + (Vector3.right), 0.1f); //forward
-        Gizmos.DrawWireSphere(transform.position + (Vector3.left), 0.1f); //backward
-        Gizmos.DrawWireSphere(transform.position + (Vector3.back), 0.1f); //right
-        Gizmos.DrawWireSphere(transform.position + (Vector3.forward), 0.1f); //left
-
-        Gizmos.DrawWireSphere(transform.position + (Vector3.right + Vector3.forward), 0.1f); //forward left
-        Gizmos.DrawWireSphere(transform.position + (Vector3.right + Vector3.back), 0.1f); //forward right
-        Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.forward), 0.1f); //backwards left
-        Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.back), 0.1f); //backwards right
-    }
-    */
 }

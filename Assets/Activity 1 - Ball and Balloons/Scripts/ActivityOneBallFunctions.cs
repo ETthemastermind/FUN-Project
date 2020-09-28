@@ -37,16 +37,6 @@ public class ActivityOneBallFunctions : MonoBehaviour
         }
         
     }
-    
-    public void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
-        {
-            Debug.Log("Boundary Hit");
-            Ball.HapticFeedback(); //run the haptic feedback function
-        }
-    }
-    
     /*
 
     
