@@ -28,6 +28,7 @@ public class ProxmityToBalloon : MonoBehaviour
         
     }
 
+    /*
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -36,6 +37,7 @@ public class ProxmityToBalloon : MonoBehaviour
         Gizmos.DrawWireSphere(transform.localPosition + (Vector3.left * Distance), 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + (Vector3.right * Distance), 0.1f);
     }
+    */
 
     public void BalloonProxCheck()
     {

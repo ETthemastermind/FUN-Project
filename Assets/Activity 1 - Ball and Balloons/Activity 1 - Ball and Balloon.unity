@@ -1917,8 +1917,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.817843, y: 0.40892124, z: 0.40076256}
+  m_Size: {x: 11.817843, y: 0.40892124, z: 6}
   m_Center: {x: 0, y: -5.7044606, z: 0.20038128}
+--- !u!54 &168674883
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168674878}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!224 &172563672 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1992226512522723174, guid: 50cca5922c0bfb44e9a61cd8b0d545a7,
@@ -9030,8 +9046,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4089213, y: 11.8178425, z: 0.40076256}
+  m_Size: {x: 0.4089213, y: 11.8178425, z: 6}
   m_Center: {x: -5.704461, y: 2.8475892e-15, z: 0.20038128}
+--- !u!54 &1045312773
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045312768}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!224 &1048735671 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
@@ -12350,8 +12382,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.817843, y: 0.40892124, z: 0.40076256}
+  m_Size: {x: 11.817843, y: 0.40892124, z: 6}
   m_Center: {x: 0, y: 5.7044606, z: 0.20038128}
+--- !u!54 &1466167867
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466167862}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!224 &1481569987 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
@@ -12375,8 +12423,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4089213, y: 11.8178425, z: 0.40076256}
+  m_Size: {x: 0.4089213, y: 11.8178425, z: 6}
   m_Center: {x: 5.704461, y: 2.8475892e-15, z: 0.20038128}
+--- !u!54 &1484093915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484093910}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!224 &1484291397 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
@@ -12445,7 +12509,6 @@ GameObject:
   - component: {fileID: 1517539528}
   - component: {fileID: 1517539532}
   - component: {fileID: 1517539531}
-  - component: {fileID: 1517539529}
   - component: {fileID: 1517539530}
   m_Layer: 0
   m_Name: NewBalloonSpawner
@@ -12468,29 +12531,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1517539529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517539527}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5471b21b6cfdf041bb44d2e93a61ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ball_Player: {fileID: 0}
-  Balloon_Prefab:
-  - {fileID: 6140672978158337520, guid: a64e68f1d55d1184882046ebaf222ae2, type: 3}
-  - {fileID: 1340121623799083656, guid: 90bc3941102138a42868f39dbce72854, type: 3}
-  - {fileID: 1234496012673498558, guid: 0c0d4a29f681e594da0cee5f29e69a88, type: 3}
-  SpawnLocations: []
-  SpawnedBalloons: []
-  HUDController: {fileID: 1606569991}
-  GameController: {fileID: 0}
-  MaxGrid_UD: 0
-  MaxGrid_LR: 0
 --- !u!114 &1517539530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12498,7 +12538,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517539527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b09c4b6ae15e9ca4b8b568b495b3ff98, type: 3}
   m_Name: 
@@ -16628,6 +16668,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6408410518435697552, guid: 026508a40cc7d7746acfe9ff438c6c79,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6628056275447563161, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_Name
@@ -16636,7 +16681,7 @@ PrefabInstance:
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.457
+      value: 2.34
       objectReference: {fileID: 0}
     - target: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}

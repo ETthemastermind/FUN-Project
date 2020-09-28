@@ -12,6 +12,8 @@ public class BallControllerV2 : MonoBehaviour
     public bool _BallMoving; //bool to check if the ball is moving
     public float RotSpeed = 500f; //speed at which the ball rotates
     public bool _InBoundary = false;
+    private AudioSource AS;
+    public AudioClip BoundaryHit;
 
     public MasterTelemetrySystem TelSystem;
 
@@ -23,6 +25,7 @@ public class BallControllerV2 : MonoBehaviour
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        AS = Camera.main.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -422,7 +425,52 @@ public class BallControllerV2 : MonoBehaviour
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
+        AS.PlayOneShot(BoundaryHit);
+        HapticFeedback();
+        StartCoroutine(BoundaryHitPause(StartPos));
+
+
     }
+
+    public IEnumerator BoundaryHitPause(Vector3 Target)
+    {
+        float timeBeforeReturn = 1;
+        float currentTimeBeforeReturn = 0;
+        while (currentTimeBeforeReturn < timeBeforeReturn)
+        {
+            currentTimeBeforeReturn++;
+            yield return new WaitForSecondsRealtime(timeBeforeReturn);
+
+        }
+        StartCoroutine(BoundaryHitReturn(Target));
+    }
+
+    public IEnumerator BoundaryHitReturn(Vector3 Target)
+    {
+        LerpFraction = 0f; //set the lerp fraction to 0
+        Vector3 StartPos = transform.position; //get the current start position of the ball
+        while (LerpFraction < 1)
+        {
+            LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
+            transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+            yield return new WaitForEndOfFrame();
+        }
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -440,6 +488,7 @@ public class BallControllerV2 : MonoBehaviour
             _InBoundary = false;
         }
     }
+    
 
     public void HapticFeedback()
     {
