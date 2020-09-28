@@ -80,7 +80,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "F"));
                     
                 }
                 else
@@ -121,7 +121,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "B"));
                 }
                 else
                 {
@@ -162,7 +162,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target,"R"));
                 }
                 else
                 {
@@ -201,7 +201,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "L"));
 
                 }
                 else
@@ -233,13 +233,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "F"));
+                    StartCoroutine(Move(Target, "FR"));
                     //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "FR"));
                 }
                 else
                 {
@@ -268,13 +268,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "F"));
+                    StartCoroutine(Move(Target, "FL"));
                     //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "FL"));
                 }
                 else
                 {
@@ -303,13 +303,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "F"));
+                    StartCoroutine(Move(Target, "BR"));
                     //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target,"BR"));
                 }
 
                 else
@@ -339,13 +339,13 @@ public class BallControllerV2 : MonoBehaviour
                     Transform HT = hit.transform;
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
-                    StartCoroutine(Move(Target, "L"));
+                    StartCoroutine(Move(Target, "BL"));
                     //TelSystem.AddLine("Ball moved left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
                     Vector3 Target = hit.point;
-                    StartCoroutine(BoundaryHitMove(Target));
+                    StartCoroutine(BoundaryHitMove(Target, "BL"));
                 }
 
                 else
@@ -387,8 +387,24 @@ public class BallControllerV2 : MonoBehaviour
                     gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
                     break;
                 case "L":
-                    //Debug.Log("Ball Moving Right");
+                    //Debug.Log("Ball Moving Left");
                     gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
+                    break;
+
+                case "FR":
+                    gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                    break;
+
+                case "FL":
+                    gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                    break;
+
+                case "BR":
+                    gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
+                    break;
+
+                case "BL":
+                    gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
                     break;
 
                 default: //in the unlikley case of the switch running without getting a value
@@ -403,7 +419,7 @@ public class BallControllerV2 : MonoBehaviour
         RunAfterMove.Invoke();
     }
 
-    public IEnumerator BoundaryHitMove(Vector3 Target)
+    public IEnumerator BoundaryHitMove(Vector3 Target, string FauxRot)
     {
         RunBeforeMove.Invoke();
         LerpFraction = 0f; //set the lerp fraction to 0
@@ -415,16 +431,57 @@ public class BallControllerV2 : MonoBehaviour
             {
                 LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
                 transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+                switch (FauxRot) //switch case statement to determine which way the ball should spin
+                {
+                    case "F": // F/B/R/L for forwards, backwards, Right and Left
+                              //Debug.Log("Ball Moving Forwards");
+                        gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
+                        break;
+                    case "B":
+                        //Debug.Log("Ball Moving Backwards");
+                        gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
+                        break;
+
+                    case "R":
+                        //Debug.Log("Ball Moving Right");
+                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
+                        break;
+                    case "L":
+                        //Debug.Log("Ball Moving Left");
+                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
+                        break;
+
+                    case "FR":
+                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                        break;
+
+                    case "FL":
+                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                        break;
+
+                    case "BR":
+                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
+                        break;
+
+                    case "BL":
+                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
+                        break;
+
+                    default: //in the unlikley case of the switch running without getting a value
+                        Debug.Log("Unknown Value");
+                        break;
+                }
                 yield return new WaitForEndOfFrame();
             }
             else
             {
                 break;
             }
-            
-        }
+                
+
+            }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        RunAfterMove.Invoke();
+        
         AS.PlayOneShot(BoundaryHit);
         HapticFeedback();
         StartCoroutine(BoundaryHitPause(StartPos));
@@ -455,7 +512,8 @@ public class BallControllerV2 : MonoBehaviour
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
             yield return new WaitForEndOfFrame();
         }
-        
+        RunAfterMove.Invoke();
+
     }
 
 
