@@ -371,48 +371,10 @@ public class BallControllerV2 : MonoBehaviour
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
-            switch (FauxRot) //switch case statement to determine which way the ball should spin
-            {
-                case "F": // F/B/R/L for forwards, backwards, Right and Left
-                    //Debug.Log("Ball Moving Forwards");
-                    gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
-                    break;
-                case "B":
-                    //Debug.Log("Ball Moving Backwards");
-                    gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
-                    break;
-
-                case "R":
-                    //Debug.Log("Ball Moving Right");
-                    gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
-                    break;
-                case "L":
-                    //Debug.Log("Ball Moving Left");
-                    gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
-                    break;
-
-                case "FR":
-                    gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
-                    break;
-
-                case "FL":
-                    gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
-                    break;
-
-                case "BR":
-                    gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
-                    break;
-
-                case "BL":
-                    gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
-                    break;
-
-                default: //in the unlikley case of the switch running without getting a value
-                    Debug.Log("Unknown Value");
-                    break;
+            FauxRotFunc(FauxRot);
 
 
-            }
+            
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
@@ -431,46 +393,8 @@ public class BallControllerV2 : MonoBehaviour
             {
                 LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
                 transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
-                switch (FauxRot) //switch case statement to determine which way the ball should spin
-                {
-                    case "F": // F/B/R/L for forwards, backwards, Right and Left
-                              //Debug.Log("Ball Moving Forwards");
-                        gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
-                        break;
-                    case "B":
-                        //Debug.Log("Ball Moving Backwards");
-                        gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
-                        break;
-
-                    case "R":
-                        //Debug.Log("Ball Moving Right");
-                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
-                        break;
-                    case "L":
-                        //Debug.Log("Ball Moving Left");
-                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
-                        break;
-
-                    case "FR":
-                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
-                        break;
-
-                    case "FL":
-                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
-                        break;
-
-                    case "BR":
-                        gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
-                        break;
-
-                    case "BL":
-                        gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
-                        break;
-
-                    default: //in the unlikley case of the switch running without getting a value
-                        Debug.Log("Unknown Value");
-                        break;
-                }
+                FauxRotFunc(FauxRot);
+                
                 yield return new WaitForEndOfFrame();
             }
             else
@@ -484,12 +408,12 @@ public class BallControllerV2 : MonoBehaviour
         
         AS.PlayOneShot(BoundaryHit);
         HapticFeedback();
-        StartCoroutine(BoundaryHitPause(StartPos));
+        StartCoroutine(BoundaryHitPause(StartPos, FauxRot));
 
 
     }
 
-    public IEnumerator BoundaryHitPause(Vector3 Target)
+    public IEnumerator BoundaryHitPause(Vector3 Target, string FauxRot)
     {
         float timeBeforeReturn = 1;
         float currentTimeBeforeReturn = 0;
@@ -499,36 +423,50 @@ public class BallControllerV2 : MonoBehaviour
             yield return new WaitForSecondsRealtime(timeBeforeReturn);
 
         }
-        StartCoroutine(BoundaryHitReturn(Target));
+        StartCoroutine(BoundaryHitReturn(Target, FauxRot));
     }
 
-    public IEnumerator BoundaryHitReturn(Vector3 Target)
+    public IEnumerator BoundaryHitReturn(Vector3 Target, string FauxRot)
     {
         LerpFraction = 0f; //set the lerp fraction to 0
         Vector3 StartPos = transform.position; //get the current start position of the ball
+        switch (FauxRot)
+        {
+            case "F":
+                FauxRot = "B";
+                break;
+            case "B":
+                FauxRot = "F";
+                break;
+            case "L":
+                FauxRot = "R";
+                break;
+            case "R":
+                FauxRot = "L";
+                break;
+            case "FL":
+                FauxRot = "BR";
+                break;
+            case "FR":
+                FauxRot = "BL";
+                break;
+            case "BL":
+                FauxRot = "FR";
+                break;
+            case "BR":
+                FauxRot = "BL";
+                break;
+        }
         while (LerpFraction < 1)
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+            FauxRotFunc(FauxRot);
             yield return new WaitForEndOfFrame();
         }
         RunAfterMove.Invoke();
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -553,6 +491,52 @@ public class BallControllerV2 : MonoBehaviour
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
-    
+    public void FauxRotFunc(string FauxRot)
+    {
+        switch (FauxRot) //switch case statement to determine which way the ball should spin
+        {
+            case "F": // F/B/R/L for forwards, backwards, Right and Left
+                      //Debug.Log("Ball Moving Forwards");
+                gameObject.transform.Rotate(0, 0, (RotSpeed * -1) * Time.deltaTime, Space.World); //rotate the ball appropriately 
+                break;
+            case "B":
+                //Debug.Log("Ball Moving Backwards");
+                gameObject.transform.Rotate(0, 0, (RotSpeed * 1) * Time.deltaTime, Space.World);
+                break;
 
+            case "R":
+                //Debug.Log("Ball Moving Right");
+                gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, 0, Space.World);
+                break;
+            case "L":
+                //Debug.Log("Ball Moving Left");
+                gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, 0, Space.World);
+                break;
+
+            case "FR":
+                gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                break;
+
+            case "FL":
+                gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * -1), Space.World);
+                break;
+
+            case "BR":
+                gameObject.transform.Rotate((RotSpeed * -1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
+                break;
+
+            case "BL":
+                gameObject.transform.Rotate((RotSpeed * 1) * Time.deltaTime, 0, (RotSpeed * 1), Space.World);
+                break;
+
+            default: //in the unlikley case of the switch running without getting a value
+                Debug.Log("Unknown Value");
+                break;
+        }
+
+    }
+
+
+
+    
 }
