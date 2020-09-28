@@ -3645,27 +3645,27 @@ PrefabInstance:
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_text
-      value: <Text>
+      value: <text>
       objectReference: {fileID: 0}
     - target: {fileID: 2531014202279973229, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -16658,6 +16658,12 @@ PrefabInstance:
       propertyPath: layerMask.m_Bits
       value: 1536
       objectReference: {fileID: 0}
+    - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
+        type: 3}
+      propertyPath: WallCollisionFX
+      value: 
+      objectReference: {fileID: 9049209338060905178, guid: 714bfea3fd4b1fa4e86cb22822075488,
+        type: 3}
     - target: {fileID: 6065881097038340100, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_Name
