@@ -14,10 +14,10 @@ public class BallControllerV2 : MonoBehaviour
     public bool _InBoundary = false;
     private AudioSource AS;
     public AudioClip BoundaryHit;
-
+    public ParticleSystem WallCollisionFX;
     public MasterTelemetrySystem TelSystem;
 
-
+    public Vector3 HitLocation;
 
     public UnityEvent RunAfterMove = new UnityEvent();
     public UnityEvent RunBeforeMove = new UnityEvent();
@@ -79,6 +79,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    HitLocation = hit.point;
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "F"));
                     
@@ -474,6 +475,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             //Debug.Log("Boundary Hit");
             _InBoundary = true;
+            Instantiate(WallCollisionFX, transform.position, transform.rotation);
         }
     }
     public void OnCollisionExit(Collision collision)

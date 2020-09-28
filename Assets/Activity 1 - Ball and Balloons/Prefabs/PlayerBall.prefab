@@ -354,6 +354,8 @@ MonoBehaviour:
   RotSpeed: 500
   _InBoundary: 0
   BoundaryHit: {fileID: 8300000, guid: 48b13d5ac3149ea4fa008c5ff631d9f0, type: 3}
+  WallCollisionFX: {fileID: 6497530932212617328, guid: aca21e98b096b8c47ab420936abdf5c4,
+    type: 3}
   TelSystem: {fileID: 0}
   RunAfterMove:
     m_PersistentCalls:
