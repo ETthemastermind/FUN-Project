@@ -382,7 +382,7 @@ public class BallControllerV2 : MonoBehaviour
 
 
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
@@ -396,6 +396,7 @@ public class BallControllerV2 : MonoBehaviour
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
 
+    /*
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
@@ -410,5 +411,5 @@ public class BallControllerV2 : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.forward), 0.1f); //backwards left
         Gizmos.DrawWireSphere(transform.position + (Vector3.left + Vector3.back), 0.1f); //backwards right
     }
-
+    */
 }
