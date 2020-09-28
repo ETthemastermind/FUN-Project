@@ -74,7 +74,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
-
+                    Debug.Log(hit.transform.name);
                 }
                 else
                 {
@@ -110,6 +110,10 @@ public class BallControllerV2 : MonoBehaviour
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"B"));
                     TelSystem.AddLine("Ball moved backward");
+                }
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
                 }
                 else
                 {
@@ -147,6 +151,10 @@ public class BallControllerV2 : MonoBehaviour
                     StartCoroutine(Move(Target,"R"));
                     TelSystem.AddLine("Ball moved right");
                 }
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
+                }
                 else
                 {
                     _BallMoving = false;
@@ -180,6 +188,11 @@ public class BallControllerV2 : MonoBehaviour
                     TelSystem.AddLine("Ball moved left");
                 }
 
+               
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
+                }
                 else
                 {
                     _BallMoving = false;
@@ -212,7 +225,10 @@ public class BallControllerV2 : MonoBehaviour
                     StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
                 }
-
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
+                }
                 else
                 {
                     _BallMoving = false;
@@ -243,7 +259,10 @@ public class BallControllerV2 : MonoBehaviour
                     StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
                 }
-
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
+                }
                 else
                 {
                     _BallMoving = false;
@@ -273,6 +292,10 @@ public class BallControllerV2 : MonoBehaviour
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
+                }
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
                 }
 
                 else
@@ -304,6 +327,10 @@ public class BallControllerV2 : MonoBehaviour
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
+                }
+                else if (hit.transform.tag == "Boundary")
+                {
+                    Debug.Log(hit.transform.name);
                 }
 
                 else
