@@ -14308,8 +14308,6 @@ MonoBehaviour:
   GameMenu_Canvas: {fileID: 949466009}
   OpeningGameMenu_Audio: {fileID: 8300000, guid: 3096d8a552fe97e4b9878775c06cba33,
     type: 3}
-  IncreasingBallSpeed_Audio: {fileID: 0}
-  DecreasingBallSpeed_Audio: {fileID: 0}
   ProfileMenu_Canvas: {fileID: 186439381}
   OpeningProfileMenu_Audio: {fileID: 8300000, guid: e5fd5b31b13a5d544a7bb4563ffbeaac,
     type: 3}
@@ -16708,7 +16706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36f7a95ae523cd4cad8a8bf8cc3a84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TelemetryActive: 0
+  TelemetryActive: 1
   ID: 
   FilePath: 
   LineToWrite: 

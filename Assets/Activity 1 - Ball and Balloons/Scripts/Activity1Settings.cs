@@ -186,6 +186,8 @@ public class Activity1Settings : MonoBehaviour
         float CurrentVolume = AS.volume; //get the current volume. Why have i done it this way... it can be done in one line
         float NextVolume = CurrentVolume + 0.1f; //get the next volume
         AS.volume = NextVolume; //set the next volume
+        //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
+        TelSystem.AddLine("Volume increased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
       
     }
     public void DecreaseVolume(AudioSource AS) //same as above but - instead of +
@@ -193,6 +195,8 @@ public class Activity1Settings : MonoBehaviour
         float CurrentVolume = AS.volume;
         float NextVolume = CurrentVolume - 0.1f;
         AS.volume = NextVolume;
+        //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
+        TelSystem.AddLine("Volume decreased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
 
     }
 
@@ -306,12 +310,14 @@ public class Activity1Settings : MonoBehaviour
         }
         Win_PopUpCanvas.SetActive(true);
         WinText.text = StatsText;
+        //TelSystem.AddLine("Game Completed: " +  NumberOfBalloonsPopped + ","+ Score_Goal + "," + CompletedTime + "seconds");
     }
 
     public void GridUp()
     {
-        Debug.Log("Making grid bigger");
+        //Debug.Log("Making grid bigger");
         Grid.NextGrid();
+        TelSystem.AddLine("Increase grid size button pressed");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
         if (Canvas_AudioSource.isPlaying == true)
         {
@@ -324,8 +330,9 @@ public class Activity1Settings : MonoBehaviour
 
     public void GridDown()
     {
-        Debug.Log("Making grid smaller");
+        //Debug.Log("Making grid smaller");
         Grid.LastGrid();
+        TelSystem.AddLine("Decrease grid size button pressed");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
         if (Canvas_AudioSource.isPlaying == true)
         {

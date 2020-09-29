@@ -51,8 +51,7 @@ public class HudController : MonoBehaviour
 
     public GameObject GameMenu_Canvas;
     public AudioClip OpeningGameMenu_Audio;
-    public AudioClip IncreasingBallSpeed_Audio;
-    public AudioClip DecreasingBallSpeed_Audio;
+    
 
 
     public GameObject ProfileMenu_Canvas;
@@ -168,11 +167,13 @@ public class HudController : MonoBehaviour
         {
             Time.timeScale = 1;
             CommsMenu.SetActive(false);
+            TelSystem.AddLine("Communication paged closed");
         }
         else
         {
             Time.timeScale = 0;
             CommsMenu.SetActive(true);
+            TelSystem.AddLine("Communication paged opened");
         }
     }
     

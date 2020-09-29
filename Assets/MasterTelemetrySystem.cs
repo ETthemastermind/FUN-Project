@@ -66,7 +66,7 @@ public class MasterTelemetrySystem : MonoBehaviour
         string TimeCode = System.DateTime.Now.ToLongTimeString();
         string Xcoord = Input.mousePosition.x.ToString();
         string Ycoord = Input.mousePosition.y.ToString();
-        LineToWrite = Activity + "," + InteractionStyle + "," + Action + "," + TimeCode + "," + Xcoord + "," + Ycoord + "," + gameObject;
+        LineToWrite = Activity + "," + InteractionStyle + "," + Action + "," + TimeCode + "," + Xcoord + "," + Ycoord + ",";
         if (TelemetryActive == true)
         {
             StreamWriter SW = new StreamWriter(FilePath, true);

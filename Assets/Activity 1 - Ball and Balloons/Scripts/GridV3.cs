@@ -35,10 +35,12 @@ public class GridV3 : MonoBehaviour
     int CurrentY = 1;
     int CurrentX = 1;
 
+    MasterTelemetrySystem TelSystem;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         GridValueArray[0] = GridPos1;
         GridValueArray[1] = GridPos2;
         GridValueArray[2] = GridPos3;
@@ -78,7 +80,8 @@ public class GridV3 : MonoBehaviour
         Width = (int)Temp[3];
         X_Space = Temp[4];
         Y_Space = Temp[5];
-        
+
+        TelSystem.AddLine("Grid of " + Height + " x " + Width + " created");
         for (int i = 0; i < Height * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
             GameObject G =  Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
@@ -119,17 +122,23 @@ public class GridV3 : MonoBehaviour
 
     public void NextGrid()
     {
+        
         CurrentGrid++;
         {
             if (CurrentGrid > GridValueArray.Length - 1)
             {
                 CurrentGrid = GridValueArray.Length - 1;
-                
+
                 //DeleteGrid();
                 //CreateGrid();
             }
-            DeleteGrid();
-            CreateGrid();
+            else
+            {
+                Debug.Log("Grid Size Increased");
+                DeleteGrid();
+                CreateGrid();
+            }
+            
         }
     }
 
@@ -143,9 +152,14 @@ public class GridV3 : MonoBehaviour
                 //DeleteGrid();
                 //CreateGrid();
             }
+            else
+            {
+                Debug.Log("Grid Size Decreased");
+                DeleteGrid();
+                CreateGrid();
+            }
 
-            DeleteGrid();
-            CreateGrid();
+            
 
         }
 
@@ -158,7 +172,10 @@ public class GridV3 : MonoBehaviour
             for (int i = 0; i < GridGameObjects.Count; i++)
             {
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
+                
             }
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            TelSystem.AddLine("Grid hidden");
         }
         else
         {
@@ -166,6 +183,8 @@ public class GridV3 : MonoBehaviour
             {
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
             }
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            TelSystem.AddLine("Grid unhidden");
         }
     }
 

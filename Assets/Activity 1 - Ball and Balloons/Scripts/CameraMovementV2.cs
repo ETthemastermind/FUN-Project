@@ -58,7 +58,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
-        TelSystem.AddLine("Next Camera button pressed active camera is - " + CameraPositionsArray[CurrentCamera].name);
+        TelSystem.AddLine("Next Camera button pressedS active camera is - " + CameraPositionsArray[CurrentCamera].name);
         //transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         //transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
     }
@@ -88,7 +88,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
-        TelSystem.AddLine("Last Camera button pressed active camera is - " + CameraPositionsArray[CurrentCamera].name);
+        TelSystem.AddLine("Last Camera button pressed, active camera is - " + CameraPositionsArray[CurrentCamera].name);
     }
 
 
@@ -96,19 +96,23 @@ public class CameraMovementV2 : MonoBehaviour
     public void RotateCameraUp()
     {
         CameraPositionsArray[CurrentCamera].GetComponent<CameraPosMovement>().RotateUp();
+        TelSystem.AddLine("Camera Rotated Up");
 
     }
     public void RotateCameraRight()
     {
         CameraPositionsArray[CurrentCamera].GetComponent<CameraPosMovement>().RotateRight();
+        TelSystem.AddLine("Camera Rotated Right");
     }
     public void RotateCameraDown()
     {
         CameraPositionsArray[CurrentCamera].GetComponent<CameraPosMovement>().RotateDown();
+        TelSystem.AddLine("Camera Rotated Down");
     }
     public void RotateCameraLeft()
     {
         CameraPositionsArray[CurrentCamera].GetComponent<CameraPosMovement>().RotateLeft();
+        TelSystem.AddLine("Camera Rotated Left");
     }
 
     public IEnumerator CameraLerp(Vector3 StartPos, Quaternion StartRot, Vector3 TargetPos,Quaternion TargetRot)

@@ -117,7 +117,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"B"));
-                    TelSystem.AddLine("Ball moved backward");
+                    TelSystem.AddLine("Ball moved towards");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
@@ -235,7 +235,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "FR"));
-                    //TelSystem.AddLine("Ball moved left");
+                    TelSystem.AddLine("Ball moved forward right");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
@@ -270,7 +270,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "FL"));
-                    //TelSystem.AddLine("Ball moved left");
+                    TelSystem.AddLine("Ball moved forward left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
@@ -305,7 +305,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "BR"));
-                    //TelSystem.AddLine("Ball moved left");
+                    TelSystem.AddLine("Ball moved towards right");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
@@ -341,7 +341,7 @@ public class BallControllerV2 : MonoBehaviour
                     Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "BL"));
-                    //TelSystem.AddLine("Ball moved left");
+                    TelSystem.AddLine("Ball moved towards left");
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
