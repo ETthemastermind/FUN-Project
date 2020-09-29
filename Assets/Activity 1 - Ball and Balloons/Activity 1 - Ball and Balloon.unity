@@ -1840,7 +1840,7 @@ PrefabInstance:
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -1875,7 +1875,7 @@ PrefabInstance:
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: UnityEngine.AudioClip, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
@@ -1887,6 +1887,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8187532027572570186, guid: 6a03e6a696a4d45449a657871bf4cbaa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 91ce733349d07824990fe10e7f4ec489, type: 3}
     - target: {fileID: 8195689205225100690, guid: 6a03e6a696a4d45449a657871bf4cbaa,
         type: 3}
       propertyPath: m_Name
@@ -5264,7 +5269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &548300391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7167,7 +7172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &808467377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14551,14 +14556,24 @@ MonoBehaviour:
   ButtonClick_SFX: {fileID: 8300000, guid: 96fc51d8ff65ca34e89a9ce20c612be3, type: 3}
   SettingsMenu: {fileID: 1266508935}
   Controls: {fileID: 1435514174}
+  OpenSettings_Audio: {fileID: 8300000, guid: 7a80af378dfc76648825c4e475c62ffe, type: 3}
+  CloseSettings_Audio: {fileID: 8300000, guid: ade837f679b2ff54189af5da246ac4f8, type: 3}
   ControlToggle: 1
   CameraSprite: {fileID: 21300000, guid: 58be41f6a64761c4e900591be720873c, type: 3}
   CameraControlsCanvas: {fileID: 808467376}
   MovementSprite: {fileID: 21300000, guid: ed39dd54b66dcc54ca5ae410ec5bc2f0, type: 3}
   MovementControlsCanvas: {fileID: 1435514174}
   MusicMenu_Canvas: {fileID: 188824600}
+  OpeningMusicMenu_Audio: {fileID: 8300000, guid: 67f02cadd5ec15d41af9622d9ddd525f,
+    type: 3}
   GameMenu_Canvas: {fileID: 949466009}
+  OpeningGameMenu_Audio: {fileID: 8300000, guid: 3096d8a552fe97e4b9878775c06cba33,
+    type: 3}
+  IncreasingBallSpeed_Audio: {fileID: 0}
+  DecreasingBallSpeed_Audio: {fileID: 0}
   ProfileMenu_Canvas: {fileID: 186439381}
+  OpeningProfileMenu_Audio: {fileID: 8300000, guid: e5fd5b31b13a5d544a7bb4563ffbeaac,
+    type: 3}
   Minimap: {fileID: 1149603239}
   Mirrors: {fileID: 1100831942}
   CommsMenu: {fileID: 234116868}
@@ -14600,6 +14615,15 @@ MonoBehaviour:
   BallSizeText: {fileID: 349154119}
   Grid: {fileID: 919132149354484216}
   GridText: {fileID: 393979998}
+  Canvas_AudioSource: {fileID: 0}
+  IncreasingBallSpeed_Audio: {fileID: 8300000, guid: fc7b8452175c4dd438a5d988ae009fdb,
+    type: 3}
+  DecreasingBallSpeed_Audio: {fileID: 8300000, guid: 9998ea01a10b9a64485074e81a7e9afe,
+    type: 3}
+  IncreasingBallSize_Audio: {fileID: 8300000, guid: 54a7695436998a645b885136d2c2539f,
+    type: 3}
+  DecreasingBallSize_Audio: {fileID: 8300000, guid: c2a8564ca01fcb74cad9519620b72da8,
+    type: 3}
 --- !u!82 &1606569995
 AudioSource:
   m_ObjectHideFlags: 0

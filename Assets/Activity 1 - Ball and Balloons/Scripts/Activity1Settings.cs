@@ -52,6 +52,14 @@ public class Activity1Settings : MonoBehaviour
     [Header("Grid Refs")]
     public GridV3 Grid;
     public TextMeshProUGUI GridText;
+
+    [Header("AudioClips")]
+    public AudioSource Canvas_AudioSource;
+    public AudioClip IncreasingBallSpeed_Audio;
+    public AudioClip DecreasingBallSpeed_Audio;
+
+    public AudioClip IncreasingBallSize_Audio;
+    public AudioClip DecreasingBallSize_Audio;
     private void Awake()
 
     {
@@ -66,6 +74,7 @@ public class Activity1Settings : MonoBehaviour
         Application.targetFrameRate = 60;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
         //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
 
         //RoundNumber = gameObject.GetComponent<HudController>();
@@ -101,28 +110,7 @@ public class Activity1Settings : MonoBehaviour
 
         }
     }
-    /*
-    public void ToggleSoundFX()
-    {
-        if (SoundFXToggle.isOn == true)
-        {
-            AudioListener.volume = 1f;
-            Debug.Log("Sound FX turned on");
-            SoundActive = true;
-
-        }
-
-        else
-        {
-            AudioListener.volume = 0f;
-            Debug.Log("Sound FX turned off");
-            SoundActive = false;
-        }
-
-    }
-    */
-
-    
+     
     public void ToggleSoundFX(GameObject SoundObject) //function to mute the audiosource passed in on the gameobject
     {
         AudioSource AS = SoundObject.GetComponent<AudioSource>(); //get the audiosource
@@ -213,7 +201,14 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed++; //increment the ball speed
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString(); //update the text component
+            if (Canvas_AudioSource.isPlaying == true)
+            {
+                Canvas_AudioSource.Stop();
+
+            }
+            Canvas_AudioSource.PlayOneShot(IncreasingBallSpeed_Audio);
             TelSystem.AddLine("Ball speed increased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
+            
         }
     }
 
@@ -227,6 +222,12 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed--;
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString();
+            if (Canvas_AudioSource.isPlaying == true)
+            {
+                Canvas_AudioSource.Stop();
+
+            }
+            Canvas_AudioSource.PlayOneShot(DecreasingBallSpeed_Audio);
             TelSystem.AddLine("Ball speed decreased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
         }
 
@@ -244,6 +245,12 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber++;
             BallSizeText.text = BallSizeNumber.ToString();
+            if (Canvas_AudioSource.isPlaying == true)
+            {
+                Canvas_AudioSource.Stop();
+
+            }
+            Canvas_AudioSource.PlayOneShot(IncreasingBallSize_Audio);
             //TelSystem.AddLine("Ball size increased to" + PlayerBall.transform.localScale);
         }
     }
@@ -259,6 +266,12 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber--;
             BallSizeText.text = BallSizeNumber.ToString();
+            if (Canvas_AudioSource.isPlaying == true)
+            {
+                Canvas_AudioSource.Stop();
+
+            }
+            Canvas_AudioSource.PlayOneShot(DecreasingBallSize_Audio);
             //TelSystem.AddLine("Ball size decreased to" + PlayerBall.transform.localScale);
         }
     }

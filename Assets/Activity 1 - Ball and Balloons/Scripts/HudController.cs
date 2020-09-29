@@ -29,10 +29,15 @@ public class HudController : MonoBehaviour
     public AudioClip ButtonClick_SFX;
 
     //Activate Menu
+    
     public GameObject SettingsMenu;
     public GameObject Controls;
 
+    [Header("Settings Audio Clips")]
+    public AudioClip OpenSettings_Audio;
+    public AudioClip CloseSettings_Audio;
 
+    [Header ("Toggle Camera and Movement")]
     public bool ControlToggle = true; //true = movement, false = camera
     public Sprite CameraSprite;
     public GameObject CameraControlsCanvas;
@@ -40,9 +45,18 @@ public class HudController : MonoBehaviour
     public GameObject MovementControlsCanvas;
 
     [Header("Settings Menus")]
+    
     public GameObject MusicMenu_Canvas;
+    public AudioClip OpeningMusicMenu_Audio;
+
     public GameObject GameMenu_Canvas;
+    public AudioClip OpeningGameMenu_Audio;
+    public AudioClip IncreasingBallSpeed_Audio;
+    public AudioClip DecreasingBallSpeed_Audio;
+
+
     public GameObject ProfileMenu_Canvas;
+    public AudioClip OpeningProfileMenu_Audio;
 
     [Header("Minimap and Wing Mirror Refs")]
     public GameObject Minimap;
@@ -114,7 +128,7 @@ public class HudController : MonoBehaviour
     public void ButtonClick(AudioClip SpeechSynth) //play a button click sound effect
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
-        if (Canvas_AudioSource.isPlaying == true)
+        if (Canvas_AudioSource.isPlaying == true )
         {
             Canvas_AudioSource.Stop();
             
@@ -130,6 +144,7 @@ public class HudController : MonoBehaviour
             //Controls.SetActive(true);
             CommsMenu.SetActive(false);
             Time.timeScale = 1; //set the time scale back to 1
+            Canvas_AudioSource.PlayOneShot(CloseSettings_Audio);
             TelSystem.AddLine("Settings menu closed");
 
 
@@ -141,6 +156,7 @@ public class HudController : MonoBehaviour
             //Controls.SetActive(false);
             CommsMenu.SetActive(false);
             Time.timeScale = 0;
+            Canvas_AudioSource.PlayOneShot(OpenSettings_Audio);
             TelSystem.AddLine("Settings menu opened");
         }
 
@@ -189,6 +205,7 @@ public class HudController : MonoBehaviour
         MusicMenu_Canvas.SetActive(true);
         GameMenu_Canvas.SetActive(false);
         ProfileMenu_Canvas.SetActive(false);
+        Canvas_AudioSource.PlayOneShot(OpeningMusicMenu_Audio);
         TelSystem.AddLine("Music tab opened");
     }
     public void GameMenuOn()
@@ -196,6 +213,7 @@ public class HudController : MonoBehaviour
         MusicMenu_Canvas.SetActive(false);
         GameMenu_Canvas.SetActive(true);
         ProfileMenu_Canvas.SetActive(false);
+        Canvas_AudioSource.PlayOneShot(OpeningGameMenu_Audio);
         TelSystem.AddLine("Game tab opened");
     }
     public void ProfileMenuOn()
@@ -203,6 +221,7 @@ public class HudController : MonoBehaviour
         MusicMenu_Canvas.SetActive(false);
         GameMenu_Canvas.SetActive(false);
         ProfileMenu_Canvas.SetActive(true);
+        Canvas_AudioSource.PlayOneShot(OpeningProfileMenu_Audio);
         TelSystem.AddLine("Profile tab opened");
     }
     #endregion
