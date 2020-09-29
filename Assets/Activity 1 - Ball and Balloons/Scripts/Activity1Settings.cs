@@ -53,13 +53,18 @@ public class Activity1Settings : MonoBehaviour
     public GridV3 Grid;
     public TextMeshProUGUI GridText;
 
+
     [Header("AudioClips")]
     public AudioSource Canvas_AudioSource;
+
     public AudioClip IncreasingBallSpeed_Audio;
     public AudioClip DecreasingBallSpeed_Audio;
 
     public AudioClip IncreasingBallSize_Audio;
     public AudioClip DecreasingBallSize_Audio;
+
+    public AudioClip IncreasingGridSize_Audio;
+    public AudioClip DecreasingGridSize_Audio;
     private void Awake()
 
     {
@@ -308,6 +313,12 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid bigger");
         Grid.NextGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        if (Canvas_AudioSource.isPlaying == true)
+        {
+            Canvas_AudioSource.Stop();
+
+        }
+        Canvas_AudioSource.PlayOneShot(IncreasingGridSize_Audio);
         //TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
@@ -316,6 +327,12 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Making grid smaller");
         Grid.LastGrid();
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        if (Canvas_AudioSource.isPlaying == true)
+        {
+            Canvas_AudioSource.Stop();
+
+        }
+        Canvas_AudioSource.PlayOneShot(DecreasingGridSize_Audio);
         //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
