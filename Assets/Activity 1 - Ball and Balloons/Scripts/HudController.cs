@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class HudController : MonoBehaviour
 {
     public MasterTelemetrySystem TelSystem;
-
+    public AudioSource Canvas_AudioSource;
+    
     public TextMeshProUGUI ScoreText; //reference to the score text
     public TextMeshProUGUI Timer; //reference to the timer text
 
@@ -59,7 +60,7 @@ public class HudController : MonoBehaviour
         MaxScore = GameController.Score_Goal;
 
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        
+        Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
 
 
     }
@@ -110,9 +111,15 @@ public class HudController : MonoBehaviour
     }
    
 
-    public void ButtonClick() //play a button click sound effect
+    public void ButtonClick(AudioClip SpeechSynth) //play a button click sound effect
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
+        if (Canvas_AudioSource.isPlaying == true)
+        {
+            Canvas_AudioSource.Stop();
+            
+        }
+        Canvas_AudioSource.PlayOneShot(SpeechSynth);
     }
 
     public void OpenCloseSettings() //function to open and close the settings menu
