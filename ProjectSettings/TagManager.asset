@@ -13,6 +13,7 @@ TagManager:
   - GridCube
   - GridObject
   - TelSystem
+  - CanvasAudioSource
   layers:
   - Default
   - TransparentFX
