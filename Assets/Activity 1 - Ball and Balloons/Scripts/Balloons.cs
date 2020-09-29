@@ -9,7 +9,6 @@ public class Balloons : MonoBehaviour
     public int BalloonValue;
     public Texture[] BalloonColors; //array of albedo maps for the balloons
     public Texture[] PoppedBalloonColors;
-    public GameObject Camera; //reference to the camera because it has an audio source
     public AudioSource AS; //reference to the audio source on the camera
     public AudioClip Pop_SFX; //pop sound effect for the balloon
     public int RandomColor;
@@ -26,8 +25,8 @@ public class Balloons : MonoBehaviour
 
         gameObject.transform.Rotate(-90f, 0f,0f); //damn balloon wont spawn in the same orientation that dragging it into the scene shows
 
-        Camera = GameObject.FindGameObjectWithTag("MainCamera"); //finds the main camera
-        AS = Camera.GetComponent<AudioSource>(); //gets the audiosource on the camera object
+        
+        AS = Camera.main.GetComponent<AudioSource>(); //gets the audiosource on the camera object
         rb = gameObject.GetComponent<Rigidbody>();
         StartCoroutine(FallOver());
 
