@@ -40,7 +40,7 @@ public class GridV3 : MonoBehaviour
 
 
     MasterTelemetrySystem TelSystem;
-
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -249,12 +249,17 @@ public class HudController : MonoBehaviour
         {
             Minimap.SetActive(false); //deactive the minimap gameobject
             Mirrors.SetActive(true); //activate the mirrors gameobject
+            GameController.Save.Mirrors = true;
+            GameController.Save.MiniMap = false;
+
             TelSystem.AddLine("Mirror UI activated");
         }
         else
         {
             Minimap.SetActive(true); //active the minimap gameobject
             Mirrors.SetActive(false); //deactivate the mirrors gameobject
+            GameController.Save.Mirrors = false;
+            GameController.Save.MiniMap = true;
             TelSystem.AddLine("Minimap UI activated");
         }
     }

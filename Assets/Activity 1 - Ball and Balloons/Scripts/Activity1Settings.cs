@@ -6,6 +6,9 @@ using TMPro;
 using System;
 using UnityEngine.EventSystems;
 
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 public class Activity1Settings : MonoBehaviour
 {
     public GameObject PlayerBall;
@@ -35,7 +38,7 @@ public class Activity1Settings : MonoBehaviour
     //Ball Speed? also need to edit the ball rotation...
 
     [Header("Game Attributes")]
-    public bool AnimatedTexturesActive;
+    //public bool AnimatedTexturesActive;
     public bool SoundActive;
     public int NumberOfBalloonsToSpawn;
     public int Score_Goal;
@@ -70,13 +73,13 @@ public class Activity1Settings : MonoBehaviour
     public bool DiagonalControlsActive;
     public GameObject[] DiagonalControlsObjects;
 
-    [Header ("Data to s)]
+    public ActivityOneSave Save;
 
 
     private void Awake()
 
     {
-        LoadPrefs();
+        //LoadPrefs();
     }
     // Start is called before the first frame update
     void Start()
@@ -93,7 +96,7 @@ public class Activity1Settings : MonoBehaviour
         //RoundNumber = gameObject.GetComponent<HudController>();
         //RoundNumberText.text = NumberOfRounds.ToString();
 
-
+        
 
 
     }
@@ -111,6 +114,7 @@ public class Activity1Settings : MonoBehaviour
         {
             Debug.Log("Turn on animated ball texture");
             AnimatedTexture.Active = true;
+            Save.AnimatedTexture = true;
             TelSystem.AddLine("Animated ball texture turned on");
             
         }
@@ -119,30 +123,12 @@ public class Activity1Settings : MonoBehaviour
         {
             Debug.Log("Turn off animated ball texture");
             AnimatedTexture.Active = false ;
+            Save.AnimatedTexture = false;
             TelSystem.AddLine("Animated ball texture turned off");
 
         }
     }
-     
-    public void ToggleSoundFX(GameObject SoundObject) //function to mute the audiosource passed in on the gameobject
-    {
-        AudioSource AS = SoundObject.GetComponent<AudioSource>(); //get the audiosource
-        if (AS.mute == false) //if the audiosource is unmuted
-        {
-            AS.mute = true; //mute
-            Debug.Log("Turning Sound on component off");
-            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned off");
 
-        }
-        else //therefore if its unmuted
-        {
-            AS.mute = false; //unmute
-            Debug.Log("Turning Sound on component on");
-            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned on");
-        }
-    }
-
-   
 
     public void ToggleSlider(GameObject Slider) //toggle the sliders for the audio components in the settings
     {
@@ -185,8 +171,25 @@ public class Activity1Settings : MonoBehaviour
 
         Debug.Log("Current Number of Balloons: " + NumberOfBalloonsToSpawn);
         NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
-        //SavePrefs();
+        
 
+    }
+    public void ToggleSoundFX(GameObject SoundObject) //function to mute the audiosource passed in on the gameobject
+    {
+        AudioSource AS = SoundObject.GetComponent<AudioSource>(); //get the audiosource
+        if (AS.mute == false) //if the audiosource is unmuted
+        {
+            AS.mute = true; //mute
+            Debug.Log("Turning Sound on component off");
+            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned off");
+
+        }
+        else //therefore if its unmuted
+        {
+            AS.mute = false; //unmute
+            Debug.Log("Turning Sound on component on");
+            TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned on");
+        }
     }
 
     public void IncreaseVolume(AudioSource AS) //pass in an audiosource as a parameter
@@ -224,6 +227,7 @@ public class Activity1Settings : MonoBehaviour
 
             }
             Canvas_AudioSource.PlayOneShot(IncreasingBallSpeed_Audio);
+            Save.BallSpeed = PlayerBall.GetComponent<BallControllerV2>().LerpSpeed; //set the ball speed
             TelSystem.AddLine("Ball speed increased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
             
         }
@@ -245,6 +249,7 @@ public class Activity1Settings : MonoBehaviour
 
             }
             Canvas_AudioSource.PlayOneShot(DecreasingBallSpeed_Audio);
+            Save.BallSpeed = PlayerBall.GetComponent<BallControllerV2>().LerpSpeed; //set the ball speed
             TelSystem.AddLine("Ball speed decreased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
         }
 
@@ -268,6 +273,7 @@ public class Activity1Settings : MonoBehaviour
 
             }
             Canvas_AudioSource.PlayOneShot(IncreasingBallSize_Audio);
+            Save.BallSize = float.Parse(BallSizeText.text);
             //TelSystem.AddLine("Ball size increased to" + PlayerBall.transform.localScale);
         }
     }
@@ -289,6 +295,7 @@ public class Activity1Settings : MonoBehaviour
 
             }
             Canvas_AudioSource.PlayOneShot(DecreasingBallSize_Audio);
+            Save.BallSize = float.Parse(BallSizeText.text);
             //TelSystem.AddLine("Ball size decreased to" + PlayerBall.transform.localScale);
         }
     }
@@ -324,6 +331,8 @@ public class Activity1Settings : MonoBehaviour
 
         }
         Canvas_AudioSource.PlayOneShot(IncreasingGridSize_Audio);
+        Save.Grid[0] = Grid.Height;
+        Save.Grid[1] = Grid.Width;
         //TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
@@ -339,12 +348,23 @@ public class Activity1Settings : MonoBehaviour
 
         }
         Canvas_AudioSource.PlayOneShot(DecreasingGridSize_Audio);
+        Save.Grid[0] = Grid.Height;
+        Save.Grid[1] = Grid.Width;
         //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
     public void ShowHideGrid()
     {
         Grid.ShowHideGrid();
+        if (Grid.GridHidden == true)
+        {
+            Save.ShownGrid = false;
+        }
+        else
+        {
+            Save.ShownGrid = true;
+        }
+        
     }
 
     public void ToggleDiagonalControls()
@@ -357,6 +377,7 @@ public class Activity1Settings : MonoBehaviour
                 DiagonalControlsObjects[i].SetActive(false);
             }
             Grid.FourDirectionalGrid();
+            Save.DiagonalMovement = false;
             TelSystem.AddLine("Diagonal controls deactivated");
         }
 
@@ -368,21 +389,13 @@ public class Activity1Settings : MonoBehaviour
                 DiagonalControlsObjects[i].SetActive(true);
             }
             Grid.EightDirectionalGrid();
+            Save.DiagonalMovement = true;
             TelSystem.AddLine("Diagonal controls activated");
         }
     }
 
 
-    public void SavePrefs()
-    {
-        SaveSystem.SavePrefs(this);
-    }
-
-    public void LoadPrefs()
-    {
-        Profile data = SaveSystem.LoadPrefs();
-        //NumberOfBalloonsToSpawn = data.NumberOfBalloons_Save;
-    }
+    
 
 
 
