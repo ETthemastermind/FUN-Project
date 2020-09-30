@@ -161,7 +161,7 @@ public class CameraPosMovement : MonoBehaviour
         //Debug.Log(RotTarget);
         while (LerpFraction < 1) //while the lerp fraction is less than 1
         {
-            Debug.Log("Rotating Camera Up");
+            //Debug.Log("Rotating Camera Up");
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime; //increment the lerp fraction
             transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction); //set the rotation based on the lerp fraction
@@ -219,7 +219,7 @@ public class CameraPosMovement : MonoBehaviour
     {
         while (LerpFraction < 1)
         {
-            Debug.Log("Returning Camera to position");
+            //Debug.Log("Returning Camera to position");
             yield return new WaitForEndOfFrame();
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(RotTarget, StartRotation, LerpFraction);

@@ -19573,6 +19573,9 @@ MonoBehaviour:
   - 1.145
   - 1.222
   CurrentGrid: 2
+  GridHidden: 0
+  FourDirGrid_Tex: {fileID: 2800000, guid: 2c3a9c7a43685fc48aacb9d156b8c32d, type: 3}
+  EightDirGrid_Tex: {fileID: 2800000, guid: 1ffee42038c698b4dbd05f06873f0a0a, type: 3}
 --- !u!23 &1711813855745011746
 MeshRenderer:
   m_ObjectHideFlags: 0

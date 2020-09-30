@@ -31,7 +31,7 @@ public class GridV3 : MonoBehaviour
 
 
     public int CurrentGrid = 1;
-
+    public bool GridHidden = false;
     int CurrentY = 1;
     int CurrentX = 1;
 
@@ -114,6 +114,15 @@ public class GridV3 : MonoBehaviour
         }
         Material gridLines = gameObject.GetComponent<Renderer>().material;
         gridLines.mainTextureScale = new Vector2(Height, Width);
+        if (GridHidden == true)
+        {
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
+
+            }
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
 
     }
 
@@ -123,6 +132,7 @@ public class GridV3 : MonoBehaviour
         {
             Destroy(GridGameObjects[i]);
         }
+        GridGameObjects.Clear();
     }
 
     public void NextGrid()
@@ -172,6 +182,30 @@ public class GridV3 : MonoBehaviour
 
     public void ShowHideGrid()
     {
+        if (GridHidden == true) //if the grid is already hidden
+        {
+            GridHidden = false;
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
+
+            }
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            TelSystem.AddLine("Grid hidden");
+            //show the grid
+        }
+        else //if the grid is not hidden
+        {
+            GridHidden = true;
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
+            }
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            TelSystem.AddLine("Grid unhidden");
+            //hide the grid
+        }
+        /*
         if (GridGameObjects[0].GetComponent<MeshRenderer>().enabled == true)
         {
             for (int i = 0; i < GridGameObjects.Count; i++)
@@ -191,6 +225,7 @@ public class GridV3 : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             TelSystem.AddLine("Grid unhidden");
         }
+        */
     }
 
     public void FourDirectionalGrid()

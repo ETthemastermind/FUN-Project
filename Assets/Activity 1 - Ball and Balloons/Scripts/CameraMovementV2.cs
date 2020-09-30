@@ -20,11 +20,13 @@ public class CameraMovementV2 : MonoBehaviour
     public UnityEvent Command = new UnityEvent();
     public UnityEvent View = new UnityEvent();
 
+    private Transform ThisTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        ThisTransform = gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class CameraMovementV2 : MonoBehaviour
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera++; //increment the current camera
-        Debug.Log("Array length = " + CameraPositionsArray.Length); //just a debug
+        //Debug.Log("Array length = " + CameraPositionsArray.Length); //just a debug
         if (CurrentCamera > CameraPositionsArray.Length - 1) //if the current camera value is greater than the amount of cameras avaliable
         {
             CurrentCamera = 0; //resets the camera back to 0 if true
@@ -69,7 +71,7 @@ public class CameraMovementV2 : MonoBehaviour
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera--; //increment the current camera
-        Debug.Log("Current Camera" + CurrentCamera); //just a debug
+        //Debug.Log("Current Camera" + CurrentCamera); //just a debug
         if (CurrentCamera == -1) //if the current camera value is greater than the amount of cameras avaliable
         {
             CurrentCamera = CameraPositionsArray.Length - 1; //resets the camera back to 0 if true
@@ -122,8 +124,8 @@ public class CameraMovementV2 : MonoBehaviour
         while (LerpFraction < 1)
         {
             LerpFraction += LerpSpeed * Time.deltaTime;
-            transform.position = Vector3.Slerp(StartPos, TargetPos, LerpFraction);
-            transform.rotation = Quaternion.Slerp(StartRot, TargetRot, LerpFraction);
+            ThisTransform.position = Vector3.Slerp(StartPos, TargetPos, LerpFraction);
+            ThisTransform.rotation = Quaternion.Slerp(StartRot, TargetRot, LerpFraction);
             yield return new WaitForEndOfFrame();
 
 
