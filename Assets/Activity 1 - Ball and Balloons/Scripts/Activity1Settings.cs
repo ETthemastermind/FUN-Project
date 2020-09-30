@@ -24,7 +24,7 @@ public class Activity1Settings : MonoBehaviour
     public int MinBalloons;
     public int MaxBalloons;
     public TMP_Text NumOfBalloonText;
-    
+
     /*
     //Number of Rounds
     public HudController RoundNumber;
@@ -65,6 +65,12 @@ public class Activity1Settings : MonoBehaviour
 
     public AudioClip IncreasingGridSize_Audio;
     public AudioClip DecreasingGridSize_Audio;
+
+    [Header("Diagonal Controls")]
+    public bool DiagonalControlsActive;
+    public GameObject[] DiagonalControlsObjects;
+
+
     private void Awake()
 
     {
@@ -310,7 +316,7 @@ public class Activity1Settings : MonoBehaviour
         }
         Win_PopUpCanvas.SetActive(true);
         WinText.text = StatsText;
-        //TelSystem.AddLine("Game Completed: " +  NumberOfBalloonsPopped + ","+ Score_Goal + "," + CompletedTime + "seconds");
+        TelSystem.AddLine("Game Completed: Number of Balloons Popped - " +  NumberOfBalloonsPopped + ". Score goal -"+ Score_Goal + ".Completed time- " + CompletedTime + "seconds");
     }
 
     public void GridUp()
@@ -346,6 +352,27 @@ public class Activity1Settings : MonoBehaviour
     public void ShowHideGrid()
     {
         Grid.ShowHideGrid();
+    }
+
+    public void ToggleDiagonalControls()
+    {
+        if (DiagonalControlsActive == true)
+        {
+            DiagonalControlsActive = false;
+            for (int i = 0; i < DiagonalControlsObjects.Length; i++)
+            {
+                DiagonalControlsObjects[i].SetActive(false);
+            }
+        }
+
+        else
+        {
+            DiagonalControlsActive = true;
+            for (int i = 0; i < DiagonalControlsObjects.Length; i++)
+            {
+                DiagonalControlsObjects[i].SetActive(true);
+            }
+        }
     }
 
     
