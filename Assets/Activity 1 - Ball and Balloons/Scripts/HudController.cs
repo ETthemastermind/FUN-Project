@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class HudController : MonoBehaviour
 {
@@ -133,6 +134,7 @@ public class HudController : MonoBehaviour
             
         }
         Canvas_AudioSource.PlayOneShot(SpeechSynth);
+        TelSystem.AddLine(EventSystem.current.currentSelectedGameObject.name + "button clicked");
     }
 
     public void OpenCloseSettings() //function to open and close the settings menu
@@ -176,6 +178,8 @@ public class HudController : MonoBehaviour
             TelSystem.AddLine("Communication paged opened");
         }
     }
+
+    
     
     public void Camera_Movement_Toggle(Image ButtonImage) //switch between player movement and camera movement
     {

@@ -70,6 +70,8 @@ public class Activity1Settings : MonoBehaviour
     public bool DiagonalControlsActive;
     public GameObject[] DiagonalControlsObjects;
 
+    [Header ("Data to s)]
+
 
     private void Awake()
 
@@ -291,16 +293,7 @@ public class Activity1Settings : MonoBehaviour
         }
     }
 
-    public void SavePrefs()
-    {
-        SaveSystem.SavePrefs(this);
-    }
-
-    public void LoadPrefs()
-    {
-        Profile data = SaveSystem.LoadPrefs();
-        //NumberOfBalloonsToSpawn = data.NumberOfBalloons_Save;
-    }
+    
 
     public void Win_PopUp()
     {
@@ -379,7 +372,19 @@ public class Activity1Settings : MonoBehaviour
         }
     }
 
-    
+
+    public void SavePrefs()
+    {
+        SaveSystem.SavePrefs(this);
+    }
+
+    public void LoadPrefs()
+    {
+        Profile data = SaveSystem.LoadPrefs();
+        //NumberOfBalloonsToSpawn = data.NumberOfBalloons_Save;
+    }
+
+
 
 
 

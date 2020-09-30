@@ -60,7 +60,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
-        TelSystem.AddLine("Next Camera button pressedS active camera is - " + CameraPositionsArray[CurrentCamera].name);
+        TelSystem.AddLine("Next Camera button pressedS active camera is  " + CameraPositionsArray[CurrentCamera].name);
         //transform.position = CameraPositionsArray[CurrentCamera].transform.position;
         //transform.rotation = CameraPositionsArray[CurrentCamera].transform.rotation;
     }
@@ -90,7 +90,7 @@ public class CameraMovementV2 : MonoBehaviour
         Quaternion TargetRot = CameraPositionsArray[CurrentCamera].transform.rotation;
 
         StartCoroutine(CameraLerp(StartPos, StartRot, TargetPos, TargetRot));
-        TelSystem.AddLine("Last Camera button pressed, active camera is - " + CameraPositionsArray[CurrentCamera].name);
+        TelSystem.AddLine("Last Camera button pressed active camera is - " + CameraPositionsArray[CurrentCamera].name);
     }
 
 
