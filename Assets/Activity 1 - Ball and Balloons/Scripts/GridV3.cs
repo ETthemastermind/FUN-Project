@@ -7,9 +7,9 @@ public class GridV3 : MonoBehaviour
 {
     public List<GameObject> GridGameObjects = new List<GameObject>();
 
-    
 
-    [Header ("FromVid - changing these value does nothing, its just for debug")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
+
+    [Header("FromVid - changing these value does nothing, its just for debug")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
     public float X_Start; //default = -4.5
     public float Y_Start; // default = 6.8
 
@@ -29,11 +29,15 @@ public class GridV3 : MonoBehaviour
     public float[] GridPos4 = new float[6];
     public float[] GridPos5 = new float[6];
 
-    
+
     public int CurrentGrid = 1;
 
     int CurrentY = 1;
     int CurrentX = 1;
+
+    public Texture FourDirGrid_Tex;
+    public Texture EightDirGrid_Tex;
+
 
     MasterTelemetrySystem TelSystem;
 
@@ -46,7 +50,7 @@ public class GridV3 : MonoBehaviour
         GridValueArray[2] = GridPos3;
         GridValueArray[3] = GridPos4;
         GridValueArray[4] = GridPos5;
-        
+
 
         //Debug.Log(GridValueArray[0][2]);
         CreateGrid();
@@ -57,16 +61,17 @@ public class GridV3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.L))
         {
-            ShowHideGrid();
+            FourDirectionalGrid();
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            DeleteGrid();
-            CreateGrid();
+            EightDirectionalGrid();
         }
+        */
     }
 
     public void CreateGrid()
@@ -84,7 +89,7 @@ public class GridV3 : MonoBehaviour
         TelSystem.AddLine("Grid of " + Height + " x " + Width + " created");
         for (int i = 0; i < Height * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
-            GameObject G =  Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
+            GameObject G = Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
             GridGameObjects.Add(G);
             G.transform.parent = this.gameObject.transform;
             GridAttributes GA = G.GetComponent<GridAttributes>();
@@ -104,7 +109,7 @@ public class GridV3 : MonoBehaviour
                 CurrentY++;
 
             }
-            
+
 
         }
         Material gridLines = gameObject.GetComponent<Renderer>().material;
@@ -122,7 +127,7 @@ public class GridV3 : MonoBehaviour
 
     public void NextGrid()
     {
-        
+
         CurrentGrid++;
         {
             if (CurrentGrid > GridValueArray.Length - 1)
@@ -138,7 +143,7 @@ public class GridV3 : MonoBehaviour
                 DeleteGrid();
                 CreateGrid();
             }
-            
+
         }
     }
 
@@ -159,7 +164,7 @@ public class GridV3 : MonoBehaviour
                 CreateGrid();
             }
 
-            
+
 
         }
 
@@ -172,7 +177,7 @@ public class GridV3 : MonoBehaviour
             for (int i = 0; i < GridGameObjects.Count; i++)
             {
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
-                
+
             }
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             TelSystem.AddLine("Grid hidden");
@@ -186,6 +191,18 @@ public class GridV3 : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             TelSystem.AddLine("Grid unhidden");
         }
+    }
+
+    public void FourDirectionalGrid()
+    {
+        Material mat = gameObject.GetComponent<Renderer>().material;
+        mat.SetTexture("_MainTex", FourDirGrid_Tex);
+    }
+
+    public void EightDirectionalGrid()
+    {
+        Material mat = gameObject.GetComponent<Renderer>().material;
+        mat.SetTexture("_MainTex", EightDirGrid_Tex);
     }
 
 

@@ -363,6 +363,8 @@ public class Activity1Settings : MonoBehaviour
             {
                 DiagonalControlsObjects[i].SetActive(false);
             }
+            Grid.FourDirectionalGrid();
+            TelSystem.AddLine("Diagonal controls deactivated");
         }
 
         else
@@ -372,6 +374,8 @@ public class Activity1Settings : MonoBehaviour
             {
                 DiagonalControlsObjects[i].SetActive(true);
             }
+            Grid.EightDirectionalGrid();
+            TelSystem.AddLine("Diagonal controls activated");
         }
     }
 
