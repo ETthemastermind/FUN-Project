@@ -26,6 +26,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         AS = Camera.main.GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame

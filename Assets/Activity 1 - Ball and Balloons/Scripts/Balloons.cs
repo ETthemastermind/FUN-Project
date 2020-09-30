@@ -28,7 +28,7 @@ public class Balloons : MonoBehaviour
         
         AS = Camera.main.GetComponent<AudioSource>(); //gets the audiosource on the camera object
         rb = gameObject.GetComponent<Rigidbody>();
-        StartCoroutine(FallOver());
+        //StartCoroutine(FallOver());
 
         
     }

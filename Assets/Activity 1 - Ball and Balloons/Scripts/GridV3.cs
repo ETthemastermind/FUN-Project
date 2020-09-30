@@ -232,12 +232,14 @@ public class GridV3 : MonoBehaviour
     {
         Material mat = gameObject.GetComponent<Renderer>().material;
         mat.SetTexture("_MainTex", FourDirGrid_Tex);
+        TelSystem.AddLine("Grid set to 4 directional");
     }
 
     public void EightDirectionalGrid()
     {
         Material mat = gameObject.GetComponent<Renderer>().material;
         mat.SetTexture("_MainTex", EightDirGrid_Tex);
+        TelSystem.AddLine("Grid set to 8 directional");
     }
 
 
