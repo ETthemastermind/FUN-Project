@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 2706638762155853069, guid: 989f4a62795b82e448da1b1f8e799264,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowHideGrid
+      value: ShowHideGridLines
       objectReference: {fileID: 0}
     - target: {fileID: 2706638762662091971, guid: 989f4a62795b82e448da1b1f8e799264,
         type: 3}
@@ -1921,7 +1921,7 @@ PrefabInstance:
     - target: {fileID: 2706638762155853069, guid: 989f4a62795b82e448da1b1f8e799264,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowHideGrid
+      value: ShowHideGridBoxes
       objectReference: {fileID: 0}
     - target: {fileID: 2706638762662091971, guid: 989f4a62795b82e448da1b1f8e799264,
         type: 3}
@@ -16419,9 +16419,8 @@ MonoBehaviour:
     Grid: 070000000b000000
     MiniMap: 0
     Mirrors: 1
-    ShownGrid: 1
-    ShowGridLines: 0
-    ShowGridBoxes: 0
+    ShowGridLines: 1
+    ShowGridBoxes: 1
     DiagonalMovement: 0
     GameMusic: 1
     GameMusic_Volume: 0
@@ -21876,7 +21875,6 @@ MonoBehaviour:
   - 1.145
   - 1.222
   CurrentGrid: 2
-  GridHidden: 0
   GridLinesHidden: 0
   GridBoxesHidden: 0
   FourDirGrid_Tex: {fileID: 2800000, guid: 2c3a9c7a43685fc48aacb9d156b8c32d, type: 3}
