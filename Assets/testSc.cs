@@ -71,9 +71,10 @@ public class testSc : MonoBehaviour
 
         }
         */
-        LineToWrite = MouseX + "," + MouseY + ",";
+        LineToWrite = MouseX + "," + MouseY + ","; //positive unsigned short
+        
 
-        TestList.Add(LineToWrite);
+        //TestList.Add(LineToWrite);
         
 
     }

@@ -32,31 +32,31 @@ public class BallControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         if (Input.GetKeyDown(KeyCode.UpArrow)) //debug controls
         {
-            //MoveForward();
+            MoveForward();
             
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            //MoveRight();
+            MoveRight();
             
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //MoveBackward();
+            MoveBackward();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            //MoveLeft();
+            MoveLeft();
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
             //LerpFraction = 0f;
         }
-        */
+        
 
     }
 
