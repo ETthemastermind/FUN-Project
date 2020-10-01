@@ -353,6 +353,7 @@ public class Activity1Settings : MonoBehaviour
         //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
+    /*
     public void ShowHideGrid()
     {
         Grid.ShowHideGrid();
@@ -366,6 +367,7 @@ public class Activity1Settings : MonoBehaviour
         }
         
     }
+    */
 
     public void ToggleDiagonalControls()
     {

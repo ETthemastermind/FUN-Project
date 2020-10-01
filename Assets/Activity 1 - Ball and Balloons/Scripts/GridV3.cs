@@ -32,6 +32,10 @@ public class GridV3 : MonoBehaviour
 
     public int CurrentGrid = 1;
     public bool GridHidden = false;
+
+    public bool GridLinesHidden = false;
+    public bool GridBoxesHidden = false;
+
     int CurrentY = 1;
     int CurrentX = 1;
 
@@ -40,7 +44,7 @@ public class GridV3 : MonoBehaviour
 
 
     MasterTelemetrySystem TelSystem;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,17 +65,16 @@ public class GridV3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+
         if (Input.GetKeyDown(KeyCode.L))
         {
-            FourDirectionalGrid();
+            ShowHideGridLines();
+            
         }
-
         if (Input.GetKeyDown(KeyCode.K))
         {
-            EightDirectionalGrid();
+            ShowHideGridBoxes();
         }
-        */
     }
 
     public void CreateGrid()
@@ -180,6 +183,20 @@ public class GridV3 : MonoBehaviour
 
     }
 
+    public void FourDirectionalGrid()
+    {
+        Material mat = gameObject.GetComponent<Renderer>().material;
+        mat.SetTexture("_MainTex", FourDirGrid_Tex);
+        TelSystem.AddLine("Grid set to 4 directional");
+    }
+
+    public void EightDirectionalGrid()
+    {
+        Material mat = gameObject.GetComponent<Renderer>().material;
+        mat.SetTexture("_MainTex", EightDirGrid_Tex);
+        TelSystem.AddLine("Grid set to 8 directional");
+    }
+
     public void ShowHideGrid()
     {
         if (GridHidden == true) //if the grid is already hidden
@@ -205,42 +222,50 @@ public class GridV3 : MonoBehaviour
             TelSystem.AddLine("Grid unhidden");
             //hide the grid
         }
-        /*
-        if (GridGameObjects[0].GetComponent<MeshRenderer>().enabled == true)
+
+    }
+
+    public void ShowHideGridLines()
+    {
+        if (GridLinesHidden == true) //if the grid lines are hidden
         {
+            GridLinesHidden = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            TelSystem.AddLine("Grid lines unhidden");
+        }
+        else //if the grid lines arent hidden
+        {
+            GridLinesHidden = true;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            TelSystem.AddLine("Grid lines hidden");
+        }
+
+
+    }
+
+    public void ShowHideGridBoxes()
+    {
+        if (GridBoxesHidden == true) //if the grid boxes are hidden
+        {
+            GridBoxesHidden = false;
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
+
+            }
+            TelSystem.AddLine("Grid boxes unhidden");
+        }
+
+        else //if the grid boxes arent hidden
+        {
+            GridBoxesHidden = true;
             for (int i = 0; i < GridGameObjects.Count; i++)
             {
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
 
             }
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            TelSystem.AddLine("Grid hidden");
+            TelSystem.AddLine("Grid boxes hidden");
         }
-        else
-        {
-            for (int i = 0; i < GridGameObjects.Count; i++)
-            {
-                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
-            }
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            TelSystem.AddLine("Grid unhidden");
-        }
-        */
     }
-
-    public void FourDirectionalGrid()
-    {
-        Material mat = gameObject.GetComponent<Renderer>().material;
-        mat.SetTexture("_MainTex", FourDirGrid_Tex);
-        TelSystem.AddLine("Grid set to 4 directional");
-    }
-
-    public void EightDirectionalGrid()
-    {
-        Material mat = gameObject.GetComponent<Renderer>().material;
-        mat.SetTexture("_MainTex", EightDirGrid_Tex);
-        TelSystem.AddLine("Grid set to 8 directional");
-    }
-
 
 }

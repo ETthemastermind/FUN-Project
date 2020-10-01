@@ -39,15 +39,21 @@ public class Balloons : MonoBehaviour
         gameObject.transform.Rotate(0,0,BalloonRotSpeed); //rotate the balloon around the Z axis, doesnt look as good because the texture is uniform across the whole model but will look better with texture variation i.e numbers
         //gameObject.transform.position += Vector3.left * BalloonSpeed * Time.deltaTime; //move the balloon left at it's speed * time.delta time (left happens to be down towards the player here)
     }
-
-    public void OnDestroy()
+    public void DestroyBalloon()
     {
         ParticleSystem BalloonLeftovers = Instantiate(ps, transform.position, Quaternion.identity); //spawn the particle effects of the destroyed balloon
         Material mat = BalloonLeftovers.GetComponent<ParticleSystemRenderer>().material;
         mat.SetTexture("_MainTex", PoppedBalloonColors[RandomColor]);
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
+        Destroy(gameObject);
+    }
+    /*
+    public void OnDestroy()
+    {
+        
 
     }
+    */
 
     public IEnumerator FallOver()
     {

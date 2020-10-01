@@ -30,7 +30,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
             //_HUDController.GetComponent<Activity1Settings>().NumberOfBalloonsPopped++;
             string BalloonValue = (collision.gameObject.GetComponent<Balloons>().BalloonValue).ToString();
             TelSystem.AddLine("Balloon popped value - " + BalloonValue); //run telemetry line
-            Destroy(collision.gameObject); //destroy the balloon
+            collision.gameObject.GetComponent<Balloons>().DestroyBalloon();
             Ball.HapticFeedback(); //run the haptic feedback function
             
 
