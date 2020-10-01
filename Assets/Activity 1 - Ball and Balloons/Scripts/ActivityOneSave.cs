@@ -17,7 +17,6 @@ public class ActivityOneSave
     public bool MiniMap;
     public bool Mirrors;
 
-    public bool ShownGrid;
     public bool ShowGridLines;
     public bool ShowGridBoxes;
 

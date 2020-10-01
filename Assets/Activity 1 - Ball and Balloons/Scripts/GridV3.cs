@@ -31,7 +31,7 @@ public class GridV3 : MonoBehaviour
 
 
     public int CurrentGrid = 1;
-    public bool GridHidden = false;
+    ///public bool GridHidden = false;
 
     public bool GridLinesHidden = false;
     public bool GridBoxesHidden = false;
@@ -65,7 +65,7 @@ public class GridV3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (Input.GetKeyDown(KeyCode.L))
         {
             ShowHideGridLines();
@@ -75,6 +75,7 @@ public class GridV3 : MonoBehaviour
         {
             ShowHideGridBoxes();
         }
+        */
     }
 
     public void CreateGrid()
@@ -117,6 +118,20 @@ public class GridV3 : MonoBehaviour
         }
         Material gridLines = gameObject.GetComponent<Renderer>().material;
         gridLines.mainTextureScale = new Vector2(Height, Width);
+        if (GridLinesHidden == true)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        if (GridBoxesHidden == true)
+        {
+            for (int i = 0; i < GridGameObjects.Count; i++)
+            {
+                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
+
+            }
+        }
+        /*
         if (GridHidden == true)
         {
             for (int i = 0; i < GridGameObjects.Count; i++)
@@ -126,6 +141,7 @@ public class GridV3 : MonoBehaviour
             }
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
+        */
 
     }
 
@@ -196,7 +212,7 @@ public class GridV3 : MonoBehaviour
         mat.SetTexture("_MainTex", EightDirGrid_Tex);
         TelSystem.AddLine("Grid set to 8 directional");
     }
-
+    /*
     public void ShowHideGrid()
     {
         if (GridHidden == true) //if the grid is already hidden
@@ -224,6 +240,7 @@ public class GridV3 : MonoBehaviour
         }
 
     }
+    */
 
     public void ShowHideGridLines()
     {

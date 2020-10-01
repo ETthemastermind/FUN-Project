@@ -368,6 +368,32 @@ public class Activity1Settings : MonoBehaviour
         
     }
     */
+    public void ShowHideGridLines()
+    {
+        Grid.ShowHideGridLines();
+        if (Grid.GridLinesHidden == true)
+        {
+            Save.ShowGridLines = false;
+        }
+        else
+        {
+            Save.ShowGridLines = true;
+        }
+    }
+
+    public void ShowHideGridBoxes()
+    {
+        Grid.ShowHideGridBoxes();
+        if (Grid.GridBoxesHidden == true)
+        {
+            Save.ShowGridBoxes = false;
+        }
+        else
+        {
+            Save.ShowGridBoxes = true;
+        }
+    }
+
 
     public void ToggleDiagonalControls()
     {
