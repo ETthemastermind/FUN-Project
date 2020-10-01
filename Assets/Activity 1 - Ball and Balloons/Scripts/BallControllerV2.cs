@@ -80,6 +80,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     HitLocation = hit.point;
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "F"));
@@ -122,6 +123,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "B"));
                 }
@@ -163,6 +165,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target,"R"));
                 }
@@ -202,6 +205,7 @@ public class BallControllerV2 : MonoBehaviour
                
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "L"));
 
@@ -240,6 +244,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "FR"));
                 }
@@ -275,6 +280,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "FL"));
                 }
@@ -310,6 +316,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target,"BR"));
                 }
@@ -346,6 +353,7 @@ public class BallControllerV2 : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Boundary")
                 {
+                    _BallMoving = true; // the ball is now moving
                     Vector3 Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "BL"));
                 }
@@ -406,7 +414,7 @@ public class BallControllerV2 : MonoBehaviour
                 
 
             }
-        _BallMoving = false; //ball has stopped moving, so change the bool to false
+       
         
         AS.PlayOneShot(BoundaryHit);
         HapticFeedback();
@@ -466,6 +474,7 @@ public class BallControllerV2 : MonoBehaviour
             FauxRotFunc(FauxRot);
             yield return new WaitForEndOfFrame();
         }
+        _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
 
     }
