@@ -471,7 +471,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
-            FauxRotFunc(FauxRot);
+            //FauxRotFunc(FauxRot);
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
@@ -502,7 +502,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
-
+    
     public void FauxRotFunc(string FauxRot)
     {
         switch (FauxRot) //switch case statement to determine which way the ball should spin
