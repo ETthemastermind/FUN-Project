@@ -148,6 +148,7 @@ public class HudController : MonoBehaviour
             Time.timeScale = 1; //set the time scale back to 1
             Canvas_AudioSource.PlayOneShot(CloseSettings_Audio);
             TelSystem.AddLine("Settings menu closed");
+            GameController.SaveData();
 
 
 

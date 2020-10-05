@@ -104,7 +104,14 @@ public class Activity1Settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadData();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            InitialiseData();
+        }
     }
 
 
@@ -468,4 +475,36 @@ public class Activity1Settings : MonoBehaviour
         }
     }
 
+    public void SaveData()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream fs = File.Create(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
+        bf.Serialize(fs, Save);
+        fs.Close();
+        Debug.Log("Data Saved");
+    }
+
+    public void LoadData()
+    {
+        if (File.Exists(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Open(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV", FileMode.Open);
+            Save = (ActivityOneSave)bf.Deserialize(fs);
+            fs.Close();
+            Debug.Log("Data Loaded");
+        }
+    }
+
+    public void InitialiseData()
+    {
+        if (File.Exists(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Open(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV", FileMode.Open);
+            Save = (ActivityOneSave)bf.Deserialize(fs);
+            fs.Close();
+            Debug.Log("Data Initialised");
+        }
+    }
 }
