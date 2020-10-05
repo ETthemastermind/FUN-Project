@@ -329,7 +329,7 @@ public class Activity1Settings : MonoBehaviour
         }
 
     }
-
+    #region Functions related to ball speed
     public void IncreaseBallSize()
     {
         BallSize++;
@@ -338,26 +338,16 @@ public class Activity1Settings : MonoBehaviour
             BallSize = 3;
         }
         BallSizeText.text = BallSize.ToString();
-
-        switch (BallSize)
+        SetBallSize(BallSize);
+        if (AudioSources[3].isPlaying == true)
         {
-            case 1:
-                PlayerBall.transform.localScale = DefaultBallSize;
-                break;
+            AudioSources[3].Stop();
 
-            case 2:
-                PlayerBall.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
-                break;
-
-            case 3:
-                PlayerBall.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                break;
-
-            default:
-                Debug.Log("Unexpected Ball Size");
-                break;
         }
-       #region old version
+        AudioSources[3].PlayOneShot(IncreasingBallSize_Audio);
+        Save.BallSize = BallSize;
+        TelSystem.AddLine("Ball size increased to" + BallSize);
+        #region old version
         /*
         //Debug.Log(PlayerBall.transform.localScale);
         Vector3 MaxSize = new Vector3(0.6f, 0.6f, 0.6f);
@@ -389,47 +379,39 @@ public class Activity1Settings : MonoBehaviour
             BallSize = 1;
         }
         BallSizeText.text = BallSize.ToString();
-        switch (BallSize)
+        SetBallSize(BallSize);
+        AudioSources[3].PlayOneShot(IncreasingBallSize_Audio);
+        Save.BallSize = BallSize;
+        TelSystem.AddLine("Ball size decreased to" + BallSize);
+    }
+
+    public void SetBallSize(int SetSize)
+    {
+        switch (SetSize)
         {
             case 1:
                 PlayerBall.transform.localScale = DefaultBallSize;
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y, PlayerBall.transform.localPosition.z);
                 break;
 
             case 2:
                 PlayerBall.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y + 0.15f, PlayerBall.transform.localPosition.z);
                 break;
 
             case 3:
                 PlayerBall.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y + 0.3f, PlayerBall.transform.localPosition.z);
                 break;
 
             default:
                 Debug.Log("Unexpected Ball Size");
                 break;
-                #region old code
-                /*
-                //Debug.Log(PlayerBall.transform.localScale);
-                int BallSizeNumber = int.Parse(BallSizeText.text);
-                Vector3 MinSize = new Vector3(0.3f, 0.3f, 0.3f);
-                if (PlayerBall.transform.localScale != MinSize)
-                {
-                    PlayerBall.transform.localScale -= new Vector3(0.15f, 0.15f, 0.15f);
-                    PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y - 0.15f, PlayerBall.transform.localPosition.z);
-                    BallSizeNumber--;
-                    BallSizeText.text = BallSizeNumber.ToString();
-                    if (AudioSources[3].isPlaying == true)
-                    {
-                        AudioSources[3].Stop();
-
-                    }
-                    AudioSources[3].PlayOneShot(DecreasingBallSize_Audio);
-                    Save.BallSize = float.Parse(BallSizeText.text);
-                    //TelSystem.AddLine("Ball size decreased to" + PlayerBall.transform.localScale);
-                }
-                */
-                #endregion
+                
         }
     }
+    #endregion
+
     public void Win_PopUp()
     {
         //< Username >, you completed<Name of the game> and popped < number of balloons> to get the max score of < max score > in just < Completed time > !
@@ -562,31 +544,14 @@ public class Activity1Settings : MonoBehaviour
                 AnimTex_Toggle.isOn = false;
             }
 
-            
-            
-        }
-    }
-    /*
-    public void InitialiseData()
-    {
-        if (File.Exists(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = File.Open(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV", FileMode.Open);
-            Save = (ActivityOneSave)bf.Deserialize(fs);
-            fs.Close();
-            Debug.Log("Data Initialised");
+            SetBallSize(Save.BallSize);
 
-            if (Save.AnimatedTexture == true) //set the scene based on the loaded data
-            {
-                AnimTex_Toggle.isOn = true;
-            }
-            else
-            {
-                AnimTex_Toggle.isOn = false;
-            }
+
+            
+            
         }
-        
     }
-    */
+    
+    
+    
 }

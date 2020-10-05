@@ -16879,9 +16879,6 @@ MonoBehaviour:
   Score_Goal: 20
   CompletedTime: 0
   NumberOfBalloonsPopped: 0
-  BallSize: 1
-  DefaultBallSize: {x: 0, y: 0, z: 0}
-  DefaultBallPos: {x: 0, y: 0, z: 0}
   BallSpeedText: {fileID: 81390010}
   WinText: {fileID: 925349159}
   Win_PopUpCanvas: {fileID: 492808686}
@@ -16918,7 +16915,7 @@ MonoBehaviour:
   Save:
     AnimatedTexture: 1
     BallSpeed: 3
-    BallSize: 3
+    BallSize: 1
     Grid: 070000000b000000
     MiniMap: 0
     Mirrors: 1

@@ -9,7 +9,7 @@ public class ActivityOneSave
 
     public float BallSpeed;
 
-    public float BallSize;
+    public int BallSize;
 
     public int[] Grid = new int[2];
 
