@@ -6975,6 +6975,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435095194}
   m_CullTransparentMesh: 0
+--- !u!114 &450766213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2706638762155853069, guid: 989f4a62795b82e448da1b1f8e799264,
+    type: 3}
+  m_PrefabInstance: {fileID: 1067558305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &455512209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2706638762155853069, guid: 989f4a62795b82e448da1b1f8e799264,
+    type: 3}
+  m_PrefabInstance: {fileID: 106168055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &473928742 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
@@ -9187,6 +9211,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2125390867}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &688860168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2706638762155853069, guid: 989f4a62795b82e448da1b1f8e799264,
+    type: 3}
+  m_PrefabInstance: {fileID: 7916736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &699407178 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8473997366412725170, guid: 6a03e6a696a4d45449a657871bf4cbaa,
@@ -16931,6 +16967,9 @@ MonoBehaviour:
   AnimTex_Toggle: {fileID: 4176744178994175046}
   MirrorsGameObject: {fileID: 1100831942}
   MiniMapGameObject: {fileID: 1149603239}
+  ShowGridLines_Toggle: {fileID: 688860168}
+  ShowGridBoxes_Toggle: {fileID: 455512209}
+  Diagonal_Toggle: {fileID: 450766213}
 --- !u!1 &1614871382
 GameObject:
   m_ObjectHideFlags: 0

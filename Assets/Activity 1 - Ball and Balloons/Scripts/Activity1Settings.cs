@@ -77,12 +77,16 @@ public class Activity1Settings : MonoBehaviour
     public bool DiagonalControlsActive;
     public GameObject[] DiagonalControlsObjects;
 
+    [Header("Save Data")]
     public ActivityOneSave Save;
 
     [Header("References related to loading data,if needed")]
     public Toggle AnimTex_Toggle;
     public GameObject MirrorsGameObject;
     public GameObject MiniMapGameObject;
+    public Toggle ShowGridLines_Toggle;
+    public Toggle ShowGridBoxes_Toggle;
+    public Toggle Diagonal_Toggle;
 
     private void Awake()
 
@@ -554,12 +558,15 @@ public class Activity1Settings : MonoBehaviour
             }
             
             SetBallSize(Save.BallSize);
-            /*
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed = Save.BallSpeed;
+            BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString();
+
+            
             Grid.CurrentGrid = Save.CurrentGrid;
+            GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
             //Grid.DeleteGrid(); //temporary otherwise the grid wont change
             //Grid.CreateGrid(); //temporary otherwise the grid wont change
-
+            
             if (Save.MiniMap == true)
             {
                 MiniMapGameObject.SetActive(true);
@@ -579,38 +586,40 @@ public class Activity1Settings : MonoBehaviour
                 MirrorsGameObject.SetActive(false);
             }
 
+
+            
             if (Save.ShowGridLines == true)
             {
-                Grid.GridLinesHidden = true;
-                Grid.ShowHideGridLines();
+                ShowGridLines_Toggle.isOn = true;
+                //Grid.GridLinesHidden = true;
+                //Grid.ShowHideGridLines();
             }
             else
             {
-
-                Grid.GridLinesHidden = false;
-                Grid.ShowHideGridLines();
+                ShowGridLines_Toggle.isOn = false;
+                //Grid.GridLinesHidden = false;
+                //Grid.ShowHideGridLines();
             }
 
+            
             if (Save.ShowGridBoxes == true)
             {
-                Grid.GridBoxesHidden = true;
-                Grid.ShowHideGridBoxes();
+                ShowGridBoxes_Toggle.isOn = true;
             }
             else
             {
-                Grid.GridBoxesHidden = false;
-                Grid.ShowHideGridBoxes();
+                ShowGridBoxes_Toggle.isOn = false;
+                //Grid.GridBoxesHidden = false;
+                //Grid.ShowHideGridBoxes();
             }
-
+            
             if (Save.DiagonalMovement == true)
             {
-                DiagonalControlsActive = false;
-                ToggleDiagonalControls();
+                Diagonal_Toggle.isOn = true;
             }
             else
             {
-                DiagonalControlsActive = true;
-                ToggleDiagonalControls();
+                Diagonal_Toggle.isOn = false;
             }
 
             bool[] MusicStates = new bool[3] {Save.BallSound, Save.BalloonPop, Save.GameMusic};
@@ -630,7 +639,12 @@ public class Activity1Settings : MonoBehaviour
                     AudioSources[i].mute = true;
                     AudioSources[i].volume = MusicVolumes[i];
                 }
-            }*/
+            }
+            
+        }
+        else
+        {
+            Debug.Log("No File Found");
         }
     }
     
