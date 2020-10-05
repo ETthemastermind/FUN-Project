@@ -87,7 +87,8 @@ public class Activity1Settings : MonoBehaviour
     private void Awake()
 
     {
-        //LoadPrefs();
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
     }
     // Start is called before the first frame update
     void Start()
@@ -97,7 +98,7 @@ public class Activity1Settings : MonoBehaviour
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
         Application.targetFrameRate = -1;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        
 
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
@@ -250,13 +251,13 @@ public class Activity1Settings : MonoBehaviour
         switch (name)
         {
             case "BallPassive":
-                Save.BallSoundVolume = NextVolume;
+                Save.BallSoundVolume = AS.volume;
                 break;
             case "BalloonPop":
-                Save.BalloonPop_Volume = NextVolume;
+                Save.BalloonPop_Volume = AS.volume;
                 break;
             case "GameMusic":
-                Save.GameMusic_Volume = NextVolume;
+                Save.GameMusic_Volume = AS.volume;
                 break;
             default:
                 break;
@@ -552,8 +553,8 @@ public class Activity1Settings : MonoBehaviour
             SetBallSize(Save.BallSize);
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed = Save.BallSpeed;
             Grid.CurrentGrid = Save.CurrentGrid;
-            Grid.DeleteGrid(); //temporary otherwise the grid wont change
-            Grid.CreateGrid(); //temporary otherwise the grid wont change
+            //Grid.DeleteGrid(); //temporary otherwise the grid wont change
+            //Grid.CreateGrid(); //temporary otherwise the grid wont change
 
             if (Save.MiniMap == true)
             {
@@ -581,7 +582,6 @@ public class Activity1Settings : MonoBehaviour
             }
             else
             {
-                
 
                 Grid.GridLinesHidden = false;
                 Grid.ShowHideGridLines();
@@ -594,16 +594,39 @@ public class Activity1Settings : MonoBehaviour
             }
             else
             {
-
-
                 Grid.GridBoxesHidden = false;
                 Grid.ShowHideGridBoxes();
             }
 
+            if (Save.DiagonalMovement == true)
+            {
+                DiagonalControlsActive = false;
+                ToggleDiagonalControls();
+            }
+            else
+            {
+                DiagonalControlsActive = true;
+                ToggleDiagonalControls();
+            }
+
+            bool[] MusicStates = new bool[3] {Save.BallSound, Save.BalloonPop, Save.GameMusic};
+            float[] MusicVolumes = new float[3] { Save.BallSoundVolume, Save.BalloonPop_Volume, Save.GameMusic_Volume};
 
 
+            for (int i = 0; i < MusicStates.Length; i++)
+            {
+                if (MusicStates[i] == true)
+                {
+                    AudioSources[i].mute = false;
+                    AudioSources[i].volume = MusicVolumes[i];
+                }
 
-
+                else
+                {
+                    AudioSources[i].mute = true;
+                    AudioSources[i].volume = MusicVolumes[i];
+                }
+            }
         }
     }
     

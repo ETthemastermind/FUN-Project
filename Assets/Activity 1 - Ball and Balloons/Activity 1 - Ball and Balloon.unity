@@ -16866,9 +16866,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bb00d15ee7e35479079d4097f3ad8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerBall: {fileID: 0}
+  PlayerBall: {fileID: 1708170150}
   TelSystem: {fileID: 0}
-  AnimatedTexture: {fileID: 0}
+  AnimatedTexture: {fileID: 1708170152}
   AnimTextureToggle: {fileID: 4176744178994175046}
   BalloonSpawner: {fileID: 0}
   MinBalloons: 4
@@ -16923,11 +16923,11 @@ MonoBehaviour:
     ShowGridBoxes: 1
     DiagonalMovement: 0
     GameMusic: 1
-    GameMusic_Volume: 5
+    GameMusic_Volume: 0.5
     BalloonPop: 1
-    BalloonPop_Volume: 5
+    BalloonPop_Volume: 0.5
     BallSound: 1
-    BallSoundVolume: 5
+    BallSoundVolume: 0.5
   AnimTex_Toggle: {fileID: 4176744178994175046}
   MirrorsGameObject: {fileID: 1100831942}
   MiniMapGameObject: {fileID: 1149603239}
@@ -17935,6 +17935,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1863079897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1708170152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8753386378283065122, guid: 026508a40cc7d7746acfe9ff438c6c79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863079897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708170150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b037f6929491fa04ea87ffa84bd5990f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1708170158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
@@ -22345,6 +22357,7 @@ MonoBehaviour:
   GridBoxesHidden: 0
   FourDirGrid_Tex: {fileID: 2800000, guid: 2c3a9c7a43685fc48aacb9d156b8c32d, type: 3}
   EightDirGrid_Tex: {fileID: 2800000, guid: 1ffee42038c698b4dbd05f06873f0a0a, type: 3}
+  TelSystem: {fileID: 0}
 --- !u!23 &1711813855745011746
 MeshRenderer:
   m_ObjectHideFlags: 0

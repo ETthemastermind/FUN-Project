@@ -43,12 +43,16 @@ public class GridV3 : MonoBehaviour
     public Texture EightDirGrid_Tex;
 
 
-    MasterTelemetrySystem TelSystem;
+    public MasterTelemetrySystem TelSystem;
 
+    public void Awake()
+    {
+        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        
         GridValueArray[0] = GridPos1;
         GridValueArray[1] = GridPos2;
         GridValueArray[2] = GridPos3;
@@ -205,14 +209,14 @@ public class GridV3 : MonoBehaviour
     {
         Material mat = gameObject.GetComponent<Renderer>().material;
         mat.SetTexture("_MainTex", FourDirGrid_Tex);
-        TelSystem.AddLine("Grid set to 4 directional");
+        //TelSystem.AddLine("Grid set to 4 directional");
     }
 
     public void EightDirectionalGrid()
     {
         Material mat = gameObject.GetComponent<Renderer>().material;
         mat.SetTexture("_MainTex", EightDirGrid_Tex);
-        TelSystem.AddLine("Grid set to 8 directional");
+        //TelSystem.AddLine("Grid set to 8 directional");
     }
     /*
     public void ShowHideGrid()
@@ -250,13 +254,13 @@ public class GridV3 : MonoBehaviour
         {
             GridLinesHidden = false;
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            TelSystem.AddLine("Grid lines unhidden");
+            //TelSystem.AddLine("Grid lines unhidden");
         }
         else //if the grid lines arent hidden
         {
             GridLinesHidden = true;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            TelSystem.AddLine("Grid lines hidden");
+            //TelSystem.AddLine("Grid lines hidden");
         }
 
 
@@ -272,7 +276,7 @@ public class GridV3 : MonoBehaviour
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
 
             }
-            TelSystem.AddLine("Grid boxes unhidden");
+            //TelSystem.AddLine("Grid boxes unhidden");
         }
 
         else //if the grid boxes arent hidden
@@ -283,7 +287,7 @@ public class GridV3 : MonoBehaviour
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
 
             }
-            TelSystem.AddLine("Grid boxes hidden");
+            //TelSystem.AddLine("Grid boxes hidden");
         }
     }
 
