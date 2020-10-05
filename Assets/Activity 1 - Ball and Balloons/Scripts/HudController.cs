@@ -74,7 +74,7 @@ public class HudController : MonoBehaviour
         MaxScore = GameController.Score_Goal;
 
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
+        //Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
 
 
     }
@@ -127,12 +127,13 @@ public class HudController : MonoBehaviour
 
     public void ButtonClick(AudioClip SpeechSynth) //play a button click sound effect
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
+        //Camera.main.GetComponent<AudioSource>().PlayOneShot(ButtonClick_SFX);
         if (Canvas_AudioSource.isPlaying == true )
         {
             Canvas_AudioSource.Stop();
             
         }
+        Canvas_AudioSource.PlayOneShot(ButtonClick_SFX);
         Canvas_AudioSource.PlayOneShot(SpeechSynth);
         TelSystem.AddLine(EventSystem.current.currentSelectedGameObject.name + "button clicked");
     }

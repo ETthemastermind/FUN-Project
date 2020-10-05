@@ -10,7 +10,7 @@ public class ProxmityToBalloon : MonoBehaviour
     Vector3[] DDirections = new Vector3[4] { (Vector3.forward + Vector3.right) * 1, (Vector3.forward + Vector3.left) * 1, (Vector3.back + Vector3.right) * 1, (Vector3.back + Vector3.left) * 1 };
     public GameObject PrepareToBang;
     public AudioClip PrepareToBang_Audio;
-    private AudioSource AS;
+    public AudioSource AS;
     public float Distance = 1.5f;
     public LayerMask layerMask;
     public BallControllerV2 BC;
@@ -19,7 +19,7 @@ public class ProxmityToBalloon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AS = Camera.main.GetComponent<AudioSource>();
+        
        
     }
 

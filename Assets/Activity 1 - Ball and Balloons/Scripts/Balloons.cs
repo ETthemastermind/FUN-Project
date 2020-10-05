@@ -25,8 +25,8 @@ public class Balloons : MonoBehaviour
 
         gameObject.transform.Rotate(-90f, 0f,0f); //damn balloon wont spawn in the same orientation that dragging it into the scene shows
 
-        
-        AS = Camera.main.GetComponent<AudioSource>(); //gets the audiosource on the camera object
+
+        AS = GameObject.Find("BalloonPop").GetComponent<AudioSource>(); //gets the audiosource on the camera object
         rb = gameObject.GetComponent<Rigidbody>();
         //StartCoroutine(FallOver());
 

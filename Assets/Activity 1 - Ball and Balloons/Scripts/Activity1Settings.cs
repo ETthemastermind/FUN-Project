@@ -90,7 +90,7 @@ public class Activity1Settings : MonoBehaviour
         Application.targetFrameRate = -1;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
+        //Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
         //NumOfBalloonText.text = NumberOfBalloonsToSpawn.ToString();
 
         //RoundNumber = gameObject.GetComponent<HudController>();
@@ -286,7 +286,7 @@ public class Activity1Settings : MonoBehaviour
         if (PlayerBall.transform.localScale != MinSize)
         {
             PlayerBall.transform.localScale -= new Vector3(0.15f, 0.15f, 0.15f);
-            PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
+            PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y - 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber--;
             BallSizeText.text = BallSizeNumber.ToString();
             if (Canvas_AudioSource.isPlaying == true)
