@@ -221,7 +221,7 @@ MonoBehaviour:
   Material: {fileID: 0}
   TextureSpeed: 4
   Offset: 0
-  Active: 0
+  Active: 1
 --- !u!114 &8695233151433864567
 MonoBehaviour:
   m_ObjectHideFlags: 0

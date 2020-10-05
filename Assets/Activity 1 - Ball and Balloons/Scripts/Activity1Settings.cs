@@ -75,6 +75,8 @@ public class Activity1Settings : MonoBehaviour
 
     public ActivityOneSave Save;
 
+    [Header("References related to loading data")]
+    public Toggle AnimTex_Toggle;
 
     private void Awake()
 
@@ -106,11 +108,11 @@ public class Activity1Settings : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LoadData();
+            LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            InitialiseData();
+            LoadData(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV");
         }
     }
 
@@ -484,18 +486,28 @@ public class Activity1Settings : MonoBehaviour
         Debug.Log("Data Saved");
     }
 
-    public void LoadData()
+    public void LoadData(string path)
     {
-        if (File.Exists(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV"))
+        if (File.Exists(path))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = File.Open(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV", FileMode.Open);
+            FileStream fs = File.Open(path, FileMode.Open);
             Save = (ActivityOneSave)bf.Deserialize(fs);
             fs.Close();
             Debug.Log("Data Loaded");
+            
+            if (Save.AnimatedTexture == true) //set the scene based on the loaded data
+            {
+                AnimTex_Toggle.isOn = true;
+            }
+            else
+            {
+                AnimTex_Toggle.isOn = false;
+            }
+            
         }
     }
-
+    /*
     public void InitialiseData()
     {
         if (File.Exists(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV"))
@@ -505,6 +517,17 @@ public class Activity1Settings : MonoBehaviour
             Save = (ActivityOneSave)bf.Deserialize(fs);
             fs.Close();
             Debug.Log("Data Initialised");
+
+            if (Save.AnimatedTexture == true) //set the scene based on the loaded data
+            {
+                AnimTex_Toggle.isOn = true;
+            }
+            else
+            {
+                AnimTex_Toggle.isOn = false;
+            }
         }
+        
     }
+    */
 }
