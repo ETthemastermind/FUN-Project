@@ -16929,6 +16929,8 @@ MonoBehaviour:
     BallSound: 1
     BallSoundVolume: 5
   AnimTex_Toggle: {fileID: 4176744178994175046}
+  MirrorsGameObject: {fileID: 1100831942}
+  MiniMapGameObject: {fileID: 1149603239}
 --- !u!1 &1614871382
 GameObject:
   m_ObjectHideFlags: 0

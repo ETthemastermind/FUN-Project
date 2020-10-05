@@ -79,8 +79,10 @@ public class Activity1Settings : MonoBehaviour
 
     public ActivityOneSave Save;
 
-    [Header("References related to loading data")]
+    [Header("References related to loading data,if needed")]
     public Toggle AnimTex_Toggle;
+    public GameObject MirrorsGameObject;
+    public GameObject MiniMapGameObject;
 
     private void Awake()
 
@@ -552,6 +554,39 @@ public class Activity1Settings : MonoBehaviour
             Grid.CurrentGrid = Save.CurrentGrid;
             Grid.DeleteGrid(); //temporary otherwise the grid wont change
             Grid.CreateGrid(); //temporary otherwise the grid wont change
+
+            if (Save.MiniMap == true)
+            {
+                MiniMapGameObject.SetActive(true);
+            }
+            else
+            {
+                MiniMapGameObject.SetActive(false);
+            }
+
+
+            if (Save.Mirrors == true)
+            {
+                MirrorsGameObject.SetActive(true);
+            }
+            else
+            {
+                MirrorsGameObject.SetActive(false);
+            }
+
+            if (Save.ShowGridLines == true)
+            {
+                Grid.GridLinesHidden = true;
+                Grid.ShowHideGridLines();
+            }
+            else
+            {
+                
+
+                Grid.GridLinesHidden = false;
+                Grid.ShowHideGridLines();
+            }
+            
 
 
 
