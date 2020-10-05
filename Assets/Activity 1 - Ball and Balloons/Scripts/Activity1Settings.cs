@@ -586,7 +586,20 @@ public class Activity1Settings : MonoBehaviour
                 Grid.GridLinesHidden = false;
                 Grid.ShowHideGridLines();
             }
-            
+
+            if (Save.ShowGridBoxes == true)
+            {
+                Grid.GridBoxesHidden = true;
+                Grid.ShowHideGridBoxes();
+            }
+            else
+            {
+
+
+                Grid.GridBoxesHidden = false;
+                Grid.ShowHideGridBoxes();
+            }
+
 
 
 
