@@ -135,17 +135,6 @@ public class GridV3 : MonoBehaviour
 
             }
         }
-        /*
-        if (GridHidden == true)
-        {
-            for (int i = 0; i < GridGameObjects.Count; i++)
-            {
-                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
-
-            }
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
-        */
 
     }
 
@@ -216,7 +205,7 @@ public class GridV3 : MonoBehaviour
     {
         Material mat = gameObject.GetComponent<Renderer>().material;
         mat.SetTexture("_MainTex", EightDirGrid_Tex);
-        //TelSystem.AddLine("Grid set to 8 directional");
+        TelSystem.AddLine("Grid set to 8 directional");
     }
     /*
     public void ShowHideGrid()
@@ -254,13 +243,13 @@ public class GridV3 : MonoBehaviour
         {
             GridLinesHidden = false;
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            //TelSystem.AddLine("Grid lines unhidden");
+            TelSystem.AddLine("Grid lines unhidden");
         }
         else //if the grid lines arent hidden
         {
             GridLinesHidden = true;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //TelSystem.AddLine("Grid lines hidden");
+            TelSystem.AddLine("Grid lines hidden");
         }
 
 
@@ -276,7 +265,7 @@ public class GridV3 : MonoBehaviour
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
 
             }
-            //TelSystem.AddLine("Grid boxes unhidden");
+            TelSystem.AddLine("Grid boxes unhidden");
         }
 
         else //if the grid boxes arent hidden
@@ -287,7 +276,7 @@ public class GridV3 : MonoBehaviour
                 GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
 
             }
-            //TelSystem.AddLine("Grid boxes hidden");
+            TelSystem.AddLine("Grid boxes hidden");
         }
     }
 

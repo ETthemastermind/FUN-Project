@@ -336,7 +336,7 @@ public class Activity1Settings : MonoBehaviour
     }
     #endregion
 
-    #region Functions related to ball speed
+    #region Functions related to ball size
     public void IncreaseBallSize()
     {
         BallSize++;
@@ -344,7 +344,6 @@ public class Activity1Settings : MonoBehaviour
         {
             BallSize = 3;
         }
-        BallSizeText.text = BallSize.ToString();
         SetBallSize(BallSize);
         if (AudioSources[3].isPlaying == true)
         {
@@ -352,7 +351,7 @@ public class Activity1Settings : MonoBehaviour
 
         }
         AudioSources[3].PlayOneShot(IncreasingBallSize_Audio);
-        Save.BallSize = BallSize;
+ 
         TelSystem.AddLine("Ball size increased to" + BallSize);
         #region old version
         /*
@@ -385,10 +384,9 @@ public class Activity1Settings : MonoBehaviour
         {
             BallSize = 1;
         }
-        BallSizeText.text = BallSize.ToString();
+        
         SetBallSize(BallSize);
         AudioSources[3].PlayOneShot(IncreasingBallSize_Audio);
-        Save.BallSize = BallSize;
         TelSystem.AddLine("Ball size decreased to" + BallSize);
     }
 
@@ -397,18 +395,21 @@ public class Activity1Settings : MonoBehaviour
         switch (SetSize)
         {
             case 1:
-                PlayerBall.transform.localScale = DefaultBallSize;
-                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y, PlayerBall.transform.localPosition.z);
+                PlayerBall.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, 0.3f, PlayerBall.transform.localPosition.z);
+                BallSize = 1;
                 break;
 
             case 2:
                 PlayerBall.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
-                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y + 0.15f, PlayerBall.transform.localPosition.z);
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, 0.3f + 0.15f, PlayerBall.transform.localPosition.z);
+                BallSize = 2;
                 break;
 
             case 3:
                 PlayerBall.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, DefaultBallPos.y + 0.3f, PlayerBall.transform.localPosition.z);
+                PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, 0.3f + 0.3f, PlayerBall.transform.localPosition.z);
+                BallSize = 3;
                 break;
 
             default:
@@ -416,6 +417,8 @@ public class Activity1Settings : MonoBehaviour
                 break;
                 
         }
+        BallSizeText.text = BallSize.ToString();
+        Save.BallSize = BallSize;
     }
     #endregion
 
@@ -549,8 +552,9 @@ public class Activity1Settings : MonoBehaviour
             {
                 AnimTex_Toggle.isOn = false;
             }
-
+            
             SetBallSize(Save.BallSize);
+            /*
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed = Save.BallSpeed;
             Grid.CurrentGrid = Save.CurrentGrid;
             //Grid.DeleteGrid(); //temporary otherwise the grid wont change
@@ -626,7 +630,7 @@ public class Activity1Settings : MonoBehaviour
                     AudioSources[i].mute = true;
                     AudioSources[i].volume = MusicVolumes[i];
                 }
-            }
+            }*/
         }
     }
     
