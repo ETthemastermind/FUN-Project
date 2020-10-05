@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class ReplayTelemetry : MonoBehaviour
 {
-    public EyetrackingDataSave EDS;
-
-    public GameObject LastPressedButton;
+    //public EyetrackingDataSave EDS;
+    public EyetrackingDataSave[] EDS_Array;
+    int i = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,19 +22,34 @@ public class ReplayTelemetry : MonoBehaviour
 
     public void Data()
     {
+        EyetrackingDataSave EDS = new EyetrackingDataSave();
         EDS.MouseX = Input.mousePosition.x;
         EDS.MouseY = Input.mousePosition.y;
-        if (LastPressedButton == EventSystem.current.currentSelectedGameObject)
-        {
-            EDS.ButtonPressed = null;
-        }
-        else
-        {
-            EDS.ButtonPressed = EventSystem.current.currentSelectedGameObject;
-            LastPressedButton = EventSystem.current.currentSelectedGameObject;
-
-
-        }
+        EDS.ButtonPressed = null;
+        EDS_Array[i] = EDS;
+        i++;
+        /*
+        EDS.MouseX = Input.mousePosition.x;
+        EDS.MouseY = Input.mousePosition.y;
         
+        //EDS_List.Add(EDS);
+        */
+
+
     }
+    
+    public void DatawithButtonPress(GameObject ButtonPress)
+    {
+        EyetrackingDataSave EDS = new EyetrackingDataSave();
+        EDS.MouseX = Input.mousePosition.x;
+        EDS.MouseY = Input.mousePosition.y;
+        EDS.ButtonPressed = ButtonPress;
+        EDS_Array[i] = EDS;
+        i++;
+
+
+
+
+    }
+    
 }
