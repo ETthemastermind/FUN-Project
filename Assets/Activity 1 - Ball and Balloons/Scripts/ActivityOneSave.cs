@@ -11,7 +11,7 @@ public class ActivityOneSave
 
     public int BallSize;
 
-    public int[] Grid = new int[2];
+    public int CurrentGrid;
 
 
     public bool MiniMap;

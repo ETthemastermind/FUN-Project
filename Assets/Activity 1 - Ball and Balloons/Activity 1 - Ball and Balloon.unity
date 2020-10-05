@@ -16916,7 +16916,7 @@ MonoBehaviour:
     AnimatedTexture: 1
     BallSpeed: 3
     BallSize: 1
-    Grid: 070000000b000000
+    CurrentGrid: 2
     MiniMap: 0
     Mirrors: 1
     ShowGridLines: 1

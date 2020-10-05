@@ -286,6 +286,8 @@ public class Activity1Settings : MonoBehaviour
 
     }
 
+    #region Functions related to ball speed
+
     public void IncreaseBallSpeed() //function to increase the ball speed
     {
         if (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed == 5) //if the current speed of the ball is 5
@@ -329,6 +331,8 @@ public class Activity1Settings : MonoBehaviour
         }
 
     }
+    #endregion
+
     #region Functions related to ball speed
     public void IncreaseBallSize()
     {
@@ -441,8 +445,8 @@ public class Activity1Settings : MonoBehaviour
 
         }
         AudioSources[3].PlayOneShot(IncreasingGridSize_Audio);
-        Save.Grid[0] = Grid.Height;
-        Save.Grid[1] = Grid.Width;
+        Save.CurrentGrid = Grid.CurrentGrid;
+        
         //TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
@@ -458,8 +462,7 @@ public class Activity1Settings : MonoBehaviour
 
         }
         AudioSources[3].PlayOneShot(DecreasingGridSize_Audio);
-        Save.Grid[0] = Grid.Height;
-        Save.Grid[1] = Grid.Width;
+        Save.CurrentGrid = Grid.CurrentGrid;
         //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
@@ -545,10 +548,14 @@ public class Activity1Settings : MonoBehaviour
             }
 
             SetBallSize(Save.BallSize);
+            PlayerBall.GetComponent<BallControllerV2>().LerpSpeed = Save.BallSpeed;
+            Grid.CurrentGrid = Save.CurrentGrid;
+            Grid.DeleteGrid(); //temporary otherwise the grid wont change
+            Grid.CreateGrid(); //temporary otherwise the grid wont change
 
 
-            
-            
+
+
         }
     }
     
