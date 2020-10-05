@@ -23,13 +23,15 @@ public class ActivityOneSave
     public bool DiagonalMovement;
 
     public bool GameMusic;
-    public int GameMusic_Volume;
+    public float GameMusic_Volume;
 
     public bool BalloonPop;
-    public int BalloonPop_Volume;
+    public float BalloonPop_Volume;
 
     public bool BallSound;
-    public int BallSoundVolume;
+    public float BallSoundVolume;
+
+    
 
     
 

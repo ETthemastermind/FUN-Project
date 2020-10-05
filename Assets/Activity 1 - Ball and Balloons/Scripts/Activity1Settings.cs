@@ -58,8 +58,8 @@ public class Activity1Settings : MonoBehaviour
 
 
     [Header("AudioClips")]
-    public AudioSource Canvas_AudioSource;
-
+    public AudioSource[] AudioSources;
+    
     public AudioClip IncreasingBallSpeed_Audio;
     public AudioClip DecreasingBallSpeed_Audio;
 
@@ -183,12 +183,46 @@ public class Activity1Settings : MonoBehaviour
             Debug.Log("Turning Sound on component off");
             TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned off");
 
+            string name = AS.gameObject.name;
+            switch (name)
+            {
+                case "BallPassive":
+                    Save.BallSound = false;
+                    break;
+                case "BalloonPop":
+                    Save.BalloonPop = false;
+                    break;
+                case "GameMusic":
+                    Save.GameMusic = false;
+                    break;
+                default:
+                    Debug.Log("Unexpected name in the baggage area");
+                    break;
+            }
         }
+        
         else //therefore if its unmuted
         {
             AS.mute = false; //unmute
             Debug.Log("Turning Sound on component on");
             TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned on");
+
+            string name = AS.gameObject.name;
+            switch (name)
+            {
+                case "BallPassive":
+                    Save.BallSound = true;
+                    break;
+                case "BalloonPop":
+                    Save.BalloonPop = true;
+                    break;
+                case "GameMusic":
+                    Save.GameMusic = true;
+                    break;
+                default:
+                    Debug.Log("Unexpected name in the baggage area");
+                    break;
+            }
         }
     }
 
@@ -199,7 +233,22 @@ public class Activity1Settings : MonoBehaviour
         AS.volume = NextVolume; //set the next volume
         //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
         TelSystem.AddLine("Volume increased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
-      
+        string name = AS.gameObject.name;
+        switch (name)
+        {
+            case "BallPassive":
+                Save.BallSoundVolume = NextVolume;
+                break;
+            case "BalloonPop":
+                Save.BalloonPop_Volume = NextVolume;
+                break;
+            case "GameMusic":
+                Save.GameMusic_Volume = NextVolume;
+                break;
+            default:
+                break;
+        }
+
     }
     public void DecreaseVolume(AudioSource AS) //same as above but - instead of +
     {
@@ -208,6 +257,21 @@ public class Activity1Settings : MonoBehaviour
         AS.volume = NextVolume;
         //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
         TelSystem.AddLine("Volume decreased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
+        string name = AS.gameObject.name;
+        switch (name)
+        {
+            case "BallPassive":
+                Save.BallSoundVolume = NextVolume;
+                break;
+            case "BalloonPop":
+                Save.BalloonPop_Volume = NextVolume;
+                break;
+            case "GameMusic":
+                Save.GameMusic_Volume = NextVolume;
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -221,12 +285,12 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed++; //increment the ball speed
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString(); //update the text component
-            if (Canvas_AudioSource.isPlaying == true)
+            if (AudioSources[3].isPlaying == true)
             {
-                Canvas_AudioSource.Stop();
+                AudioSources[3].Stop();
 
             }
-            Canvas_AudioSource.PlayOneShot(IncreasingBallSpeed_Audio);
+            AudioSources[3].PlayOneShot(IncreasingBallSpeed_Audio);
             Save.BallSpeed = PlayerBall.GetComponent<BallControllerV2>().LerpSpeed; //set the ball speed
             TelSystem.AddLine("Ball speed increased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
             
@@ -243,12 +307,12 @@ public class Activity1Settings : MonoBehaviour
         {
             PlayerBall.GetComponent<BallControllerV2>().LerpSpeed--;
             BallSpeedText.text = (PlayerBall.GetComponent<BallControllerV2>().LerpSpeed).ToString();
-            if (Canvas_AudioSource.isPlaying == true)
+            if (AudioSources[3].isPlaying == true)
             {
-                Canvas_AudioSource.Stop();
+                AudioSources[3].Stop();
 
             }
-            Canvas_AudioSource.PlayOneShot(DecreasingBallSpeed_Audio);
+            AudioSources[3].PlayOneShot(DecreasingBallSpeed_Audio);
             Save.BallSpeed = PlayerBall.GetComponent<BallControllerV2>().LerpSpeed; //set the ball speed
             TelSystem.AddLine("Ball speed decreased to " + PlayerBall.GetComponent<BallControllerV2>().LerpSpeed);
         }
@@ -267,12 +331,12 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y + 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber++;
             BallSizeText.text = BallSizeNumber.ToString();
-            if (Canvas_AudioSource.isPlaying == true)
+            if (AudioSources[3].isPlaying == true)
             {
-                Canvas_AudioSource.Stop();
+                AudioSources[3].Stop();
 
             }
-            Canvas_AudioSource.PlayOneShot(IncreasingBallSize_Audio);
+            AudioSources[3].PlayOneShot(IncreasingBallSize_Audio);
             Save.BallSize = float.Parse(BallSizeText.text);
             //TelSystem.AddLine("Ball size increased to" + PlayerBall.transform.localScale);
         }
@@ -289,18 +353,16 @@ public class Activity1Settings : MonoBehaviour
             PlayerBall.transform.localPosition = new Vector3(PlayerBall.transform.localPosition.x, PlayerBall.transform.localPosition.y - 0.15f, PlayerBall.transform.localPosition.z);
             BallSizeNumber--;
             BallSizeText.text = BallSizeNumber.ToString();
-            if (Canvas_AudioSource.isPlaying == true)
+            if (AudioSources[3].isPlaying == true)
             {
-                Canvas_AudioSource.Stop();
+                AudioSources[3].Stop();
 
             }
-            Canvas_AudioSource.PlayOneShot(DecreasingBallSize_Audio);
+            AudioSources[3].PlayOneShot(DecreasingBallSize_Audio);
             Save.BallSize = float.Parse(BallSizeText.text);
             //TelSystem.AddLine("Ball size decreased to" + PlayerBall.transform.localScale);
         }
-    }
-
-    
+    } 
 
     public void Win_PopUp()
     {
@@ -325,12 +387,12 @@ public class Activity1Settings : MonoBehaviour
         Grid.NextGrid();
         TelSystem.AddLine("Increase grid size button pressed");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-        if (Canvas_AudioSource.isPlaying == true)
+        if (AudioSources[3].isPlaying == true)
         {
-            Canvas_AudioSource.Stop();
+            AudioSources[3].Stop();
 
         }
-        Canvas_AudioSource.PlayOneShot(IncreasingGridSize_Audio);
+        AudioSources[3].PlayOneShot(IncreasingGridSize_Audio);
         Save.Grid[0] = Grid.Height;
         Save.Grid[1] = Grid.Width;
         //TelSystem.AddLine("Grid increased to" + GridText.text);
@@ -342,32 +404,17 @@ public class Activity1Settings : MonoBehaviour
         Grid.LastGrid();
         TelSystem.AddLine("Decrease grid size button pressed");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-        if (Canvas_AudioSource.isPlaying == true)
+        if (AudioSources[3].isPlaying == true)
         {
-            Canvas_AudioSource.Stop();
+            AudioSources[3].Stop();
 
         }
-        Canvas_AudioSource.PlayOneShot(DecreasingGridSize_Audio);
+        AudioSources[3].PlayOneShot(DecreasingGridSize_Audio);
         Save.Grid[0] = Grid.Height;
         Save.Grid[1] = Grid.Width;
         //TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
-    /*
-    public void ShowHideGrid()
-    {
-        Grid.ShowHideGrid();
-        if (Grid.GridHidden == true)
-        {
-            Save.ShownGrid = false;
-        }
-        else
-        {
-            Save.ShownGrid = true;
-        }
-        
-    }
-    */
     public void ShowHideGridLines()
     {
         Grid.ShowHideGridLines();
@@ -393,7 +440,6 @@ public class Activity1Settings : MonoBehaviour
             Save.ShowGridBoxes = true;
         }
     }
-
 
     public void ToggleDiagonalControls()
     {
@@ -421,16 +467,5 @@ public class Activity1Settings : MonoBehaviour
             TelSystem.AddLine("Diagonal controls activated");
         }
     }
-
-
-    
-
-
-
-
-
-
-
-
 
 }
