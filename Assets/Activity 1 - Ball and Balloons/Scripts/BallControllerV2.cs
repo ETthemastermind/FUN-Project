@@ -471,7 +471,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
-            //FauxRotFunc(FauxRot);
+            FauxRotFunc(FauxRot);
             yield return new WaitForEndOfFrame();
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false

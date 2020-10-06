@@ -11,7 +11,8 @@ public class ProxmityToBalloon : MonoBehaviour
     public GameObject PrepareToBang;
     public AudioClip PrepareToBang_Audio;
     public AudioSource AS;
-    public float Distance = 1.5f;
+    public float SDistance = 1.5f;
+    public float DDistance = 3f;
     public LayerMask layerMask;
     public BallControllerV2 BC;
     public Activity1Settings ActSet;
@@ -53,8 +54,9 @@ public class ProxmityToBalloon : MonoBehaviour
         BalloonFound = false;
         PrepareToBang.SetActive(false);
 
-        Vector3[] Directions;
 
+        #region old code
+        /*
         if (ActSet.DiagonalControlsActive == false) //if the diagonal controls arent active
         {
             Directions = new Vector3[4];
@@ -67,12 +69,13 @@ public class ProxmityToBalloon : MonoBehaviour
             Directions = SDirections.Concat(DDirections).ToArray();
             Distance = 3f;
         }
-
-        for (int i = 0; i < Directions.Length; i++)
+        */
+#endregion
+        for (int i = 0; i < SDirections.Length; i++)
         {
             //Debug.Log(Directions[i]);
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Directions[i], out hit, Distance, layerMask))
+            if (Physics.Raycast(transform.position, SDirections[i], out hit, SDistance, layerMask))
             {
                 
                 Debug.Log(hit.transform.name);
@@ -88,7 +91,28 @@ public class ProxmityToBalloon : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("No balloon in proximity");
+                    Debug.Log("No balloon in proximity - 4 Directional");
+                }
+            }
+            if (ActSet.DiagonalControlsActive == true)
+            {
+                if (Physics.Raycast(transform.position, DDirections[i], out hit, DDistance, layerMask))
+                {
+                    Debug.Log(hit.transform.name);
+                    if (hit.transform.tag == "Balloon")
+                    {
+                        Debug.Log("Balloon in Proximity");
+                        BalloonFound = true;
+                        PrepareToBang.SetActive(true); //activate the prepare to bang graphic
+                        if (AS.isPlaying == false) //if the audiosource is not playing
+                        {
+                            AS.PlayOneShot(PrepareToBang_Audio); //play the prepare to bang audio
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("No balloon in proximity - 8 Directional");
+                    }
                 }
             }
 
