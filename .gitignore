@@ -43,6 +43,7 @@ ExportedObj/
 *.opendb
 *.VC.db
 *.csv
+*.FUNREPLAY
 
 
 # Unity3D generated meta files
@@ -50,6 +51,7 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 *.csv.meta
+*.FUNREPLAY.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
