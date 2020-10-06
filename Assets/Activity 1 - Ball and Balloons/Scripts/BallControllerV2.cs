@@ -12,7 +12,7 @@ public class BallControllerV2 : MonoBehaviour
     public bool _BallMoving; //bool to check if the ball is moving
     public float RotSpeed = 500f; //speed at which the ball rotates
     public bool _InBoundary = false;
-    private AudioSource AS;
+    public AudioSource AS;
     public AudioClip BoundaryHit;
     public ParticleSystem WallCollisionFX;
     public MasterTelemetrySystem TelSystem;
@@ -25,7 +25,7 @@ public class BallControllerV2 : MonoBehaviour
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        AS = Camera.main.GetComponent<AudioSource>();
+        
         
     }
 
