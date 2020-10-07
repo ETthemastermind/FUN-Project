@@ -22410,7 +22410,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517539527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87295a872eeb6684a81ec8d6e42f4a68, type: 3}
   m_Name: 
@@ -25032,6 +25032,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b037f6929491fa04ea87ffa84bd5990f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1708170157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708170150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec560f25484264f44a18ac2a5227bd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActSet: {fileID: 0}
+  Grid: {fileID: 0}
+  BalloonFound: 0
+  CurrentGridCoords: {x: 0, y: 0}
+  FourDirArray_Coords:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  EightDirArray_Coords:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  PrepareToBang: {fileID: 49134804}
+  PrepareToBang_Audio: {fileID: 8300000, guid: 49469f95b9c5fb34fb24fe3d9a1c50ed, type: 3}
+  AS: {fileID: 405778073}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &1708170158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6874047829863201470, guid: 026508a40cc7d7746acfe9ff438c6c79,
@@ -25054,29 +25086,6 @@ MonoBehaviour:
   _HUDController: {fileID: 1606569991}
   TelSystem: {fileID: 0}
   Ball: {fileID: 0}
---- !u!114 &1708170160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708170150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd67261afb7b7194c9220d544402a246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BalloonFound: 0
-  PrepareToBang: {fileID: 49134804}
-  PrepareToBang_Audio: {fileID: 8300000, guid: 49469f95b9c5fb34fb24fe3d9a1c50ed, type: 3}
-  AS: {fileID: 405778073}
-  SDistance: 1.5
-  DDistance: 3
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  BC: {fileID: 0}
-  ActSet: {fileID: 1606569994}
 --- !u!114 &1708170161 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
@@ -27504,7 +27513,7 @@ PrefabInstance:
         type: 3}
       propertyPath: RunAfterMove.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1708170160}
+      objectReference: {fileID: 1708170157}
     - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: layerMask.m_Bits
