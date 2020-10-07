@@ -14,12 +14,16 @@ public class MasterTelemetrySystem : MonoBehaviour
     public string FilePath;
     public string LineToWrite;
     // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         if (TelemetryActive == true) //if the telemetry system is wanted to run
         {
             CreateFile(); //run the create file function
         }
+    }
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

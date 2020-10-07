@@ -6,14 +6,17 @@ public class ActivityOneBallFunctions : MonoBehaviour
 {
     public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
     public GameObject _HUDController;
+    public GridV3 Grid;
     public MasterTelemetrySystem TelSystem;
-
+    public GameObject StartGO;
     public BallControllerV2 Ball;
     // Start is called before the first frame update
     void Start()
     {
         Ball = this.GetComponent<BallControllerV2>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
+        
     }
 
     // Update is called once per frame
@@ -49,5 +52,25 @@ public class ActivityOneBallFunctions : MonoBehaviour
         }
     }
     */
-    
+
+    /*
+    public void BallToStart()
+    {
+        Debug.Log(Grid.Width);
+        int StartPosX = (Grid.Width + 1) / 2;
+        int StartPosY = 2;
+        Vector2 Start = new Vector2(StartPosX, StartPosY);
+        Debug.Log(Start);
+        for (int i = 0; i < Grid.GridGameObjects.Count; i++)
+        {
+            GridAttributes GA = Grid.GridGameObjects[i].GetComponent<GridAttributes>();
+            if (GA.GridCoords == Start)
+            {
+                StartGO = Grid.GridGameObjects[i];
+                //transform.position = Grid.GridGameObjects[i].transform.position;
+
+            }
+        }
+    }
+    */
 }

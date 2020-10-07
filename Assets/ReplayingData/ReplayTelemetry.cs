@@ -12,7 +12,7 @@ public class ReplayTelemetry : MonoBehaviour
     public EyetrackingDataSave[] EDS_Array;
     int i = 0;
     private bool TelemetryActive;
-    
+    //public string FileName;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,8 +79,18 @@ public class ReplayTelemetry : MonoBehaviour
         if (TelemetryActive == true)
         {
             Debug.Log("Data Pushed");
+            string ID = gameObject.GetComponent<MasterTelemetrySystem>().ID;
+            string FileName = "/" + ID + ".FUNREPLAY";
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Create(Application.streamingAssetsPath + "/Replay Files" + FileName);
+            bf.Serialize(fs, EDS_Array);
+            fs.Close();
             Array.Clear(EDS_Array, 0, EDS_Array.Length);
+            
+
+
         }
+
 
     }
 
@@ -94,5 +104,6 @@ public class ReplayTelemetry : MonoBehaviour
         fs.Close();
 
     }
+
     
 }
