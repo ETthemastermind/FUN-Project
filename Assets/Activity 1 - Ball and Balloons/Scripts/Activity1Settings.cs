@@ -23,7 +23,7 @@ public class Activity1Settings : MonoBehaviour
     // reset button
 
     //Number of Balloons per round
-    public BalloonSpawnerV2 BalloonSpawner;
+    public BalloonSpawnerV3 BalloonSpawner;
     public int MinBalloons;
     public int MaxBalloons;
     public TMP_Text NumOfBalloonText;
@@ -99,7 +99,7 @@ public class Activity1Settings : MonoBehaviour
     {
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
-        BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV2>();
+        BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV3>();
         Application.targetFrameRate = -1;
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
         
@@ -456,8 +456,8 @@ public class Activity1Settings : MonoBehaviour
         }
         AudioSources[3].PlayOneShot(IncreasingGridSize_Audio);
         Save.CurrentGrid = Grid.CurrentGrid;
-        
-        //TelSystem.AddLine("Grid increased to" + GridText.text);
+        BalloonSpawner.ResetBalloons();
+        TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
     public void GridDown()
@@ -473,7 +473,8 @@ public class Activity1Settings : MonoBehaviour
         }
         AudioSources[3].PlayOneShot(DecreasingGridSize_Audio);
         Save.CurrentGrid = Grid.CurrentGrid;
-        //TelSystem.AddLine("Grid decreased to" + GridText.text);
+        BalloonSpawner.ResetBalloons();
+        TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
 
     public void ShowHideGridLines()

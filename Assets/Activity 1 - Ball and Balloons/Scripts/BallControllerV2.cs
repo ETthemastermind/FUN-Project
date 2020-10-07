@@ -18,7 +18,7 @@ public class BallControllerV2 : MonoBehaviour
     public MasterTelemetrySystem TelSystem;
 
     public Vector3 HitLocation;
-
+    public GameObject CurrentGridGO;
     public UnityEvent RunAfterMove = new UnityEvent();
     public UnityEvent RunBeforeMove = new UnityEvent();
     // Start is called before the first frame update
@@ -71,6 +71,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube") //if the hit object has the grid cube tag
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true; // the ball is now moving
                     Transform HT = hit.transform; //reference for the transform of the hit object
                     Vector3 Target; //reference for a vector3 called target
@@ -114,6 +115,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -156,6 +158,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -194,6 +197,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -235,6 +239,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -271,6 +276,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -307,6 +313,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;
@@ -344,6 +351,7 @@ public class BallControllerV2 : MonoBehaviour
             {
                 if (hit.transform.tag == "GridCube")
                 {
+                    CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
                     Vector3 Target;

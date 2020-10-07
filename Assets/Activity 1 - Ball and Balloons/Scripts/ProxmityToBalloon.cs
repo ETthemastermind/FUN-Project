@@ -16,7 +16,7 @@ public class ProxmityToBalloon : MonoBehaviour
     public LayerMask layerMask;
     public BallControllerV2 BC;
     public Activity1Settings ActSet;
-
+    public bool test;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +38,21 @@ public class ProxmityToBalloon : MonoBehaviour
     {
         
         Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.localPosition + SDirections[0], 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + SDirections[1], 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + SDirections[2], 0.1f);
+        Gizmos.DrawWireSphere(transform.localPosition + SDirections[3], 0.1f);
+
         Gizmos.DrawWireSphere(transform.localPosition + DDirections[0], 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + DDirections[1], 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + DDirections[2], 0.1f);
         Gizmos.DrawWireSphere(transform.localPosition + DDirections[3], 0.1f);
+
         
     }
     */
+    
     
 
     public void BalloonProxCheck()
@@ -53,8 +61,6 @@ public class ProxmityToBalloon : MonoBehaviour
         Debug.Log("running the balloon prox check");
         BalloonFound = false;
         PrepareToBang.SetActive(false);
-
-
         #region old code
         /*
         if (ActSet.DiagonalControlsActive == false) //if the diagonal controls arent active
@@ -77,8 +83,16 @@ public class ProxmityToBalloon : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, SDirections[i], out hit, SDistance, layerMask))
             {
-                
-                Debug.Log(hit.transform.name);
+                Debug.Log("Balloon in Proximity");
+                BalloonFound = true;
+                PrepareToBang.SetActive(true); //activate the prepare to bang graphic
+                if (AS.isPlaying == false) //if the audiosource is not playing
+                {
+                    AS.PlayOneShot(PrepareToBang_Audio); //play the prepare to bang audio
+                }
+                #region old code
+                /*
+                Debug.Log("boop" + hit.transform.name);
                 if (hit.transform.tag == "Balloon")
                 {
                     Debug.Log("Balloon in Proximity");
@@ -93,7 +107,11 @@ public class ProxmityToBalloon : MonoBehaviour
                 {
                     Debug.Log("No balloon in proximity - 4 Directional");
                 }
+                */
+                #endregion
             }
+            #region disabled diag
+            /*
             if (ActSet.DiagonalControlsActive == true)
             {
                 if (Physics.Raycast(transform.position, DDirections[i], out hit, DDistance, layerMask))
@@ -115,10 +133,13 @@ public class ProxmityToBalloon : MonoBehaviour
                     }
                 }
             }
-
+            */
+            #endregion
 
         }
+
         
+
 
 
 

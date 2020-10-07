@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class GridV3 : MonoBehaviour
@@ -103,8 +104,7 @@ public class GridV3 : MonoBehaviour
             GridAttributes GA = G.GetComponent<GridAttributes>();
             if (CurrentY != Height + 1)
             {
-                GA.X = CurrentX;
-                GA.Y = CurrentY;
+                GA.GridCoords = new Vector2(CurrentX,CurrentY);
                 CurrentY++;
 
             }
@@ -112,8 +112,7 @@ public class GridV3 : MonoBehaviour
             {
                 CurrentY = 1;
                 CurrentX++;
-                GA.X = CurrentX;
-                GA.Y = CurrentY;
+                GA.GridCoords = new Vector2(CurrentX, CurrentY);
                 CurrentY++;
 
             }

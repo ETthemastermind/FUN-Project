@@ -90,4 +90,13 @@ public class BalloonSpawnerV3 : MonoBehaviour
 
 
     }
+
+    public void ResetBalloons()
+    {
+        for (int i = 0; i < SpawnedBalloons.Length; i++)
+        {
+            Destroy(SpawnedBalloons[i]);
+        }
+    }
+    
 }

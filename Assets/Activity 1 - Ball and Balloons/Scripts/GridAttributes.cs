@@ -5,8 +5,7 @@ using UnityEngine;
 public class GridAttributes : MonoBehaviour
 {
 
-    public int X;
-    public int Y;
+    public Vector2 GridCoords;
     // Start is called before the first frame update
     void Start()
     {
