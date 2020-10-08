@@ -31351,7 +31351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CanvasList.Array.data[0]
       value: 
-      objectReference: {fileID: 61883984}
+      objectReference: {fileID: 548300390}
     - target: {fileID: 2630984397203733294, guid: 74358bec71557294caba118b1df0d88c,
         type: 3}
       propertyPath: CanvasList.Array.data[1]
