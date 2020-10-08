@@ -10,8 +10,9 @@ public class ActivityOneBallFunctions : MonoBehaviour
     public GridV3 Grid;
     public MasterTelemetrySystem TelSystem;
     public BallControllerV2 Ball;
-
-    public Collider[] GridInProx;
+    public List<GameObject> Test;
+    public GameObject NearestGrid;
+    public List<GameObject> GridInProx;
     public LayerMask layermask;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,12 @@ public class ActivityOneBallFunctions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            ClearGrid();
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReposBall();
         }
     }
     public void OnCollisionEnter(Collision collision)
@@ -48,52 +54,22 @@ public class ActivityOneBallFunctions : MonoBehaviour
         
     }
 
-    public void ReposBall()
+    public void ReposBall() //https://answers.unity.com/questions/122936/find-nearest-object-using-physicsoverlapsphere.html
     {
         Debug.Log("Repositioning Ball");
-        //Array.Clear(GridInProx, 0, GridInProx.Length);
-        GridInProx = Physics.OverlapSphere(transform.position, 1, layermask);
-        GameObject ChosenGrid = GridInProx[0].gameObject;
-        Vector3 Destination = new Vector3(ChosenGrid.transform.position.x, transform.position.y, ChosenGrid.transform.position.z);
-        transform.position = Destination;
-    }
-
-    public void ClearGrid()
-    {
-        Array.Clear(GridInProx, 0, GridInProx.Length);
-    }
-
-    /*
-
-    
-    public void OnTriggerStay(Collider other) //when the ball stays in a trigger area
-    {
-        if (other.gameObject.tag == "Boundary") //if trigger area entered belongs to the boundary wall
+        float distance;
+        float nearestDistance = float.MaxValue;
+        foreach (GameObject grid in Grid.GridGameObjects)
         {
-            Debug.Log("Boundary Hit");
-            Ball.HapticFeedback(); //run the haptic feedback function
-        }
-    }
-    */
-
-    /*
-    public void BallToStart()
-    {
-        Debug.Log(Grid.Width);
-        int StartPosX = (Grid.Width + 1) / 2;
-        int StartPosY = 2;
-        Vector2 Start = new Vector2(StartPosX, StartPosY);
-        Debug.Log(Start);
-        for (int i = 0; i < Grid.GridGameObjects.Count; i++)
-        {
-            GridAttributes GA = Grid.GridGameObjects[i].GetComponent<GridAttributes>();
-            if (GA.GridCoords == Start)
+            distance = (transform.position - grid.transform.position).sqrMagnitude;
+            if (distance < nearestDistance)
             {
-                StartGO = Grid.GridGameObjects[i];
-                //transform.position = Grid.GridGameObjects[i].transform.position;
-
+                nearestDistance = distance;
+                NearestGrid = grid;
             }
         }
+
+        Vector3 Destination = new Vector3(NearestGrid.transform.position.x, transform.position.y, NearestGrid.transform.position.z);
+        transform.position = Destination;
     }
-    */
 }

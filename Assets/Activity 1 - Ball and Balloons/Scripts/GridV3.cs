@@ -7,7 +7,7 @@ using System;
 public class GridV3 : MonoBehaviour
 {
     public List<GameObject> GridGameObjects = new List<GameObject>();
-
+    public GameObject PlayerBall;
     public float[] CurrentGridParam;
 
     [Header("FromVid - changing these value does nothing, its just for debug")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
@@ -48,6 +48,7 @@ public class GridV3 : MonoBehaviour
     public void InitGridValues()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
+        PlayerBall = GameObject.FindGameObjectWithTag("Player");
         GridValueArray[0] = GridPos1;
         GridValueArray[1] = GridPos2;
         GridValueArray[2] = GridPos3;
@@ -121,6 +122,7 @@ public class GridV3 : MonoBehaviour
 
 
         }
+        
         Material gridLines = gameObject.GetComponent<Renderer>().material;
         gridLines.mainTextureScale = new Vector2(Height, Width);
         if (GridLinesHidden == true)
@@ -136,6 +138,8 @@ public class GridV3 : MonoBehaviour
 
             }
         }
+
+        
 
     }
 

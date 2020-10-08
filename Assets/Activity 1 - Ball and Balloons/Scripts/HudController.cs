@@ -10,7 +10,7 @@ public class HudController : MonoBehaviour
 {
     public MasterTelemetrySystem TelSystem;
     public AudioSource Canvas_AudioSource;
-    
+    public GameObject Player;
     public TextMeshProUGUI ScoreText; //reference to the score text
     public TextMeshProUGUI Timer; //reference to the timer text
 
@@ -72,7 +72,7 @@ public class HudController : MonoBehaviour
         Time.timeScale = 1; //makes sure that time scale for this scene is set to 1
         GameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>();
         MaxScore = GameController.Score_Goal;
-
+        Player = GameObject.FindGameObjectWithTag("Player");
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         //Canvas_AudioSource = GameObject.FindGameObjectWithTag("CanvasAudioSource").GetComponent<AudioSource>();
 
@@ -151,6 +151,7 @@ public class HudController : MonoBehaviour
             Canvas_AudioSource.PlayOneShot(CloseSettings_Audio);
             TelSystem.AddLine("Settings menu closed");
             GameController.SaveData();
+            Player.GetComponent<ActivityOneBallFunctions>().ReposBall();
 
 
 

@@ -122,6 +122,7 @@ public class Activity1Settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
@@ -130,6 +131,7 @@ public class Activity1Settings : MonoBehaviour
         {
             LoadData(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV");
         }
+        */
     }
 
 
@@ -464,7 +466,6 @@ public class Activity1Settings : MonoBehaviour
         AudioSources[3].PlayOneShot(IncreasingGridSize_Audio);
         Save.CurrentGrid = Grid.CurrentGrid;
         BalloonSpawner.ResetBalloons();
-        PlayerBall.GetComponent<ActivityOneBallFunctions>().ReposBall();
         TelSystem.AddLine("Grid increased to" + GridText.text);
     }
 
@@ -482,9 +483,10 @@ public class Activity1Settings : MonoBehaviour
         AudioSources[3].PlayOneShot(DecreasingGridSize_Audio);
         Save.CurrentGrid = Grid.CurrentGrid;
         BalloonSpawner.ResetBalloons();
-        PlayerBall.GetComponent<ActivityOneBallFunctions>().ReposBall();
         TelSystem.AddLine("Grid decreased to" + GridText.text);
     }
+
+    
 
     public void ShowHideGridLines()
     {
