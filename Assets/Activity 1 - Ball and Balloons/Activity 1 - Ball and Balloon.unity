@@ -26611,11 +26611,11 @@ MonoBehaviour:
   _HUDController: {fileID: 1606569991}
   Grid: {fileID: 0}
   TelSystem: {fileID: 0}
-  StartGameObject: {fileID: 0}
+  Ball: {fileID: 0}
+  GridInProx: []
   layermask:
     serializedVersion: 2
-    m_Bits: 0
-  Ball: {fileID: 0}
+    m_Bits: 512
 --- !u!114 &1708170161 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,

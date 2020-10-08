@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ActivityOneBallFunctions : MonoBehaviour
 {
@@ -8,16 +9,17 @@ public class ActivityOneBallFunctions : MonoBehaviour
     public GameObject _HUDController;
     public GridV3 Grid;
     public MasterTelemetrySystem TelSystem;
-    public GameObject StartGameObject;
-    public LayerMask layermask;
     public BallControllerV2 Ball;
+
+    public Collider[] GridInProx;
+    public LayerMask layermask;
     // Start is called before the first frame update
     void Start()
     {
         Ball = this.GetComponent<BallControllerV2>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        
+        ReposBall();
         
     }
 
@@ -43,11 +45,14 @@ public class ActivityOneBallFunctions : MonoBehaviour
         
     }
 
-    public void OnDrawGizmosSelected()
+    public void ReposBall()
     {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(transform.position, 1f);
-      
+        Debug.Log("Repositioning Ball");
+        //Array.Clear(GridInProx, 0, GridInProx.Length);
+        GridInProx = Physics.OverlapSphere(transform.position, 1, layermask);
+        GameObject ChosenGrid = GridInProx[0].gameObject;
+        Vector3 Destination = new Vector3(ChosenGrid.transform.position.x, transform.position.y, ChosenGrid.transform.position.z);
+        transform.position = Destination;
     }
 
     /*
