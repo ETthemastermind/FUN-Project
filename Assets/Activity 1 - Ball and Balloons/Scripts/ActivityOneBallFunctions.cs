@@ -8,7 +8,8 @@ public class ActivityOneBallFunctions : MonoBehaviour
     public GameObject _HUDController;
     public GridV3 Grid;
     public MasterTelemetrySystem TelSystem;
-    public GameObject StartGO;
+    public GameObject StartGameObject;
+    public LayerMask layermask;
     public BallControllerV2 Ball;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
         Ball = this.GetComponent<BallControllerV2>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
+        
         
     }
 
@@ -40,6 +42,14 @@ public class ActivityOneBallFunctions : MonoBehaviour
         }
         
     }
+
+    public void OnDrawGizmosSelected()
+    {
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(transform.position, 1f);
+      
+    }
+
     /*
 
     

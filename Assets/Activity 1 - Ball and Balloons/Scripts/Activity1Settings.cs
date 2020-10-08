@@ -106,8 +106,8 @@ public class Activity1Settings : MonoBehaviour
 
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
+        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
 
-        
 
 
     }
@@ -564,9 +564,8 @@ public class Activity1Settings : MonoBehaviour
 
             
             Grid.CurrentGrid = Save.CurrentGrid;
-            GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-            //Grid.DeleteGrid(); //temporary otherwise the grid wont change
-            //Grid.CreateGrid(); //temporary otherwise the grid wont change
+            //GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+            Grid.CreateGrid();
             
             if (Save.MiniMap == true)
             {
@@ -641,7 +640,9 @@ public class Activity1Settings : MonoBehaviour
                     AudioSources[i].volume = MusicVolumes[i];
                 }
             }
+
             
+
         }
         else
         {

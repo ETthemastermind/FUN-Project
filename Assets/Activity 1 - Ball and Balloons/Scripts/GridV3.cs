@@ -8,7 +8,7 @@ public class GridV3 : MonoBehaviour
 {
     public List<GameObject> GridGameObjects = new List<GameObject>();
 
-
+    public float[] CurrentGridParam;
 
     [Header("FromVid - changing these value does nothing, its just for debug")] ////https://www.youtube.com/watch?v=WJimYq2Tczc
     public float X_Start; //default = -4.5
@@ -31,7 +31,7 @@ public class GridV3 : MonoBehaviour
     public float[] GridPos5 = new float[6];
 
 
-    public int CurrentGrid = 1;
+    public int CurrentGrid;
     ///public bool GridHidden = false;
 
     public bool GridLinesHidden = false;
@@ -62,7 +62,7 @@ public class GridV3 : MonoBehaviour
 
 
         //Debug.Log(GridValueArray[0][2]);
-        CreateGrid();
+        //CreateGrid();
         //Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.x) / Height);
         //Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.z) / Width);
     }
@@ -85,6 +85,7 @@ public class GridV3 : MonoBehaviour
 
     public void CreateGrid()
     {
+        
         CurrentX = 1;
         CurrentY = 1;
         float[] Temp = GridValueArray[CurrentGrid];
