@@ -22,14 +22,14 @@ public class GridV3 : MonoBehaviour
     public GameObject prefab;
 
     [Header("Grid Values")]
-    public float[][] GridValueArray = new float[5][];
 
-    public float[] GridPos1 = new float[6];
-    public float[] GridPos2 = new float[6];
-    public float[] GridPos3 = new float[6];
-    public float[] GridPos4 = new float[6];
-    public float[] GridPos5 = new float[6];
-
+    private float[][] GridValueArray = new float[5][];
+    public float[] GridPos1 = new float[6] {(float)-4.138,(float)6.957, 5, 9, (float)2.06, (float)1.765};
+    public float[] GridPos2 = new float[6] {(float)-4.3, (float)7.05, 6, 10, (float)1.72, (float)1.59};
+    public float[] GridPos3 = new float[6] {(float)-4.45, (float)7.1, 7, 11, (float)1.48, (float)1.44};
+    public float[] GridPos4 = new float[6] {(float)-4.538, (float)7.194, 8, 12, (float)1.29, (float)1.325};
+    public float[] GridPos5 = new float[6] {(float)-4.603, (float)7.24, 9, 13, (float)1.145, (float)1.222 };
+    
 
     public int CurrentGrid;
     ///public bool GridHidden = false;
@@ -45,20 +45,27 @@ public class GridV3 : MonoBehaviour
 
 
     public MasterTelemetrySystem TelSystem;
-
-    public void Awake()
+    public void InitGridValues()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
         GridValueArray[0] = GridPos1;
         GridValueArray[1] = GridPos2;
         GridValueArray[2] = GridPos3;
         GridValueArray[3] = GridPos4;
         GridValueArray[4] = GridPos5;
+    }
+    public void OnAwake()
+    {
+        
+       
+        
+        
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        
 
 
         //Debug.Log(GridValueArray[0][2]);
@@ -83,12 +90,12 @@ public class GridV3 : MonoBehaviour
         */
     }
 
-    public void CreateGrid()
+    public void CreateGrid(int CG)
     {
         
         CurrentX = 1;
         CurrentY = 1;
-        float[] Temp = GridValueArray[CurrentGrid];
+        float[] Temp = GridValueArray[CG];
         X_Start = Temp[0];
         Y_Start = Temp[1];
         Height = (int)Temp[2];
@@ -165,7 +172,7 @@ public class GridV3 : MonoBehaviour
             {
                 Debug.Log("Grid Size Increased");
                 DeleteGrid();
-                CreateGrid();
+                CreateGrid(CurrentGrid);
             }
 
         }
@@ -185,7 +192,7 @@ public class GridV3 : MonoBehaviour
             {
                 Debug.Log("Grid Size Decreased");
                 DeleteGrid();
-                CreateGrid();
+                CreateGrid(CurrentGrid);
             }
 
 

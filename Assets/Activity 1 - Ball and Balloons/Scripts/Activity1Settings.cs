@@ -94,6 +94,11 @@ public class Activity1Settings : MonoBehaviour
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
     }
+
+    private void OnEnable()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -564,9 +569,10 @@ public class Activity1Settings : MonoBehaviour
 
             
             Grid.CurrentGrid = Save.CurrentGrid;
-            //GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
-            Grid.CreateGrid();
-            
+            Grid.InitGridValues();
+            Grid.CreateGrid(Save.CurrentGrid);
+            GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+
             if (Save.MiniMap == true)
             {
                 MiniMapGameObject.SetActive(true);
