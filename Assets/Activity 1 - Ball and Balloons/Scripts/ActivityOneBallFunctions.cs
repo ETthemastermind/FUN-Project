@@ -26,7 +26,10 @@ public class ActivityOneBallFunctions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ClearGrid();
+        }
     }
     public void OnCollisionEnter(Collision collision)
     {
@@ -53,6 +56,11 @@ public class ActivityOneBallFunctions : MonoBehaviour
         GameObject ChosenGrid = GridInProx[0].gameObject;
         Vector3 Destination = new Vector3(ChosenGrid.transform.position.x, transform.position.y, ChosenGrid.transform.position.z);
         transform.position = Destination;
+    }
+
+    public void ClearGrid()
+    {
+        Array.Clear(GridInProx, 0, GridInProx.Length);
     }
 
     /*

@@ -54,13 +54,7 @@ public class GridV3 : MonoBehaviour
         GridValueArray[3] = GridPos4;
         GridValueArray[4] = GridPos5;
     }
-    public void OnAwake()
-    {
-        
-       
-        
-        
-    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -230,35 +224,6 @@ public class GridV3 : MonoBehaviour
         }
         
     }
-    /*
-    public void ShowHideGrid()
-    {
-        if (GridHidden == true) //if the grid is already hidden
-        {
-            GridHidden = false;
-            for (int i = 0; i < GridGameObjects.Count; i++)
-            {
-                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = true;
-
-            }
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
-            TelSystem.AddLine("Grid hidden");
-            //show the grid
-        }
-        else //if the grid is not hidden
-        {
-            GridHidden = true;
-            for (int i = 0; i < GridGameObjects.Count; i++)
-            {
-                GridGameObjects[i].GetComponent<MeshRenderer>().enabled = false;
-            }
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            TelSystem.AddLine("Grid unhidden");
-            //hide the grid
-        }
-
-    }
-    */
 
     public void ShowHideGridLines()
     {
@@ -310,7 +275,7 @@ public class GridV3 : MonoBehaviour
             }
             else
             {
-                TelSystem.AddLine("Grid boxes unhidden");
+                //TelSystem.AddLine("Grid boxes unhidden");
             }
             
         }
@@ -329,7 +294,7 @@ public class GridV3 : MonoBehaviour
             }
             else
             {
-                TelSystem.AddLine("Grid boxes hidden");
+                //TelSystem.AddLine("Grid boxes hidden");
             }
             
         }

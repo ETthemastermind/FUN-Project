@@ -92,7 +92,8 @@ public class Activity1Settings : MonoBehaviour
 
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
+        
     }
 
     private void OnEnable()
@@ -106,11 +107,12 @@ public class Activity1Settings : MonoBehaviour
         AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV3>();
         Application.targetFrameRate = -1;
-        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
+ 
         
 
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
+        LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
 
 
