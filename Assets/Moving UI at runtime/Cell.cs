@@ -9,7 +9,10 @@ public class Cell : MonoBehaviour
 
     public void Start()
     {
-        
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            ComponentsUnderCell.Add(transform.GetChild(i).gameObject);
+        }
     }
 
 }
