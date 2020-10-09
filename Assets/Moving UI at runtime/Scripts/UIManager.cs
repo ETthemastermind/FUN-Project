@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,8 +27,11 @@ public class UIManager : MonoBehaviour
         CellsInScene = GameObject.FindGameObjectsWithTag("Cell"); //finds all the objects with the "Cell" tag
         for (int i = 0; i < CellsInScene.Length; i++) //for each gameobject in the cell array
         {
-            CellsInScene[i].GetComponent<Button>().interactable = false; //turn the button functionality off
-            
+            CellsInScene[i].transform.GetChild(0).gameObject.GetComponent<Button>().interactable = false;
+            for (int f = 0; f < CellsInScene[i].transform.GetChild(1).childCount; f++)
+            {
+                CellsInScene[i].transform.GetChild(1).gameObject.transform.GetChild(f).gameObject.SetActive(false);
+            }
         }
         ScreenRes_W = (Screen.width); //find the width and height of the screen, mainly here for debug
         ScreenRes_H = (Screen.height);
@@ -44,35 +48,6 @@ public class UIManager : MonoBehaviour
             CurrentMouseLocation = Input.mousePosition; //get the current mouse position
             ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0); //have the cell follow the mouse
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.KeypadPlus)) //debug controls
-        {
-            if (ChosenCell != null)
-            {
-                ScaleCellUp();
-            }
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            if (ChosenCell != null)
-            {
-                ScaleCellDown();
-            }
-            
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (ChosenCell != null)
-            {
-                HideCell();
-            }
-            
-        }
-        */
-       
     }
 
     public void ActivateCells() //show the cells to the user
@@ -83,19 +58,22 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode enabled"); //print to console the the cell moving mode is active
             for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                
-                CellsInScene[i].GetComponent<Button>().interactable = true; //reactivate the interactble option
-                CellsInScene[i].SetActive(true);
-                for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for each child of the cell
-                {
-                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the current child to a reference for ease of use
-                    if (CurrentChild.GetComponent<Button>() != null) //if the child has a button component
-                    {
-                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false; //turn the button component off
+                GameObject CellBorder = CellsInScene[i].transform.GetChild(0).gameObject; //refernce some things to make them easier to code for
+                GameObject[] FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
+                List<GameObject> UIbuttons = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
 
-                    }
+                CellBorder.GetComponent<Button>().interactable = true; //activate the borders of the cell
+                foreach (GameObject button in FunctionButtons) //activate the function buttons
+                {
+                    button.SetActive(true);
+                }
+                foreach (GameObject uiButton in UIbuttons)
+                {
+                    uiButton.GetComponent<Button>().interactable = false;
+                    uiButton.GetComponent<Image>().raycastTarget = false;
                     
                 }
+
 
             }
 
@@ -105,25 +83,27 @@ public class UIManager : MonoBehaviour
         {
             CellsActive = false; //set the cells active variable to false
             Debug.Log("Cell moving mode disabled"); //print to console that the cell moving mode is disabled
-            for (int i = 0; i < CellsInScene.Length; i++)// for the number of cells in the scene
+            for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                CellsInScene[i].GetComponent<Button>().interactable = false; //turn the interactble option off for the button
-                if (CellsInScene[i].GetComponent<Cell>().HiddenCell == true)
+                GameObject CellBorder = CellsInScene[i].transform.GetChild(0).gameObject;
+                GameObject[] FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
+                List<GameObject> UIbuttons = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
+
+                CellBorder.GetComponent<Button>().interactable = false; //deactivate the border of the cell
+                foreach (GameObject button in FunctionButtons) //deactivate the function buttons
                 {
-                    CellsInScene[i].SetActive(false);
+                    button.SetActive(false);
                 }
-                for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for the childen of the current cell
+                foreach (GameObject uiButton in UIbuttons)
                 {
-                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the child to a variable for ease of use
-                    if (CurrentChild.GetComponent<Button>() != null) //if the child has a buttton component
-                    {
-                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = true; //renable to button component for the child
-                    }
+                    uiButton.GetComponent<Button>().interactable = true;
+                    uiButton.GetComponent<Image>().raycastTarget = true;
                     
                 }
+
             }
 
-            
+
         }
     }
 
@@ -134,7 +114,7 @@ public class UIManager : MonoBehaviour
         if (ChosenCell == null) //if no cell is currently being held
         {
             Debug.Log("Pick up cell"); //print to console that a cell has been picked up
-            ChosenCell = Cell; //sets the chosen cell to this cell
+            ChosenCell = Cell.transform.parent.gameObject; //sets the chosen cell to this cell
         }
 
         else //if a cell is currently being held
@@ -147,13 +127,9 @@ public class UIManager : MonoBehaviour
             SaveCellPosition(); //run the save cell position script
             
         }
-        /*
-        Debug.Log(Cell.name + "Cell Activated");
-        ChosenCell = Cell;
-        //Button.GetComponent<RuntimeButtonMove>().enabled = true;
-        */
-    }
 
+    }
+    /*
     public void ScaleCellUp() //a function to scale the size of a cell up, this will likely be reworked later
     {
         if (ChosenCell != null) //if a cell has been chosen
@@ -253,6 +229,8 @@ public class UIManager : MonoBehaviour
 
                 }
             }
+
+            SR.Close();
         }
 
         
