@@ -37,7 +37,7 @@ public class CameraMovementV2 : MonoBehaviour
 
     public void NextCamera() //function to go to the next camera
     {
-        View.Invoke();
+        //View.Invoke();
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera++; //increment the current camera
@@ -67,7 +67,7 @@ public class CameraMovementV2 : MonoBehaviour
 
     public void LastCamera() //function to go to the next camera
     {
-        View.Invoke();
+        //View.Invoke();
         //CameraInterface_Canvas[CurrentCamera].SetActive(false); //set the current canvas to false;
         CameraPositionsArray[CurrentCamera].GetComponent<CanvasController>().DeactivateCanvas();
         CurrentCamera--; //increment the current camera
@@ -130,7 +130,7 @@ public class CameraMovementV2 : MonoBehaviour
 
 
         }
-        Command.Invoke();
+        //Command.Invoke();
         
     }
    

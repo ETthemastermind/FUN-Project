@@ -156,7 +156,7 @@ public class CameraPosMovement : MonoBehaviour
 
     public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget) //coroutine to rotate the camera
     {
-        View.Invoke();
+        //View.Invoke();
         //Debug.Log(StartRotation);
         //Debug.Log(RotTarget);
         while (LerpFraction < 1) //while the lerp fraction is less than 1
@@ -173,7 +173,7 @@ public class CameraPosMovement : MonoBehaviour
 
     public IEnumerator MoveCam(Quaternion RotTarget, Vector3 PosTarget)
     {
-        View.Invoke();
+        //View.Invoke();
         float LerpFraction = 0f;
         float LerpSpeed = 1f;
         
@@ -234,7 +234,7 @@ public class CameraPosMovement : MonoBehaviour
         {
             _CameraMoving = false;
         }
-        Command.Invoke();
+        //Command.Invoke();
     }
 
     public IEnumerator MoveCamStart(Quaternion RotTarget, Vector3 PosTarget)
@@ -250,7 +250,7 @@ public class CameraPosMovement : MonoBehaviour
 
         }
         _CameraMoving = false;
-        Command.Invoke();
+        //Command.Invoke();
 
 
 
