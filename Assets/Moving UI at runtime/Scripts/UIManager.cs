@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
             ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0); //have the cell follow the mouse
         }
 
-
+        /*
         if (Input.GetKeyDown(KeyCode.KeypadPlus)) //debug controls
         {
             if (ChosenCell != null)
@@ -71,6 +71,7 @@ public class UIManager : MonoBehaviour
             }
             
         }
+        */
        
     }
 
@@ -171,7 +172,7 @@ public class UIManager : MonoBehaviour
         ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
 
     }
-
+    /*
     public void HideCell() //https://answers.unity.com/questions/1401626/how-to-change-button-color-highlited-color-etc.html
     {
         if (ChosenCell.GetComponent<Cell>().HiddenCell == true) //if the cell is hidden
@@ -193,6 +194,7 @@ public class UIManager : MonoBehaviour
             ChosenCell.GetComponent<Button>().colors = Colours;
         }
     }
+    */
 
     public void SaveCellPosition() //horrible function
     {
