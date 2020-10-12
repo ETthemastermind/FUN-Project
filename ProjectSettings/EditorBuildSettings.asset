@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Activity 1 - Ball and Balloons/Activity 1 - Ball and Balloon.unity
     guid: e3fbfc024d8e41b488288f27dde6372c
   - enabled: 0
     path: Assets/Moving UI at runtime/Moving UI at runtime.unity
     guid: 957c9c74630a3614c9593c1fa7703a6b
-  - enabled: 1
+  - enabled: 0
     path: Assets/EXP_Folder/TestScene.unity
     guid: 94675f5697a5f0241baec3ff6375d904
   m_configObjects: {}
