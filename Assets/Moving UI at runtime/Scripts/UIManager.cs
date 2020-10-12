@@ -27,11 +27,9 @@ public class UIManager : MonoBehaviour
         CellsInScene = GameObject.FindGameObjectsWithTag("Cell"); //finds all the objects with the "Cell" tag
         for (int i = 0; i < CellsInScene.Length; i++) //for each gameobject in the cell array
         {
-            CellsInScene[i].transform.GetChild(0).gameObject.GetComponent<Button>().interactable = false;
-            for (int f = 0; f < CellsInScene[i].transform.GetChild(1).childCount; f++)
-            {
-                CellsInScene[i].transform.GetChild(1).gameObject.transform.GetChild(f).gameObject.SetActive(false);
-            }
+            CellsInScene[i].transform.FindChild("Cell").gameObject.GetComponent<Button>().interactable = false;
+            CellsInScene[i].transform.FindChild("FunctionButtons").gameObject.SetActive(false);
+           
         }
         ScreenRes_W = (Screen.width); //find the width and height of the screen, mainly here for debug
         ScreenRes_H = (Screen.height);
@@ -49,7 +47,7 @@ public class UIManager : MonoBehaviour
             ChosenCell.transform.position = new Vector3(CurrentMouseLocation.x, CurrentMouseLocation.y, 0); //have the cell follow the mouse
         }
     }
-
+    
     public void ActivateCells() //show the cells to the user
     {
         if (CellsActive == false) //if the user is currently not the edit cell mode
@@ -58,20 +56,22 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode enabled"); //print to console the the cell moving mode is active
             for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                GameObject CellBorder = CellsInScene[i].transform.GetChild(0).gameObject; //refernce some things to make them easier to code for
-                GameObject[] FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
-                List<GameObject> UIbuttons = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
+                GameObject CellBorder = CellsInScene[i].transform.FindChild("Cell").gameObject; //refernce some things to make them easier to code for
+                GameObject FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
+                GameObject UIButtons = CellBorder.GetComponent<Cell>().UIButtons; 
+                List<GameObject> UIbuttons_List = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
 
                 CellBorder.GetComponent<Button>().interactable = true; //activate the borders of the cell
-                foreach (GameObject button in FunctionButtons) //activate the function buttons
-                {
-                    button.SetActive(true);
-                }
-                foreach (GameObject uiButton in UIbuttons)
+                FunctionButtons.SetActive(true);
+                foreach (GameObject uiButton in UIbuttons_List)
                 {
                     uiButton.GetComponent<Button>().interactable = false;
                     uiButton.GetComponent<Image>().raycastTarget = false;
                     
+                }
+                if (CellBorder.GetComponent<Cell>().HiddenCell == true)
+                {
+                    UIButtons.SetActive(true);
                 }
 
 
@@ -85,21 +85,28 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode disabled"); //print to console that the cell moving mode is disabled
             for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                GameObject CellBorder = CellsInScene[i].transform.GetChild(0).gameObject;
-                GameObject[] FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
-                List<GameObject> UIbuttons = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
+                GameObject CellBorder = CellsInScene[i].transform.FindChild("Cell").gameObject;
+                GameObject FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
+                GameObject UIButtons = CellBorder.GetComponent<Cell>().UIButtons;
+                List<GameObject> UIbuttons_List = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
 
                 CellBorder.GetComponent<Button>().interactable = false; //deactivate the border of the cell
-                foreach (GameObject button in FunctionButtons) //deactivate the function buttons
-                {
-                    button.SetActive(false);
-                }
-                foreach (GameObject uiButton in UIbuttons)
+                FunctionButtons.SetActive(false);
+               
+                foreach (GameObject uiButton in UIbuttons_List)
                 {
                     uiButton.GetComponent<Button>().interactable = true;
                     uiButton.GetComponent<Image>().raycastTarget = true;
                     
                 }
+
+                if (CellBorder.GetComponent<Cell>().HiddenCell == true)
+                {
+                    UIButtons.SetActive(false);
+                }
+
+
+                
 
             }
 
@@ -108,7 +115,7 @@ public class UIManager : MonoBehaviour
     }
 
     
-
+    
     public void ActivateCell(GameObject Cell) //function that gets called when a specific cell is clicked on
     {
         if (ChosenCell == null) //if no cell is currently being held
@@ -129,48 +136,7 @@ public class UIManager : MonoBehaviour
         }
 
     }
-    /*
-    public void ScaleCellUp() //a function to scale the size of a cell up, this will likely be reworked later
-    {
-        if (ChosenCell != null) //if a cell has been chosen
-        {
-            float NewY = ChosenCell.transform.localScale.y + 0.1f; //increase the size of the x and y variables
-            float NewX = ChosenCell.transform.localScale.x + 0.1f;
-            ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
-        }
-        
-    }
-
-    public void ScaleCellDown() //a function to scale the size of a cell up, likely to be reworked later
-    {
-        float NewY = ChosenCell.transform.localScale.y - 0.1f; //decrease the size of the x and y variables
-        float NewX = ChosenCell.transform.localScale.x - 0.1f;
-        ChosenCell.transform.localScale = new Vector3(NewX, NewY, transform.localScale.z); //apply the new x and y variables
-
-    }
-    /*
-    public void HideCell() //https://answers.unity.com/questions/1401626/how-to-change-button-color-highlited-color-etc.html
-    {
-        if (ChosenCell.GetComponent<Cell>().HiddenCell == true) //if the cell is hidden
-        {
-            Debug.Log("Cell Hidden");
-            ChosenCell.GetComponent<Cell>().HiddenCell = false; //turn the hidden cell bool off
-            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
-            Colours.normalColor = new Color(255f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
-            ChosenCell.GetComponent<Button>().colors = Colours;
-
-
-        }
-        else //therefore, if the cell is not hidden
-        {
-            ChosenCell.GetComponent<Cell>().HiddenCell = true; //turn the hidden cell bool on
-            Debug.Log("Cell Unhidden");
-            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
-            Colours.normalColor = new Color(0f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
-            ChosenCell.GetComponent<Button>().colors = Colours;
-        }
-    }
-    */
+    
 
     public void SaveCellPosition() //horrible function
     {

@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cell : MonoBehaviour
 {
+    public bool MovingCell;
     public bool HiddenCell;
-    public GameObject[] FunctionButtons;
-    public GameObject PARENT_ComponentsUnderCell;
+    public GameObject FunctionButtons;
+    public GameObject UIButtons;
     public List<GameObject> ComponentsUnderCell;
 
     public void Start()
     {
-        for (int i = 0; i < PARENT_ComponentsUnderCell.transform.childCount; i++)
+        for (int i = 0; i < UIButtons.transform.childCount; i++)
         {
-            ComponentsUnderCell.Add(PARENT_ComponentsUnderCell.transform.GetChild(i).gameObject);
+            ComponentsUnderCell.Add(UIButtons.transform.GetChild(i).gameObject);
         }
     }
 
@@ -38,28 +40,42 @@ public class Cell : MonoBehaviour
         if (HiddenCell == true)
         {
             HiddenCell = false;
+            ColorBlock Colours = gameObject.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(255f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            gameObject.GetComponent<Button>().colors = Colours;
 
         }
 
         else if (HiddenCell == false)
         {
             HiddenCell = true;
+            ColorBlock Colours = gameObject.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(0f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            gameObject.GetComponent<Button>().colors = Colours;
         }
     }
+    /*
+    public void HideCell() //https://answers.unity.com/questions/1401626/how-to-change-button-color-highlited-color-etc.html
+    {
+        if (ChosenCell.GetComponent<Cell>().HiddenCell == true) //if the cell is hidden
+        {
+            Debug.Log("Cell Hidden");
+            ChosenCell.GetComponent<Cell>().HiddenCell = false; //turn the hidden cell bool off
+            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(255f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            ChosenCell.GetComponent<Button>().colors = Colours;
 
 
-     /*
-                CellsInScene[i].GetComponent<Button>().interactable = true; //reactivate the interactble option
-                CellsInScene[i].SetActive(true);
-                for (int j = 0; j < CellsInScene[i].transform.childCount; j++) //for each child of the cell
-                {
-                    GameObject CurrentChild = CellsInScene[i].transform.GetChild(j).gameObject; //assign the current child to a reference for ease of use
-                    if (CurrentChild.GetComponent<Button>() != null) //if the child has a button component
-                    {
-                        CellsInScene[i].transform.GetChild(j).GetComponent<Button>().enabled = false; //turn the button component off
+        }
+        else //therefore, if the cell is not hidden
+        {
+            ChosenCell.GetComponent<Cell>().HiddenCell = true; //turn the hidden cell bool on
+            Debug.Log("Cell Unhidden");
+            ColorBlock Colours = ChosenCell.GetComponent<Button>().colors;
+            Colours.normalColor = new Color(0f, Colours.normalColor.g, Colours.normalColor.b, Colours.normalColor.a);
+            ChosenCell.GetComponent<Button>().colors = Colours;
+        }
+    }
+    */
 
-                    }
-                    
-                }
-                */
 }
