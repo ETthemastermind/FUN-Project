@@ -6,7 +6,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"J:/0.RA/EXP WebBuild;J:/0.RA/WEBGL Build 8;J:/0.RA/WebGLBuild7;C:/Users/Owner/Desktop/test;J:/0.RA/WebGLBuild6;J:/0.RA/Webglbuild5;J:/0.RA/WebGLBuild4;J:/0.RA/WebglBuild3;;\"}"
+                "value": "{\"m_Value\":\"J:/0.RA/EXP;J:/0.RA/EXP WebBuild;J:/0.RA/WEBGL Build 8;J:/0.RA/WebGLBuild7;C:/Users/Owner/Desktop/test;J:/0.RA/WebGLBuild6;J:/0.RA/Webglbuild5;J:/0.RA/WebGLBuild4;J:/0.RA/WebglBuild3;\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
