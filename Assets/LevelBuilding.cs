@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelBuilding : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class LevelBuilding : MonoBehaviour
     public float Distance = 50f;
 
     public GameObject TestBalloon;
+
+
+
+    public RawImage Map;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +33,7 @@ public class LevelBuilding : MonoBehaviour
 
     public void PlaceObject()
     {
-        Ray ray = _Camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _Camera.ViewportPointToRay(Input.mousePosition);
         RaycastHit Hit;
         if (Physics.Raycast(ray,out Hit,layerMask))
         {
@@ -40,9 +45,11 @@ public class LevelBuilding : MonoBehaviour
             }
             
         }
+
+    }
+
+    public void PlaceObject2() //https://forum.unity.com/threads/interactable-minimap-using-raw-image-render-texture-solved.525486/
+    {
         
-
-
-
     }
 }
