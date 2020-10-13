@@ -27,8 +27,8 @@ public class UIManager : MonoBehaviour
         CellsInScene = GameObject.FindGameObjectsWithTag("Cell"); //finds all the objects with the "Cell" tag
         for (int i = 0; i < CellsInScene.Length; i++) //for each gameobject in the cell array
         {
-            CellsInScene[i].transform.FindChild("Cell").gameObject.GetComponent<Button>().interactable = false;
-            CellsInScene[i].transform.FindChild("FunctionButtons").gameObject.SetActive(false);
+            CellsInScene[i].transform.Find("Cell").gameObject.GetComponent<Button>().interactable = false;
+            CellsInScene[i].transform.Find("FunctionButtons").gameObject.SetActive(false);
            
         }
         ScreenRes_W = (Screen.width); //find the width and height of the screen, mainly here for debug
@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode enabled"); //print to console the the cell moving mode is active
             for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                GameObject CellBorder = CellsInScene[i].transform.FindChild("Cell").gameObject; //refernce some things to make them easier to code for
+                GameObject CellBorder = CellsInScene[i].transform.Find("Cell").gameObject; //refernce some things to make them easier to code for
                 GameObject FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
                 GameObject UIButtons = CellBorder.GetComponent<Cell>().UIButtons; 
                 List<GameObject> UIbuttons_List = CellBorder.GetComponent<Cell>().ComponentsUnderCell;
@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Cell moving mode disabled"); //print to console that the cell moving mode is disabled
             for (int i = 0; i < CellsInScene.Length; i++) //for the length of the "cells in scene" array
             {
-                GameObject CellBorder = CellsInScene[i].transform.FindChild("Cell").gameObject;
+                GameObject CellBorder = CellsInScene[i].transform.Find("Cell").gameObject;
                 GameObject FunctionButtons = CellBorder.GetComponent<Cell>().FunctionButtons;
                 GameObject UIButtons = CellBorder.GetComponent<Cell>().UIButtons;
                 List<GameObject> UIbuttons_List = CellBorder.GetComponent<Cell>().ComponentsUnderCell;

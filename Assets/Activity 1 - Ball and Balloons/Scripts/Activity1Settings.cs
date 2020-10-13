@@ -112,7 +112,7 @@ public class Activity1Settings : MonoBehaviour
 
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
-        //LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
+        LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
 
 
