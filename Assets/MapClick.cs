@@ -10,6 +10,17 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
     public Camera LevelBuildCamera;
     public Transform GridFound;
     public GameObject TestBalloon;
+    public GameObject BalloonHistoryButton_Prefab; //reference to the button that will get added to the scroll view button history box
+    public GameObject BalloonHistory_Content;
+
+    public Texture[] OnePointBallonTex;
+    public Texture[] TwoPointBallonTex;
+    public Texture[] ThreePointBallonTex;
+
+    public string CurrentChosenColour;
+    public GameObject TemplateBalloon;
+
+
 
     public void Start()
     {
@@ -48,9 +59,53 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
             {
                 GridFound = LevelBuildCamHit.transform;
                 Vector3 SpawnPoint = new Vector3(GridFound.position.x, 1f, GridFound.position.z);
-                Instantiate(TestBalloon, SpawnPoint, Quaternion.identity);
+                GameObject SpawnedBalloon = Instantiate(TestBalloon, SpawnPoint, Quaternion.identity);
+                GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
+                SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
+                SpawnedBalloonButton.transform.GetChild(0).GetComponent<Text>().text = SpawnedBalloon.name;
             }
         }
 
+    }
+
+    public void SetBalloonColor(GameObject ButtonInput)
+    {
+        Material BalloonMat = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+        
+        switch (ButtonInput.name)
+        {
+            case ("Red"):
+                Debug.Log("Balloon Set to Red");
+                CurrentChosenColour = "Red";
+                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[0]);
+                break;
+
+            case ("Yellow"):
+                Debug.Log("Balloon Set to Yellow");
+                CurrentChosenColour = "Yellow";
+                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[1]);
+                break;
+
+            case ("Green"):
+                Debug.Log("Balloon Set to Green");
+                CurrentChosenColour = "Green";
+                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[2]);
+                break;
+
+            case ("Purple"):
+                Debug.Log("Balloon Set to Purple");
+                CurrentChosenColour = "Purple";
+                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[3]);
+                break;
+
+            case ("Blue"):
+                Debug.Log("Balloon Set to Blue");
+                CurrentChosenColour = "Blue";
+                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[4]);
+                break;
+
+            default:
+                break;
+        }
     }
 }
