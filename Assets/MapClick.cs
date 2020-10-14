@@ -13,18 +13,56 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
     public GameObject BalloonHistoryButton_Prefab; //reference to the button that will get added to the scroll view button history box
     public GameObject BalloonHistory_Content;
 
+    public List<BalloonProperties> BP;
+
+
+    public Texture[][] TextureArray = new Texture[3][];
     public Texture[] OnePointBallonTex;
     public Texture[] TwoPointBallonTex;
     public Texture[] ThreePointBallonTex;
 
     public string CurrentChosenColour;
+    public int CurrentChosenValue = 1;
     public GameObject TemplateBalloon;
-
+    
 
 
     public void Start()
     {
+        TextureArray[0] = OnePointBallonTex;
+        TextureArray[1] = TwoPointBallonTex;
+        TextureArray[2] = ThreePointBallonTex;
+
         Time.timeScale = 0;
+        Material BalloonMat = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+        string BalloonTexName = BalloonMat.mainTexture.name;
+        Debug.Log(BalloonTexName);
+
+        if (BalloonTexName.Contains("Red"))
+        {
+            CurrentChosenColour = "Red";
+        }
+        else if (BalloonTexName.Contains("Yellow"))
+        {
+            CurrentChosenColour = "Yellow";
+        }
+        else if (BalloonTexName.Contains("Green"))
+        {
+            CurrentChosenColour = "Green";
+        }
+        else if (BalloonTexName.Contains("Purple"))
+        {
+            CurrentChosenColour = "Purple";
+        }
+        else if (BalloonTexName.Contains("Blue"))
+        {
+            CurrentChosenColour = "Blue"; 
+        }
+        else
+        {
+            Debug.Log("No Color found");
+        }
+
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -63,6 +101,7 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
                 GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
                 SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
                 SpawnedBalloonButton.transform.GetChild(0).GetComponent<Text>().text = SpawnedBalloon.name;
+                
             }
         }
 
@@ -77,35 +116,85 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
             case ("Red"):
                 Debug.Log("Balloon Set to Red");
                 CurrentChosenColour = "Red";
-                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[0]);
+                ChangePreview();
                 break;
 
             case ("Yellow"):
                 Debug.Log("Balloon Set to Yellow");
                 CurrentChosenColour = "Yellow";
-                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[1]);
+                ChangePreview();
                 break;
 
             case ("Green"):
                 Debug.Log("Balloon Set to Green");
                 CurrentChosenColour = "Green";
-                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[2]);
+                ChangePreview();
                 break;
 
             case ("Purple"):
                 Debug.Log("Balloon Set to Purple");
                 CurrentChosenColour = "Purple";
-                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[3]);
+                ChangePreview();
                 break;
 
             case ("Blue"):
                 Debug.Log("Balloon Set to Blue");
                 CurrentChosenColour = "Blue";
-                BalloonMat.SetTexture("_MainTex", OnePointBallonTex[4]);
+                ChangePreview();
                 break;
 
             default:
                 break;
+        }
+    }
+
+    public void ChangeValue(int value)
+    {
+        CurrentChosenValue = value;
+        ChangePreview();
+    }
+
+    public void ChangePreview()
+    {
+        int TrueValue = CurrentChosenValue - 1;
+        for (int i = 0; i < TextureArray[TrueValue].Length; i++)
+        {
+            switch (CurrentChosenColour)
+            {
+                case "Red":
+                    Texture RequestedTexture = TextureArray[TrueValue][0];
+                    Material BalloonMat = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                    BalloonMat.SetTexture("_MainTex", RequestedTexture);
+                    break;
+
+                case "Yellow":
+                    Texture RequestedTexture2 = TextureArray[TrueValue][1];
+                    Material BalloonMat2 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                    BalloonMat2.SetTexture("_MainTex", RequestedTexture2);
+                    break;
+
+                case "Green":
+                    Texture RequestedTexture3 = TextureArray[TrueValue][2];
+                    Material BalloonMat3 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                    BalloonMat3.SetTexture("_MainTex", RequestedTexture3);
+                    break;
+
+                case "Purple":
+                    Texture RequestedTexture4 = TextureArray[TrueValue][3];
+                    Material BalloonMat4 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                    BalloonMat4.SetTexture("_MainTex", RequestedTexture4);
+                    break;
+
+                case "Blue":
+                    Texture RequestedTexture5 = TextureArray[TrueValue][4];
+                    Material BalloonMat5 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                    BalloonMat5.SetTexture("_MainTex", RequestedTexture5);
+                    break;
+
+                default:
+                    break;
+
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4753616740239421227}
   - component: {fileID: 4753616740239421225}
   - component: {fileID: 4753616740239421224}
+  - component: {fileID: 752555601203913381}
   m_Layer: 8
   m_Name: Balloon
   m_TagString: Balloon
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5564572189340827013}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f70f35f1a53b164e8ccb9a324baf680, type: 3}
   m_Name: 
@@ -138,9 +139,20 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cd6a46dfdba0b83448d201ce887acebf, type: 3}
   - {fileID: 2800000, guid: f293f9cb82e07e44dbec0285bbdb917f, type: 3}
   - {fileID: 2800000, guid: ca22241cf7d483247b5522b7466aa3d7, type: 3}
-  Camera: {fileID: 0}
   AS: {fileID: 0}
   Pop_SFX: {fileID: 8300000, guid: 17422c81b990aaf4ab36738b547b6e18, type: 3}
   RandomColor: 0
   ps: {fileID: 225352611149129212, guid: 4b3bb915352fb24499aeb85251072996, type: 3}
   rb: {fileID: 0}
+--- !u!114 &752555601203913381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564572189340827013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15e2af859653dd40bbd8673002ab5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

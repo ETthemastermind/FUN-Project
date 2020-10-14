@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 752555601203913381, guid: 9c0dfbc3c93b09e4694fca7eb2b52e43,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4753616740239421224, guid: 9c0dfbc3c93b09e4694fca7eb2b52e43,
         type: 3}
       propertyPath: BalloonColors.Array.data[0]
@@ -36,6 +41,11 @@ PrefabInstance:
         type: 3}
       propertyPath: BalloonValue
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753616740239421224, guid: 9c0dfbc3c93b09e4694fca7eb2b52e43,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4753616740239421225, guid: 9c0dfbc3c93b09e4694fca7eb2b52e43,
         type: 3}
