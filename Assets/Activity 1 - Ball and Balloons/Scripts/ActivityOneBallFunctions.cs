@@ -41,15 +41,26 @@ public class ActivityOneBallFunctions : MonoBehaviour
     {
         if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
         {
-            PlayerScore += collision.gameObject.GetComponent<Balloons>().BalloonValue; //increment the player's score
-            _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
-            //_HUDController.GetComponent<Activity1Settings>().NumberOfBalloonsPopped++;
-            string BalloonValue = (collision.gameObject.GetComponent<Balloons>().BalloonValue).ToString();
-            TelSystem.AddLine("Balloon popped value - " + BalloonValue); //run telemetry line
-            collision.gameObject.GetComponent<Balloons>().DestroyBalloon();
-            Ball.HapticFeedback(); //run the haptic feedback function
-            
-
+            GameObject Balloon = collision.gameObject;
+            if (Balloon.GetComponent<ConfigedBalloon>().isActiveAndEnabled)
+            {
+                PlayerScore += Balloon.GetComponent<ConfigedBalloon>().BalloonValue;
+                _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore);
+                string BalloonValue = (Balloon.GetComponent<Balloons>().BalloonValue).ToString();
+                TelSystem.AddLine("Balloon popped value - " + BalloonValue); //run telemetry line
+                Balloon.GetComponent<ConfigedBalloon>().DestroyBalloon();
+                Ball.HapticFeedback(); //run the haptic feedback function
+            }
+            else
+            {
+                PlayerScore += Balloon.GetComponent<Balloons>().BalloonValue; //increment the player's score
+                _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore); //update the players score text in the hud controller
+                                                                                          //_HUDController.GetComponent<Activity1Settings>().NumberOfBalloonsPopped++;
+                string BalloonValue = (Balloon.GetComponent<Balloons>().BalloonValue).ToString();
+                TelSystem.AddLine("Balloon popped value - " + BalloonValue); //run telemetry line
+                Balloon.GetComponent<Balloons>().DestroyBalloon();
+                
+            }
         }
         
     }

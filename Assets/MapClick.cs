@@ -23,6 +23,8 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
 
     public string CurrentChosenColour;
     public int CurrentChosenValue = 1;
+    public Texture RequestedTexture;
+
     public GameObject TemplateBalloon;
     
 
@@ -33,7 +35,7 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
         TextureArray[1] = TwoPointBallonTex;
         TextureArray[2] = ThreePointBallonTex;
 
-        Time.timeScale = 0;
+  
         Material BalloonMat = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
         string BalloonTexName = BalloonMat.mainTexture.name;
         Debug.Log(BalloonTexName);
@@ -41,22 +43,27 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
         if (BalloonTexName.Contains("Red"))
         {
             CurrentChosenColour = "Red";
+            ChangePreview();
         }
         else if (BalloonTexName.Contains("Yellow"))
         {
             CurrentChosenColour = "Yellow";
+            ChangePreview();
         }
         else if (BalloonTexName.Contains("Green"))
         {
             CurrentChosenColour = "Green";
+            ChangePreview();
         }
         else if (BalloonTexName.Contains("Purple"))
         {
             CurrentChosenColour = "Purple";
+            ChangePreview();
         }
         else if (BalloonTexName.Contains("Blue"))
         {
-            CurrentChosenColour = "Blue"; 
+            CurrentChosenColour = "Blue";
+            ChangePreview();
         }
         else
         {
@@ -98,6 +105,9 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
                 GridFound = LevelBuildCamHit.transform;
                 Vector3 SpawnPoint = new Vector3(GridFound.position.x, 1f, GridFound.position.z);
                 GameObject SpawnedBalloon = Instantiate(TestBalloon, SpawnPoint, Quaternion.identity);
+                Material BalloonMat = SpawnedBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+                BalloonMat.SetTexture("_MainTex", RequestedTexture);
+                SpawnedBalloon.GetComponent<ConfigedBalloon>().BalloonValue = CurrentChosenValue;
                 GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
                 SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
                 SpawnedBalloonButton.transform.GetChild(0).GetComponent<Text>().text = SpawnedBalloon.name;
@@ -162,33 +172,33 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
             switch (CurrentChosenColour)
             {
                 case "Red":
-                    Texture RequestedTexture = TextureArray[TrueValue][0];
+                    RequestedTexture = TextureArray[TrueValue][0];
                     Material BalloonMat = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
                     BalloonMat.SetTexture("_MainTex", RequestedTexture);
                     break;
 
                 case "Yellow":
-                    Texture RequestedTexture2 = TextureArray[TrueValue][1];
+                    RequestedTexture = TextureArray[TrueValue][1];
                     Material BalloonMat2 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
-                    BalloonMat2.SetTexture("_MainTex", RequestedTexture2);
+                    BalloonMat2.SetTexture("_MainTex", RequestedTexture);
                     break;
 
                 case "Green":
-                    Texture RequestedTexture3 = TextureArray[TrueValue][2];
+                    RequestedTexture = TextureArray[TrueValue][2];
                     Material BalloonMat3 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
-                    BalloonMat3.SetTexture("_MainTex", RequestedTexture3);
+                    BalloonMat3.SetTexture("_MainTex", RequestedTexture);
                     break;
 
                 case "Purple":
-                    Texture RequestedTexture4 = TextureArray[TrueValue][3];
+                    RequestedTexture = TextureArray[TrueValue][3];
                     Material BalloonMat4 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
-                    BalloonMat4.SetTexture("_MainTex", RequestedTexture4);
+                    BalloonMat4.SetTexture("_MainTex", RequestedTexture);
                     break;
 
                 case "Blue":
-                    Texture RequestedTexture5 = TextureArray[TrueValue][4];
+                    RequestedTexture = TextureArray[TrueValue][4];
                     Material BalloonMat5 = TemplateBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
-                    BalloonMat5.SetTexture("_MainTex", RequestedTexture5);
+                    BalloonMat5.SetTexture("_MainTex", RequestedTexture);
                     break;
 
                 default:
