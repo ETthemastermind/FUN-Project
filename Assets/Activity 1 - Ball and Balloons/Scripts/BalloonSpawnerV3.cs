@@ -27,6 +27,12 @@ public class BalloonSpawnerV3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ResetBalloons();
+        }
+
+
         SpawnedBalloons = GameObject.FindGameObjectsWithTag("Balloon"); //finds all the ballons active in the scene per frame
         if (SpawnedBalloons.Length == 0) //if there are no balloons in the scene
         {
@@ -50,7 +56,7 @@ public class BalloonSpawnerV3 : MonoBehaviour
             SpawnLocations.Add(Location);
 
         }
-        //CheckForDuplicates
+        CheckForDuplicates();
 
         for (int j = 0; j != SpawnLocations.Count; j++)
         {
@@ -80,10 +86,16 @@ public class BalloonSpawnerV3 : MonoBehaviour
         SpawnLocations = SpawnLocations.Distinct().ToList(); //removes all duplicates in the list
         if (SpawnLocations.Count <= 3) //if the length of the list is less than 3
         {
+            
             Debug.Log("Duplicate Spawn Location Found"); //print that a duplicate spawn location was generated to the console
             int RandomNumber = Random.Range(0, grid.GridGameObjects.Count);
             Vector3 Location = new Vector3((grid.GridGameObjects[RandomNumber].transform.position.x), (transform.position.y), (grid.GridGameObjects[RandomNumber].transform.position.z));
             SpawnLocations.Add(Location);
+            /*
+            int RandomNumber = Random.Range(0, grid.GridGameObjects.Count);
+            Vector3 Location = new Vector3((grid.GridGameObjects[RandomNumber].transform.position.x), (transform.position.y), (grid.GridGameObjects[RandomNumber].transform.position.z));
+            SpawnLocations.Add(Location);
+            */
             CheckForDuplicates(); //run the check duplicates function again, essentially creating a loop until 4 unique locations are generated
         }
 
