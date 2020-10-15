@@ -142,7 +142,10 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
                 TMP_Dropdown dropdownLabel2 = SpawnedBalloonButton.transform.GetChild(2).GetComponent<TMP_Dropdown>();
                 dropdownLabel2.value = CurrentChosenValue - 1;
                 SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
-
+                BalloonHistoryButtonScript BHBS = SpawnedBalloonButton.GetComponent<BalloonHistoryButtonScript>();
+                BHBS.Balloon = SpawnedBalloon;
+                BHBS.LevelDesignManager = this;
+                BHBS.BP = LastBalloon;
                 
                 
                 

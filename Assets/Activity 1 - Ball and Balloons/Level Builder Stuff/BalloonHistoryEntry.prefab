@@ -2776,6 +2776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3742709545273719996}
+  - component: {fileID: 6575853456818976242}
   m_Layer: 0
   m_Name: BalloonHistoryEntry
   m_TagString: Untagged
@@ -2806,6 +2807,18 @@ RectTransform:
   m_AnchoredPosition: {x: 328.08, y: 44.23}
   m_SizeDelta: {x: 182.76318, y: 33.102005}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6575853456818976242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033335191996607476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b74f13f10319445b4382612294cd2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8341939229644132872
 GameObject:
   m_ObjectHideFlags: 0
