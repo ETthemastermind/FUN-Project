@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unity.com/threads/interactable-minimap-using-raw-image-render-texture-solved.525486/
 {
     // Start is called before the first frame update
     public Camera LevelBuildCamera;
-    public Transform GridFound;
+    private Transform GridFound;
     public GameObject TestBalloon;
     public GameObject BalloonHistoryButton_Prefab; //reference to the button that will get added to the scroll view button history box
     public GameObject BalloonHistory_Content;
 
-    public List<BalloonProperties> BP;
+    
 
-
-    public Texture[][] TextureArray = new Texture[3][];
+    private Texture[][] TextureArray = new Texture[3][];
     public Texture[] OnePointBallonTex;
     public Texture[] TwoPointBallonTex;
     public Texture[] ThreePointBallonTex;
@@ -26,8 +26,11 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
     public Texture RequestedTexture;
 
     public GameObject TemplateBalloon;
-    
 
+    public GameObject Test;
+
+    public List<BalloonProperties> BHistory;
+    public BalloonProperties LastBalloon;
 
     public void Start()
     {
@@ -109,8 +112,39 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
                 BalloonMat.SetTexture("_MainTex", RequestedTexture);
                 SpawnedBalloon.GetComponent<ConfigedBalloon>().BalloonValue = CurrentChosenValue;
                 GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
+
+                LastBalloon.value = CurrentChosenValue;
+                LastBalloon.Color = CurrentChosenColour;
+                LastBalloon.GridLoc = GridFound.gameObject.GetComponent<GridAttributes>().GridCoords;
+                BHistory.Add(LastBalloon);
+
+                SpawnedBalloonButton.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = SpawnedBalloon.name; //change the text on the button
+                TMP_Dropdown dropdownLabel = SpawnedBalloonButton.transform.GetChild(1).GetComponent<TMP_Dropdown>(); //reference to the color dropdown box
+                switch (CurrentChosenColour) //switch case to change the value/label of the dropdown
+                {
+                    case ("Red"):
+                        dropdownLabel.value = 0;
+                        break;
+                    case ("Yellow"):
+                        dropdownLabel.value = 1;
+                        break;
+                    case ("Green"):
+                        dropdownLabel.value = 2;
+                        break;
+                    case ("Purple"):
+                        dropdownLabel.value = 3;
+                        break;
+                    case ("Blue"):
+                        dropdownLabel.value = 4;
+                        break;
+
+                }
+                TMP_Dropdown dropdownLabel2 = SpawnedBalloonButton.transform.GetChild(2).GetComponent<TMP_Dropdown>();
+                dropdownLabel2.value = CurrentChosenValue - 1;
                 SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
-                SpawnedBalloonButton.transform.GetChild(0).GetComponent<Text>().text = SpawnedBalloon.name;
+
+                
+                
                 
             }
         }
