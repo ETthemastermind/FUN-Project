@@ -105,47 +105,11 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
             //Debug.Log(LevelBuildCamHit.collider.gameObject + "found via render texture");
             if (LevelBuildCamHit.transform.tag == "GridCube")
             {
+                LastBalloon = new BalloonProperties();
                 GridFound = LevelBuildCamHit.transform;
                 Vector3 SpawnPoint = new Vector3(GridFound.position.x, 1f, GridFound.position.z);
-                GameObject SpawnedBalloon = Instantiate(TestBalloon, SpawnPoint, Quaternion.identity);
-                Material BalloonMat = SpawnedBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
-                BalloonMat.SetTexture("_MainTex", RequestedTexture);
-                SpawnedBalloon.GetComponent<ConfigedBalloon>().BalloonValue = CurrentChosenValue;
-                GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
-
-                LastBalloon.value = CurrentChosenValue;
-                LastBalloon.Color = CurrentChosenColour;
-                LastBalloon.GridLoc = GridFound.gameObject.GetComponent<GridAttributes>().GridCoords;
-                BHistory.Add(LastBalloon);
-
-                SpawnedBalloonButton.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = SpawnedBalloon.name; //change the text on the button
-                TMP_Dropdown dropdownLabel = SpawnedBalloonButton.transform.GetChild(1).GetComponent<TMP_Dropdown>(); //reference to the color dropdown box
-                switch (CurrentChosenColour) //switch case to change the value/label of the dropdown
-                {
-                    case ("Red"):
-                        dropdownLabel.value = 0;
-                        break;
-                    case ("Yellow"):
-                        dropdownLabel.value = 1;
-                        break;
-                    case ("Green"):
-                        dropdownLabel.value = 2;
-                        break;
-                    case ("Purple"):
-                        dropdownLabel.value = 3;
-                        break;
-                    case ("Blue"):
-                        dropdownLabel.value = 4;
-                        break;
-
-                }
-                TMP_Dropdown dropdownLabel2 = SpawnedBalloonButton.transform.GetChild(2).GetComponent<TMP_Dropdown>();
-                dropdownLabel2.value = CurrentChosenValue - 1;
-                SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
-                BalloonHistoryButtonScript BHBS = SpawnedBalloonButton.GetComponent<BalloonHistoryButtonScript>();
-                BHBS.Balloon = SpawnedBalloon;
-                BHBS.LevelDesignManager = this;
-                BHBS.BP = LastBalloon;
+                CreateBalloon(SpawnPoint);
+                
                 
                 
                 
@@ -243,5 +207,48 @@ public class MapClick : MonoBehaviour, IPointerClickHandler //https://forum.unit
 
             }
         }
+    }
+
+    public void CreateBalloon(Vector3 SpawnPoint)
+    {
+        GameObject SpawnedBalloon = Instantiate(TestBalloon, SpawnPoint, Quaternion.identity);
+        Material BalloonMat = SpawnedBalloon.GetComponent<Renderer>().material; //gets the material on the balloon
+        BalloonMat.SetTexture("_MainTex", RequestedTexture);
+        SpawnedBalloon.GetComponent<ConfigedBalloon>().BalloonValue = CurrentChosenValue;
+        GameObject SpawnedBalloonButton = Instantiate(BalloonHistoryButton_Prefab) as GameObject;
+
+        LastBalloon.value = CurrentChosenValue;
+        LastBalloon.Color = CurrentChosenColour;
+        LastBalloon.GridLoc = GridFound.gameObject.GetComponent<GridAttributes>().GridCoords;
+        BHistory.Add(LastBalloon);
+
+        SpawnedBalloonButton.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = SpawnedBalloon.name; //change the text on the button
+        TMP_Dropdown dropdownLabel = SpawnedBalloonButton.transform.GetChild(1).GetComponent<TMP_Dropdown>(); //reference to the color dropdown box
+        switch (CurrentChosenColour) //switch case to change the value/label of the dropdown
+        {
+            case ("Red"):
+                dropdownLabel.value = 0;
+                break;
+            case ("Yellow"):
+                dropdownLabel.value = 1;
+                break;
+            case ("Green"):
+                dropdownLabel.value = 2;
+                break;
+            case ("Purple"):
+                dropdownLabel.value = 3;
+                break;
+            case ("Blue"):
+                dropdownLabel.value = 4;
+                break;
+
+        }
+        TMP_Dropdown dropdownLabel2 = SpawnedBalloonButton.transform.GetChild(2).GetComponent<TMP_Dropdown>();
+        dropdownLabel2.value = CurrentChosenValue - 1;
+        SpawnedBalloonButton.transform.parent = BalloonHistory_Content.transform;
+        BalloonHistoryButtonScript BHBS = SpawnedBalloonButton.GetComponent<BalloonHistoryButtonScript>();
+        BHBS.Balloon = SpawnedBalloon;
+        BHBS.LevelDesignManager = this;
+        BHBS.BP = LastBalloon;
     }
 }
