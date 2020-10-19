@@ -54,6 +54,7 @@ public class GridV3 : MonoBehaviour
         GridValueArray[2] = GridPos3;
         GridValueArray[3] = GridPos4;
         GridValueArray[4] = GridPos5;
+        CreateGrid(2);
     }
     
     // Start is called before the first frame update

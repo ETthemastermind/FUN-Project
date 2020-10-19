@@ -93,7 +93,7 @@ public class Activity1Settings : MonoBehaviour
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        
+        Grid.InitGridValues();
     }
 
     private void OnEnable()
@@ -112,7 +112,7 @@ public class Activity1Settings : MonoBehaviour
 
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
-        LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
+        //LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
         GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
 
 

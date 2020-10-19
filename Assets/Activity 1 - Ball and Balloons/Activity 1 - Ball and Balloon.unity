@@ -29912,7 +29912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1714287778
 Transform:
   m_ObjectHideFlags: 0
@@ -31655,7 +31655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36f7a95ae523cd4cad8a8bf8cc3a84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TelemetryActive: 1
+  TelemetryActive: 0
   ID: 
   FilePath: 
   LineToWrite: 
