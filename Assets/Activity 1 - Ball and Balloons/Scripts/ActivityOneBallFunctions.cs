@@ -15,6 +15,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
     public List<GameObject> GridInProx;
     public LayerMask layermask;
 
+    
 
     ObjectPooler objectPooler;
     // Start is called before the first frame update
@@ -27,7 +28,16 @@ public class ActivityOneBallFunctions : MonoBehaviour
         //ReposBall();
 
     }
-    
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ReposBall();
+
+        }
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
@@ -55,31 +65,24 @@ public class ActivityOneBallFunctions : MonoBehaviour
         }
         
     }
-    /*
-    public void ReposBall() //https://answers.unity.com/questions/122936/find-nearest-object-using-physicsoverlapsphere.html
+    
+    public void ReposBall()
     {
         Debug.Log("Repositioning Ball");
         float distance;
         float nearestDistance = float.MaxValue;
-        foreach (GameObject grid in Grid.GridGameObjects)
+        foreach (Transform child in objectPooler.transform)
         {
-            distance = (transform.position - grid.transform.position).sqrMagnitude;
+            distance = (transform.position - child.transform.position).sqrMagnitude;
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
-                NearestGrid = grid;
+                NearestGrid = child.gameObject;
             }
         }
 
         Vector3 Destination = new Vector3(NearestGrid.transform.position.x, transform.position.y, NearestGrid.transform.position.z);
         transform.position = Destination;
     }
-    */
-    public void ReposBall2()
-    {
 
-        
-
-
-    }
 }

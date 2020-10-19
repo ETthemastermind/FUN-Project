@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridV4 : MonoBehaviour
 {
@@ -20,16 +21,22 @@ public class GridV4 : MonoBehaviour
 
     public bool GridInit = false;
     public int CurrentGrid = 0;
-    public Material mat;
+    public Material Mat;
+    
 
     public bool GridLinesHidden;
     public bool GridBoxesHidden;
 
+    public Texture FourDirGrid_Tex;
+    public Texture EightDirGrid_Tex;
+
+    public UnityEvent CallOnceGridIsMade = new UnityEvent();
+    
     // Start is called before the first frame update
     void Start()
     {
         //objectPooler = ObjectPooler.Instance;
-        mat = gameObject.GetComponent<Renderer>().material;
+        Mat = gameObject.GetComponent<Renderer>().material;
         CreateGrid();
 
     }
@@ -62,10 +69,11 @@ public class GridV4 : MonoBehaviour
 
             }
             //set the grid lines
-            mat.mainTextureScale = new Vector2(gridSettings[CurrentGrid].Height, gridSettings[CurrentGrid].Width);
+            Mat.mainTextureScale = new Vector2(gridSettings[CurrentGrid].Height, gridSettings[CurrentGrid].Width);
             ShowHideGridLines();
             ShowHideGridBoxes();
         }
+        CallOnceGridIsMade.Invoke();
     }
 
     public void Update()
@@ -149,6 +157,15 @@ public class GridV4 : MonoBehaviour
                 child.GetComponent<MeshRenderer>().enabled = false;
             }
         }
+    }
+    public void FourDirMovement()
+    {
+        Mat.SetTexture("_MainTex", FourDirGrid_Tex);
+    }
+
+    public void EightDirMovement()
+    {
+        Mat.SetTexture("_MainTex", EightDirGrid_Tex);
     }
 
 

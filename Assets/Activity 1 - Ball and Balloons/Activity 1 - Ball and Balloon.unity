@@ -23489,9 +23489,14 @@ MonoBehaviour:
     Y_Space: 1.222
   GridInit: 0
   CurrentGrid: 2
-  mat: {fileID: 0}
+  Mat: {fileID: 0}
   GridLinesHidden: 0
   GridBoxesHidden: 0
+  FourDirGrid_Tex: {fileID: 0}
+  EightDirGrid_Tex: {fileID: 0}
+  CallOnceGridIsMade:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1356681458
 Transform:
   m_ObjectHideFlags: 0
@@ -36190,9 +36195,25 @@ MonoBehaviour:
     Y_Space: 1.222
   GridInit: 0
   CurrentGrid: 2
-  mat: {fileID: 0}
+  Mat: {fileID: 0}
   GridLinesHidden: 1
   GridBoxesHidden: 1
+  FourDirGrid_Tex: {fileID: 2800000, guid: 2c3a9c7a43685fc48aacb9d156b8c32d, type: 3}
+  EightDirGrid_Tex: {fileID: 2800000, guid: 1ffee42038c698b4dbd05f06873f0a0a, type: 3}
+  CallOnceGridIsMade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1708170159}
+        m_MethodName: ReposBall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!23 &1711813855745011746
 MeshRenderer:
   m_ObjectHideFlags: 0
