@@ -11,6 +11,13 @@ public class ObjectPooler : MonoBehaviour //https://www.youtube.com/watch?v=tdSm
         public GameObject Prefab;
         public int size;
     }
+    #region Singleton
+    public static ObjectPooler Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
 
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> PoolDictionary;
@@ -18,6 +25,43 @@ public class ObjectPooler : MonoBehaviour //https://www.youtube.com/watch?v=tdSm
     void Start()
     {
         PoolDictionary = new Dictionary<string, Queue<GameObject>>();
+        foreach (Pool pool in pools)
+        {
+            Queue<GameObject> ObjectPool = new Queue<GameObject>();
+
+            for (int i = 0; i < pool.size; i++)
+            {
+                GameObject Obj = Instantiate(pool.Prefab);
+                Obj.transform.parent = this.transform;
+                Obj.SetActive(false);
+                ObjectPool.Enqueue(Obj);
+            }
+
+            PoolDictionary.Add(pool.tag, ObjectPool);
+        }
     }
+
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    {
+        if (!PoolDictionary.ContainsKey(tag))
+        {
+            return null;
+        }
+        GameObject ObjectToSpawn = PoolDictionary[tag].Dequeue();
+        ObjectToSpawn.SetActive(true);
+        ObjectToSpawn.transform.position = position;
+        ObjectToSpawn.transform.rotation = rotation;
+
+        PoolDictionary[tag].Enqueue(ObjectToSpawn);
+        return ObjectToSpawn;
+
+    }
+
+    public void ResetPool(string tag)
+    {
+
+    }
+
+    
 
 }
