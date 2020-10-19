@@ -20,10 +20,16 @@ public class GridV4 : MonoBehaviour
 
     public bool GridInit = false;
     public int CurrentGrid = 0;
+    public Material mat;
+
+    public bool GridLinesHidden;
+    public bool GridBoxesHidden;
+
     // Start is called before the first frame update
     void Start()
     {
         //objectPooler = ObjectPooler.Instance;
+        mat = gameObject.GetComponent<Renderer>().material;
         CreateGrid();
 
     }
@@ -55,7 +61,10 @@ public class GridV4 : MonoBehaviour
                 CurrentY++;
 
             }
-
+            //set the grid lines
+            mat.mainTextureScale = new Vector2(gridSettings[CurrentGrid].Height, gridSettings[CurrentGrid].Width);
+            ShowHideGridLines();
+            ShowHideGridBoxes();
         }
     }
 
@@ -66,5 +75,81 @@ public class GridV4 : MonoBehaviour
             GridInit = true;
             CreateGrid();
         }
+
+        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            LastGrid();
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            NextGrid();
+        }
     }
+
+    public void NextGrid()
+    {
+        CurrentGrid++;
+        if (CurrentGrid > gridSettings.Length - 1)
+        {
+            CurrentGrid = gridSettings.Length - 1;
+
+        }
+        else
+        {
+            objectPooler.ResetPool("Grid");
+            CreateGrid();
+        }
+        
+
+
+    }
+
+    public void LastGrid()
+    {
+        CurrentGrid--;
+        if (CurrentGrid < 0)
+        {
+            CurrentGrid = 0;
+        }
+        else
+        {
+            objectPooler.ResetPool("Grid");
+            CreateGrid();
+        }
+    }
+
+    public void ShowHideGridLines()
+    {
+        if (GridLinesHidden == true)
+        {
+            GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        else if (GridLinesHidden == false)
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+
+    public void ShowHideGridBoxes()
+    {
+        if (GridBoxesHidden == true)
+        {
+            foreach (Transform child in objectPooler.transform)
+            {
+                child.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+
+        else if (GridBoxesHidden == false)
+        {
+            foreach (Transform child in objectPooler.transform)
+            {
+                child.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+    }
+
+
 }

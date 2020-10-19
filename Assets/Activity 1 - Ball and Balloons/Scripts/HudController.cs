@@ -139,7 +139,7 @@ public class HudController : MonoBehaviour
             Canvas_AudioSource.PlayOneShot(CloseSettings_Audio);
             TelSystem.AddLine("Settings menu closed");
             GameController.SaveData();
-            Player.GetComponent<ActivityOneBallFunctions>().ReposBall();
+            //Player.GetComponent<ActivityOneBallFunctions>().ReposBall();
 
 
 

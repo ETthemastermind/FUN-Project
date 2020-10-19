@@ -59,8 +59,22 @@ public class ObjectPooler : MonoBehaviour //https://www.youtube.com/watch?v=tdSm
 
     public void ResetPool(string tag)
     {
+        Debug.Log("resetting pool");
+        if (!PoolDictionary.ContainsKey(tag))
+        {
+            return;
+        }
+
+        for (int i = 0; i < PoolDictionary[tag].Count;i++)
+        {
+            GameObject GridCube = PoolDictionary[tag].Dequeue();
+            GridCube.SetActive(false);
+            PoolDictionary[tag].Enqueue(GridCube);
+        }
+        
 
     }
+
 
     
 

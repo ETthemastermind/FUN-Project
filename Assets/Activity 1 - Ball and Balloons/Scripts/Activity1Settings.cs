@@ -57,7 +57,7 @@ public class Activity1Settings : MonoBehaviour
     public TMP_Text BallSizeText;
 
     [Header("Grid Refs")]
-    public GridV3 Grid;
+    public GridV4 Grid;
     public TextMeshProUGUI GridText;
 
 
@@ -92,8 +92,8 @@ public class Activity1Settings : MonoBehaviour
 
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        Grid.InitGridValues();
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV4>();
+        //Grid.InitGridValues();
     }
 
     void Start()
@@ -108,7 +108,9 @@ public class Activity1Settings : MonoBehaviour
         DefaultBallSize = PlayerBall.transform.localScale;
         DefaultBallPos = PlayerBall.transform.localPosition;
         //LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
-        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        //GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        int CurrentGrid = Grid.CurrentGrid;
+        GridText.text = Grid.gridSettings[CurrentGrid].Height.ToString() + "x" + Grid.gridSettings[CurrentGrid].Width.ToString();
 
 
 
@@ -441,7 +443,8 @@ public class Activity1Settings : MonoBehaviour
         //Debug.Log("Making grid bigger");
         Grid.NextGrid();
         TelSystem.AddLine("Increase grid size button pressed");
-        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        int CurrentGrid = Grid.CurrentGrid;
+        GridText.text = Grid.gridSettings[CurrentGrid].Height.ToString() + "x" + Grid.gridSettings[CurrentGrid].Width.ToString();
         if (AudioSources[3].isPlaying == true)
         {
             AudioSources[3].Stop();
@@ -458,7 +461,8 @@ public class Activity1Settings : MonoBehaviour
         //Debug.Log("Making grid smaller");
         Grid.LastGrid();
         TelSystem.AddLine("Decrease grid size button pressed");
-        GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+        int CurrentGrid = Grid.CurrentGrid;
+        GridText.text = Grid.gridSettings[CurrentGrid].Height.ToString() + "x" + Grid.gridSettings[CurrentGrid].Width.ToString();
         if (AudioSources[3].isPlaying == true)
         {
             AudioSources[3].Stop();
@@ -471,33 +475,41 @@ public class Activity1Settings : MonoBehaviour
     }
 
     
-
+    
     public void ShowHideGridLines()
     {
-        Grid.ShowHideGridLines();
+        //Grid.ShowHideGridLines();
         if (Grid.GridLinesHidden == true)
         {
+            Grid.GridLinesHidden = false;
+            Grid.ShowHideGridLines();
             Save.ShowGridLines = false;
         }
         else
         {
+            Grid.GridLinesHidden = true;
+            Grid.ShowHideGridLines();
             Save.ShowGridLines = true;
         }
     }
-
+    
     public void ShowHideGridBoxes()
     {
-        Grid.ShowHideGridBoxes();
+        //Grid.ShowHideGridBoxes();
         if (Grid.GridBoxesHidden == true)
         {
+            Grid.GridBoxesHidden = false;
+            Grid.ShowHideGridBoxes();
             Save.ShowGridBoxes = false;
         }
         else
         {
+            Grid.GridBoxesHidden = true;
+            Grid.ShowHideGridBoxes();
             Save.ShowGridBoxes = true;
         }
     }
-
+    
     public void ToggleDiagonalControls()
     {
         if (DiagonalControlsActive == true)
@@ -507,7 +519,7 @@ public class Activity1Settings : MonoBehaviour
             {
                 DiagonalControlsObjects[i].SetActive(false);
             }
-            Grid.FourDirectionalGrid();
+            //Grid.FourDirectionalGrid();
             Save.DiagonalMovement = false;
             TelSystem.AddLine("Diagonal controls deactivated");
         }
@@ -519,7 +531,7 @@ public class Activity1Settings : MonoBehaviour
             {
                 DiagonalControlsObjects[i].SetActive(true);
             }
-            Grid.EightDirectionalGrid();
+            //Grid.EightDirectionalGrid();
             Save.DiagonalMovement = true;
             TelSystem.AddLine("Diagonal controls activated");
         }
@@ -559,9 +571,9 @@ public class Activity1Settings : MonoBehaviour
 
             
             Grid.CurrentGrid = Save.CurrentGrid;
-            Grid.InitGridValues();
-            Grid.CreateGrid(Save.CurrentGrid);
-            GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
+            //Grid.InitGridValues();
+            //Grid.CreateGrid(Save.CurrentGrid);
+            //GridText.text = Grid.Height.ToString() + " x " + Grid.Width.ToString();
 
             if (Save.MiniMap == true)
             {

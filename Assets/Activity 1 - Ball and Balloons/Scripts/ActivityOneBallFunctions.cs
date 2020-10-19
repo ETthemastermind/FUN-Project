@@ -7,21 +7,25 @@ public class ActivityOneBallFunctions : MonoBehaviour
 {
     public int PlayerScore; //integer to hold the player score i.e. how many balloons popped
     public GameObject _HUDController;
-    public GridV3 Grid;
+    public GridV4 Grid;
     public MasterTelemetrySystem TelSystem;
     public BallControllerV2 Ball;
     public List<GameObject> Test;
     public GameObject NearestGrid;
     public List<GameObject> GridInProx;
     public LayerMask layermask;
+
+
+    ObjectPooler objectPooler;
     // Start is called before the first frame update
     void Start()
     {
         Ball = this.GetComponent<BallControllerV2>();
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>();
-        ReposBall();
-        
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV4>();
+        objectPooler = ObjectPooler.Instance;
+        //ReposBall();
+
     }
     
     public void OnCollisionEnter(Collision collision)
@@ -51,7 +55,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
         }
         
     }
-
+    /*
     public void ReposBall() //https://answers.unity.com/questions/122936/find-nearest-object-using-physicsoverlapsphere.html
     {
         Debug.Log("Repositioning Ball");
@@ -69,5 +73,13 @@ public class ActivityOneBallFunctions : MonoBehaviour
 
         Vector3 Destination = new Vector3(NearestGrid.transform.position.x, transform.position.y, NearestGrid.transform.position.z);
         transform.position = Destination;
+    }
+    */
+    public void ReposBall2()
+    {
+
+        
+
+
     }
 }
