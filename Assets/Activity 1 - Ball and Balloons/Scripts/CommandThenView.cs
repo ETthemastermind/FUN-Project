@@ -12,11 +12,6 @@ public class CommandThenView : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Command()
     {
         for (int i = 0; i < Canvas.Length; i++)

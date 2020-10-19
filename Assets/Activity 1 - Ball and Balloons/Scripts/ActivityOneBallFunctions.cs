@@ -23,20 +23,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
         ReposBall();
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReposBall();
-        }
-    }
+    
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Balloon") // if the other object is a balloon

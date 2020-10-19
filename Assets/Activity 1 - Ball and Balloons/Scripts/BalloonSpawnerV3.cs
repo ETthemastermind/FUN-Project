@@ -33,7 +33,7 @@ public class BalloonSpawnerV3 : MonoBehaviour
         }
 
 
-        SpawnedBalloons = GameObject.FindGameObjectsWithTag("Balloon"); //finds all the ballons active in the scene per frame
+        SpawnedBalloons = GameObject.FindGameObjectsWithTag("Balloon"); //finds all the ballons active in the scene per frame <- optimise
         if (SpawnedBalloons.Length == 0) //if there are no balloons in the scene
         {
             if (HUDController.GetComponent<HudController>().GameComplete == false) //checks the HUDController to make sure that the player hasnt reached the max score (had an issue of balloons spawning and then the time scale turning to 0)

@@ -9,10 +9,4 @@ public class BalloonLeftOvers : MonoBehaviour
     {
         Destroy(gameObject, 5);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

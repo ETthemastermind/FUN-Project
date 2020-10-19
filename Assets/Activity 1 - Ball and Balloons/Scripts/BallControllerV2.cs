@@ -21,43 +21,15 @@ public class BallControllerV2 : MonoBehaviour
     public GameObject CurrentGridGO;
     public UnityEvent RunAfterMove = new UnityEvent();
     public UnityEvent RunBeforeMove = new UnityEvent();
+
+
+    public WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.01f);
     // Start is called before the first frame update
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        if (Input.GetKeyDown(KeyCode.UpArrow)) //debug controls
-        {
-            MoveForward();
-            
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            MoveRight();
-            
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveBackward();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            MoveLeft();
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //LerpFraction = 0f;
-        }
-        
-
     }
 
     public void MoveForward() ///script to move the ball forward/backwards/left/right
@@ -227,8 +199,6 @@ public class BallControllerV2 : MonoBehaviour
         }
     }
 
-    
-
     public void MoveForwardRight()
     {
         if (_BallMoving == false)
@@ -392,8 +362,8 @@ public class BallControllerV2 : MonoBehaviour
             FauxRotFunc(FauxRot);
 
 
-            
-            yield return new WaitForEndOfFrame();
+
+            yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();
@@ -413,7 +383,7 @@ public class BallControllerV2 : MonoBehaviour
                 transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
                 FauxRotFunc(FauxRot);
                 
-                yield return new WaitForEndOfFrame();
+                yield return delay;
             }
             else
             {
@@ -480,7 +450,7 @@ public class BallControllerV2 : MonoBehaviour
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
             transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
             FauxRotFunc(FauxRot);
-            yield return new WaitForEndOfFrame();
+            yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
         RunAfterMove.Invoke();

@@ -21,18 +21,13 @@ public class CameraMovementV2 : MonoBehaviour
     public UnityEvent View = new UnityEvent();
 
     private Transform ThisTransform;
+    WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.01f);
 
     // Start is called before the first frame update
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
         ThisTransform = gameObject.GetComponent<Transform>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void NextCamera() //function to go to the next camera
@@ -126,7 +121,7 @@ public class CameraMovementV2 : MonoBehaviour
             LerpFraction += LerpSpeed * Time.deltaTime;
             ThisTransform.position = Vector3.Slerp(StartPos, TargetPos, LerpFraction);
             ThisTransform.rotation = Quaternion.Slerp(StartRot, TargetRot, LerpFraction);
-            yield return new WaitForEndOfFrame();
+            yield return delay;
 
 
         }

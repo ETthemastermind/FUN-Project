@@ -12,7 +12,7 @@ public class DestoryParticleSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //<- maybe theres a more effcient way of doing this?
     {
         if (ps.IsAlive() == false)
         {

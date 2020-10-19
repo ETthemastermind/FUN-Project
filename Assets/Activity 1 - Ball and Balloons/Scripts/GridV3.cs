@@ -70,22 +70,6 @@ public class GridV3 : MonoBehaviour
         //Debug.Log((gameObject.GetComponent<Renderer>().bounds.size.z) / Width);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            ShowHideGridLines();
-            
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ShowHideGridBoxes();
-        }
-        */
-    }
-
     public void CreateGrid(int CG)
     {
         
@@ -102,7 +86,7 @@ public class GridV3 : MonoBehaviour
         TelSystem.AddLine("Grid of " + Height + " x " + Width + " created");
         for (int i = 0; i < Height * Width; i++) //from video //https://www.youtube.com/watch?v=WJimYq2Tczc
         {
-            GameObject G = Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y - 0.45f, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
+            GameObject G = Instantiate(prefab, new Vector3(X_Start + (X_Space * (i % Height)), transform.position.y, -Y_Start + (Y_Space * (i / Height))), Quaternion.identity);
             GridGameObjects.Add(G);
             G.transform.parent = this.gameObject.transform;
             GridAttributes GA = G.GetComponent<GridAttributes>();

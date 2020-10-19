@@ -12,11 +12,6 @@ public class CanvasController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ActivateCanvas()
     {
         for (int i = 0; i < CanvasList.Length; i++)

@@ -85,18 +85,6 @@ public class HudController : MonoBehaviour
         CurrentGameTime += Time.deltaTime;
         Timer.GetComponent<TextMeshProUGUI>().text = "Time: " + (Mathf.RoundToInt(CurrentGameTime));
         
-        /*
-        if (PrepareForBang_SFX == true)
-        {
-            AudioSource AS = Camera.main.GetComponent<AudioSource>();
-            if (AS.isPlaying == false)
-            {
-                //AS.PlayOneShot(inBallonProx_Clip);
-
-            }
-        }
-        */
-        
 
     }
 

@@ -96,11 +96,6 @@ public class Activity1Settings : MonoBehaviour
         Grid.InitGridValues();
     }
 
-    private void OnEnable()
-    {
-        
-    }
-    // Start is called before the first frame update
     void Start()
     {
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
@@ -118,22 +113,6 @@ public class Activity1Settings : MonoBehaviour
 
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadData(Application.streamingAssetsPath + "/EthanActivity1Save.FUNSAV");
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            LoadData(Application.streamingAssetsPath + "/DEFAULT_Activity1Save.FUNSAV");
-        }
-        */
-    }
-
 
     public void ToggleAnimatedTexture()
     {
@@ -210,6 +189,7 @@ public class Activity1Settings : MonoBehaviour
             Debug.Log("Turning Sound on component off");
             TelSystem.AddLine("Sound of " + EventSystem.current.currentSelectedGameObject.name + "turned off");
 
+
             string name = AS.gameObject.name;
             switch (name)
             {
@@ -260,7 +240,9 @@ public class Activity1Settings : MonoBehaviour
         AS.volume = NextVolume; //set the next volume
         //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
         TelSystem.AddLine("Volume increased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
-        string name = AS.gameObject.name;
+        GameObject GO = AS.gameObject;
+        string name = GO.name;
+        GO.GetComponent<AS_Functions>().UpdateLabel();
         switch (name)
         {
             case "BallPassive":
@@ -284,7 +266,9 @@ public class Activity1Settings : MonoBehaviour
         AS.volume = NextVolume;
         //Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent);
         TelSystem.AddLine("Volume decreased for " + EventSystem.current.currentSelectedGameObject.transform.parent.parent + " to " + AS.volume);
-        string name = AS.gameObject.name;
+        GameObject GO = AS.gameObject;
+        string name = GO.name;
+        GO.GetComponent<AS_Functions>().UpdateLabel();
         switch (name)
         {
             case "BallPassive":

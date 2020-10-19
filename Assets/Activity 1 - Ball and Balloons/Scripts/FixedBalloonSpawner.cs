@@ -22,10 +22,7 @@ public class FixedBalloonSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     /*
      ideas:
      Place the balloons manually in the scene

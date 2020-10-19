@@ -27,7 +27,8 @@ public class CameraPosMovement : MonoBehaviour
     public UnityEvent Command = new UnityEvent();
     public UnityEvent View = new UnityEvent();
     public MasterTelemetrySystem TelSystem;
-    
+
+    WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.01f);
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class CameraPosMovement : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    /*
     void Update()
     {
         if (Input.GetKey(KeyCode.Q)) //debug so i can get quaterion values
@@ -47,7 +48,7 @@ public class CameraPosMovement : MonoBehaviour
             GetQuaterion();
         }
     }
-
+    */
     public void RotateUp() //function for rotating/moving the camera up/down/left/right
     {
         if (_CameraMoving == false)
@@ -152,8 +153,6 @@ public class CameraPosMovement : MonoBehaviour
         
     }
 
-
-
     public IEnumerator RotCam(Quaternion RotTarget, Vector3 PosTarget) //coroutine to rotate the camera
     {
         //View.Invoke();
@@ -162,7 +161,7 @@ public class CameraPosMovement : MonoBehaviour
         while (LerpFraction < 1) //while the lerp fraction is less than 1
         {
             //Debug.Log("Rotating Camera Up");
-            yield return new WaitForEndOfFrame();
+            yield return delay;
             LerpFraction += LerpSpeed * Time.deltaTime; //increment the lerp fraction
             transform.rotation = Quaternion.Lerp(StartRotation, RotTarget, LerpFraction); //set the rotation based on the lerp fraction
         }
@@ -181,7 +180,7 @@ public class CameraPosMovement : MonoBehaviour
         {
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp(StartPos, PosTarget, LerpFraction);
-            yield return new WaitForEndOfFrame();
+            yield return delay;
 
         }
         StartCoroutine(RotCam(RotTarget, PosTarget));
@@ -220,7 +219,7 @@ public class CameraPosMovement : MonoBehaviour
         while (LerpFraction < 1)
         {
             //Debug.Log("Returning Camera to position");
-            yield return new WaitForEndOfFrame();
+            yield return delay;
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(RotTarget, StartRotation, LerpFraction);
             
@@ -246,7 +245,7 @@ public class CameraPosMovement : MonoBehaviour
         {
             LerpFraction += LerpSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp(PosTarget, StartPos, LerpFraction);
-            yield return new WaitForEndOfFrame();
+            yield return delay;
 
         }
         _CameraMoving = false;
