@@ -125,7 +125,7 @@ public class HudController : MonoBehaviour
         Canvas_AudioSource.PlayOneShot(SpeechSynth);
         TelSystem.AddLine(EventSystem.current.currentSelectedGameObject.name + "button clicked");
         TelSystem.gameObject.GetComponent<ReplayTelemetry>().DatawithButtonPress(EventSystem.current.currentSelectedGameObject.gameObject);
-        Debug.Log(EventSystem.current.currentSelectedGameObject.gameObject);
+        //Debug.Log(EventSystem.current.currentSelectedGameObject.gameObject);
     }
 
     public void OpenCloseSettings() //function to open and close the settings menu

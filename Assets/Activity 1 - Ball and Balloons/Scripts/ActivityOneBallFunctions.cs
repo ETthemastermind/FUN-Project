@@ -68,7 +68,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
     
     public void ReposBall()
     {
-        Debug.Log("Repositioning Ball");
+        //Debug.Log("Repositioning Ball");
         float distance;
         float nearestDistance = float.MaxValue;
         foreach (Transform child in objectPooler.transform)

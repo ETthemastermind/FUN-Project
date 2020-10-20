@@ -21,14 +21,14 @@ public class BallControllerV2 : MonoBehaviour
     public GameObject CurrentGridGO;
     public UnityEvent RunAfterMove = new UnityEvent();
     public UnityEvent RunBeforeMove = new UnityEvent();
-
+    public Transform _transform;
 
     public WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.01f);
     // Start is called before the first frame update
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        
+        _transform = gameObject.transform;
         
     }
 
@@ -37,7 +37,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false) //if the ball isnt moving
         {
             
-            Debug.Log("Move Forward"); //print to console that the ball is moving
+            //Debug.Log("Move Forward"); //print to console that the ball is moving
             RaycastHit hit; //reference for the hit
             if (Physics.SphereCast(transform.position, 0.5f, Vector3.right, out hit, 100f, layerMask.value)) //shoot the ray in the direction the ball is going to move
             {
@@ -81,7 +81,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             
-            Debug.Log("Move Backwards");
+            //Debug.Log("Move Backwards");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 0.5f, Vector3.left, out hit, 100f, layerMask.value))
             {
@@ -124,7 +124,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             
-            Debug.Log("Move Right");
+            //Debug.Log("Move Right");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position,0.5f, Vector3.back, out hit, 100f, layerMask.value))
             {
@@ -163,7 +163,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             
-            Debug.Log("Move Left");
+            //Debug.Log("Move Left");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position,0.5f, Vector3.forward, out hit, 100f, layerMask.value))
             {
@@ -203,7 +203,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            Debug.Log("Move Forward Right");
+            //Debug.Log("Move Forward Right");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.back), out hit, 100f, layerMask.value))
             {
@@ -240,9 +240,9 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            Debug.Log("Move Forward Left");
+            //Debug.Log("Move Forward Left");
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.forward), out hit, 100f, layerMask.value))
+            if (Physics.SphereCast(_transform.position, 0.1f, (Vector3.right + Vector3.forward), out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
                 {
@@ -277,7 +277,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            Debug.Log("Move Forward Right");
+            //Debug.Log("Move Forward Right");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.back), out hit, 100f, layerMask.value))
             {
@@ -315,7 +315,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (_BallMoving == false)
         {
-            Debug.Log("Move Forward Left");
+            //Debug.Log("Move Forward Left");
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.forward), out hit, 100f, layerMask.value))
             {
@@ -358,7 +358,7 @@ public class BallControllerV2 : MonoBehaviour
         while (LerpFraction < 1) // while the lerp fraction is less than 0
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
-            transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+            _transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
             FauxRotFunc(FauxRot);
 
 
@@ -366,7 +366,7 @@ public class BallControllerV2 : MonoBehaviour
             yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        RunAfterMove.Invoke();
+        //RunAfterMove.Invoke();
     }
 
     public IEnumerator BoundaryHitMove(Vector3 Target, string FauxRot)
@@ -453,7 +453,7 @@ public class BallControllerV2 : MonoBehaviour
             yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        RunAfterMove.Invoke();
+        //RunAfterMove.Invoke();
 
     }
 
@@ -461,9 +461,11 @@ public class BallControllerV2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boundary")
         {
+
             //Debug.Log("Boundary Hit");
             _InBoundary = true;
-            Instantiate(WallCollisionFX, transform.position, transform.rotation);
+            
+            //Instantiate(WallCollisionFX, transform.position, transform.rotation);
         }
     }
     public void OnCollisionExit(Collision collision)
@@ -478,7 +480,7 @@ public class BallControllerV2 : MonoBehaviour
 
     public void HapticFeedback()
     {
-        Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
+        //Debug.Log("Bzz Bzz Haptic Feedback Bzz Bzz"); //buzz buzz
     }
     
     public void FauxRotFunc(string FauxRot)
