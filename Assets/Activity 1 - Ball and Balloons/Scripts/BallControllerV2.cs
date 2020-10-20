@@ -393,7 +393,7 @@ public class BallControllerV2 : MonoBehaviour
             }
        
         
-        AS.PlayOneShot(BoundaryHit);
+        //AS.PlayOneShot(BoundaryHit);
         HapticFeedback();
         StartCoroutine(BoundaryHitPause(StartPos, FauxRot));
 

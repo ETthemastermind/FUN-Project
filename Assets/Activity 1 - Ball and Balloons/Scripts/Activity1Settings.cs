@@ -99,7 +99,7 @@ public class Activity1Settings : MonoBehaviour
     void Start()
     {
         PlayerBall = GameObject.FindGameObjectWithTag("Player");
-        AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
+        //AnimatedTexture = PlayerBall.GetComponent<AnimatedTexture>();
         BalloonSpawner = GameObject.FindGameObjectWithTag("BalloonSpawner").GetComponent<BalloonSpawnerV3>();
         Application.targetFrameRate = -1;
  
