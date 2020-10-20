@@ -18,17 +18,22 @@ public class BallControllerV2 : MonoBehaviour
     public MasterTelemetrySystem TelSystem;
 
     public Vector3 HitLocation;
+    public RaycastHit hit;
+    Vector3 Target;
+    Vector3 StartPos;
+
+
     public GameObject CurrentGridGO;
     public UnityEvent RunAfterMove = new UnityEvent();
     public UnityEvent RunBeforeMove = new UnityEvent();
-    public Transform _transform;
+    
 
     public WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.01f);
     // Start is called before the first frame update
     void Start()
     {
         TelSystem = GameObject.FindGameObjectWithTag("TelSystem").GetComponent<MasterTelemetrySystem>();
-        _transform = gameObject.transform;
+        
         
     }
 
@@ -38,7 +43,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             
             //Debug.Log("Move Forward"); //print to console that the ball is moving
-            RaycastHit hit; //reference for the hit
+            
             if (Physics.SphereCast(transform.position, 0.5f, Vector3.right, out hit, 100f, layerMask.value)) //shoot the ray in the direction the ball is going to move
             {
                 if (hit.transform.tag == "GridCube") //if the hit object has the grid cube tag
@@ -46,7 +51,6 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true; // the ball is now moving
                     Transform HT = hit.transform; //reference for the transform of the hit object
-                    Vector3 Target; //reference for a vector3 called target
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z); //calculate the target location, based on the cube hit
                     StartCoroutine(Move(Target, "F")); //start the move coroutine passing in the target and a string of F/B/L/R depending on which way the ball needs to rotate
                     TelSystem.AddLine("Ball moved forward");
@@ -55,7 +59,7 @@ public class BallControllerV2 : MonoBehaviour
                 {
                     _BallMoving = true; // the ball is now moving
                     HitLocation = hit.point;
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "F"));
                     
                 }
@@ -82,7 +86,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             
             //Debug.Log("Move Backwards");
-            RaycastHit hit;
+            
             if (Physics.SphereCast(transform.position, 0.5f, Vector3.left, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -90,7 +94,6 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"B"));
                     TelSystem.AddLine("Ball moved towards");
@@ -98,7 +101,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "B"));
                 }
                 else
@@ -125,7 +128,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             
             //Debug.Log("Move Right");
-            RaycastHit hit;
+            
             if (Physics.SphereCast(transform.position,0.5f, Vector3.back, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -133,7 +136,6 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target,"R"));
                     TelSystem.AddLine("Ball moved right");
@@ -141,7 +143,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target,"R"));
                 }
                 else
@@ -164,7 +166,7 @@ public class BallControllerV2 : MonoBehaviour
         {
             
             //Debug.Log("Move Left");
-            RaycastHit hit;
+            
             if (Physics.SphereCast(transform.position,0.5f, Vector3.forward, out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -172,7 +174,6 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "L"));
                     TelSystem.AddLine("Ball moved left");
@@ -182,7 +183,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "L"));
 
                 }
@@ -204,7 +205,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             //Debug.Log("Move Forward Right");
-            RaycastHit hit;
+            
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.back), out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -212,7 +213,6 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "FR"));
                     TelSystem.AddLine("Ball moved forward right");
@@ -220,7 +220,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "FR"));
                 }
                 else
@@ -241,15 +241,14 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             //Debug.Log("Move Forward Left");
-            RaycastHit hit;
-            if (Physics.SphereCast(_transform.position, 0.1f, (Vector3.right + Vector3.forward), out hit, 100f, layerMask.value))
+       
+            if (Physics.SphereCast(transform.position, 0.1f, (Vector3.right + Vector3.forward), out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
                 {
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "FL"));
                     TelSystem.AddLine("Ball moved forward left");
@@ -257,7 +256,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "FL"));
                 }
                 else
@@ -278,7 +277,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             //Debug.Log("Move Forward Right");
-            RaycastHit hit;
+            
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.back), out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -286,7 +285,7 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
+                    
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "BR"));
                     TelSystem.AddLine("Ball moved towards right");
@@ -294,7 +293,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target,"BR"));
                 }
 
@@ -316,7 +315,7 @@ public class BallControllerV2 : MonoBehaviour
         if (_BallMoving == false)
         {
             //Debug.Log("Move Forward Left");
-            RaycastHit hit;
+         
             if (Physics.SphereCast(transform.position, 0.1f, (Vector3.left + Vector3.forward), out hit, 100f, layerMask.value))
             {
                 if (hit.transform.tag == "GridCube")
@@ -324,7 +323,7 @@ public class BallControllerV2 : MonoBehaviour
                     CurrentGridGO = hit.transform.gameObject;
                     _BallMoving = true;
                     Transform HT = hit.transform;
-                    Vector3 Target;
+                    
                     Target = new Vector3(HT.position.x, transform.position.y, HT.transform.position.z);
                     StartCoroutine(Move(Target, "BL"));
                     TelSystem.AddLine("Ball moved towards left");
@@ -332,7 +331,7 @@ public class BallControllerV2 : MonoBehaviour
                 else if (hit.transform.tag == "Boundary")
                 {
                     _BallMoving = true; // the ball is now moving
-                    Vector3 Target = hit.point;
+                    Target = hit.point;
                     StartCoroutine(BoundaryHitMove(Target, "BL"));
                 }
 
@@ -358,7 +357,7 @@ public class BallControllerV2 : MonoBehaviour
         while (LerpFraction < 1) // while the lerp fraction is less than 0
         {
             LerpFraction += (LerpSpeed * Time.deltaTime); //increment the lerp fraction
-            _transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
+            transform.position = Vector3.Lerp(StartPos, Target, LerpFraction); //move the ball based on the lerp fraction
             FauxRotFunc(FauxRot);
 
 
@@ -373,7 +372,7 @@ public class BallControllerV2 : MonoBehaviour
     {
         RunBeforeMove.Invoke();
         LerpFraction = 0f; //set the lerp fraction to 0
-        Vector3 StartPos = transform.position; //get the current start position of the ball
+        StartPos = transform.position; //get the current start position of the ball
 
         while (LerpFraction < 1) // while the lerp fraction is less than 0
         {
@@ -417,7 +416,7 @@ public class BallControllerV2 : MonoBehaviour
     public IEnumerator BoundaryHitReturn(Vector3 Target, string FauxRot)
     {
         LerpFraction = 0f; //set the lerp fraction to 0
-        Vector3 StartPos = transform.position; //get the current start position of the ball
+        StartPos = transform.position; //get the current start position of the ball
         switch (FauxRot)
         {
             case "F":
