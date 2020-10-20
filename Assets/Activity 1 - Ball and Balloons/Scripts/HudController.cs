@@ -121,8 +121,8 @@ public class HudController : MonoBehaviour
             Canvas_AudioSource.Stop();
             
         }
-        //Canvas_AudioSource.PlayOneShot(ButtonClick_SFX);
-        //Canvas_AudioSource.PlayOneShot(SpeechSynth);
+        Canvas_AudioSource.PlayOneShot(ButtonClick_SFX);
+        Canvas_AudioSource.PlayOneShot(SpeechSynth);
         TelSystem.AddLine(EventSystem.current.currentSelectedGameObject.name + "button clicked");
         TelSystem.gameObject.GetComponent<ReplayTelemetry>().DatawithButtonPress(EventSystem.current.currentSelectedGameObject.gameObject);
         //Debug.Log(EventSystem.current.currentSelectedGameObject.gameObject);
