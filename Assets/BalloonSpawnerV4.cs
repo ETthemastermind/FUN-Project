@@ -19,6 +19,7 @@ public class BalloonSpawnerV4 : MonoBehaviour
     GameObject Balloon; //reference to a spawned balloon
     ConfigedBalloon CB; //reference to the configedballoon script on the above balloon
     Material BM; //reference to the material on the above balloon
+    public Vector3 rot;
 
     ObjectPooler objectPooler; //reference to the object pooler
 
@@ -35,6 +36,7 @@ public class BalloonSpawnerV4 : MonoBehaviour
         
         if (ready == false) //if the ready bool false
         {
+            //Debug.Log("Checking if Ready");
             CheckIfReady(); //check if the grid is ready
         }
         
@@ -55,10 +57,10 @@ public class BalloonSpawnerV4 : MonoBehaviour
         for (int i = 0; i != SpawnLocations.Count; i++) //for each of the spawn locations
         {
             BalloonValue = Random.Range(1, 11); // 50% for 1 pointer, 40% for a 2 pointer, 10% for a 3 pointer
-
+            Quaternion QRot = Quaternion.Euler(rot.x, rot.y, rot.z);
             if (BalloonValue >= 1 && BalloonValue <= 5) //1 pointer
             {
-                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], Quaternion.identity); //spawn a balloon from the pool
+                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], QRot); //spawn a balloon from the pool
                 CB = Balloon.GetComponent<ConfigedBalloon>(); //get the config balloon script
                 CB.BalloonValue = 1; //set the value of the balloon
                 CB.BalloonSpawner = this;
@@ -70,7 +72,7 @@ public class BalloonSpawnerV4 : MonoBehaviour
 
             else if (BalloonValue >= 6 && BalloonValue <= 9) //2 pointer
             {
-                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], Quaternion.identity);
+                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], QRot);
                 CB = Balloon.GetComponent<ConfigedBalloon>();
                 CB.BalloonValue = 2;
                 CB.BalloonSpawner = this;
@@ -82,7 +84,7 @@ public class BalloonSpawnerV4 : MonoBehaviour
             }
             else if (BalloonValue == 10) //3 pointer
             {
-                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], Quaternion.identity);
+                Balloon = objectPooler.SpawnFromPool("Balloon", SpawnLocations[i], QRot);
                 CB = Balloon.GetComponent<ConfigedBalloon>();
                 CB.BalloonValue = 3;
                 CB.BalloonSpawner = this;

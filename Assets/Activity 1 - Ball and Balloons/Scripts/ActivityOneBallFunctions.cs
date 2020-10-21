@@ -43,6 +43,13 @@ public class ActivityOneBallFunctions : MonoBehaviour
         if (collision.gameObject.tag == "Balloon") // if the other object is a balloon
         {
             GameObject Balloon = collision.gameObject;
+            PlayerScore += Balloon.GetComponent<ConfigedBalloon>().BalloonValue;
+            _HUDController.GetComponent<HudController>().IncrementScore(PlayerScore);
+            string BalloonValue = (Balloon.GetComponent<Balloons>().BalloonValue).ToString();
+            TelSystem.AddLine("Balloon popped value - " + BalloonValue); //run telemetry line
+            Balloon.GetComponent<ConfigedBalloon>().DestroyBalloon();
+            Ball.HapticFeedback(); //run the haptic feedback function
+            /*
             if (Balloon.GetComponent<ConfigedBalloon>().isActiveAndEnabled)
             {
                 PlayerScore += Balloon.GetComponent<ConfigedBalloon>().BalloonValue;
@@ -62,6 +69,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
                 Balloon.GetComponent<Balloons>().DestroyBalloon();
                 
             }
+            */
         }
         
     }

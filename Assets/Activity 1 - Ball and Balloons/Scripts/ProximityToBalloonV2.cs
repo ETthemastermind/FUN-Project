@@ -31,7 +31,7 @@ public class ProximityToBalloonV2 : MonoBehaviour
 
     public void BalloonProxCheck() //function to check if a balloon is in proximity of a player
     {
-        Debug.Log("Running Balloon Prox Check");
+        //Debug.Log("Running Balloon Prox Check");
         BalloonFound = false; //reset the balloon found boolean
         PrepareToBang.SetActive(false);
         GridAttributes CurrentGrid = gameObject.GetComponent<BallControllerV2>().CurrentGridGO.GetComponent<GridAttributes>(); //gets the current grid location of the playerball

@@ -15,15 +15,17 @@ public class ConfigedBalloon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.transform.rotation.x != -90f)
-        {
-            gameObject.transform.Rotate(-90f, 0f, 0f); //damn balloon wont spawn in the same orientation that dragging it into the scene shows
-        }
         
         AS = GameObject.Find("BalloonPop").GetComponent<AudioSource>(); //gets the audiosource on the camera object
     }
 
     // Update is called once per frame
+    public void OnEnable()
+    {
+        
+        
+        
+    }
     void Update()
     {
         gameObject.transform.Rotate(0, 0, BalloonRotSpeed); //rotate the balloon around the Z axis, doesnt look as good because the texture is uniform across the whole model but will look better with texture variation i.e numbers

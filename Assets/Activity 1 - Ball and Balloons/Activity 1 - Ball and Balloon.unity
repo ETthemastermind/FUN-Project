@@ -25973,6 +25973,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 29b8556e6e96c0b47ab42ea01b1877bb, type: 3}
   - {fileID: 2800000, guid: dd6125ce89095a54ca7ebccb47742ab9, type: 3}
   grid: {fileID: 919132149354484217}
+  rot: {x: -90, y: 0, z: 0}
 --- !u!4 &1531412839 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2eb664f401fb673418b6e9c5cbd9b91c,
@@ -32322,11 +32323,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
-      propertyPath: RunAfterMove.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1708170157}
-    - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
-        type: 3}
       propertyPath: layerMask.m_Bits
       value: 1536
       objectReference: {fileID: 0}
@@ -32339,7 +32335,7 @@ PrefabInstance:
     - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: RunAfterMove.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: BalloonProxCheck
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
@@ -32361,6 +32357,11 @@ PrefabInstance:
       propertyPath: AS
       value: 
       objectReference: {fileID: 322118980}
+    - target: {fileID: 5928547481522155748, guid: 026508a40cc7d7746acfe9ff438c6c79,
+        type: 3}
+      propertyPath: RunAfterMove.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6065881097038340100, guid: 026508a40cc7d7746acfe9ff438c6c79,
         type: 3}
       propertyPath: m_Name
