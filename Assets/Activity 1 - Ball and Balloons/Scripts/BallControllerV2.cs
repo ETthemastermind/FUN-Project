@@ -365,7 +365,7 @@ public class BallControllerV2 : MonoBehaviour
             yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        //RunAfterMove.Invoke();
+        RunAfterMove.Invoke();
     }
 
     public IEnumerator BoundaryHitMove(Vector3 Target, string FauxRot)
@@ -452,7 +452,7 @@ public class BallControllerV2 : MonoBehaviour
             yield return delay;
         }
         _BallMoving = false; //ball has stopped moving, so change the bool to false
-        //RunAfterMove.Invoke();
+        RunAfterMove.Invoke();
 
     }
 

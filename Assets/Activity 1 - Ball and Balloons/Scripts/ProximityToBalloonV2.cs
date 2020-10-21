@@ -7,7 +7,7 @@ using System;
 public class ProximityToBalloonV2 : MonoBehaviour
 {
     public Activity1Settings ActSet;  //reference to the activity settings on the game controller object
-    public GridV3 Grid; //reference to the grid script on the grid object
+    public GridV4 Grid; //reference to the grid script on the grid object
 
     public bool BalloonFound; //bool that triggers if a balloon is found
     public Vector2 CurrentGridCoords; //vector2 to hold the current grid coords on the playerball
@@ -25,12 +25,13 @@ public class ProximityToBalloonV2 : MonoBehaviour
     void Start()
     {
         ActSet = GameObject.FindGameObjectWithTag("GameController").GetComponent<Activity1Settings>(); //find the activity one settings
-        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV3>(); //find the grid
+        Grid = GameObject.FindGameObjectWithTag("GridObject").GetComponent<GridV4>(); //find the grid
     }
 
 
     public void BalloonProxCheck() //function to check if a balloon is in proximity of a player
     {
+        Debug.Log("Running Balloon Prox Check");
         BalloonFound = false; //reset the balloon found boolean
         PrepareToBang.SetActive(false);
         GridAttributes CurrentGrid = gameObject.GetComponent<BallControllerV2>().CurrentGridGO.GetComponent<GridAttributes>(); //gets the current grid location of the playerball
@@ -58,7 +59,7 @@ public class ProximityToBalloonV2 : MonoBehaviour
 
     public void RaycastCheck(Vector2[] Targets) //function to see if any balls are in the neighbouring grid boxes
     {
-        List<GameObject> GridCubes = Grid.GridGameObjects; //reference to the list of grid cubes in the grid script
+        List<GameObject> GridCubes = Grid.ActiveGrids; //reference to the list of grid cubes in the grid script
         for (int i = 0; i < GridCubes.Count; i++) //for each of the cubes in the grid cubes list
         {
             GridAttributes G = GridCubes[i].GetComponent<GridAttributes>(); //get the grid attributes of the current cube

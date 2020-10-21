@@ -9,10 +9,17 @@ public class ConfigedBalloon : MonoBehaviour
     public int BalloonValue;
     public AudioSource AS; //reference to the audio source on the camera
     public AudioClip Pop_SFX; //pop sound effect for the balloon
+    public BalloonSpawnerV4 BalloonSpawner;
+
+    bool BallonRotated = false;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.Rotate(-90f, 0f, 0f); //damn balloon wont spawn in the same orientation that dragging it into the scene shows
+        if (gameObject.transform.rotation.x != -90f)
+        {
+            gameObject.transform.Rotate(-90f, 0f, 0f); //damn balloon wont spawn in the same orientation that dragging it into the scene shows
+        }
+        
         AS = GameObject.Find("BalloonPop").GetComponent<AudioSource>(); //gets the audiosource on the camera object
     }
 
@@ -28,6 +35,8 @@ public class ConfigedBalloon : MonoBehaviour
         //Material mat = BalloonLeftovers.GetComponent<ParticleSystemRenderer>().material;
         //mat.SetTexture("_MainTex", PoppedBalloonColors[RandomColor]);
         AS.PlayOneShot(Pop_SFX); //when the ballon is destroyed, play the pop sound effect
-        Destroy(gameObject);
+        BalloonSpawner.RemoveBalloon(this.gameObject);
+        gameObject.SetActive(false);
+
     }
 }

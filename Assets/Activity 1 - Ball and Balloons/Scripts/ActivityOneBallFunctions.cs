@@ -83,6 +83,7 @@ public class ActivityOneBallFunctions : MonoBehaviour
 
         Vector3 Destination = new Vector3(NearestGrid.transform.position.x, transform.position.y, NearestGrid.transform.position.z);
         transform.position = Destination;
+        gameObject.GetComponent<BallControllerV2>().CurrentGridGO = NearestGrid;
     }
 
 }

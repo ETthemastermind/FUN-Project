@@ -15,7 +15,7 @@ public class GridV4 : MonoBehaviour
         public float X_Space;
         public float Y_Space;
     }
-
+    public List<GameObject> ActiveGrids;
     public ObjectPooler objectPooler;
     public GridSettings[] gridSettings;
 
@@ -31,8 +31,12 @@ public class GridV4 : MonoBehaviour
     public Texture EightDirGrid_Tex;
 
     public UnityEvent CallOnceGridIsMade = new UnityEvent();
-    
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         //objectPooler = ObjectPooler.Instance;
@@ -45,7 +49,7 @@ public class GridV4 : MonoBehaviour
     // Update is called once per frame
     public void CreateGrid()
     {
-        
+        ActiveGrids.Clear();
         int CurrentX = 1;
         int CurrentY = 1;
 
@@ -53,6 +57,7 @@ public class GridV4 : MonoBehaviour
         {
             Vector3 pos = new Vector3(gridSettings[CurrentGrid].X_Start + (gridSettings[CurrentGrid].X_Space * (i % gridSettings[CurrentGrid].Height)), transform.position.y, -gridSettings[CurrentGrid].Y_Start + (gridSettings[CurrentGrid].Y_Space * (i / gridSettings[CurrentGrid].Height)));
             GameObject SpawnedGrid = objectPooler.SpawnFromPool("Grid", pos, Quaternion.identity);
+            ActiveGrids.Add(SpawnedGrid);
             GridAttributes GA = SpawnedGrid.GetComponent<GridAttributes>();
             if (CurrentY != gridSettings[CurrentGrid].Height + 1)
             {
@@ -75,7 +80,7 @@ public class GridV4 : MonoBehaviour
         }
         CallOnceGridIsMade.Invoke();
     }
-
+    /*
     public void Update()
     {
         if (GridInit == false)
@@ -94,7 +99,7 @@ public class GridV4 : MonoBehaviour
             NextGrid();
         }
     }
-
+    */
     public void NextGrid()
     {
         CurrentGrid++;

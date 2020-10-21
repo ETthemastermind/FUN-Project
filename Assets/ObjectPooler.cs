@@ -55,11 +55,13 @@ public class ObjectPooler : MonoBehaviour //https://www.youtube.com/watch?v=tdSm
         PoolDictionary[tag].Enqueue(ObjectToSpawn);
         return ObjectToSpawn;
 
+        
+
     }
 
     public void ResetPool(string tag)
     {
-        Debug.Log("resetting pool");
+        //Debug.Log("resetting pool");
         if (!PoolDictionary.ContainsKey(tag))
         {
             return;
